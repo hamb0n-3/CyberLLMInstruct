@@ -1,0 +1,23 @@
+Python 3.10.14
+2024-11-14 16:44:32.391740: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-14 16:44:35.774955: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-11-14 16:44:35.775071: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-11-14 16:44:35.855458: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-14 16:44:36.067720: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Unsloth 2024.8 patched 32 layers with 32 QKV layers, 32 O layers and 32 MLP layers.
+🦥 Unsloth: Will patch your computer to enable 2x faster free finetuning.
+==((====))==  Unsloth 2024.8: Fast Llama patching. Transformers = 4.43.4.
+   \\   /|    GPU: NVIDIA A100 80GB PCIe. Max memory: 79.254 GB. Platform = Linux.
+O^O/ \_/ \    Pytorch: 2.4.0+cu121. CUDA = 8.0. CUDA Toolkit = 12.1.
+\        /    Bfloat16 = TRUE. FA [Xformers = 0.0.27.post2. FA2 = False]
+ "-____-"     Free Apache license: http://github.com/unslothai/unsloth
+Error reading file CyberLLMInstruct-Eval-Data.json: 'questions'
+Traceback (most recent call last):
+  File "/home/cug/ae455/llm/unsloth4/test5/CyberLLMInstruct-Eval.py", line 172, in <module>
+    evaluator.run_evaluation()
+  File "/home/cug/ae455/llm/unsloth4/test5/CyberLLMInstruct-Eval.py", line 105, in run_evaluation
+    prompts = self.read_json_file()
+  File "/home/cug/ae455/llm/unsloth4/test5/CyberLLMInstruct-Eval.py", line 95, in read_json_file
+    return data['questions']
+KeyError: 'questions'

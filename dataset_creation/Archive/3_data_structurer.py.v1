@@ -1,0 +1,265 @@
+#!/usr/bin/env python3
+
+import json
+import logging
+import re
+import sys
+import time
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Optional
+
+import requests
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+class CyberDataStructurer:
+    def __init__(self, input_dir: str = "filtered_data", output_dir: str = "structured_data", ollama_model: str = "mistral:7b", ollama_port: int = 11434):
+        """Initialize the data structurer with directory configurations."""
+        self.input_dir = Path(input_dir)
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.ollama_model = ollama_model
+        self.ollama_url = f"http://localhost:{ollama_port}/api/generate"
+
+        if not self._verify_ollama_connection():
+            logger.error(f"Could not connect to Ollama at {self.ollama_url.replace('/generate', '')}. Please ensure Ollama is running.")
+            sys.exit(1)
+
+        # Map filenames to their respective handler functions
+        self.file_handlers = {
+            'ctf_data': self._structure_ctf_data,
+            'arxiv_papers': self._structure_arxiv_data,
+            'ubuntu_security': self._structure_ubuntu_data,
+            'microsoft_security': self._structure_microsoft_data,
+        }
+
+    def _verify_ollama_connection(self) -> bool:
+        """Verify connection to Ollama API."""
+        try:
+            response = requests.get(self.ollama_url.replace('/generate', '/'), timeout=5)
+            return response.status_code == 200
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Error connecting to Ollama: {e}")
+            return False
+
+    def _call_ollama(self, prompt: str, system_prompt: str, max_retries: int = 3) -> Optional[str]:
+        """Call Ollama API with retry mechanism."""
+        for attempt in range(max_retries):
+            try:
+                response = requests.post(
+                    self.ollama_url,
+                    json={
+                        "model": self.ollama_model,
+                        "prompt": prompt,
+                        "system": system_prompt,
+                        "stream": False,
+                        "options": {"temperature": 0.3, "num_predict": 300}
+                    },
+                    timeout=20
+                )
+                response.raise_for_status()
+                return response.json()["response"]
+            except requests.exceptions.Timeout:
+                logger.warning(f"Attempt {attempt + 1}/{max_retries} timed out.")
+            except requests.exceptions.RequestException as e:
+                logger.warning(f"Attempt {attempt + 1}/{max_retries} failed: {e}")
+            
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # Exponential backoff
+        return None
+
+    def _load_data(self, file_path: Path) -> Optional[List[Dict]]:
+        """Load data from a JSON file, ensuring it's a list of dicts."""
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            if isinstance(data, list):
+                return data
+            elif isinstance(data, dict):
+                 # Handle cases where the list is nested under a key
+                for key, value in data.items():
+                    if isinstance(value, list):
+                        return value
+            logger.warning(f"Could not find a list of entries in {file_path.name}")
+            return None
+        except (json.JSONDecodeError, IOError) as e:
+            logger.error(f"Error loading or parsing file {file_path}: {e}")
+            return None
+
+    def _structure_ctf_data(self, data: List[Dict]) -> List[Dict]:
+        """Create instruction-response pairs for CTF events."""
+        structured_pairs = []
+        for entry in data[:5]: # Process first 5 entries for brevity
+            title = entry.get('title', 'N/A')
+            context = (
+                f"CTF Title: {title}\n"
+                f"Description: {entry.get('description', 'N/A')}\n"
+                f"Format: {entry.get('format', 'N/A')}\n"
+                f"Prizes: {entry.get('prizes', 'N/A')}\n"
+                f"URL: {entry.get('url', 'N/A')}\n"
+            )
+            
+            instructions = [
+                f"Provide a concise summary of the CTF event: '{title}'.",
+                f"What are the eligibility requirements and prizes for the '{title}' CTF event?"
+            ]
+
+            for instruction in instructions:
+                prompt = f"Based on the following information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
+                response = self._call_ollama(prompt, "You are an assistant providing clear information about CTF events.")
+                if response:
+                    structured_pairs.append({
+                        'instruction': instruction,
+                        'response': response.strip(),
+                        'type': 'ctf_event',
+                        'source_data': {'id': title, 'type': 'ctf_event'}
+                    })
+        return structured_pairs
+
+    def _structure_arxiv_data(self, data: List[Dict]) -> List[Dict]:
+        """Create instruction-response pairs for arXiv papers."""
+        structured_pairs = []
+        for entry in data[:5]:
+            title = entry.get('title', 'N/A').replace('\n', ' ').strip()
+            summary = entry.get('summary', 'N/A').replace('\n', ' ').strip()
+            authors = ", ".join([author['name'] for author in entry.get('authors', [])])
+
+            context = f"Paper Title: {title}\nAuthors: {authors}\nSummary: {summary}"
+            instructions = [
+                f"Summarize the key findings of the research paper titled '{title}'.",
+                f"What is the main contribution of the paper '{title}' by {authors}?"
+            ]
+
+            for instruction in instructions:
+                prompt = f"Based on the following paper details, answer the question.\n\nDetails:\n{context}\n\nQuestion: {instruction}"
+                response = self._call_ollama(prompt, "You are a research assistant summarizing academic papers.")
+                if response:
+                    structured_pairs.append({
+                        'instruction': instruction,
+                        'response': response.strip(),
+                        'type': 'research_paper',
+                        'source_data': {'id': entry.get('id'), 'type': 'arxiv_paper'}
+                    })
+        return structured_pairs
+
+    def _structure_ubuntu_data(self, data: List[Dict]) -> List[Dict]:
+        """Create instruction-response pairs for Ubuntu security notices."""
+        structured_pairs = []
+        for entry in data[:5]:
+            # The filter script already created a high-quality summary. We can use it directly.
+            if 'enhanced' in entry and entry['enhanced'].get('description'):
+                usn_id = entry.get('title', 'Unknown USN').split(':')[0].strip()
+                cves = re.findall(r'CVE-\d{4}-\d{4,7}', entry.get('summary', ''))
+                
+                instruction = f"Summarize Ubuntu security notice {usn_id} and the vulnerabilities it addresses."
+                response = (
+                    f"Ubuntu Security Notice {usn_id} addresses vulnerabilities including {', '.join(cves) if cves else 'unspecified CVEs'}. "
+                    f"The issue involves: {entry['enhanced']['description']}. "
+                    f"The risk is rated as '{entry['enhanced']['risk_level']}'. "
+                    f"The recommended mitigation is to {entry['enhanced']['mitigations']}."
+                )
+                structured_pairs.append({
+                    'instruction': instruction,
+                    'response': response.strip(),
+                    'type': 'security_advisory',
+                    'source_data': {'id': usn_id, 'type': 'ubuntu_advisory'}
+                })
+        return structured_pairs
+        
+    def _structure_microsoft_data(self, data: List[Dict]) -> List[Dict]:
+        """Create instruction-response pairs for Microsoft security updates."""
+        structured_pairs = []
+        for entry in data[:5]:
+            title = entry.get('DocumentTitle', 'N/A')
+            cvrf_url = entry.get('CvrfUrl', 'N/A')
+            release_date = entry.get('CurrentReleaseDate', 'N/A')
+            
+            context = f"Update Title: {title}\nRelease Date: {release_date}\nDetails URL: {cvrf_url}"
+            instructions = [
+                f"What is the purpose of the Microsoft security update titled '{title}'?",
+                f"Provide a brief overview of the '{title}' security update."
+            ]
+            
+            for instruction in instructions:
+                prompt = f"Based on the following metadata, answer the question.\n\nMetadata:\n{context}\n\nQuestion: {instruction}"
+                response = self._call_ollama(prompt, "You are an assistant summarizing Microsoft security bulletins.")
+                if response:
+                     structured_pairs.append({
+                        'instruction': instruction,
+                        'response': response.strip(),
+                        'type': 'security_advisory',
+                        'source_data': {'id': entry.get('ID'), 'type': 'microsoft_advisory'}
+                    })
+        return structured_pairs
+
+    def process_directory(self):
+        """Process all recognized files in the input directory."""
+        all_structured_pairs = []
+        
+        input_files = list(self.input_dir.glob('*_filtered_*.json'))
+        if not input_files:
+            logger.warning(f"No '*_filtered_*.json' files found in {self.input_dir}. Nothing to process.")
+            return
+
+        for file_path in input_files:
+            logger.info(f"Processing file: {file_path.name}")
+            
+            # Find the correct handler based on the filename
+            handler = None
+            for key, func in self.file_handlers.items():
+                if key in file_path.name:
+                    handler = func
+                    break
+            
+            if not handler:
+                logger.warning(f"No specific handler for file: {file_path.name}. Skipping.")
+                continue
+
+            # Load data and process it with the selected handler
+            data = self._load_data(file_path)
+            if data:
+                structured_pairs = handler(data)
+                if structured_pairs:
+                    all_structured_pairs.extend(structured_pairs)
+                    logger.info(f"Generated {len(structured_pairs)} pairs from {file_path.name}")
+
+        # Save all generated pairs into a single consolidated file
+        if all_structured_pairs:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            output_file = self.output_dir / f"consolidated_cybersecurity_dataset_{timestamp}.json"
+            
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump({
+                    'metadata': {
+                        'total_entries': len(all_structured_pairs),
+                        'processed_files': len(input_files),
+                        'generation_timestamp': timestamp,
+                        'model_used': self.ollama_model
+                    },
+                    'data': all_structured_pairs
+                }, f, indent=2)
+            
+            logger.info(f"Successfully saved {len(all_structured_pairs)} structured pairs to {output_file}")
+        else:
+            logger.info("No structured pairs were generated from the input files.")
+
+def main():
+    """Main function to run the data structurer."""
+    try:
+        structurer = CyberDataStructurer(
+            input_dir="filtered_data",
+            output_dir="structured_data"
+        )
+        structurer.process_directory()
+    except Exception as e:
+        logger.error(f"An unexpected error occurred: {e}", exc_info=True)
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

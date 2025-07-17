@@ -1,0 +1,14 @@
+
+# Pipeline output directories
+ai_enhanced/
+domain_classified/
+filtered_data/
+final_dataset/
+raw_data/
+reviewed_data/
+security_aligned/
+structured_data/
+
+# macOS system files
+.DS_Store
+**/.DS_Store

@@ -1,0 +1,73 @@
+Python 3.10.14
+
+=== Now testing model: unsloth/Meta-Llama-3.1-8B ===
+
+Downloading shards:   0%|          | 0/4 [00:00<?, ?it/s]Downloading shards:  25%|██▌       | 1/4 [02:10<06:30, 130.03s/it]Downloading shards:  50%|█████     | 2/4 [04:10<04:08, 124.24s/it]Downloading shards:  75%|███████▌  | 3/4 [06:11<02:02, 122.83s/it]Downloading shards: 100%|██████████| 4/4 [06:39<00:00, 85.38s/it] Downloading shards: 100%|██████████| 4/4 [06:39<00:00, 99.84s/it]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:05<00:16,  5.60s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:10,  5.20s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:15<00:05,  5.04s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:16<00:00,  3.52s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:16<00:00,  4.14s/it]
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+/home/cug/ae455/.local/lib/python3.10/site-packages/transformers/quantizers/auto.py:174: UserWarning: You passed `quantization_config` or equivalent parameters to `from_pretrained` but the model you're loading already has a `quantization_config` attribute. The `quantization_config` from the model will be used.
+  warnings.warn(warning_msg)
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Unused kwargs: ['_load_in_4bit', '_load_in_8bit', 'quant_method']. These kwargs are not used in <class 'transformers.utils.quantization_config.BitsAndBytesConfig'>.
+Error processing model unsloth/Meta-Llama-3.1-8B: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/finetuned-Meta-Llama-3.1-8B ===
+
+Error processing model adelsamir/finetuned-Meta-Llama-3.1-8B: name 'RedTeamer' is not defined
+
+=== Now testing model: unsloth/llama-3-8b-bnb-4bit ===
+
+Error processing model unsloth/llama-3-8b-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/cyber-finetuned-llama-3-8b-bnb-4bit ===
+
+Error processing model adelsamir/cyber-finetuned-llama-3-8b-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/cyber-llama-3-8b-bnb-4bit ===
+
+Error processing model adelsamir/cyber-llama-3-8b-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: unsloth/gemma-2-9b-bnb-4bit ===
+
+Error processing model unsloth/gemma-2-9b-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/cyber-gemma-2-9b-bnb-4bit3 ===
+
+Error processing model adelsamir/cyber-gemma-2-9b-bnb-4bit3: name 'RedTeamer' is not defined
+
+=== Now testing model: unsloth/mistral-7b-bnb-4bit ===
+
+Error processing model unsloth/mistral-7b-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/cyber-mistral-7b-bnb-4bit ===
+
+Error processing model adelsamir/cyber-mistral-7b-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: unsloth/Phi-3.5-mini-instruct-bnb-4bit ===
+
+Error processing model unsloth/Phi-3.5-mini-instruct-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/cyber-Phi-3.5-mini-instruct-bnb-4bit-d2 ===
+
+Error processing model adelsamir/cyber-Phi-3.5-mini-instruct-bnb-4bit-d2: name 'RedTeamer' is not defined
+
+=== Now testing model: unsloth/Qwen2.5-Coder-7B-bnb-4bit ===
+
+Error processing model unsloth/Qwen2.5-Coder-7B-bnb-4bit: name 'RedTeamer' is not defined
+
+=== Now testing model: adelsamir/cyber-Qwen2.5-Coder-7B-bnb-4bit-d2 ===
+
+Error processing model adelsamir/cyber-Qwen2.5-Coder-7B-bnb-4bit-d2: name 'RedTeamer' is not defined
+Traceback (most recent call last):
+  File "/cluster/home/cug/ae455/llm/deepeval/test.py", line 109, in <module>
+    execution_time = end_time - start_time
+NameError: name 'start_time' is not defined

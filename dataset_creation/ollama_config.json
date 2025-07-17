@@ -1,0 +1,9 @@
+{
+  "base_url": "http://localhost:11434",
+  "models": {
+    "classification": "gemma:2b",
+    "enhancement": "mistral:7b"
+  },
+  "timeout": 60,
+  "max_tokens": 2000
+}

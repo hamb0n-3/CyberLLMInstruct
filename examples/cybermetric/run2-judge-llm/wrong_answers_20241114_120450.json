@@ -1,0 +1,497 @@
+[
+  {
+    "question": "What is the purpose of periodic reviews of user accounts and access privileges?",
+    "answers": {
+      "A": "To ensure all user accounts have access to the highest privileges.",
+      "B": "To demonstrate adherence to regulatory requirements.",
+      "C": "To create a record of all user accounts",
+      "D": "To identify and remove any inappropriate access and privileges."
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which of the following is a purpose of having synchronized system clocks?",
+    "answers": {
+      "A": "To compare log files from different systems.",
+      "B": "To accelerate system performance.",
+      "C": "To standardize file naming conventions.",
+      "D": "To reduce power consumption."
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What does the abbreviation 'SDK' stand for in the context of software security?",
+    "answers": {
+      "A": "Software Development Kit",
+      "B": "System Deflection Key",
+      "C": "Software Delegation Kernel",
+      "D": "System Development Key"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the main purpose of multi-factor authentication in cybersecurity?",
+    "answers": {
+      "A": "To limit user privileges within the network",
+      "B": "To ensure compliance with government regulations",
+      "C": "To adds an extra layer of security by requiring multiple forms of verification.",
+      "D": "To monitor network traffic for security threats"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "What is the purpose of periodically changing passwords or passphrases?",
+    "answers": {
+      "A": "To provide more time for a malicious individual to crack the password/passphrase",
+      "B": "To allow for more rapid detection and response to address potentially compromised credentials",
+      "C": "To prevent unauthorized users from gaining access to the user account through use of a shared authentication factor",
+      "D": "To offer less time for a malicious individual to crack a password/passphrase and less time to use a compromised password"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which of the following defines the entity\u2019s security objectives and principles?",
+    "answers": {
+      "A": "Security policies",
+      "B": "Operational procedures",
+      "C": "Risk assessment framework",
+      "D": "Incident response plan"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "Which protocol is used to create a secure environment in a wireless network?",
+    "answers": {
+      "A": "WAP",
+      "B": "WPA2",
+      "C": "WTLS",
+      "D": "WML3"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "Which design concept limits access to systems from outside users while protecting users and systems inside the LAN?",
+    "answers": {
+      "A": "DMZ",
+      "B": "VLAN",
+      "C": "I&A",
+      "D": "Router"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the process of making an operating system secure from attack called?",
+    "answers": {
+      "A": "Hardening",
+      "B": "Tuning",
+      "C": "Sealing",
+      "D": "Locking down"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "Which mechanism is used by PKI to allow immediate verification of a certificate's validity?",
+    "answers": {
+      "A": "CRL",
+      "B": "MD5",
+      "C": "SSHA",
+      "D": "OCSP"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which of the following is a major security problem with FTP?",
+    "answers": {
+      "A": "Password files are stored in an unsecure area on disk.",
+      "B": "Memory traces can corrupt file access.",
+      "C": "User IDs and passwords are unencrypted.",
+      "D": "FTP sites are unregistered."
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "In the OSI model, which layer consists of the physical media and infrastructure of networks?",
+    "answers": {
+      "A": "Session",
+      "B": "Presentation",
+      "C": "Data Link",
+      "D": "Physical"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "In binary representation, what is the result of the bitwise XOR operation between 110101 and 101010",
+    "answers": {
+      "A": "011111",
+      "B": "100111",
+      "C": "0",
+      "D": "111111"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the proper sequence of the TCP three-way-handshake?",
+    "answers": {
+      "A": "SYN-ACK, ACK, ACK",
+      "B": "SYN, SYN-ACK, ACK",
+      "C": "SYN-SYN, SYN-ACK, SYN",
+      "D": "ACK, SYN-ACK, SYN"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "Which topology has built-in redundancy because of its many client connections?",
+    "answers": {
+      "A": "Token ring",
+      "B": "Bus",
+      "C": "Hybrid",
+      "D": "Mesh"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which best describes a vulnerability scan?",
+    "answers": {
+      "A": "A way to find open ports",
+      "B": "A way to diagram a network",
+      "C": "A proxy attack",
+      "D": "A way to automate the discovery of vulnerabilities"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "What is Tor used for?",
+    "answers": {
+      "A": "To make it more difficult to trace a user's Internet activity",
+      "B": "To hide the process of scanning",
+      "C": "To automate scanning",
+      "D": "To hide the banner on a system"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the maximum number of IP addresses in an IPv6 subnet?",
+    "answers": {
+      "A": "6 bit",
+      "B": "32 bit",
+      "C": "6*16 bit",
+      "D": "8*16 bit"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which of the following is a characteristic of a worm?",
+    "answers": {
+      "A": "Requires user interaction to spread",
+      "B": "Self-replicates and spreads independently",
+      "C": "Aargets specific individuals or organizations",
+      "D": "A worm is an item that runs silently."
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "What is the purpose of the Crossover Error Rate (CER) in rating the performance of biometric devices?",
+    "answers": {
+      "A": "To compare the effectiveness of different biometric factors",
+      "B": "To compare the accuracy of similar biometric devices",
+      "C": "To assess the acceptance level of biometric factors",
+      "D": "To measure the throughput rate of biometric devices"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary purpose of a padded cell system in relation to intrusion detection?",
+    "answers": {
+      "A": "Attract unauthorized users",
+      "B": "Simulate a real network for intruders",
+      "C": "Isolate detected intruders",
+      "D": "Send alerts to administrators"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary goal of penetration testing?",
+    "answers": {
+      "A": "To evaluate the robustness of security systems and identify vulnerabilities",
+      "B": "To exploit vulnerabilities and cause damage to the system",
+      "C": "To eliminate all vulnerabilities in the system",
+      "D": "To simulate unauthorized attacks without actually exploiting vulnerabilities"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary purpose of RADIUS and TACACS in a network environment?",
+    "answers": {
+      "A": "To centralize the authentication of remote dial-up connections",
+      "B": "To establish secure connections for voice and video conferencing",
+      "C": "To provide security for WAN communication technologies",
+      "D": "To support remote journaling and electronic vaulting"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the essential requirement for the security of the Discrete Logarithm Integrated Encryption Scheme (DLIES) to be maintained?",
+    "answers": {
+      "A": "The order q of the base point P should be at least q \u2265 1024.",
+      "B": "Randomly choose two primes p and q such that p*q > 2048 bits.",
+      "C": "The length of the prime number p should be at least 3000 bits.",
+      "D": "All of the above"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "Which document provides the recommendation for elliptic curve cryptography?",
+    "answers": {
+      "A": "NIST SP 800-56C",
+      "B": "NIST SP 800-63-3",
+      "C": "NIST SP 800-57 Part 1",
+      "D": "NIST SP 800-186-4"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which federal government agency has responsibility for ensuring the security of government computer systems that are not used to process sensitive and/or classified information?",
+    "answers": {
+      "A": "National Security Agency",
+      "B": "Federal Bureau of Investigation",
+      "C": "National Institute of Standards and Technology",
+      "D": "Secret Service"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "Which principle of cybersecurity focuses on ensuring that data is accurate and trustworthy?",
+    "answers": {
+      "A": "Resilience",
+      "B": "Availability",
+      "C": "Authenticity",
+      "D": "Integrity"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary goal of the Transport Layer Security (TLS) protocol?",
+    "answers": {
+      "A": "Privacy and authentication between two communicating applications",
+      "B": "Privacy and data integrity between two communicating applications",
+      "C": "Authentication and data integrity between two communicating applications",
+      "D": "Privacy, authentication, and data integrity between two communicating applications"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which of the following is NOT one of the five disaster recovery plan testing types?",
+    "answers": {
+      "A": "Simulation",
+      "B": "Checklist",
+      "C": "Availability",
+      "D": "Full Interruption"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "Which of the following is NOT a form of computer/network surveillance?",
+    "answers": {
+      "A": "Keyboard monitoring",
+      "B": "Use of network sniffers",
+      "C": "Use of Closed-Circuit Television (CCTV)",
+      "D": "Review of audit logs"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "How would you calculate risk?",
+    "answers": {
+      "A": "Probability / loss",
+      "B": "Probability * mitigation factor",
+      "C": "(Loss + mitigation factor) * (loss/probability)",
+      "D": "Probability * loss"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "What is the common share name used for interprocess communication?",
+    "answers": {
+      "A": "C$",
+      "B": "IPC$",
+      "C": "ADMIN$",
+      "D": "INTERCOM$"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "Which port is commonly used by SMB when operating over TCP without NetBIOS?",
+    "answers": {
+      "A": "137",
+      "B": "139",
+      "C": "135",
+      "D": "445"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "Which access control model would be found in a firewall?",
+    "answers": {
+      "A": "Mandatory access control",
+      "B": "Discretionary access control",
+      "C": "Role-based access control",
+      "D": "Rule-based access control"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "What is the preferred encryption option for sending large amounts of data?",
+    "answers": {
+      "A": "Symmetric encryption",
+      "B": "Asymmetric encryption",
+      "C": "Public Key Cryptography",
+      "D": "Diffie-Hellman scheme"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary goal of an Information Security Governance strategy?",
+    "answers": {
+      "A": "To minimize the impact of security incidents on the organization",
+      "B": "To obtain senior management commitment and support",
+      "C": "To enforce compliance with information security policies",
+      "D": "To prioritize options to mitigate risks"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "What is the purpose of continuously improving cybersecurity guidelines and their application notes?",
+    "answers": {
+      "A": "To categorize security measures into groups",
+      "B": "To react to new technologies, use cases, and risks",
+      "C": "To prevent all identified threats",
+      "D": "To eliminate all cybersecurity risks"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "Which technique aims to identify changes in normal routines by examining patterns of a user's activity?",
+    "answers": {
+      "A": "Vulnerability Assessment",
+      "B": "Behavior-based IDS",
+      "C": "Data Mining",
+      "D": "User Profile Analysis"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary purpose of conducting a risk analysis in cybersecurity?",
+    "answers": {
+      "A": "To assess the risk level for the organization",
+      "B": "To formulate the most important IT security procedures for the organization",
+      "C": "To create a risk assessment statement",
+      "D": "To determine the level of exposure to identified threats and identify possible safeguards or controls"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "What does the CIA triad in cryptography emphasize?",
+    "answers": {
+      "A": "Confidentiality, Integrity, Authenticity",
+      "B": "Confidentiality, Integrity, Availability",
+      "C": "Confidentiality, Authenticity, Nonrepudiation",
+      "D": "Confidentiality, Availability, Nonrepudiation"
+    },
+    "correct": "B",
+    "predicted": null
+  },
+  {
+    "question": "Which nmap command is used to perform a TCP SYN scan, also known as a half-open scan, to determine which ports are open on a target system?",
+    "answers": {
+      "A": "nmap -sP",
+      "B": "nmap -sT",
+      "C": "nmap -SYN",
+      "D": "nmap -sS"
+    },
+    "correct": "D",
+    "predicted": null
+  },
+  {
+    "question": "What is the primary purpose of business continuity plans?",
+    "answers": {
+      "A": "To recover from natural disasters",
+      "B": "To conduct regular audits of the organization's security systems",
+      "C": "To minimize the effects of a disruptive event on a company",
+      "D": "To increase the cost associated with a disruptive event"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "Which DoS attack sends large amounts of ICMP Echo traffic to a broadcast IP address with a spoofed source address of a victim?",
+    "answers": {
+      "A": "Smurf attack",
+      "B": "SYN flood attack",
+      "C": "Ping of Death",
+      "D": "Botnet attack"
+    },
+    "correct": "A",
+    "predicted": null
+  },
+  {
+    "question": "What is the purpose of NOP sleds in buffer overflow exploits?",
+    "answers": {
+      "A": "To encrypt the payload",
+      "B": "To alter the content of the NOP register",
+      "C": "To insert no-operation instructions for padding",
+      "D": "To alter the content of the EIP register"
+    },
+    "correct": "C",
+    "predicted": null
+  },
+  {
+    "question": "Which security feature can help prevent buffer overflow attacks by marking certain memory regions as non-executable?",
+    "answers": {
+      "A": "Data Execution Prevention (DEP)",
+      "B": "Buffer Overflow Prevention (BOP)",
+      "C": "Intrusion Detection System (IDS)",
+      "D": "Address Space Layout Randomization (ASLR)"
+    },
+    "correct": "A",
+    "predicted": null
+  }
+]
