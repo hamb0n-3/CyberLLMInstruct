@@ -11,6 +11,7 @@ PORT="8080"
 MAX_BATCH_SIZE="8"
 BATCH_TIMEOUT_MS="50"
 USE_SPECULATIVE=""
+USE_COMBINED=""
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -43,6 +44,10 @@ while [[ $# -gt 0 ]]; do
             USE_SPECULATIVE="--use-speculative"
             shift
             ;;
+        --use-combined)
+            USE_COMBINED="--use-combined"
+            shift
+            ;;
         --help)
             echo "Usage: $0 [options]"
             echo "Options:"
@@ -53,6 +58,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --max-batch-size SIZE    Maximum batch size (default: $MAX_BATCH_SIZE)"
             echo "  --batch-timeout-ms MS    Batch timeout in milliseconds (default: $BATCH_TIMEOUT_MS)"
             echo "  --use-speculative        Use speculative decoding by default"
+            echo "  --use-combined           Use combined speculative + continuous batching"
             echo "  --help                   Show this help message"
             exit 0
             ;;
@@ -84,6 +90,7 @@ echo "Host: $HOST:$PORT"
 echo "Max Batch Size: $MAX_BATCH_SIZE"
 echo "Batch Timeout: ${BATCH_TIMEOUT_MS}ms"
 echo "Use Speculative: ${USE_SPECULATIVE:-No}"
+echo "Use Combined: ${USE_COMBINED:-No}"
 echo ""
 
 # Start the server
@@ -94,4 +101,5 @@ python -m mlx_parallm.advanced_server \
     --port "$PORT" \
     --max-batch-size "$MAX_BATCH_SIZE" \
     --batch-timeout-ms "$BATCH_TIMEOUT_MS" \
-    $USE_SPECULATIVE 
+    $USE_SPECULATIVE \
+    $USE_COMBINED 

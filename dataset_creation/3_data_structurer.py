@@ -9,41 +9,62 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 import argparse
+import yaml
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
-# Import MLX libraries
-try:
-    from mlx_lm import load, generate
-    MLX_AVAILABLE = True
-except ImportError:
-    MLX_AVAILABLE = False
+# Import MLX client
+from mlx_client import MLXClient
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class CyberDataStructurer:
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, workers: int, disable_llm: bool):
+    def __init__(self, input_dir: str, output_dir: str, config_path: str = "pipeline_config.yaml", workers: int = 4, disable_llm: bool = False):
         """Initialize the data structurer."""
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.num_workers = workers
-        self.model, self.tokenizer, self.llm_available = None, None, False
-
-        if not disable_llm and MLX_AVAILABLE:
-            try:
-                logger.info(f"Loading MLX model '{llm_model}'...")
-                self.model, self.tokenizer = load(llm_model)
-                self.llm_available = True
-                logger.info("MLX model loaded successfully.")
-            except Exception as e:
-                logger.error(f"Failed to load MLX model: {e}")
-                self.llm_available = False
+        
+        # Load configuration
+        self.config = self._load_config(config_path)
+        
+        if not disable_llm:
+            # Initialize MLX client
+            self.mlx_client = MLXClient(
+                server_url=self.config["mlx_server"]["base_url"],
+                model_path=self.config["mlx_model"]["path"],
+                batch_size=self.config["pipeline"]["data_structurer"].get("batch_size", 8),
+                batch_timeout_ms=self.config["batching"]["batch_timeout_ms"],
+                use_server=self.config["mlx_server"]["use_server"],
+                max_retries=self.config["mlx_server"]["max_retries"]
+            )
+            self.llm_available = True
+            logger.info(f"MLX client initialized in {self.mlx_client.mode} mode")
         else:
-            logger.warning("LLM disabled or mlx-lm not found. Structuring will not be possible.")
+            self.mlx_client = None
+            self.llm_available = False
+            logger.warning("LLM disabled. Structuring will not be possible.")
+    
+    def _load_config(self, config_path: str) -> Dict:
+        """Load pipeline configuration"""
+        try:
+            with open(config_path, 'r') as f:
+                return yaml.safe_load(f)
+        except Exception as e:
+            logger.warning(f"Failed to load config from {config_path}: {e}")
+            # Return default configuration
+            return {
+                "mlx_server": {"base_url": "http://localhost:8080", "use_server": True, "max_retries": 3},
+                "mlx_model": {"path": "mlx-community/Phi-3-mini-4k-instruct-4bit"},
+                "batching": {"batch_size": 16, "batch_timeout_ms": 100},
+                "pipeline": {
+                    "data_structurer": {"max_tokens": 2048, "temperature": 0.7, "batch_size": 8}
+                }
+            }
 
         self.file_handlers = {
             'ctf_data': self._prepare_ctf_tasks,
@@ -56,11 +77,16 @@ class CyberDataStructurer:
         }
 
     def _call_llm(self, prompt: str) -> Optional[str]:
-        """Call the local MLX model."""
+        """Call the MLX model via client."""
         if not self.llm_available: return None
         try:
-            # Removed temp/temperature argument for compatibility
-            return generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=400)
+            # Get configuration for data structurer
+            config = self.config["pipeline"]["data_structurer"]
+            return self.mlx_client.generate(
+                prompt,
+                max_tokens=config.get("max_tokens", 2048),
+                temperature=config.get("temperature", 0.7)
+            )
         except Exception as e:
             logger.error(f"Error during MLX generation: {e}")
             return None
@@ -206,13 +232,24 @@ class CyberDataStructurer:
             # For all other handlers, prepare and process LLM tasks
             if self.llm_available:
                 tasks = handler(data)
-                with ThreadPoolExecutor(max_workers=self.num_workers) as executor:
-                    future_to_meta = {executor.submit(self._call_llm, prompt): meta for prompt, meta in tasks}
-                    progress_bar = tqdm(as_completed(future_to_meta), total=len(tasks), desc=f"Structuring {file_path.name}")
+                # Process in batches for better performance
+                batch_size = self.config["pipeline"]["data_structurer"].get("batch_size", 8)
+                
+                for i in tqdm(range(0, len(tasks), batch_size), desc=f"Structuring {file_path.name} (batched)"):
+                    batch_tasks = tasks[i:i + batch_size]
+                    prompts = [prompt for prompt, _ in batch_tasks]
+                    metadatas = [meta for _, meta in batch_tasks]
                     
-                    for future in progress_bar:
-                        metadata = future_to_meta[future]
-                        response = future.result()
+                    # Get batch responses
+                    config = self.config["pipeline"]["data_structurer"]
+                    responses = self.mlx_client.generate_batch(
+                        prompts,
+                        max_tokens=config.get("max_tokens", 2048),
+                        temperature=config.get("temperature", 0.7)
+                    )
+                    
+                    # Process responses
+                    for metadata, response in zip(metadatas, responses):
                         if response:
                             metadata['response'] = response.strip()
                             all_structured_pairs.append(metadata)
@@ -223,23 +260,38 @@ class CyberDataStructurer:
             
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump({
-                    'metadata': {'total_entries': len(all_structured_pairs), 'generation_timestamp': timestamp, 'model_used': self.model.model.name if self.llm_available else "N/A"},
+                    'metadata': {
+                        'total_entries': len(all_structured_pairs), 
+                        'generation_timestamp': timestamp, 
+                        'model_used': self.config["mlx_model"]["path"] if self.llm_available else "N/A",
+                        'mlx_mode': self.mlx_client.mode if self.llm_available else "N/A"
+                    },
                     'data': all_structured_pairs
                 }, f, indent=2)
             
             logger.info(f"Successfully saved {len(all_structured_pairs)} structured pairs to {output_file}")
+        
+        # Close the MLX client when done
+        if self.mlx_client:
+            self.mlx_client.close()
 
 def main():
-    parser = argparse.ArgumentParser(description="Structure filtered cybersecurity data using an LLM.")
+    parser = argparse.ArgumentParser(description="Structure filtered cybersecurity data using MLX with advanced server support.")
     parser.add_argument("--input-dir", default="filtered_data", help="Directory containing filtered data.")
     parser.add_argument("--output-dir", default="structured_data", help="Output directory.")
-    parser.add_argument("--model", type=str, default="mlx-community/c4ai-command-r-v01-4bit", help="The MLX-compatible model to use from Hugging Face.")
-    parser.add_argument("--workers", type=int, default=4, help="Number of parallel workers for LLM calls.")
+    parser.add_argument("--config", type=str, default="pipeline_config.yaml", help="Path to pipeline configuration file.")
+    parser.add_argument("--workers", type=int, default=4, help="Number of parallel workers (for compatibility).")
     parser.add_argument("--disable-llm", action="store_true", help="Disable LLM usage.")
     args = parser.parse_args()
 
     try:
-        structurer = CyberDataStructurer(input_dir=args.input_dir, output_dir=args.output_dir, llm_model=args.model, workers=args.workers, disable_llm=args.disable_llm)
+        structurer = CyberDataStructurer(
+            input_dir=args.input_dir, 
+            output_dir=args.output_dir, 
+            config_path=args.config,
+            workers=args.workers, 
+            disable_llm=args.disable_llm
+        )
         structurer.process_directory()
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}", exc_info=True)

@@ -1,0 +1,61 @@
+# MLX Pipeline Configuration
+# This file configures the MLX client and generation parameters for the data pipeline
+
+mlx_server:
+  base_url: "http://localhost:8080"
+  timeout: 30
+  max_retries: 3
+  use_server: true  # Set to false to use direct MLX inference
+
+# Model configuration for direct MLX mode
+mlx_model:
+  path: "mlx-community/Phi-3-mini-4k-instruct-4bit"
+  
+# Batching configuration
+batching:
+  batch_size: 16
+  batch_timeout_ms: 100
+
+# Default generation parameters
+generation:
+  temperature: 0.7
+  top_p: 0.95
+  
+# Pipeline-specific configurations
+pipeline:
+  data_filter:
+    # For relevance checking - keep it fast and concise
+    relevance_check:
+      max_tokens: 5
+      temperature: 0.1  # Low temperature for yes/no answers
+      
+    # For enhancement - more detailed generation
+    enhancement:
+      max_tokens: 1024
+      temperature: 0.7
+      
+  data_structurer:
+    max_tokens: 2048
+    temperature: 0.7
+    batch_size: 8  # Smaller batches for longer generations
+    
+  domain_classifier:
+    max_tokens: 512
+    temperature: 0.3  # Lower temperature for classification
+    
+  security_aligner:
+    max_tokens: 1500
+    temperature: 0.8  # Higher temperature for creative security scenarios
+    
+# Advanced server configuration (when using combined mode)
+advanced_server:
+  model: "mlx-community/c4ai-command-r-v01-4bit"
+  draft_model: "mlx-community/Phi-3-mini-4k-instruct-4bit"
+  max_batch_size: 16
+  batch_timeout_ms: 50
+  use_combined: true  # Enable combined speculative + continuous batching
+  
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(levelname)s - %(message)s"

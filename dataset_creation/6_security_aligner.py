@@ -15,33 +15,54 @@ import argparse
 import time
 from tqdm import tqdm
 
-try:
-    from mlx_lm import load, generate
-    MLX_AVAILABLE = True
-except ImportError:
-    MLX_AVAILABLE = False
+# Import MLX client
+from mlx_client import MLXClient
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class SecurityAligner:
-    # CORRECTED: Removed 'workers' from __init__
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, disable_llm: bool):
+    def __init__(self, input_dir: str, output_dir: str, config_path: str = "pipeline_config.yaml", disable_llm: bool = False):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        self.model, self.tokenizer, self.llm_available = None, None, False
-
-        if not disable_llm and MLX_AVAILABLE:
-            try:
-                logger.info(f"Loading MLX model '{llm_model}'...")
-                self.model, self.tokenizer = load(llm_model)
-                self.llm_available = True
-                logger.info("MLX model loaded successfully.")
-            except Exception as e:
-                logger.error(f"Failed to load MLX model: {e}")
+        
+        # Load configuration
+        self.config = self._load_config(config_path)
+        
+        if not disable_llm:
+            # Initialize MLX client
+            self.mlx_client = MLXClient(
+                server_url=self.config["mlx_server"]["base_url"],
+                model_path=self.config["mlx_model"]["path"],
+                batch_size=self.config["batching"]["batch_size"],
+                batch_timeout_ms=self.config["batching"]["batch_timeout_ms"],
+                use_server=self.config["mlx_server"]["use_server"],
+                max_retries=self.config["mlx_server"]["max_retries"]
+            )
+            self.llm_available = True
+            logger.info(f"MLX client initialized in {self.mlx_client.mode} mode")
         else:
-            logger.warning("LLM enhancement disabled or mlx-lm not found.")
+            self.mlx_client = None
+            self.llm_available = False
+            logger.warning("LLM enhancement disabled.")
+    
+    def _load_config(self, config_path: str) -> Dict:
+        """Load pipeline configuration"""
+        try:
+            with open(config_path, 'r') as f:
+                return yaml.safe_load(f)
+        except Exception as e:
+            logger.warning(f"Failed to load config from {config_path}: {e}")
+            # Return default configuration
+            return {
+                "mlx_server": {"base_url": "http://localhost:8080", "use_server": True, "max_retries": 3},
+                "mlx_model": {"path": "mlx-community/Phi-3-mini-4k-instruct-4bit"},
+                "batching": {"batch_size": 16, "batch_timeout_ms": 100},
+                "pipeline": {
+                    "security_aligner": {"max_tokens": 1500, "temperature": 0.8}
+                }
+            }
 
         self.template_categories = {'phishing': self._load_phishing_templates(), 'malware': self._load_malware_templates(), 'social_engineering': self._load_social_engineering_templates(), 'compliance': self._load_compliance_templates(), 'adversarial': self._load_adversarial_templates()}
         self.security_flags = {'high_risk': {'description': 'Contains potentially harmful content', 'review_required': True, 'isolation_required': True}, 'medium_risk': {'description': 'Contains suspicious patterns', 'review_required': True, 'isolation_required': False}, 'compliance_check': {'description': 'Tests compliance handling', 'review_required': True, 'isolation_required': False}}
@@ -98,28 +119,79 @@ class SecurityAligner:
     def enhance_with_llm(self, entry: Dict) -> Dict:
         if not isinstance(entry, dict): return entry
         instruction = entry.get('instruction', '')
-        response = entry.get('response', '')
+        orig_response = entry.get('response', '')
         category = entry.get('metadata', {}).get('category', 'general cybersecurity')
 
         prompt = f"""[INST]
 Enhance this cybersecurity instruction-response pair to be more detailed and educational. For the category '{category}', add relevant technical details and best practices. Return a single JSON object with "enhanced_instruction" and "enhanced_response" fields, and nothing else.
 Original Instruction: {instruction}
-Original Response: {response}
+Original Response: {orig_response}
 [/INST]"""
         
         try:
-            # CORRECTED LINE: Removed the temperature/temp argument entirely
-            ollama_response = generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=2048)
-            json_match = re.search(r'\{.*\}', ollama_response, re.DOTALL)
+            # Get configuration for security aligner
+            config = self.config["pipeline"]["security_aligner"]
+            response = self.mlx_client.generate(
+                prompt,
+                max_tokens=config.get("max_tokens", 1500),
+                temperature=config.get("temperature", 0.8)
+            )
+            json_match = re.search(r'\{.*\}', response, re.DOTALL)
             if json_match:
                 enhanced_data = json.loads(json_match.group(0))
                 entry['instruction'] = enhanced_data.get('enhanced_instruction', instruction)
-                entry['response'] = enhanced_data.get('enhanced_response', response)
+                entry['response'] = enhanced_data.get('enhanced_response', orig_response)
                 entry.setdefault('metadata', {})['enhancement_timestamp'] = datetime.now().isoformat()
         except Exception as e:
             logger.error(f"Could not enhance entry due to error: {e}")
         
         return entry
+    
+    def enhance_entries_batch(self, entries: List[Dict]) -> List[Dict]:
+        """Enhance multiple entries using batch processing"""
+        prompts = []
+        for entry in entries:
+            if not isinstance(entry, dict): 
+                prompts.append("")
+                continue
+            instruction = entry.get('instruction', '')
+            orig_response = entry.get('response', '')
+            category = entry.get('metadata', {}).get('category', 'general cybersecurity')
+            
+            prompt = f"""[INST]
+Enhance this cybersecurity instruction-response pair to be more detailed and educational. For the category '{category}', add relevant technical details and best practices. Return a single JSON object with "enhanced_instruction" and "enhanced_response" fields, and nothing else.
+Original Instruction: {instruction}
+Original Response: {orig_response}
+[/INST]"""
+            prompts.append(prompt)
+        
+        try:
+            # Get batch responses
+            config = self.config["pipeline"]["security_aligner"]
+            responses = self.mlx_client.generate_batch(
+                prompts,
+                max_tokens=config.get("max_tokens", 1500),
+                temperature=config.get("temperature", 0.8)
+            )
+            
+            # Process responses
+            for entry, response in zip(entries, responses):
+                if not isinstance(entry, dict):
+                    continue
+                try:
+                    json_match = re.search(r'\{.*\}', response, re.DOTALL)
+                    if json_match:
+                        enhanced_data = json.loads(json_match.group(0))
+                        entry['instruction'] = enhanced_data.get('enhanced_instruction', entry.get('instruction', ''))
+                        entry['response'] = enhanced_data.get('enhanced_response', entry.get('response', ''))
+                        entry.setdefault('metadata', {})['enhancement_timestamp'] = datetime.now().isoformat()
+                except:
+                    pass  # Keep original entry if enhancement fails
+                    
+        except Exception as e:
+            logger.error(f"Error during batch enhancement: {e}")
+            
+        return entries
 
     def process_directory(self, security_example_ratio: float = 0.2):
         input_files = [p for p in self.input_dir.glob('*_reviewed_*.json')]
@@ -141,9 +213,13 @@ Original Response: {response}
             enhanced_data = []
 
             if self.llm_available:
-                # CORRECTED: Using a sequential loop instead of ThreadPoolExecutor
-                for entry in tqdm(aligned_data, desc=f"Aligning {file_path.name}"):
-                    enhanced_data.append(self.enhance_with_llm(entry))
+                # Process in batches for better performance
+                batch_size = self.config["batching"]["batch_size"]
+                
+                for i in tqdm(range(0, len(aligned_data), batch_size), desc=f"Aligning {file_path.name} (batched)"):
+                    batch = aligned_data[i:i + batch_size]
+                    enhanced_batch = self.enhance_entries_batch(batch)
+                    enhanced_data.extend(enhanced_batch)
             else:
                 logger.info("LLM is disabled. Skipping enhancement step.")
                 enhanced_data = aligned_data
@@ -159,19 +235,29 @@ Original Response: {response}
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         logger.info(f"Saved {len(data)} aligned entries to {output_file}")
+    
+    def close(self):
+        """Close the MLX client"""
+        if self.mlx_client:
+            self.mlx_client.close()
 
 def main():
-    parser = argparse.ArgumentParser(description='Align and enhance a dataset with security-focused examples.')
+    parser = argparse.ArgumentParser(description='Align and enhance a dataset with security-focused examples using MLX with advanced server support.')
     parser.add_argument('--input-dir', default='reviewed_data', help='Input directory with reviewed data.')
     parser.add_argument('--output-dir', default='security_aligned', help='Output directory for the final dataset.')
     parser.add_argument('--ratio', type=float, default=0.2, help='Ratio of generated security examples to add.')
-    parser.add_argument('--model', type=str, default="mlx-community/c4ai-command-r-v01-4bit", help="The MLX-compatible model to use.")
+    parser.add_argument('--config', type=str, default="pipeline_config.yaml", help="Path to pipeline configuration file.")
     parser.add_argument("--disable-llm", action="store_true", help="Disable LLM enhancement.")
     args = parser.parse_args()
     
-    # CORRECTED: Removed 'workers' from the constructor call
-    aligner = SecurityAligner(input_dir=args.input_dir, output_dir=args.output_dir, llm_model=args.model, disable_llm=args.disable_llm, workers=1)
+    aligner = SecurityAligner(
+        input_dir=args.input_dir, 
+        output_dir=args.output_dir, 
+        config_path=args.config,
+        disable_llm=args.disable_llm
+    )
     aligner.process_directory(security_example_ratio=args.ratio)
+    aligner.close()
 
 if __name__ == "__main__":
     main()

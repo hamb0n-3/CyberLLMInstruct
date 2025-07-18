@@ -65,25 +65,21 @@ python dataset_creation/test_advanced_client.py
 
 ### Data Flow
 1. Raw data collected → `raw_data/` directory
-2. Processed through pipeline → `processed_data/` directory  
+2. Processed through pipeline → `*_data/` directory  
 3. Final dataset → `cybersec_instruct_dataset.json`
-4. Inference server loads MLX models from HuggingFace or local paths
+
 
 ## Key Technologies
 - **MLX Framework**: Apple's ML framework optimized for Apple Silicon
 - **Python 3.13**: Requires Python 3.8+
-- **Ollama**: Used for LLM inference during dataset processing (requires separate installation)
 - **FastAPI**: REST API for inference server
 
 ## Important Notes
 - The project is actively being refactored (many files recently deleted/reorganized)
-- Ollama must be running locally for dataset creation steps 5 and 6
 - MLX models must be in MLX format (use mlx-lm convert if needed)
 - The inference server supports both standard and speculative decoding modes
 - Dataset creation is computationally intensive and may take several hours
 
 ## Common Issues
-- If Ollama connection fails, ensure Ollama is running (`ollama serve`)
+
 - For MLX model loading errors, verify model is in MLX format
-- Memory issues: Reduce batch size or use smaller models
-- API rate limits: Adjust delay parameters in data collector

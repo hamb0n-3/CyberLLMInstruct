@@ -24,6 +24,7 @@ from mlx_lm import load
 
 from .speculative_decoding import SpeculativeConfig, SpeculativeDecodingEngine
 from .continuous_batching import BatchConfig, AsyncContinuousBatchingEngine
+from .combined_inference import CombinedConfig, AsyncCombinedEngine
 
 # Configure logging
 logging.basicConfig(
@@ -36,7 +37,9 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Advanced MLX Inference Server")
 inference_engine: Optional[AsyncContinuousBatchingEngine] = None
 speculative_engine: Optional[SpeculativeDecodingEngine] = None
+combined_engine: Optional[AsyncCombinedEngine] = None
 use_speculative = False
+use_combined = False
 
 
 # Pydantic models
@@ -74,6 +77,8 @@ class ServerStats(BaseModel):
     average_latency: float
     speculative_stats: Optional[Dict] = None
     batching_stats: Optional[Dict] = None
+    combined_stats: Optional[Dict] = None
+    mode: str
 
 
 # API Endpoints
@@ -92,8 +97,17 @@ async def generate(request: GenerationRequest):
     use_spec = request.use_speculative if request.use_speculative is not None else use_speculative
     
     try:
-        if use_spec and speculative_engine:
-            # Use speculative decoding
+        if use_combined and combined_engine:
+            # Use combined speculative + continuous batching
+            text = await combined_engine.generate(
+                request.prompt,
+                max_tokens=request.max_tokens,
+                temperature=request.temperature,
+                top_p=request.top_p
+            )
+            method = "combined"
+        elif use_spec and speculative_engine:
+            # Use speculative decoding only
             if request.stream:
                 # Return streaming response
                 return StreamingResponse(
@@ -108,7 +122,7 @@ async def generate(request: GenerationRequest):
                 )
                 method = "speculative"
         else:
-            # Use continuous batching
+            # Use continuous batching only
             if not inference_engine:
                 raise HTTPException(status_code=503, detail="Inference engine not initialized")
             text = await inference_engine.generate(
@@ -145,13 +159,23 @@ async def generate_batch(request: BatchGenerationRequest):
     start_time = time.time()
     
     try:
-        # Always use continuous batching for batch requests
-        texts = await inference_engine.generate_batch(
-            request.prompts,
-            max_tokens=request.max_tokens,
-            temperature=request.temperature,
-            top_p=request.top_p
-        )
+        # Use combined engine if available, otherwise fall back to continuous batching
+        if use_combined and combined_engine:
+            texts = await combined_engine.generate_batch(
+                request.prompts,
+                max_tokens=request.max_tokens,
+                temperature=request.temperature,
+                top_p=request.top_p
+            )
+            method = "combined"
+        else:
+            texts = await inference_engine.generate_batch(
+                request.prompts,
+                max_tokens=request.max_tokens,
+                temperature=request.temperature,
+                top_p=request.top_p
+            )
+            method = "continuous_batching"
         
         results = []
         for i, text in enumerate(texts):
@@ -159,7 +183,7 @@ async def generate_batch(request: BatchGenerationRequest):
                 text=text,
                 tokens_generated=len(text.split()),
                 generation_time=0,  # Individual times not tracked in batch
-                method="continuous_batching"
+                method=method
             ))
         
         total_time = time.time() - start_time
@@ -180,21 +204,31 @@ async def get_stats():
     """Get server statistics"""
     stats = {
         "total_requests": 0,
-        "average_latency": 0.0
+        "average_latency": 0.0,
+        "mode": "unknown"
     }
     
-    if inference_engine:
+    if use_combined and combined_engine:
+        combined_stats = combined_engine.get_stats()
+        stats["combined_stats"] = combined_stats
+        stats["total_requests"] = combined_stats.get("total_requests", 0)
+        stats["average_latency"] = combined_stats.get("avg_latency", 0.0)
+        stats["mode"] = "combined"
+    elif inference_engine:
         batching_stats = inference_engine.engine.get_stats()
         stats["batching_stats"] = batching_stats
         stats["total_requests"] = batching_stats.get("total_requests", 0)
         stats["average_latency"] = batching_stats.get("avg_latency", 0.0)
+        stats["mode"] = "continuous_batching"
     
-    if speculative_engine:
+    if speculative_engine and not use_combined:
         # Add speculative decoding stats if available
         stats["speculative_stats"] = {
             "acceptance_rate": speculative_engine.decoder.acceptance_rate,
             "draft_length": speculative_engine.decoder.draft_length
         }
+        if not inference_engine:
+            stats["mode"] = "speculative"
     
     return ServerStats(**stats)
 
@@ -202,14 +236,18 @@ async def get_stats():
 @app.post("/v1/configure")
 async def configure_server(
     use_speculative_decoding: Optional[bool] = None,
+    use_combined_mode: Optional[bool] = None,
     max_batch_size: Optional[int] = None,
     batch_timeout_ms: Optional[int] = None
 ):
     """Configure server parameters"""
-    global use_speculative
+    global use_speculative, use_combined
     
     if use_speculative_decoding is not None:
         use_speculative = use_speculative_decoding
+    
+    if use_combined_mode is not None:
+        use_combined = use_combined_mode
     
     if inference_engine and (max_batch_size or batch_timeout_ms):
         if max_batch_size:
@@ -217,10 +255,17 @@ async def configure_server(
         if batch_timeout_ms:
             inference_engine.engine.config.timeout_ms = batch_timeout_ms
     
+    if combined_engine and (max_batch_size or batch_timeout_ms):
+        if max_batch_size:
+            combined_engine.engine.config.max_batch_size = max_batch_size
+        if batch_timeout_ms:
+            combined_engine.engine.config.batch_timeout_ms = batch_timeout_ms
+    
     return {
         "use_speculative": use_speculative,
-        "max_batch_size": inference_engine.engine.config.max_batch_size if inference_engine else None,
-        "batch_timeout_ms": inference_engine.engine.config.timeout_ms if inference_engine else None
+        "use_combined": use_combined,
+        "max_batch_size": combined_engine.engine.config.max_batch_size if combined_engine else (inference_engine.engine.config.max_batch_size if inference_engine else None),
+        "batch_timeout_ms": combined_engine.engine.config.batch_timeout_ms if combined_engine else (inference_engine.engine.config.timeout_ms if inference_engine else None)
     }
 
 
@@ -244,7 +289,7 @@ async def speculative_stream_generator(request: GenerationRequest):
 @app.on_event("startup")
 async def startup_event():
     """Initialize models and engines on startup"""
-    global inference_engine, speculative_engine, use_speculative
+    global inference_engine, speculative_engine, combined_engine, use_speculative, use_combined
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, required=True, help="Main model path")
@@ -252,34 +297,51 @@ async def startup_event():
     parser.add_argument("--max-batch-size", type=int, default=8)
     parser.add_argument("--batch-timeout-ms", type=int, default=50)
     parser.add_argument("--use-speculative", action="store_true")
+    parser.add_argument("--use-combined", action="store_true", help="Use combined speculative + continuous batching")
     
     # Parse known args to handle uvicorn args
     args, _ = parser.parse_known_args()
     
-    # Load main model and tokenizer
-    logger.info(f"Loading main model: {args.model}")
-    model, tokenizer = load(args.model)
+    # Determine mode
+    use_combined = args.use_combined and args.draft_model
     
-    # Initialize continuous batching engine
-    batch_config = BatchConfig(
-        max_batch_size=args.max_batch_size,
-        timeout_ms=args.batch_timeout_ms,
-        padding_token_id=tokenizer.pad_token_id or 0
-    )
-    inference_engine = AsyncContinuousBatchingEngine(model, tokenizer, batch_config)
-    logger.info("Continuous batching engine initialized")
-    
-    # Initialize speculative decoding if draft model provided
-    if args.draft_model:
-        logger.info(f"Initializing speculative decoding with draft model: {args.draft_model}")
-        spec_config = SpeculativeConfig(
-            draft_model_path=args.draft_model,
+    if use_combined:
+        # Initialize combined engine
+        logger.info(f"Initializing combined engine with model: {args.model} and draft: {args.draft_model}")
+        combined_config = CombinedConfig(
             target_model_path=args.model,
-            max_draft_tokens=5
+            draft_model_path=args.draft_model,
+            max_batch_size=args.max_batch_size,
+            batch_timeout_ms=args.batch_timeout_ms,
+            enable_speculative=True
         )
-        speculative_engine = SpeculativeDecodingEngine(spec_config)
-        use_speculative = args.use_speculative
-        logger.info("Speculative decoding engine initialized")
+        combined_engine = AsyncCombinedEngine(combined_config)
+        logger.info("Combined speculative + continuous batching engine initialized")
+    else:
+        # Load main model and tokenizer for separate engines
+        logger.info(f"Loading main model: {args.model}")
+        model, tokenizer = load(args.model)
+        
+        # Initialize continuous batching engine
+        batch_config = BatchConfig(
+            max_batch_size=args.max_batch_size,
+            timeout_ms=args.batch_timeout_ms,
+            padding_token_id=tokenizer.pad_token_id or 0
+        )
+        inference_engine = AsyncContinuousBatchingEngine(model, tokenizer, batch_config)
+        logger.info("Continuous batching engine initialized")
+        
+        # Initialize speculative decoding if draft model provided
+        if args.draft_model:
+            logger.info(f"Initializing speculative decoding with draft model: {args.draft_model}")
+            spec_config = SpeculativeConfig(
+                draft_model_path=args.draft_model,
+                target_model_path=args.model,
+                max_draft_tokens=5
+            )
+            speculative_engine = SpeculativeDecodingEngine(spec_config)
+            use_speculative = args.use_speculative
+            logger.info("Speculative decoding engine initialized")
     
     logger.info("Server startup complete")
 
@@ -289,6 +351,8 @@ async def shutdown_event():
     """Cleanup on shutdown"""
     if inference_engine:
         inference_engine.stop()
+    if combined_engine:
+        combined_engine.stop()
     logger.info("Server shutdown complete")
 
 
@@ -301,6 +365,7 @@ def main():
     parser.add_argument("--max-batch-size", type=int, default=8)
     parser.add_argument("--batch-timeout-ms", type=int, default=50)
     parser.add_argument("--use-speculative", action="store_true")
+    parser.add_argument("--use-combined", action="store_true", help="Use combined speculative + continuous batching")
     
     args = parser.parse_args()
     

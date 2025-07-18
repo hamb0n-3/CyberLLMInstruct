@@ -21,6 +21,7 @@ except ImportError:
 
 from .speculative_decoding import SpeculativeConfig, SpeculativeDecodingEngine
 from .continuous_batching import BatchConfig, AsyncContinuousBatchingEngine
+from .combined_inference import CombinedConfig, AsyncCombinedEngine
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +31,7 @@ class InferenceMode:
     DIRECT = "direct"
     SPECULATIVE = "speculative"
     CONTINUOUS_BATCHING = "continuous_batching"
+    COMBINED = "combined"  # Combined speculative + continuous batching
 
 
 class UnifiedInferenceEngine:
@@ -70,6 +72,7 @@ class UnifiedInferenceEngine:
         # Initialize mode-specific engines
         self.speculative_engine = None
         self.batch_engine = None
+        self.combined_engine = None
         
         if mode == InferenceMode.SPECULATIVE:
             if not draft_model_path:
@@ -95,6 +98,18 @@ class UnifiedInferenceEngine:
                 self.tokenizer, 
                 batch_config
             )
+            
+        elif mode == InferenceMode.COMBINED:
+            logger.info("Initializing combined speculative + continuous batching engine")
+            combined_config = CombinedConfig(
+                target_model_path=model_path,
+                draft_model_path=draft_model_path,
+                max_batch_size=batch_size,
+                batch_timeout_ms=batch_timeout_ms,
+                padding_token_id=self.tokenizer.pad_token_id or 0,
+                enable_speculative=bool(draft_model_path)
+            )
+            self.combined_engine = AsyncCombinedEngine(combined_config)
         
         logger.info(f"Inference engine initialized in {mode} mode")
     
@@ -135,6 +150,24 @@ class UnifiedInferenceEngine:
             try:
                 return loop.run_until_complete(
                     self.batch_engine.generate(
+                        prompt,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                        **kwargs
+                    )
+                )
+            finally:
+                loop.close()
+                
+        elif self.mode == InferenceMode.COMBINED:
+            # Run async method in sync context
+            if not self.combined_engine:
+                raise RuntimeError("Combined engine not initialized")
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            try:
+                return loop.run_until_complete(
+                    self.combined_engine.generate(
                         prompt,
                         max_tokens=max_tokens,
                         temperature=temperature,
@@ -192,6 +225,24 @@ class UnifiedInferenceEngine:
                 )
             finally:
                 loop.close()
+                
+        elif self.mode == InferenceMode.COMBINED:
+            # Use combined engine batch processing
+            if not self.combined_engine:
+                raise RuntimeError("Combined engine not initialized")
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            try:
+                return loop.run_until_complete(
+                    self.combined_engine.generate_batch(
+                        prompts,
+                        max_tokens=max_tokens,
+                        temperature=temperature,
+                        **kwargs
+                    )
+                )
+            finally:
+                loop.close()
         
         else:
             # Fall back to sequential processing
@@ -210,13 +261,16 @@ class UnifiedInferenceEngine:
         """Clean up resources"""
         if self.batch_engine:
             self.batch_engine.stop()
+        if self.combined_engine:
+            self.combined_engine.stop()
 
 
 def create_inference_engine(
     model_path: str,
     use_advanced: bool = False,
     draft_model_path: Optional[str] = None,
-    batch_size: int = 8
+    batch_size: int = 8,
+    use_combined: bool = False
 ) -> UnifiedInferenceEngine:
     """
     Factory function to create an inference engine.
@@ -226,13 +280,16 @@ def create_inference_engine(
         use_advanced: Whether to use advanced features
         draft_model_path: Path to draft model (enables speculative decoding)
         batch_size: Batch size for continuous batching
+        use_combined: Whether to use combined speculative + batching mode
         
     Returns:
         Configured inference engine
     """
     if not use_advanced:
         mode = InferenceMode.DIRECT
-    elif draft_model_path:
+    elif use_combined:
+        mode = InferenceMode.COMBINED
+    elif draft_model_path and not batch_size > 1:
         mode = InferenceMode.SPECULATIVE
     else:
         mode = InferenceMode.CONTINUOUS_BATCHING
