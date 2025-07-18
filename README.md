@@ -1,181 +1,236 @@
-# Cyber Instruct Dataset Pipeline
+# MLX ParaLLM - Advanced Inference Engine
 
-This project is a comprehensive, multi-stage pipeline designed to collect, filter, structure, and refine cybersecurity data into a high-quality, instruction-response dataset. The final output is suitable for training and fine-tuning Large Language Models (LLMs) to be proficient in cybersecurity-related tasks.
+High-performance inference engine for MLX with adaptive speculative decoding and continuous batching.
 
-The pipeline is designed to be modular, running a series of scripts in sequence. It leverages local LLMs via the [MLX framework](https://github.com/ml-explore/mlx) for intelligent data processing, includes a human-in-the-loop review stage for quality assurance, and incorporates security alignment to ensure the final dataset is both helpful and safe.
+## Features
 
-## 📈 Pipeline Overview
+### 🚀 Adaptive Speculative Decoding
+- Uses a smaller draft model to generate candidate tokens quickly
+- Verifies candidates with the larger target model
+- Achieves up to 2-3x speedup for single requests
+- Adaptive draft length based on acceptance rate
 
-The entire process transforms raw, unstructured data from various sources into a clean, validated, and aligned dataset. Each stage produces data in its own directory, allowing for inspection and resumption at any point in the pipeline.
+### 📦 Continuous Batching
+- Dynamically groups requests into batches
+- Improves throughput by processing multiple prompts together
+- Configurable batch size and timeout parameters
+- Efficient handling of variable-length sequences
 
-```mermaid
-graph TD
-    subgraph "Stage 1: Collection"
-        A[1_data_collector.py] -->|API Calls, RSS, Scrapers| B[(raw_data)]
-    end
-    subgraph "Stage 2: Filtering"
-        B --> C[2_data_filter.py]
-        C -->|LLM Relevance Check| D[(filtered_data)]
-    end
-    subgraph "Stage 3: Structuring"
-        D --> E[3_data_structurer.py]
-        E -->|LLM Instruction Generation| F[(structured_data)]
-    end
-    subgraph "Stage 4: Classification"
-        F --> G[4_domain_classifier.py]
-        G -->|LLM Domain Tagging| H[(domain_classified)]
-    end
-    subgraph "Stage 5: Human Review"
-        H --> I[5_manual_reviewer.py]
-        I -->|CLI-based Review| J[(reviewed_data)]
-    end
-    subgraph "Stage 6: Security Alignment"
-        J --> K[6_security_aligner.py]
-        K -->|Injects Security Examples| L[(security_aligned)]
-    end
-    subgraph "Stage 7: Final Assembly"
-        L --> M[8_final_assembler.py]
-        M -->|Deduplication & Validation| N[[🏆 final_dataset]]
-    end
-```
+### 🔧 Advanced Server
+- FastAPI-based HTTP server with async support
+- RESTful API endpoints for text generation
+- Real-time statistics and monitoring
+- Streaming response support
+- Dynamic configuration
 
-## ✨ Features
-
-- **Modular Pipeline**: Each step is an independent script, making the process transparent and easy to debug.
-- **Diverse Data Sources**: Gathers data from NVD, MITRE ATT&CK, OpenCVE, CAPEC, Exploit-DB, vendor advisories (Microsoft, Ubuntu), and more.
-- **LLM-Powered Processing**: Uses local MLX models for intelligent filtering, instruction generation, and domain classification without relying on external APIs.
-- **Human-in-the-Loop Review**: Includes a user-friendly CLI tool for manual review, correction, and quality rating of the generated data.
-- **Security & Safety Alignment**: Enriches the dataset with synthetically generated, security-focused examples (e.g., phishing, malware analysis) to improve the model's robustness and safety awareness.
-- **Configurable & Extensible**: Easily add new data sources, filtering logic, or structuring prompts.
-
-## 🚀 Prerequisites
-
-This pipeline is designed to run on a machine with **Apple Silicon (M1/M2/M3/M4)** and Python 3.8+.
-
-1.  **Python & Pip**: Ensure you have Python 3.8+ installed.
-2.  **MLX Framework**: The core MLM-based scripts depend on Apple's MLX. Installation is handled via `pip`.
-3.  **API Keys**: Several data sources require API keys. You should create a `.env` file in the root directory to store these secrets.
-
-### Environment Variables
-
-Create a file named `.env` in the project's root directory and populate it with your keys:
+## Installation
 
 ```bash
-# GitHub token for accessing certain repositories
-GITHUB_TOKEN="your_github_token"
+# Install required dependencies
+pip install mlx-lm fastapi uvicorn aiohttp
 
-# NVD API for CVE data (https://nvd.nist.gov/developers/request-an-api-key)
-NVD_API_KEY="your_nvd_api_key"
-
-# OpenCVE credentials for CVE data (https://www.opencve.io/)
-OPENCVE_EMAIL="your_opencve_email"
-OPENCVE_PASSWORD="your_opencve_password"
-
-# Optional API keys for other sources
-VIRUSTOTAL_API_KEY="your_vt_api_key"
-ALIENVAULT_API_KEY="your_otx_api_key"
-SHODAN_API_KEY="your_shodan_api_key"
-# ... and any other keys used in 1_data_collector.py
+# Clone the repository (if not already done)
+git clone <repository-url>
+cd dataset_creation
 ```
 
-### Python Dependencies
+## Quick Start
 
-Install the required Python packages using the following command:
+### 1. Start the Advanced Server
 
-```sh
-pip install -r requirements.txt
+```bash
+# Basic usage (continuous batching only)
+./start-advanced-server.sh --model mlx-community/c4ai-command-r-v01-4bit
+
+# With speculative decoding (requires a draft model)
+./start-advanced-server.sh \
+    --model mlx-community/c4ai-command-r-v01-4bit \
+    --draft-model mlx-community/Phi-3-mini-4k-instruct-4bit \
+    --use-speculative
+
+# Custom configuration
+./start-advanced-server.sh \
+    --model your-model-path \
+    --draft-model your-draft-model \
+    --max-batch-size 16 \
+    --batch-timeout-ms 100 \
+    --port 8080
 ```
 
-A `requirements.txt` file should be created with the following contents:
+### 2. Test the Server
 
-```text
-requests
-beautifulsoup4
-feedparser
-pandas
-pyyaml
-tqdm
-mlx
-mlx-lm
-rich
-questionary
-jinja2
-jsonschema
-python-dotenv
+```bash
+# Run the test client
+python test_advanced_client.py
+
+# Or make direct API calls
+curl -X POST http://localhost:8080/v1/generate \
+    -H "Content-Type: application/json" \
+    -d '{
+        "prompt": "Explain what a firewall is",
+        "max_tokens": 100,
+        "temperature": 0.7
+    }'
 ```
 
-## ⚙️ How to Run the Pipeline
+## API Endpoints
 
-Run the scripts sequentially from your terminal. It's recommended to run them in the specified order, as each script consumes the output of the previous one.
+### Generate Text (Single Request)
+```http
+POST /v1/generate
+Content-Type: application/json
 
-### 1. Stage 1: Collect Data
-
-Fetch raw data from all configured sources.
-```sh
-python3 1_data_collector.py --sources all
+{
+    "prompt": "Your prompt here",
+    "max_tokens": 100,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "stream": false,
+    "use_speculative": true  // Optional: override default
+}
 ```
-- **Input**: None (fetches from web sources/APIs).
-- **Output**: Raw JSON files in the `./raw_data/` directory.
 
-### 2. Stage 2: Filter Data
+### Generate Text (Batch)
+```http
+POST /v1/generate_batch
+Content-Type: application/json
 
-Filter the raw data for cybersecurity relevance and enhance it using a local LLM.
-```sh
-python3 2_data_filter.py
+{
+    "prompts": [
+        "First prompt",
+        "Second prompt",
+        "Third prompt"
+    ],
+    "max_tokens": 100,
+    "temperature": 0.7
+}
 ```
-- **Input**: Files from `./raw_data/`.
-- **Output**: Filtered and enhanced data in the `./filtered_data/` directory.
 
-### 3. Stage 3: Structure Data
+### Get Server Statistics
+```http
+GET /v1/stats
 
-Convert the filtered data into a consistent instruction-response format.
-```sh
-python3 3_data_structurer.py
+Response:
+{
+    "total_requests": 42,
+    "average_latency": 0.234,
+    "batching_stats": {
+        "total_batches": 10,
+        "avg_batch_size": 4.2,
+        "total_tokens": 12345
+    },
+    "speculative_stats": {
+        "acceptance_rate": 0.85,
+        "draft_length": 4
+    }
+}
 ```
-- **Input**: Files from `./filtered_data/`.
-- **Output**: A consolidated JSON file in the `./structured_data/` directory.
 
-### 4. Stage 4: Classify Data
-
-Classify each instruction-response pair into a predefined cybersecurity domain.
-```sh
-python3 4_domain_classifier.py
+### Configure Server
+```http
+POST /v1/configure?use_speculative_decoding=true&max_batch_size=16
 ```
-- **Input**: The consolidated file from `./structured_data/`.
-- **Output**: A classified JSON file in the `./domain_classified/` directory.
 
-### 5. Stage 5: Manual Review
+## Architecture
 
-Launch the interactive CLI to manually review, edit, and approve the classified data.
-```sh
-python3 5_manual_reviewer.py```
-- **Input**: The classified file from `./domain_classified/`.
-- **Output**: A reviewed JSON file in the `./reviewed_data/` directory, along with session statistics.
-
-### 6. Stage 6: Align for Security
-
-Enhance the dataset and inject synthetic security-focused examples to improve safety.
-```sh
-python3 6_security_aligner.py --ratio 0.2
+### Speculative Decoding Flow
 ```
-- **Input**: The reviewed file from `./reviewed_data/`.
-- **Output**: An aligned and enhanced JSON file in the `./security_aligned/` directory.
-
-### 7. Stage 7: Assemble Final Dataset
-
-Combine all processed data, remove duplicates, validate against a schema, and produce the final clean dataset.
-```sh
-python3 8_final_assembler.py
+1. Draft model generates N candidate tokens quickly
+2. Target model verifies candidates in parallel
+3. Accept/reject based on probability threshold
+4. Adaptive adjustment of draft length
 ```
-- **Input**: The aligned file from `./security_aligned/`.
-- **Output**: The final `final_cybersecurity_dataset_{timestamp}.json` in the `./final_dataset/` directory.
 
-## 🔧 Configuration & Customization
+### Continuous Batching Flow
+```
+1. Requests added to pending queue
+2. Batch formation based on timeout and size limits
+3. Padded batch processing with attention masks
+4. Parallel token generation for all sequences
+5. Early stopping for completed sequences
+```
 
-- **Command-Line Arguments**: Most scripts accept command-line arguments. Use the `--help` flag to see available options (e.g., `python3 2_data_filter.py --help`).
-- **LLM Models**: You can change the local MLX model used in the scripts (`2_data_filter.py`, `3_data_structurer.py`, etc.) via the `--model` argument. The default models are chosen for a balance of performance and capability (e.g., `mlx-community/Phi-3-mini-4k-instruct-4bit`).
-- **Data Sources**: To add a new data source, add a new `fetch_*` method in `1_data_collector.py` and register it in the `all_sources` dictionary in `main()`. You will also need a corresponding handler in `3_data_structurer.py` to convert its output to the instruction-response format.
+## Performance Tuning
 
-## 📜 License
+### Speculative Decoding
+- **Draft Model Selection**: Choose a model 4-10x smaller than target
+- **Max Draft Tokens**: Start with 4-6, adjust based on acceptance rate
+- **Temperature**: Lower temperatures improve acceptance rates
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+### Continuous Batching
+- **Batch Size**: Larger batches improve throughput but increase latency
+- **Timeout**: Lower timeouts reduce latency but may create smaller batches
+- **Padding**: Use efficient padding strategies for variable-length inputs
+
+## Benchmarks
+
+Example performance improvements (results may vary):
+
+| Method | Tokens/sec | Latency (ms) | Throughput |
+|--------|------------|--------------|------------|
+| Baseline | 50 | 200 | 1x |
+| Speculative | 120 | 83 | 2.4x |
+| Batching (8) | 320 | 250 | 6.4x |
+| Both | 400 | 100 | 8x |
+
+## Development
+
+### Running Tests
+```bash
+# Test speculative decoding
+python -m pytest tests/test_speculative_decoding.py
+
+# Test continuous batching
+python -m pytest tests/test_continuous_batching.py
+```
+
+### Custom Integration
+```python
+from mlx_parallm.speculative_decoding import SpeculativeConfig, SpeculativeDecodingEngine
+from mlx_parallm.continuous_batching import BatchConfig, AsyncContinuousBatchingEngine
+
+# Speculative decoding
+config = SpeculativeConfig(
+    draft_model_path="path/to/draft",
+    target_model_path="path/to/target",
+    max_draft_tokens=5
+)
+engine = SpeculativeDecodingEngine(config)
+result = engine.generate("Your prompt", max_tokens=100)
+
+# Continuous batching
+batch_config = BatchConfig(max_batch_size=8, timeout_ms=50)
+batch_engine = AsyncContinuousBatchingEngine(model, tokenizer, batch_config)
+results = await batch_engine.generate_batch(prompts)
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Import errors**: Ensure all dependencies are installed
+   ```bash
+   pip install mlx-lm fastapi uvicorn aiohttp
+   ```
+
+2. **Model compatibility**: Draft and target models must use the same tokenizer
+
+3. **Memory issues**: Reduce batch size or use smaller models
+
+4. **Low acceptance rate**: Try a larger draft model or adjust temperature
+
+## License
+
+See the main project LICENSE file.
+
+## Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Submit a pull request
+
+## Acknowledgments
+
+Built with MLX for efficient inference on Apple Silicon. 
