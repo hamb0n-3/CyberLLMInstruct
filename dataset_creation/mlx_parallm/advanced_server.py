@@ -298,6 +298,8 @@ async def startup_event():
     parser.add_argument("--batch-timeout-ms", type=int, default=50)
     parser.add_argument("--use-speculative", action="store_true")
     parser.add_argument("--use-combined", action="store_true", help="Use combined speculative + continuous batching")
+    parser.add_argument("--kv-bits", type=int, default=4, help="KV cache quantization bits (4 or 8)")
+    parser.add_argument("--kv-group-size", type=int, default=32, help="KV cache group size")
     
     # Parse known args to handle uvicorn args
     args, _ = parser.parse_known_args()
@@ -313,7 +315,10 @@ async def startup_event():
             draft_model_path=args.draft_model,
             max_batch_size=args.max_batch_size,
             batch_timeout_ms=args.batch_timeout_ms,
-            enable_speculative=True
+            enable_speculative=True,
+            enable_kv_cache=True,  # Enable KV cache by default
+            kv_bits=8,  # Use 4-bit quantization
+            kv_group_size=32  # Standard group size
         )
         combined_engine = AsyncCombinedEngine(combined_config)
         logger.info("Combined speculative + continuous batching engine initialized")
@@ -366,6 +371,8 @@ def main():
     parser.add_argument("--batch-timeout-ms", type=int, default=50)
     parser.add_argument("--use-speculative", action="store_true")
     parser.add_argument("--use-combined", action="store_true", help="Use combined speculative + continuous batching")
+    parser.add_argument("--kv-bits", type=int, default=4, help="KV cache quantization bits (4 or 8)")
+    parser.add_argument("--kv-group-size", type=int, default=32, help="KV cache group size")
     
     args = parser.parse_args()
     

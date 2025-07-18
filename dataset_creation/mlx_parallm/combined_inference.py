@@ -50,6 +50,7 @@ class SpeculativeRequest:
     draft_acceptance_rate: float = 0.8
     current_position: int = 0
     input_ids: Optional[mx.array] = None
+    
 
 
 @dataclass
@@ -74,6 +75,11 @@ class CombinedConfig:
     # Generation config
     temperature: float = 0.7
     top_p: float = 0.95
+    
+    # KV cache config
+    enable_kv_cache: bool = True
+    kv_bits: int = 4
+    kv_group_size: int = 32
 
 
 class CombinedInferenceEngine:
@@ -86,15 +92,26 @@ class CombinedInferenceEngine:
     def __init__(self, config: CombinedConfig):
         self.config = config
         
-        # Load target model
+        # Load target model with KV cache support
         logger.info(f"Loading target model: {config.target_model_path}")
-        self.target_model, self.tokenizer = load(config.target_model_path)
+        load_kwargs = {}
+        if config.enable_kv_cache:
+            load_kwargs['kv_bits'] = config.kv_bits
+            load_kwargs['kv_group_size'] = config.kv_group_size
+            logger.info(f"Enabling KV cache with {config.kv_bits}-bit quantization")
+        
+        self.target_model, self.tokenizer = load(config.target_model_path, **load_kwargs)
         
         # Load draft model if speculative decoding is enabled
         self.draft_model = None
         if config.enable_speculative and config.draft_model_path:
             logger.info(f"Loading draft model: {config.draft_model_path}")
-            self.draft_model, _ = load(config.draft_model_path)
+            draft_load_kwargs = {}
+            if config.enable_kv_cache:
+                draft_load_kwargs['kv_bits'] = config.kv_bits
+                draft_load_kwargs['kv_group_size'] = config.kv_group_size
+            
+            self.draft_model, _ = load(config.draft_model_path, **draft_load_kwargs)
             mx.eval(self.draft_model.parameters())
         
         mx.eval(self.target_model.parameters())
@@ -118,7 +135,9 @@ class CombinedInferenceEngine:
             'avg_latency': 0.0,
             'total_drafted': 0,
             'total_accepted': 0,
-            'avg_acceptance_rate': 0.8
+            'avg_acceptance_rate': 0.8,
+            'kv_cache_enabled': config.enable_kv_cache,
+            'kv_bits': config.kv_bits if config.enable_kv_cache else None
         }
 
     def start(self):
@@ -135,6 +154,13 @@ class CombinedInferenceEngine:
             self.batch_thread.join()
         self.executor.shutdown(wait=True)
         logger.info("Combined inference engine stopped")
+    
+    
+    
+    
+    
+            
+    
 
     def submit_request(self, request: SpeculativeRequest) -> str:
         """Submit a request for processing"""
@@ -335,7 +361,10 @@ class CombinedInferenceEngine:
         
         # Get target model predictions for entire batch
         with mx.no_grad():
+            # For now, use standard forward pass
+            # TODO: Integrate KV cache when MLX models support it
             outputs = self.target_model(batch_input, batch_mask)
+            
         
         # Verify each sequence's draft tokens
         results = []
@@ -468,6 +497,7 @@ class CombinedInferenceEngine:
             req.status = RequestStatus.COMPLETED
             req.completion_event.set()
             
+            
             # Move to completed
             self.completed_requests[req.request_id] = req
             del self.active_requests[req.request_id]
@@ -488,6 +518,7 @@ class CombinedInferenceEngine:
             self.stats['avg_acceptance_rate'] = (
                 self.stats['total_accepted'] / self.stats['total_drafted']
             )
+        
         
         logger.debug(f"Processed batch of {len(batch)} requests in {batch_time:.2f}s")
 

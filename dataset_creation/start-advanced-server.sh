@@ -12,6 +12,8 @@ MAX_BATCH_SIZE="8"
 BATCH_TIMEOUT_MS="50"
 USE_SPECULATIVE=""
 USE_COMBINED=""
+KV_BITS="8"
+KV_GROUP_SIZE="32"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -48,6 +50,14 @@ while [[ $# -gt 0 ]]; do
             USE_COMBINED="--use-combined"
             shift
             ;;
+        --kv-bits)
+            KV_BITS="$2"
+            shift 2
+            ;;
+        --kv-group-size)
+            KV_GROUP_SIZE="$2"
+            shift 2
+            ;;
         --help)
             echo "Usage: $0 [options]"
             echo "Options:"
@@ -59,6 +69,8 @@ while [[ $# -gt 0 ]]; do
             echo "  --batch-timeout-ms MS    Batch timeout in milliseconds (default: $BATCH_TIMEOUT_MS)"
             echo "  --use-speculative        Use speculative decoding by default"
             echo "  --use-combined           Use combined speculative + continuous batching"
+            echo "  --kv-bits BITS           KV cache quantization bits (default: $KV_BITS)"
+            echo "  --kv-group-size SIZE     KV cache group size (default: $KV_GROUP_SIZE)"
             echo "  --help                   Show this help message"
             exit 0
             ;;
@@ -91,6 +103,7 @@ echo "Max Batch Size: $MAX_BATCH_SIZE"
 echo "Batch Timeout: ${BATCH_TIMEOUT_MS}ms"
 echo "Use Speculative: ${USE_SPECULATIVE:-No}"
 echo "Use Combined: ${USE_COMBINED:-No}"
+echo "KV Cache: ${KV_BITS}-bit quantization, group size ${KV_GROUP_SIZE}"
 echo ""
 
 # Start the server

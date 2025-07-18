@@ -95,10 +95,12 @@ class MLXServerManager:
         try:
             if detach:
                 # Start in background
+                # Create log file for server output
+                log_file = open('/var/log/mlx_server.log', 'w')
                 self.server_process = subprocess.Popen(
                     cmd,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
+                    stdout=log_file,
+                    stderr=subprocess.STDOUT,  # Redirect stderr to stdout
                     start_new_session=True
                 )
                 
@@ -110,9 +112,19 @@ class MLXServerManager:
                 logger.info("Waiting for server to start...")
                 if self._wait_for_server(timeout=30):
                     logger.info(f"Server started successfully (PID: {self.server_process.pid})")
+                    log_file.close()
                     return True
                 else:
                     logger.error("Server failed to start within timeout")
+                    # Try to get error from log
+                    log_file.close()
+                    try:
+                        with open('.mlx_server.log', 'r') as f:
+                            error_output = f.read()
+                            if error_output:
+                                logger.error(f"Server error output:\n{error_output}")
+                    except:
+                        pass
                     self.stop_server()
                     return False
             else:
