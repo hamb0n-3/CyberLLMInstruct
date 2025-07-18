@@ -1,0 +1,466 @@
+/Users/tristan/AI/AI-Training/Datasets/CyberLLMInstruct/dataset_creation/mlx_parallm/advanced_server.py:289: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+/Users/tristan/AI/AI-Training/Datasets/CyberLLMInstruct/dataset_creation/mlx_parallm/advanced_server.py:354: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("shutdown")
+2025-07-18 15:52:26,976 - INFO - Started server process [36905]
+2025-07-18 15:52:26,976 - INFO - Waiting for application startup.
+2025-07-18 15:52:26,976 - INFO - Loading main model: mlx-community/c4ai-command-r-v01-4bit
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 213827.26it/s]
+2025-07-18 15:52:28,376 - INFO - Continuous batching engine started
+2025-07-18 15:52:28,376 - INFO - Continuous batching engine initialized
+2025-07-18 15:52:28,376 - INFO - Initializing speculative decoding with draft model: mlx-community/Phi-3-mini-4k-instruct-4bit
+2025-07-18 15:52:28,376 - INFO - Loading draft model: mlx-community/Phi-3-mini-4k-instruct-4bit
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 63443.25it/s]
+2025-07-18 15:52:28,635 - INFO - Loading target model: mlx-community/c4ai-command-r-v01-4bit
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 294734.88it/s]
+2025-07-18 15:52:30,113 - WARNING - Draft and target models have different vocabulary sizes (32000 vs 255000). Speculative decoding may be less effective.
+2025-07-18 15:52:30,113 - INFO - Draft and target models use different EOS tokens (32007 vs 255001)
+2025-07-18 15:52:30,114 - INFO - Speculative decoding engine initialized
+2025-07-18 15:52:30,114 - INFO - Server startup complete
+2025-07-18 15:52:30,114 - INFO - Application startup complete.
+2025-07-18 15:52:30,115 - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2025-07-18 15:52:30,461 - INFO - 127.0.0.1:53287 - "GET /health HTTP/1.1" 200
+2025-07-18 15:53:10,664 - INFO - 127.0.0.1:53289 - "GET /health HTTP/1.1" 200
+2025-07-18 15:53:10,666 - INFO - 127.0.0.1:53290 - "GET /v1/stats HTTP/1.1" 200
+2025-07-18 15:53:10,683 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,683 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,683 - INFO - 127.0.0.1:53291 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,694 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,696 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,697 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,697 - INFO - 127.0.0.1:53292 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,701 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,701 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,701 - INFO - 127.0.0.1:53293 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,705 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,706 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,706 - INFO - 127.0.0.1:53294 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,709 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,709 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,710 - INFO - 127.0.0.1:53295 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,713 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,714 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,714 - INFO - 127.0.0.1:53296 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,718 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,719 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,719 - INFO - 127.0.0.1:53297 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,722 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,723 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,723 - INFO - 127.0.0.1:53298 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,726 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,726 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,726 - INFO - 127.0.0.1:53299 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,731 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,731 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,731 - INFO - 127.0.0.1:53300 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,735 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,735 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,735 - INFO - 127.0.0.1:53301 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,739 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,739 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,739 - INFO - 127.0.0.1:53302 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,741 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,741 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,741 - INFO - 127.0.0.1:53303 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,742 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,743 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,743 - INFO - 127.0.0.1:53304 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,744 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,744 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,744 - INFO - 127.0.0.1:53305 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,753 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,753 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,753 - INFO - 127.0.0.1:53306 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,754 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,755 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,755 - INFO - 127.0.0.1:53307 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,756 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,756 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,756 - INFO - 127.0.0.1:53308 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,762 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,762 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,762 - INFO - 127.0.0.1:53309 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,765 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,766 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,766 - INFO - 127.0.0.1:53310 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,769 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,769 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,769 - INFO - 127.0.0.1:53311 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,773 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,773 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,773 - INFO - 127.0.0.1:53312 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,776 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,776 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,776 - INFO - 127.0.0.1:53313 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,780 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,780 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,780 - INFO - 127.0.0.1:53314 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,784 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,784 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,784 - INFO - 127.0.0.1:53315 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,787 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,787 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,787 - INFO - 127.0.0.1:53316 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,791 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,791 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,791 - INFO - 127.0.0.1:53317 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,794 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,794 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,794 - INFO - 127.0.0.1:53318 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,798 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,798 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,798 - INFO - 127.0.0.1:53319 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,802 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,802 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,802 - INFO - 127.0.0.1:53320 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,806 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,806 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,806 - INFO - 127.0.0.1:53321 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,809 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,810 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,810 - INFO - 127.0.0.1:53322 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,813 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,814 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,814 - INFO - 127.0.0.1:53323 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,817 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,817 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,818 - INFO - 127.0.0.1:53324 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,821 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,822 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,822 - INFO - 127.0.0.1:53325 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,825 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,826 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,826 - INFO - 127.0.0.1:53326 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,829 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,829 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,829 - INFO - 127.0.0.1:53327 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,833 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,833 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,833 - INFO - 127.0.0.1:53328 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,836 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,836 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,837 - INFO - 127.0.0.1:53329 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,838 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,838 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,838 - INFO - 127.0.0.1:53330 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,839 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,840 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,840 - INFO - 127.0.0.1:53331 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:10,841 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:10,841 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:10,841 - INFO - 127.0.0.1:53332 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,549 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,550 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,550 - INFO - 127.0.0.1:53334 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,555 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,555 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,555 - INFO - 127.0.0.1:53335 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,560 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,560 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,560 - INFO - 127.0.0.1:53336 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,565 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,565 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,565 - INFO - 127.0.0.1:53337 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,569 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,569 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,570 - INFO - 127.0.0.1:53338 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,574 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,574 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,574 - INFO - 127.0.0.1:53339 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,578 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,579 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,579 - INFO - 127.0.0.1:53340 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,583 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,583 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,583 - INFO - 127.0.0.1:53341 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,587 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,587 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,587 - INFO - 127.0.0.1:53342 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,592 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,592 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,592 - INFO - 127.0.0.1:53343 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,596 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,596 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,596 - INFO - 127.0.0.1:53344 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,600 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,600 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,600 - INFO - 127.0.0.1:53345 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,605 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,605 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,605 - INFO - 127.0.0.1:53346 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,609 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,609 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,609 - INFO - 127.0.0.1:53347 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,613 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,613 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,613 - INFO - 127.0.0.1:53348 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,618 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,618 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,618 - INFO - 127.0.0.1:53349 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,622 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,623 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,623 - INFO - 127.0.0.1:53350 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,627 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,627 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,627 - INFO - 127.0.0.1:53351 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,632 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,632 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,632 - INFO - 127.0.0.1:53352 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,636 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,636 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,636 - INFO - 127.0.0.1:53353 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,640 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,640 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,640 - INFO - 127.0.0.1:53354 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,644 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,645 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,645 - INFO - 127.0.0.1:53355 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,649 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,649 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,649 - INFO - 127.0.0.1:53356 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,653 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,653 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,653 - INFO - 127.0.0.1:53357 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,658 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,658 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,658 - INFO - 127.0.0.1:53358 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,662 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,662 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,662 - INFO - 127.0.0.1:53359 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,667 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,667 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,667 - INFO - 127.0.0.1:53360 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,672 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,672 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,672 - INFO - 127.0.0.1:53361 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,676 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,676 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,676 - INFO - 127.0.0.1:53362 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,680 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,680 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,680 - INFO - 127.0.0.1:53363 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,684 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,685 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,685 - INFO - 127.0.0.1:53364 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,688 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,689 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,689 - INFO - 127.0.0.1:53365 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,693 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,693 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,693 - INFO - 127.0.0.1:53366 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,697 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,697 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,697 - INFO - 127.0.0.1:53367 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,701 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,701 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,701 - INFO - 127.0.0.1:53368 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,705 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,705 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,705 - INFO - 127.0.0.1:53369 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,709 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,709 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,709 - INFO - 127.0.0.1:53370 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,713 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,713 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,713 - INFO - 127.0.0.1:53371 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,716 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,717 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,717 - INFO - 127.0.0.1:53372 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,721 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,722 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,722 - INFO - 127.0.0.1:53373 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,726 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,726 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,726 - INFO - 127.0.0.1:53374 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,730 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,730 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,730 - INFO - 127.0.0.1:53375 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,736 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,736 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,736 - INFO - 127.0.0.1:53376 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,742 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,742 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,742 - INFO - 127.0.0.1:53377 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,747 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,747 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,747 - INFO - 127.0.0.1:53378 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,753 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,753 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,753 - INFO - 127.0.0.1:53379 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,758 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,759 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,759 - INFO - 127.0.0.1:53380 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,764 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,764 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,764 - INFO - 127.0.0.1:53381 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,770 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,771 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,771 - INFO - 127.0.0.1:53382 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,777 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,777 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,777 - INFO - 127.0.0.1:53383 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,783 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,783 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,783 - INFO - 127.0.0.1:53384 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,789 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,789 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,789 - INFO - 127.0.0.1:53385 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,795 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,795 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,795 - INFO - 127.0.0.1:53386 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,800 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,800 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,800 - INFO - 127.0.0.1:53387 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,806 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,807 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,807 - INFO - 127.0.0.1:53388 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,813 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,813 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,813 - INFO - 127.0.0.1:53389 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,819 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,819 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,819 - INFO - 127.0.0.1:53390 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,824 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,825 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,825 - INFO - 127.0.0.1:53391 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,830 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,830 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,830 - INFO - 127.0.0.1:53392 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,836 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,836 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,836 - INFO - 127.0.0.1:53393 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,842 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,842 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,842 - INFO - 127.0.0.1:53394 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,848 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,848 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,848 - INFO - 127.0.0.1:53395 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,853 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,854 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,854 - INFO - 127.0.0.1:53396 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,859 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,860 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,860 - INFO - 127.0.0.1:53397 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,865 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,865 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,865 - INFO - 127.0.0.1:53398 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,871 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,871 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,871 - INFO - 127.0.0.1:53399 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,877 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,877 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,877 - INFO - 127.0.0.1:53400 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,883 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,883 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,883 - INFO - 127.0.0.1:53401 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,888 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,889 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,889 - INFO - 127.0.0.1:53402 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,894 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,895 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,895 - INFO - 127.0.0.1:53403 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,900 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,900 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,900 - INFO - 127.0.0.1:53404 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,906 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,906 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,906 - INFO - 127.0.0.1:53405 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,911 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,912 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,912 - INFO - 127.0.0.1:53406 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,917 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,917 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,917 - INFO - 127.0.0.1:53407 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,922 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,923 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,923 - INFO - 127.0.0.1:53408 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,928 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,928 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,928 - INFO - 127.0.0.1:53409 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,933 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,933 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,934 - INFO - 127.0.0.1:53410 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,938 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,939 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,939 - INFO - 127.0.0.1:53411 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,944 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,945 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,945 - INFO - 127.0.0.1:53412 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,951 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,951 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,951 - INFO - 127.0.0.1:53413 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,956 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,957 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,957 - INFO - 127.0.0.1:53414 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,962 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,962 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,962 - INFO - 127.0.0.1:53415 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,968 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,968 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,968 - INFO - 127.0.0.1:53416 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,974 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,974 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,974 - INFO - 127.0.0.1:53417 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,980 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,980 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,980 - INFO - 127.0.0.1:53418 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,985 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,986 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,986 - INFO - 127.0.0.1:53419 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,991 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,991 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,991 - INFO - 127.0.0.1:53420 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:11,997 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:11,997 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:11,997 - INFO - 127.0.0.1:53421 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,002 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,002 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,003 - INFO - 127.0.0.1:53422 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,008 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,009 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,009 - INFO - 127.0.0.1:53423 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,015 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,015 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,015 - INFO - 127.0.0.1:53424 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,020 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,020 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,020 - INFO - 127.0.0.1:53425 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,026 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,026 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,026 - INFO - 127.0.0.1:53426 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,032 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,032 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,032 - INFO - 127.0.0.1:53427 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,038 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,038 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,038 - INFO - 127.0.0.1:53428 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,044 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,044 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,044 - INFO - 127.0.0.1:53429 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,050 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,050 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,050 - INFO - 127.0.0.1:53430 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,055 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,055 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,055 - INFO - 127.0.0.1:53431 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,061 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,061 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,061 - INFO - 127.0.0.1:53432 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,067 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,067 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,067 - INFO - 127.0.0.1:53433 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,072 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,073 - ERROR - Batch generation error: Request timed out
+2025-07-18 15:53:12,073 - INFO - 127.0.0.1:53434 - "POST /v1/generate_batch HTTP/1.1" 500
+2025-07-18 15:53:12,078 - ERROR - Error processing batch: module 'mlx.core' has no attribute 'no_grad'
+2025-07-18 15:53:12,078 - ERROR - Batch generation error: Request timed out

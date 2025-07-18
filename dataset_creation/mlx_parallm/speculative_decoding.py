@@ -48,9 +48,23 @@ class AdaptiveSpeculativeDecoder:
         logger.info(f"Loading target model: {config.target_model_path}")
         self.target_model, self.target_tokenizer = load(config.target_model_path)
         
-        # Ensure tokenizers are compatible
-        assert self.draft_tokenizer.eos_token_id == self.target_tokenizer.eos_token_id, \
-            "Draft and target models must use the same tokenizer"
+        # Check vocabulary compatibility (following mlx_lm standard)
+        if self.draft_tokenizer.vocab_size != self.target_tokenizer.vocab_size:
+            logger.warning(
+                f"Draft and target models have different vocabulary sizes "
+                f"({self.draft_tokenizer.vocab_size} vs {self.target_tokenizer.vocab_size}). "
+                f"Speculative decoding may be less effective."
+            )
+        
+        # Store both EOS tokens
+        self.draft_eos_token_id = self.draft_tokenizer.eos_token_id
+        self.target_eos_token_id = self.target_tokenizer.eos_token_id
+        
+        if self.draft_eos_token_id != self.target_eos_token_id:
+            logger.info(
+                f"Draft and target models use different EOS tokens "
+                f"({self.draft_eos_token_id} vs {self.target_eos_token_id})"
+            )
         
         # Adaptive parameters
         self.acceptance_rate = 0.8  # Running average of acceptance rate
@@ -119,7 +133,7 @@ class AdaptiveSpeculativeDecoder:
             current_ids = mx.concatenate([current_ids, mx.array([[next_token]])], axis=1)
             
             # Stop if EOS
-            if next_token == self.draft_tokenizer.eos_token_id:
+            if next_token == self.draft_eos_token_id:
                 break
         
         return draft_tokens, draft_logits
@@ -212,7 +226,7 @@ class AdaptiveSpeculativeDecoder:
             ], axis=1)
             
             # Check for EOS
-            if accepted_tokens and accepted_tokens[-1] == self.target_tokenizer.eos_token_id:
+            if accepted_tokens and accepted_tokens[-1] == self.target_eos_token_id:
                 break
             
             # Stream output if requested
