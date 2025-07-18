@@ -53,7 +53,7 @@ advanced_server:
   draft_model: "mlx-community/Phi-3-mini-4k-instruct-4bit"
   max_batch_size: 16
   batch_timeout_ms: 50
-  use_combined: true  # Enable combined speculative + continuous batching
+  use_combined: true  # Enable combined speculative + continuous batching (default)
   
 # Logging configuration
 logging:

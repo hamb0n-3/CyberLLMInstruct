@@ -317,8 +317,8 @@ async def startup_event():
             batch_timeout_ms=args.batch_timeout_ms,
             enable_speculative=True,
             enable_kv_cache=True,  # Enable KV cache by default
-            kv_bits=8,  # Use 4-bit quantization
-            kv_group_size=32  # Standard group size
+            kv_bits=args.kv_bits,
+            kv_group_size=args.kv_group_size
         )
         combined_engine = AsyncCombinedEngine(combined_config)
         logger.info("Combined speculative + continuous batching engine initialized")

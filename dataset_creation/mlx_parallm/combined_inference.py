@@ -92,26 +92,18 @@ class CombinedInferenceEngine:
     def __init__(self, config: CombinedConfig):
         self.config = config
         
-        # Load target model with KV cache support
+        # Load target model
         logger.info(f"Loading target model: {config.target_model_path}")
-        load_kwargs = {}
         if config.enable_kv_cache:
-            load_kwargs['kv_bits'] = config.kv_bits
-            load_kwargs['kv_group_size'] = config.kv_group_size
-            logger.info(f"Enabling KV cache with {config.kv_bits}-bit quantization")
+            logger.info(f"KV cache enabled (will be used during generation)")
         
-        self.target_model, self.tokenizer = load(config.target_model_path, **load_kwargs)
+        self.target_model, self.tokenizer = load(config.target_model_path)
         
         # Load draft model if speculative decoding is enabled
         self.draft_model = None
         if config.enable_speculative and config.draft_model_path:
             logger.info(f"Loading draft model: {config.draft_model_path}")
-            draft_load_kwargs = {}
-            if config.enable_kv_cache:
-                draft_load_kwargs['kv_bits'] = config.kv_bits
-                draft_load_kwargs['kv_group_size'] = config.kv_group_size
-            
-            self.draft_model, _ = load(config.draft_model_path, **draft_load_kwargs)
+            self.draft_model, _ = load(config.draft_model_path)
             mx.eval(self.draft_model.parameters())
         
         mx.eval(self.target_model.parameters())
@@ -296,9 +288,9 @@ class CombinedInferenceEngine:
         
         for _ in range(draft_length):
             # Get draft model predictions
-            with mx.no_grad():
-                outputs = self.draft_model(current_ids, mx.ones_like(current_ids))
-                logits = outputs[:, -1, :]
+            # MLX doesn't need no_grad context
+            outputs = self.draft_model(current_ids, mx.ones_like(current_ids).astype(mx.float16))
+            logits = outputs[:, -1, :]
             
             # Sample token
             next_token = self._sample_token(
@@ -349,9 +341,9 @@ class CombinedInferenceEngine:
             padded_sequences.append(full_seq[0])
             
             # Create attention mask
-            mask = mx.ones((seq_len,))
+            mask = mx.ones((seq_len,), dtype=mx.float16)
             if seq_len < req.input_ids.shape[1] + max_draft_len:
-                pad_mask = mx.zeros((req.input_ids.shape[1] + max_draft_len - seq_len,))
+                pad_mask = mx.zeros((req.input_ids.shape[1] + max_draft_len - seq_len,), dtype=mx.float16)
                 mask = mx.concatenate([mask, pad_mask])
             attention_masks.append(mask)
         
@@ -360,10 +352,10 @@ class CombinedInferenceEngine:
         batch_mask = mx.stack(attention_masks)
         
         # Get target model predictions for entire batch
-        with mx.no_grad():
-            # For now, use standard forward pass
-            # TODO: Integrate KV cache when MLX models support it
-            outputs = self.target_model(batch_input, batch_mask)
+        # MLX doesn't need no_grad context
+        # For now, use standard forward pass
+        # TODO: Integrate KV cache when MLX models support it
+        outputs = self.target_model(batch_input, batch_mask)
             
         
         # Verify each sequence's draft tokens
@@ -414,9 +406,9 @@ class CombinedInferenceEngine:
             sequences.append(seq)
             
             # Create mask
-            mask = mx.ones((seq_len,))
+            mask = mx.ones((seq_len,), dtype=mx.float16)
             if seq_len < max_len:
-                pad_mask = mx.zeros((max_len - seq_len,))
+                pad_mask = mx.zeros((max_len - seq_len,), dtype=mx.float16)
                 mask = mx.concatenate([mask, pad_mask])
             masks.append(mask)
         
@@ -424,9 +416,9 @@ class CombinedInferenceEngine:
         batch_input = mx.stack(sequences)
         batch_mask = mx.stack(masks)
         
-        with mx.no_grad():
-            outputs = self.target_model(batch_input, batch_mask)
-            logits = outputs[:, -1, :]
+        # MLX doesn't need no_grad context
+        outputs = self.target_model(batch_input, batch_mask)
+        logits = outputs[:, -1, :]
         
         # Sample tokens
         results = []

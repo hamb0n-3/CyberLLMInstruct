@@ -96,7 +96,7 @@ class MLXServerManager:
             if detach:
                 # Start in background
                 # Create log file for server output
-                log_file = open('/var/log/mlx_server.log', 'w')
+                log_file = open('.mlx_server.log', 'w')
                 self.server_process = subprocess.Popen(
                     cmd,
                     stdout=log_file,

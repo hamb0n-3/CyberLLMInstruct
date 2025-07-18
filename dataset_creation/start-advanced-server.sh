@@ -11,7 +11,7 @@ PORT="8080"
 MAX_BATCH_SIZE="8"
 BATCH_TIMEOUT_MS="50"
 USE_SPECULATIVE=""
-USE_COMBINED=""
+USE_COMBINED="--use-combined"  # Default to combined mode
 KV_BITS="8"
 KV_GROUP_SIZE="32"
 
