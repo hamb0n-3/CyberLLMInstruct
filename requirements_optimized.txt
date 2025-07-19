@@ -1,0 +1,42 @@
+# Core dependencies only - removed heavy ML frameworks not used in pipeline
+
+# Web scraping and data collection
+requests>=2.31.0
+beautifulsoup4>=4.12.2
+feedparser>=6.0.10
+aiohttp>=3.9.0
+
+# Data processing
+pandas>=2.0.0
+pyyaml>=6.0.1
+lxml>=4.9.3
+ijson>=3.2.0  # For streaming JSON
+jsonschema>=4.20.0
+xmltodict>=0.13.0
+
+# CLI and UI
+questionary>=2.0.1
+rich>=13.7.0
+tqdm>=4.66.0
+windows-curses>=2.3.1; platform_system == "Windows"
+
+# MLX for inference (Apple Silicon optimized)
+mlx-lm>=0.19.0
+mlx>=0.12.0
+
+# API server
+fastapi>=0.116.0
+uvicorn[standard]>=0.35.0
+
+# Utilities
+tenacity>=8.2.3  # For retries
+psutil>=5.9.0   # System monitoring
+
+# Removed:
+# - torch, transformers, datasets, peft, accelerate, bitsandbytes (not used)
+# - wandb, tensorboard (no training happening)
+# - scikit-learn, numpy (minimal usage, can install if needed)
+# - openai, tiktoken (using MLX instead)
+# - pathlib (built-in to Python 3)
+# - Jinja2 (not used)
+# - joblib (not needed without sklearn)

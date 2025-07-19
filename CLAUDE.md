@@ -75,10 +75,11 @@ python dataset_creation/test_advanced_client.py
 - **FastAPI**: REST API for inference server
 
 ## Important Notes
+- Do not use fallback methods, workarounds, palceholders, or simplified versions.
 - The project is actively being refactored (many files recently deleted/reorganized)
 - MLX models must be in MLX format (use mlx-lm convert if needed)
 - The inference server supports both standard and speculative decoding modes
-- Dataset creation is computationally intensive and may take several hours
+
 
 ## Common Issues
 
