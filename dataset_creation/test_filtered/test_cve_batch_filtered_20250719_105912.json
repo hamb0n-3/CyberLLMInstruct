@@ -1,0 +1,69 @@
+[
+  {
+    "cve": {
+      "id": "CVE-2024-12345",
+      "sourceIdentifier": "security@nvd.nist.gov",
+      "published": "2024-01-15T10:00:00.000",
+      "lastModified": "2024-01-16T15:30:00.000",
+      "vulnStatus": "Analyzed",
+      "descriptions": [
+        {
+          "lang": "en",
+          "value": "A critical vulnerability in the authentication mechanism allows remote attackers to bypass security controls and gain unauthorized access to sensitive data. This vulnerability affects all versions prior to 2.5.0."
+        }
+      ],
+      "metrics": {
+        "cvssMetricV31": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "cvssData": {
+              "version": "3.1",
+              "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "baseScore": 9.8,
+              "baseSeverity": "CRITICAL"
+            }
+          }
+        ]
+      },
+      "weaknesses": [
+        {
+          "source": "nvd@nist.gov",
+          "type": "Primary",
+          "description": [
+            {
+              "lang": "en",
+              "value": "CWE-287"
+            }
+          ]
+        }
+      ],
+      "references": [
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-12345",
+          "source": "nvd@nist.gov"
+        }
+      ]
+    },
+    "technical_description": "CVE-2024-12345 is a critical vulnerability in the authentication mechanism of a software system that allows remote attackers to bypass security controls and gain unauthorized access to sensitive data. The vulnerability is present in all versions prior to 2.5.0.",
+    "risk_level": "High",
+    "affected_systems": "All versions prior to 2.5.0 of the software system with the authentication mechanism.",
+    "mitigations": "Update the software to version 2.5.0 or later to patch the vulnerability. Implement additional security controls to monitor and restrict access to sensitive data. Regularly review and update authentication mechanisms to prevent similar vulnerabilities in the future.",
+    "is_relevant": true
+  },
+  {
+    "id": "CAPEC-123",
+    "title": "SQL Injection Attack",
+    "description": "SQL injection is a code injection technique that exploits security vulnerabilities in an application's software.",
+    "summary": "Attackers can use SQL injection to access, modify, or delete data in the database.",
+    "source": "capec",
+    "technical_description": "SQL Injection is a type of attack where malicious SQL statements are inserted into an entry field for execution (e.g., to dump database contents or modify data). It exploits vulnerabilities in the application's software that interacts with the database.",
+    "risk_level": "High",
+    "affected_systems": [
+      "Databases",
+      "Web Applications"
+    ],
+    "mitigations": "Use prepared statements with parameterized queries, employ web application firewalls, regularly update and patch database management systems, and conduct security audits and code reviews to identify and fix vulnerabilities.",
+    "is_relevant": true
+  }
+]

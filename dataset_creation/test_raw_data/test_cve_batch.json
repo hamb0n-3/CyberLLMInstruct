@@ -1,0 +1,73 @@
+{
+  "entries": [
+    {
+      "cve": {
+        "id": "CVE-2024-12345",
+        "sourceIdentifier": "security@nvd.nist.gov",
+        "published": "2024-01-15T10:00:00.000",
+        "lastModified": "2024-01-16T15:30:00.000",
+        "vulnStatus": "Analyzed",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "A critical vulnerability in the authentication mechanism allows remote attackers to bypass security controls and gain unauthorized access to sensitive data. This vulnerability affects all versions prior to 2.5.0."
+          }
+        ],
+        "metrics": {
+          "cvssMetricV31": [
+            {
+              "source": "nvd@nist.gov",
+              "type": "Primary",
+              "cvssData": {
+                "version": "3.1",
+                "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "baseScore": 9.8,
+                "baseSeverity": "CRITICAL"
+              }
+            }
+          ]
+        },
+        "weaknesses": [
+          {
+            "source": "nvd@nist.gov",
+            "type": "Primary",
+            "description": [
+              {
+                "lang": "en",
+                "value": "CWE-287"
+              }
+            ]
+          }
+        ],
+        "references": [
+          {
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-12345",
+            "source": "nvd@nist.gov"
+          }
+        ]
+      }
+    },
+    {
+      "id": "CAPEC-123",
+      "title": "SQL Injection Attack",
+      "description": "SQL injection is a code injection technique that exploits security vulnerabilities in an application's software.",
+      "summary": "Attackers can use SQL injection to access, modify, or delete data in the database.",
+      "source": "capec"
+    },
+    {
+      "id": "test-003",
+      "description": "This is a non-security related entry about general software updates"
+    },
+    {
+      "cve": {
+        "id": "CVE-2024-99999",
+        "descriptions": [
+          {
+            "lang": "en",
+            "value": "Remote code execution vulnerability in network protocol handler allows attackers to execute arbitrary code with elevated privileges."
+          }
+        ]
+      }
+    }
+  ]
+}

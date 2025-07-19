@@ -1,0 +1,19 @@
+[
+  {
+    "id": "test-003",
+    "description": "This is a non-security related entry about general software updates",
+    "filtered_reason": "Failed rule-based pre-filter"
+  },
+  {
+    "cve": {
+      "id": "CVE-2024-99999",
+      "descriptions": [
+        {
+          "lang": "en",
+          "value": "Remote code execution vulnerability in network protocol handler allows attackers to execute arbitrary code with elevated privileges."
+        }
+      ]
+    },
+    "filtered_reason": "LLM enhancement failed"
+  }
+]

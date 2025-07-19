@@ -20,18 +20,31 @@ try:
 except ImportError:
     MLX_AVAILABLE = False
 
+# Import batching utilities
+try:
+    from mlx_batch_utils import BatchedMLXGenerator, DynamicBatcher
+    from mlx_speculative import SpeculativeDecoder, SpeculativeConfig
+    BATCHING_AVAILABLE = True
+except ImportError:
+    BATCHING_AVAILABLE = False
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class CyberDataStructurer:
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, workers: int, disable_llm: bool):
+    def __init__(self, input_dir: str, output_dir: str, llm_model: str, workers: int, disable_llm: bool,
+                 use_batching: bool = True, batch_size: int = 32, batch_timeout: float = 0.1,
+                 use_speculative: bool = False, draft_model_path: str = "mlx-community/gemma-3-1b-it-bf16"):
         """Initialize the data structurer."""
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.num_workers = workers
         self.model, self.tokenizer, self.llm_available = None, None, False
+        self.use_batching = use_batching and BATCHING_AVAILABLE
+        self.use_speculative = use_speculative and BATCHING_AVAILABLE
+        self.batch_size = batch_size
 
         if not disable_llm and MLX_AVAILABLE:
             try:
@@ -39,6 +52,28 @@ class CyberDataStructurer:
                 self.model, self.tokenizer = load(llm_model)
                 self.llm_available = True
                 logger.info("MLX model loaded successfully.")
+                
+                # Setup generation method based on configuration
+                if self.use_speculative:
+                    logger.info(f"Initializing speculative decoding with draft model: {draft_model_path}")
+                    self.speculative_decoder = SpeculativeDecoder(
+                        target_model=self.model,
+                        target_tokenizer=self.tokenizer,
+                        config=SpeculativeConfig(
+                            draft_model_path=draft_model_path,
+                            target_model_path=llm_model,
+                            temperature=0.0
+                        )
+                    )
+                elif self.use_batching:
+                    logger.info(f"Initializing batched generator with batch_size={batch_size}")
+                    self.batch_generator = BatchedMLXGenerator(
+                        model=self.model,
+                        tokenizer=self.tokenizer,
+                        max_batch_size=batch_size,
+                        batch_timeout=batch_timeout,
+                        max_sequence_length=2048
+                    )
             except Exception as e:
                 logger.error(f"Failed to load MLX model: {e}")
                 self.llm_available = False
@@ -59,8 +94,22 @@ class CyberDataStructurer:
         """Call the local MLX model."""
         if not self.llm_available: return None
         try:
-            # Removed temp/temperature argument for compatibility
-            return generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=400)
+            if self.use_speculative:
+                return self.speculative_decoder.generate(
+                    prompt=prompt,
+                    max_tokens=400,
+                    temperature=0.0,
+                    verbose=False
+                )
+            elif self.use_batching:
+                return self.batch_generator.generate(
+                    prompt=prompt,
+                    max_tokens=400,
+                    temperature=0.0
+                )
+            else:
+                # Original non-batched generation
+                return generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=400)
         except Exception as e:
             logger.error(f"Error during MLX generation: {e}")
             return None
@@ -206,16 +255,37 @@ class CyberDataStructurer:
             # For all other handlers, prepare and process LLM tasks
             if self.llm_available:
                 tasks = handler(data)
-                with ThreadPoolExecutor(max_workers=self.num_workers) as executor:
-                    future_to_meta = {executor.submit(self._call_llm, prompt): meta for prompt, meta in tasks}
-                    progress_bar = tqdm(as_completed(future_to_meta), total=len(tasks), desc=f"Structuring {file_path.name}")
+                
+                if self.use_batching and hasattr(self, 'batch_generator'):
+                    # Batch processing
+                    logger.info(f"Processing {len(tasks)} tasks using batched generation")
                     
-                    for future in progress_bar:
-                        metadata = future_to_meta[future]
-                        response = future.result()
-                        if response:
-                            metadata['response'] = response.strip()
-                            all_structured_pairs.append(metadata)
+                    # Process in batches for better throughput
+                    batch_results = []
+                    for i in tqdm(range(0, len(tasks), self.batch_size), desc=f"Batching {file_path.name}"):
+                        batch = tasks[i:i+self.batch_size]
+                        
+                        # Process each item in the batch
+                        for prompt, metadata in batch:
+                            response = self._call_llm(prompt)
+                            if response:
+                                metadata['response'] = response.strip()
+                                batch_results.append(metadata)
+                    
+                    all_structured_pairs.extend(batch_results)
+                    logger.info(f"Generated {len(batch_results)} pairs from {file_path.name}")
+                else:
+                    # Original concurrent processing with ThreadPoolExecutor
+                    with ThreadPoolExecutor(max_workers=self.num_workers) as executor:
+                        future_to_meta = {executor.submit(self._call_llm, prompt): meta for prompt, meta in tasks}
+                        progress_bar = tqdm(as_completed(future_to_meta), total=len(tasks), desc=f"Structuring {file_path.name}")
+                        
+                        for future in progress_bar:
+                            metadata = future_to_meta[future]
+                            response = future.result()
+                            if response:
+                                metadata['response'] = response.strip()
+                                all_structured_pairs.append(metadata)
 
         if all_structured_pairs:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -228,22 +298,47 @@ class CyberDataStructurer:
                 }, f, indent=2)
             
             logger.info(f"Successfully saved {len(all_structured_pairs)} structured pairs to {output_file}")
+    
+    def cleanup(self):
+        """Cleanup resources"""
+        if hasattr(self, 'batch_generator'):
+            self.batch_generator.shutdown()
+            logger.info("Batch generator shutdown complete")
 
 def main():
-    parser = argparse.ArgumentParser(description="Structure filtered cybersecurity data using an LLM.")
+    parser = argparse.ArgumentParser(description="Structure filtered cybersecurity data using an LLM with batching support.")
     parser.add_argument("--input-dir", default="filtered_data", help="Directory containing filtered data.")
     parser.add_argument("--output-dir", default="structured_data", help="Output directory.")
     parser.add_argument("--model", type=str, default="mlx-community/c4ai-command-r-v01-4bit", help="The MLX-compatible model to use from Hugging Face.")
     parser.add_argument("--workers", type=int, default=4, help="Number of parallel workers for LLM calls.")
     parser.add_argument("--disable-llm", action="store_true", help="Disable LLM usage.")
+    parser.add_argument("--batch-size", type=int, default=32, help="Batch size for processing (default: 32)")
+    parser.add_argument("--batch-timeout", type=float, default=0.1, help="Batch timeout in seconds (default: 0.1)")
+    parser.add_argument("--no-batching", action="store_true", help="Disable batched processing")
+    parser.add_argument("--enable-speculative", action="store_true", help="Enable speculative decoding")
+    parser.add_argument("--draft-model", type=str, default="mlx-community/gemma-3-1b-it-bf16", help="Draft model for speculative decoding")
     args = parser.parse_args()
 
     try:
-        structurer = CyberDataStructurer(input_dir=args.input_dir, output_dir=args.output_dir, llm_model=args.model, workers=args.workers, disable_llm=args.disable_llm)
+        structurer = CyberDataStructurer(
+            input_dir=args.input_dir, 
+            output_dir=args.output_dir, 
+            llm_model=args.model, 
+            workers=args.workers, 
+            disable_llm=args.disable_llm,
+            use_batching=not args.no_batching,
+            batch_size=args.batch_size,
+            batch_timeout=args.batch_timeout,
+            use_speculative=args.enable_speculative,
+            draft_model_path=args.draft_model
+        )
         structurer.process_directory()
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}", exc_info=True)
         sys.exit(1)
+    finally:
+        if 'structurer' in locals():
+            structurer.cleanup()
 
 if __name__ == "__main__":
     main()

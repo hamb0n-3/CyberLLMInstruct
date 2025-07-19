@@ -21,16 +21,28 @@ try:
 except ImportError:
     MLX_AVAILABLE = False
 
+# Import batching utilities
+try:
+    from mlx_batch_utils import BatchedMLXGenerator, DynamicBatcher
+    from mlx_speculative import SpeculativeDecoder, SpeculativeConfig
+    BATCHING_AVAILABLE = True
+except ImportError:
+    BATCHING_AVAILABLE = False
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 class SecurityAligner:
-    # CORRECTED: Removed 'workers' from __init__
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, disable_llm: bool):
+    def __init__(self, input_dir: str, output_dir: str, llm_model: str, disable_llm: bool,
+                 use_batching: bool = True, batch_size: int = 16, batch_timeout: float = 0.1,
+                 use_speculative: bool = False, draft_model_path: str = "mlx-community/gemma-3-1b-it-bf16"):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.model, self.tokenizer, self.llm_available = None, None, False
+        self.use_batching = use_batching and BATCHING_AVAILABLE
+        self.use_speculative = use_speculative and BATCHING_AVAILABLE
+        self.batch_size = batch_size
 
         if not disable_llm and MLX_AVAILABLE:
             try:
@@ -38,6 +50,29 @@ class SecurityAligner:
                 self.model, self.tokenizer = load(llm_model)
                 self.llm_available = True
                 logger.info("MLX model loaded successfully.")
+                
+                # Setup generation method based on configuration
+                if self.use_speculative:
+                    logger.info(f"Initializing speculative decoding with draft model: {draft_model_path}")
+                    self.speculative_decoder = SpeculativeDecoder(
+                        target_model=self.model,
+                        target_tokenizer=self.tokenizer,
+                        config=SpeculativeConfig(
+                            draft_model_path=draft_model_path,
+                            target_model_path=llm_model,
+                            temperature=0.0,
+                            speculation_length=8  # Longer for enhancement tasks
+                        )
+                    )
+                elif self.use_batching:
+                    logger.info(f"Initializing batched generator with batch_size={batch_size}")
+                    self.batch_generator = BatchedMLXGenerator(
+                        model=self.model,
+                        tokenizer=self.tokenizer,
+                        max_batch_size=batch_size,
+                        batch_timeout=batch_timeout,
+                        max_sequence_length=4096  # Longer for security analysis
+                    )
             except Exception as e:
                 logger.error(f"Failed to load MLX model: {e}")
         else:
@@ -108,8 +143,24 @@ Original Response: {response}
 [/INST]"""
         
         try:
-            # CORRECTED LINE: Removed the temperature/temp argument entirely
-            ollama_response = generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=2048)
+            # Use configured generation method
+            if self.use_speculative:
+                ollama_response = self.speculative_decoder.generate(
+                    prompt=prompt,
+                    max_tokens=2048,
+                    temperature=0.0,
+                    verbose=False
+                )
+            elif self.use_batching:
+                ollama_response = self.batch_generator.generate(
+                    prompt=prompt,
+                    max_tokens=2048,
+                    temperature=0.0
+                )
+            else:
+                # Original generation
+                ollama_response = generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=2048)
+            
             json_match = re.search(r'\{.*\}', ollama_response, re.DOTALL)
             if json_match:
                 enhanced_data = json.loads(json_match.group(0))
@@ -141,9 +192,17 @@ Original Response: {response}
             enhanced_data = []
 
             if self.llm_available:
-                # CORRECTED: Using a sequential loop instead of ThreadPoolExecutor
-                for entry in tqdm(aligned_data, desc=f"Aligning {file_path.name}"):
-                    enhanced_data.append(self.enhance_with_llm(entry))
+                if self.use_batching and hasattr(self, 'batch_generator'):
+                    # Batch processing for enhancement
+                    logger.info(f"Using batched processing for enhancement")
+                    for i in tqdm(range(0, len(aligned_data), self.batch_size), desc=f"Aligning {file_path.name} (Batched)"):
+                        batch = aligned_data[i:i+self.batch_size]
+                        for entry in batch:
+                            enhanced_data.append(self.enhance_with_llm(entry))
+                else:
+                    # Original sequential processing
+                    for entry in tqdm(aligned_data, desc=f"Aligning {file_path.name}"):
+                        enhanced_data.append(self.enhance_with_llm(entry))
             else:
                 logger.info("LLM is disabled. Skipping enhancement step.")
                 enhanced_data = aligned_data
@@ -159,19 +218,43 @@ Original Response: {response}
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         logger.info(f"Saved {len(data)} aligned entries to {output_file}")
+    
+    def cleanup(self):
+        """Cleanup resources"""
+        if hasattr(self, 'batch_generator'):
+            self.batch_generator.shutdown()
+            logger.info("Batch generator shutdown complete")
 
 def main():
-    parser = argparse.ArgumentParser(description='Align and enhance a dataset with security-focused examples.')
+    parser = argparse.ArgumentParser(description='Align and enhance a dataset with security-focused examples using batching support.')
     parser.add_argument('--input-dir', default='reviewed_data', help='Input directory with reviewed data.')
     parser.add_argument('--output-dir', default='security_aligned', help='Output directory for the final dataset.')
     parser.add_argument('--ratio', type=float, default=0.2, help='Ratio of generated security examples to add.')
     parser.add_argument('--model', type=str, default="mlx-community/c4ai-command-r-v01-4bit", help="The MLX-compatible model to use.")
     parser.add_argument("--disable-llm", action="store_true", help="Disable LLM enhancement.")
+    parser.add_argument("--batch-size", type=int, default=16, help="Batch size for processing (default: 16)")
+    parser.add_argument("--batch-timeout", type=float, default=0.1, help="Batch timeout in seconds (default: 0.1)")
+    parser.add_argument("--no-batching", action="store_true", help="Disable batched processing")
+    parser.add_argument("--enable-speculative", action="store_true", help="Enable speculative decoding")
+    parser.add_argument("--draft-model", type=str, default="mlx-community/gemma-3-1b-it-bf16", help="Draft model for speculative decoding")
     args = parser.parse_args()
     
-    # CORRECTED: Removed 'workers' from the constructor call
-    aligner = SecurityAligner(input_dir=args.input_dir, output_dir=args.output_dir, llm_model=args.model, disable_llm=args.disable_llm, workers=1)
-    aligner.process_directory(security_example_ratio=args.ratio)
+    try:
+        aligner = SecurityAligner(
+            input_dir=args.input_dir, 
+            output_dir=args.output_dir, 
+            llm_model=args.model, 
+            disable_llm=args.disable_llm,
+            use_batching=not args.no_batching,
+            batch_size=args.batch_size,
+            batch_timeout=args.batch_timeout,
+            use_speculative=args.enable_speculative,
+            draft_model_path=args.draft_model
+        )
+        aligner.process_directory(security_example_ratio=args.ratio)
+    finally:
+        if 'aligner' in locals():
+            aligner.cleanup()
 
 if __name__ == "__main__":
     main()
