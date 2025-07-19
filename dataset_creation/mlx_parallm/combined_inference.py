@@ -78,7 +78,7 @@ class CombinedConfig:
     
     # KV cache config
     enable_kv_cache: bool = True
-    kv_bits: int = 4
+    kv_bits: int = 8
     kv_group_size: int = 32
 
 
