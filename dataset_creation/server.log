@@ -1,0 +1,45 @@
+/Users/tristan/AI/AI-Training/Datasets/CyberLLMInstruct/dataset_creation/mlx_parallm/advanced_server.py:289: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+/Users/tristan/AI/AI-Training/Datasets/CyberLLMInstruct/dataset_creation/mlx_parallm/advanced_server.py:354: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("shutdown")
+2025-07-18 17:59:25,993 - INFO - Started server process [43846]
+2025-07-18 17:59:25,993 - INFO - Waiting for application startup.
+2025-07-18 17:59:25,993 - INFO - Loading main model: mlx-community/c4ai-command-r-v01-4bit
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 349525.33it/s]
+2025-07-18 17:59:27,459 - INFO - Continuous batching engine started
+2025-07-18 17:59:27,459 - INFO - Continuous batching engine initialized
+2025-07-18 17:59:27,459 - INFO - Server startup complete
+2025-07-18 17:59:27,459 - INFO - Application startup complete.
+2025-07-18 17:59:27,459 - INFO - Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
+2025-07-18 17:59:36,258 - INFO - 127.0.0.1:56824 - "GET /health HTTP/1.1" 200
+2025-07-18 17:59:37,390 - INFO - 127.0.0.1:56825 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 17:59:42,680 - INFO - 127.0.0.1:56826 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 19:56:08,740 - INFO - 127.0.0.1:56978 - "GET /health HTTP/1.1" 200
+2025-07-18 19:56:08,742 - INFO - 127.0.0.1:56979 - "GET /v1/stats HTTP/1.1" 200
+2025-07-18 19:59:36,726 - INFO - 127.0.0.1:57025 - "GET /health HTTP/1.1" 200
+2025-07-18 19:59:36,727 - INFO - 127.0.0.1:57026 - "GET /v1/stats HTTP/1.1" 200
+2025-07-18 20:00:23,416 - INFO - 127.0.0.1:57027 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 20:00:42,339 - INFO - 127.0.0.1:57029 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 20:01:02,281 - INFO - 127.0.0.1:57030 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 20:01:25,132 - INFO - 127.0.0.1:57031 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 20:01:47,149 - INFO - 127.0.0.1:57032 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 20:02:07,824 - INFO - 127.0.0.1:57034 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 20:02:28,525 - INFO - 127.0.0.1:57035 - "POST /v1/generate_batch HTTP/1.1" 200
+2025-07-18 21:12:14,156 - INFO - Shutting down
+2025-07-18 21:12:14,258 - INFO - Waiting for application shutdown.
+2025-07-18 21:12:14,277 - INFO - Continuous batching engine stopped
+2025-07-18 21:12:14,277 - INFO - Server shutdown complete
+2025-07-18 21:12:14,278 - INFO - Application shutdown complete.
+2025-07-18 21:12:14,278 - INFO - Finished server process [43846]
+/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:301: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-7msem8dd'}
+  warnings.warn(

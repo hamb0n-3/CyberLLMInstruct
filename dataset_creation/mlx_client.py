@@ -243,7 +243,7 @@ class MLXClient:
                 response = requests.post(
                     f"{self.server_url}/v1/generate_batch",
                     json=payload,
-                    timeout=60
+                    timeout=120  # Increased timeout for large models
                 )
                 if response.status_code == 200:
                     results = response.json()["results"]

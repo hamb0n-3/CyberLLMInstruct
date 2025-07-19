@@ -253,9 +253,9 @@ class ContinuousBatchingEngine:
                 break
             
             # Get logits from model
-            with mx.no_grad():
-                outputs = self.model(current_ids, current_mask)
-                logits = outputs[:, -1, :]  # Get last token logits
+            # Pass None for mask to let model handle it internally
+            outputs = self.model(current_ids)
+            logits = outputs[:, -1, :]  # Get last token logits
             
             # Sample next tokens
             next_tokens = []
@@ -288,10 +288,7 @@ class ContinuousBatchingEngine:
             next_tokens_array = mx.array([next_tokens])
             current_ids = mx.concatenate([current_ids, next_tokens_array.T], axis=1)
             
-            # Update attention mask
-            new_mask = mx.array([[1 if i in active_sequences else 0 
-                                for i in range(batch_size)]]).T
-            current_mask = mx.concatenate([current_mask, new_mask], axis=1)
+            # Don't update attention mask since we're not using it
         
         return generated_tokens
 
@@ -326,7 +323,7 @@ class AsyncContinuousBatchingEngine:
             None, 
             self.engine.get_result, 
             request_id,
-            30.0  # 30 second timeout
+            120.0  # 120 second timeout for large models
         )
         
         if result is None:

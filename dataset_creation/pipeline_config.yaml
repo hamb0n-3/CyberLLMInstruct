@@ -13,7 +13,7 @@ mlx_model:
   
 # Batching configuration
 batching:
-  batch_size: 16
+  batch_size: 8  # Reduced batch size for large models
   batch_timeout_ms: 100
 
 # Default generation parameters
@@ -51,7 +51,7 @@ pipeline:
 advanced_server:
   model: "mlx-community/c4ai-command-r-v01-4bit"
   draft_model: "mlx-community/Phi-3-mini-4k-instruct-4bit"
-  max_batch_size: 16
+  max_batch_size: 8
   batch_timeout_ms: 50
   use_combined: true  # Enable combined speculative + continuous batching (default)
   
