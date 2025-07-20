@@ -13,18 +13,82 @@ import time
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
 from dataclasses import dataclass, field
+import sys
+import platform
+import signal
 
 # Import MLX components for batch processing and speculative decoding
 from mlx_lm import load, generate
 from mlx_lm.generate import speculative_generate_step
 import mlx.core as mx
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Setup logging with both console and file handlers
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Create logs directory
+logs_dir = Path("logs")
+logs_dir.mkdir(exist_ok=True)
+benchmarks_dir = logs_dir / "benchmarks"
+benchmarks_dir.mkdir(exist_ok=True)
+
+# Create timestamped log file
+timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+log_file = logs_dir / f"filter_{timestamp}.log"
+
+# File handler
+file_handler = logging.FileHandler(log_file)
+file_handler.setLevel(logging.INFO)
+file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(file_formatter)
+
+# Console handler
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(console_formatter)
+
+# Add handlers to logger
+logger.addHandler(file_handler)
+logger.addHandler(console_handler)
+
+@dataclass
+class FileMetrics:
+    """Metrics for a single file."""
+    items_total: int = 0
+    items_passed_rules: int = 0
+    items_passed_relevance: int = 0
+    items_enhanced: int = 0
+    processing_time: float = 0.0
+    tokens_per_second: float = 0.0
+    avg_batch_size: float = 0.0
+    speculative_acceptance_rate: float = 0.0
+    rule_filter_time: float = 0.0
+    relevance_check_time: float = 0.0
+    enhancement_time: float = 0.0
 
 @dataclass
 class BenchmarkMetrics:
     """Track performance metrics for the filtering process."""
+    # Model information
+    model_name: str = ""
+    draft_model_name: str = ""
+    model_type: str = ""
+    
+    # System information
+    timestamp_start: str = ""
+    timestamp_end: str = ""
+    platform_info: str = platform.platform()
+    python_version: str = sys.version.split()[0]
+    
+    # Processing parameters
+    batch_size: int = 0
+    num_draft_tokens: int = 0
+    use_speculative_decoding: bool = False
+    min_content_length: int = 0
+    min_keyword_matches: int = 0
+    
+    # Performance tracking
     total_tokens_generated: int = 0
     total_generation_time: float = 0.0
     relevance_check_time: float = 0.0
@@ -34,8 +98,13 @@ class BenchmarkMetrics:
     speculative_tokens_accepted: int = 0
     speculative_tokens_total: int = 0
     batch_sizes: List[int] = field(default_factory=list)
-    model_name: str = ""
-    draft_model_name: str = ""
+    
+    # Per-file metrics
+    file_metrics: Dict[str, FileMetrics] = field(default_factory=dict)
+    
+    # Aggregate metrics
+    total_items_processed: int = 0
+    total_items_retained: int = 0
     
     def add_generation_metrics(self, tokens: int, time_taken: float):
         self.total_tokens_generated += tokens
@@ -51,19 +120,144 @@ class BenchmarkMetrics:
             return self.speculative_tokens_accepted / self.speculative_tokens_total
         return 0.0
     
-    def log_summary(self):
-        logger.info("=== Benchmark Summary ===")
-        logger.info(f"Model: {self.model_name}")
+    def get_overall_retention_rate(self) -> float:
+        if self.total_items_processed > 0:
+            return self.total_items_retained / self.total_items_processed
+        return 0.0
+    
+    def save_to_file(self, filename: str, file_specific: Optional[str] = None):
+        """Save benchmark metrics to JSON file."""
+        benchmark_data = {
+            "timestamp": datetime.now().isoformat(),
+            "model": {
+                "main": self.model_name,
+                "draft": self.draft_model_name,
+                "type": self.model_type
+            },
+            "system": {
+                "platform": self.platform_info,
+                "python_version": self.python_version,
+                "start_time": self.timestamp_start,
+                "end_time": self.timestamp_end
+            },
+            "parameters": {
+                "batch_size": self.batch_size,
+                "num_draft_tokens": self.num_draft_tokens,
+                "use_speculative_decoding": self.use_speculative_decoding,
+                "min_content_length": self.min_content_length,
+                "min_keyword_matches": self.min_keyword_matches
+            },
+            "overall_performance": {
+                "total_tokens_generated": self.total_tokens_generated,
+                "tokens_per_second": self.get_tokens_per_second(),
+                "total_generation_time": self.total_generation_time,
+                "speculative_acceptance_rate": self.get_speculative_acceptance_rate() if self.use_speculative_decoding else None
+            },
+            "aggregate_results": {
+                "total_items_processed": self.total_items_processed,
+                "total_items_retained": self.total_items_retained,
+                "overall_retention_rate": self.get_overall_retention_rate()
+            }
+        }
+        
+        # Add file-specific metrics if provided
+        if file_specific and file_specific in self.file_metrics:
+            fm = self.file_metrics[file_specific]
+            benchmark_data["file_metrics"] = {
+                "filename": file_specific,
+                "items_total": fm.items_total,
+                "items_passed_rules": fm.items_passed_rules,
+                "items_passed_relevance": fm.items_passed_relevance,
+                "items_enhanced": fm.items_enhanced,
+                "retention_rate": fm.items_enhanced / fm.items_total if fm.items_total > 0 else 0,
+                "processing_time": fm.processing_time,
+                "tokens_per_second": fm.tokens_per_second,
+                "stage_breakdown": {
+                    "rule_filtering": {
+                        "passed": fm.items_passed_rules,
+                        "time": fm.rule_filter_time,
+                        "pass_rate": fm.items_passed_rules / fm.items_total if fm.items_total > 0 else 0
+                    },
+                    "relevance_check": {
+                        "passed": fm.items_passed_relevance,
+                        "time": fm.relevance_check_time,
+                        "pass_rate": fm.items_passed_relevance / fm.items_passed_rules if fm.items_passed_rules > 0 else 0
+                    },
+                    "enhancement": {
+                        "passed": fm.items_enhanced,
+                        "time": fm.enhancement_time,
+                        "pass_rate": fm.items_enhanced / fm.items_passed_relevance if fm.items_passed_relevance > 0 else 0
+                    }
+                }
+            }
+        else:
+            # Add all file metrics
+            benchmark_data["all_files"] = {}
+            for fname, fm in self.file_metrics.items():
+                benchmark_data["all_files"][fname] = {
+                    "items_total": fm.items_total,
+                    "items_retained": fm.items_enhanced,
+                    "retention_rate": fm.items_enhanced / fm.items_total if fm.items_total > 0 else 0,
+                    "processing_time": fm.processing_time,
+                    "tokens_per_second": fm.tokens_per_second
+                }
+        
+        # Save to file
+        with open(filename, 'w') as f:
+            json.dump(benchmark_data, f, indent=2)
+    
+    def log_file_benchmark(self, filename: str):
+        """Log detailed benchmark for a specific file."""
+        if filename not in self.file_metrics:
+            return
+            
+        fm = self.file_metrics[filename]
+        logger.info(f"\n=== Benchmark: {filename} ===")
+        logger.info(f"Model: {self.model_name} ({self.model_type})")
         if self.draft_model_name:
             logger.info(f"Draft Model: {self.draft_model_name}")
-        logger.info(f"Total tokens generated: {self.total_tokens_generated}")
-        logger.info(f"Tokens per second: {self.get_tokens_per_second():.2f}")
-        logger.info(f"Total generation time: {self.total_generation_time:.2f}s")
-        logger.info(f"Relevance check time: {self.relevance_check_time:.2f}s")
-        logger.info(f"Enhancement time: {self.enhancement_time:.2f}s")
+        logger.info(f"Batch Size: {self.batch_size}, Draft Tokens: {self.num_draft_tokens}")
+        
+        logger.info("\nProcessing Stats:")
+        logger.info(f"- Total items: {fm.items_total}")
+        logger.info(f"- Passed rules: {fm.items_passed_rules} ({fm.items_passed_rules/fm.items_total*100:.1f}%)")
+        logger.info(f"- Passed relevance: {fm.items_passed_relevance} ({fm.items_passed_relevance/fm.items_passed_rules*100:.1f}% of rules-passed)")
+        logger.info(f"- Successfully enhanced: {fm.items_enhanced} ({fm.items_enhanced/fm.items_passed_relevance*100:.1f}% of relevant)")
+        logger.info(f"- Final retained: {fm.items_enhanced} ({fm.items_enhanced/fm.items_total*100:.1f}% of total)")
+        
+        logger.info("\nPerformance:")
+        logger.info(f"- Processing time: {fm.processing_time:.1f}s ({fm.items_total/fm.processing_time:.1f} items/s)")
+        logger.info(f"- Tokens/second: {fm.tokens_per_second:.1f}")
+        if self.use_speculative_decoding:
+            logger.info(f"- Speculative acceptance: {fm.speculative_acceptance_rate:.1%}")
+        logger.info(f"- Avg batch utilization: {fm.avg_batch_size:.1f}/{self.batch_size}")
+        
+        # Save benchmark file
+        benchmark_file = benchmarks_dir / f"{Path(filename).stem}_{timestamp}.json"
+        self.save_to_file(benchmark_file, filename)
+        logger.info(f"\nSaved to: {benchmark_file}")
+        logger.info("="*40)
+    
+    def log_summary(self):
+        logger.info("\n=== Overall Benchmark Summary ===")
+        logger.info(f"Model: {self.model_name} ({self.model_type})")
         if self.draft_model_name:
-            logger.info(f"Speculative acceptance rate: {self.get_speculative_acceptance_rate():.2%}")
-        logger.info("========================")
+            logger.info(f"Draft Model: {self.draft_model_name}")
+        logger.info(f"Total files processed: {len(self.file_metrics)}")
+        logger.info(f"Total items processed: {self.total_items_processed}")
+        logger.info(f"Total items retained: {self.total_items_retained} ({self.get_overall_retention_rate():.1%})")
+        logger.info(f"Total tokens generated: {self.total_tokens_generated}")
+        logger.info(f"Overall tokens/second: {self.get_tokens_per_second():.2f}")
+        logger.info(f"Total generation time: {self.total_generation_time:.2f}s")
+        if self.draft_model_name:
+            logger.info(f"Overall speculative acceptance rate: {self.get_speculative_acceptance_rate():.2%}")
+        
+        # Save final summary
+        summary_file = benchmarks_dir / f"summary_{timestamp}.json"
+        self.timestamp_end = datetime.now().isoformat()
+        self.save_to_file(summary_file)
+        logger.info(f"\nFinal summary saved to: {summary_file}")
+        logger.info("="*40)
 
 class CyberDataFilter:
     def __init__(self, input_dir: str, output_dir: str, model_path: str, 
@@ -75,7 +269,16 @@ class CyberDataFilter:
         self.batch_size = batch_size
         self.num_draft_tokens = num_draft_tokens
         self.verbose = verbose
-        self.metrics = BenchmarkMetrics(model_name=model_path, draft_model_name=draft_model_path or "")
+        
+        # Initialize metrics with full configuration
+        self.metrics = BenchmarkMetrics(
+            model_name=model_path,
+            draft_model_name=draft_model_path or "",
+            timestamp_start=datetime.now().isoformat(),
+            batch_size=batch_size,
+            num_draft_tokens=num_draft_tokens,
+            use_speculative_decoding=bool(draft_model_path)
+        )
 
         # Load the main model
         logger.info(f"Loading main model: {model_path}...")
@@ -85,6 +288,7 @@ class CyberDataFilter:
         
         # Detect model type for prompt formatting
         self.model_type = self._detect_model_type(model_path)
+        self.metrics.model_type = self.model_type
         logger.info(f"Detected model type: {self.model_type}")
         
         # Load draft model for speculative decoding
@@ -102,7 +306,11 @@ class CyberDataFilter:
         self.cybersecurity_keywords = {'high_relevance': {'vulnerability', 'exploit', 'malware', 'ransomware', 'cyber', 'security', 'attack', 'threat', 'breach', 'cve-', 'patch', 'authentication', 'authorization', 'encryption', 'cryptography', 'backdoor', 'botnet', 'phishing', 'injection', 'zero-day', '0day', 'penetration', 'pentest', 'firewall', 'malicious'}, 'medium_relevance': {'network', 'system', 'software', 'hardware', 'protocol', 'server', 'client', 'database', 'web', 'application', 'code', 'programming', 'access', 'control', 'monitoring', 'detection', 'response', 'incident'}}
         self.exclusion_patterns = {'generic_terms': r'\b(test|sample|example|dummy|todo)\b', 'placeholder_text': r'\b(lorem ipsum|xxx|placeholder)\b', 'empty_content': r'^\s*$'}
         self.min_content_length = 20
-        self.min_keyword_matches = 2
+        self.min_keyword_matches = 1
+        
+        # Update metrics with filtering parameters
+        self.metrics.min_content_length = self.min_content_length
+        self.metrics.min_keyword_matches = self.min_keyword_matches
 
     def _detect_model_type(self, model_path: str) -> str:
         """Detect the model type from the path for proper prompt formatting."""
@@ -369,8 +577,15 @@ class CyberDataFilter:
 
     def filter_dataset(self, input_file: Path) -> Tuple[List[Dict], List[Dict]]:
         file_start_time = time.time()
+        rule_filter_start = time.time()
+        
+        # Initialize file metrics
+        file_metric = FileMetrics()
+        
         all_entries = self.load_data(input_file)
         if not all_entries: return [], []
+        
+        file_metric.items_total = len(all_entries)
         logger.info(f"Processing {len(all_entries)} entries from {input_file.name}...")
         
         relevant_entries, filtered_out_entries = [], []
@@ -389,6 +604,8 @@ class CyberDataFilter:
                 entry['filtered_reason'] = "Failed rule-based pre-filter"
                 filtered_out_entries.append(entry)
         
+        file_metric.rule_filter_time = time.time() - rule_filter_start
+        file_metric.items_passed_rules = len(relevance_candidates)
         logger.info(f"Rule-based pre-filter complete. {len(relevance_candidates)} entries passed for LLM processing.")
 
         # PASS 1: Batch Relevance Check
@@ -425,6 +642,7 @@ class CyberDataFilter:
                     entry['filtered_reason'] = "LLM determined not relevant"
                     filtered_out_entries.append(entry)
 
+        file_metric.items_passed_relevance = len(tasks_for_enhancement)
         logger.info(f"Relevance check complete. {len(tasks_for_enhancement)} entries passed for detailed enhancement.")
 
         # PASS 2: Batch Enhancement
@@ -467,17 +685,25 @@ class CyberDataFilter:
             
             logger.info(f"  Enhanced {success_count}/{len(batch)} items successfully")
         
-        # Log file processing time
-        file_time = time.time() - file_start_time
-        self.metrics.file_processing_times[input_file.name] = file_time
+        # Update file metrics
+        file_metric.items_enhanced = len(relevant_entries)
+        file_metric.processing_time = time.time() - file_start_time
+        file_metric.relevance_check_time = self.metrics.relevance_check_time - file_metric.rule_filter_time
+        file_metric.enhancement_time = self.metrics.enhancement_time
+        file_metric.tokens_per_second = self.metrics.get_tokens_per_second()
+        file_metric.avg_batch_size = sum(self.metrics.batch_sizes)/len(self.metrics.batch_sizes) if self.metrics.batch_sizes else 0
+        file_metric.speculative_acceptance_rate = self.metrics.get_speculative_acceptance_rate()
         
-        # Log benchmark for this file
-        logger.info(f"File benchmark - {input_file.name}:")
-        logger.info(f"  Processing time: {file_time:.2f}s")
-        logger.info(f"  Avg batch size: {sum(self.metrics.batch_sizes)/len(self.metrics.batch_sizes) if self.metrics.batch_sizes else 0:.1f}")
-        logger.info(f"  Current tokens/sec: {self.metrics.get_tokens_per_second():.2f}")
-        if self.draft_model:
-            logger.info(f"  Speculative acceptance rate: {self.metrics.get_speculative_acceptance_rate():.2%}")
+        # Store file metrics
+        self.metrics.file_metrics[input_file.name] = file_metric
+        self.metrics.file_processing_times[input_file.name] = file_metric.processing_time
+        
+        # Update aggregate metrics
+        self.metrics.total_items_processed += file_metric.items_total
+        self.metrics.total_items_retained += file_metric.items_enhanced
+        
+        # Log detailed benchmark for this file
+        self.metrics.log_file_benchmark(input_file.name)
                         
         return relevant_entries, filtered_out_entries
 
@@ -496,27 +722,38 @@ class CyberDataFilter:
         logger.info(f"Found {len(files_to_process)} files to process.")
         overall_start = time.time()
         
-        for file_path in files_to_process:
-            relevant, filtered = self.filter_dataset(file_path)
-            self.save_data(relevant, file_path, '_filtered')
-            self.save_data(filtered, file_path, '_removed')
-            logger.info(f"--- Finished processing {file_path.name}: {len(relevant)} retained, {len(filtered)} removed ---")
+        try:
+            for file_path in files_to_process:
+                relevant, filtered = self.filter_dataset(file_path)
+                self.save_data(relevant, file_path, '_filtered')
+                self.save_data(filtered, file_path, '_removed')
+                logger.info(f"--- Finished processing {file_path.name}: {len(relevant)} retained, {len(filtered)} removed ---")
+        except KeyboardInterrupt:
+            logger.info("\n\n=== INTERRUPTED BY USER (Ctrl+C) ===")
+            logger.info("Saving current benchmark data...")
         
-        # Log overall benchmarks
+        # Log overall benchmarks (runs for both normal completion and interruption)
         total_time = time.time() - overall_start
-        logger.info(f"\n=== Overall Processing Complete ===")
+        logger.info(f"\n=== Processing Summary ===")
         logger.info(f"Total processing time: {total_time:.2f}s")
-        logger.info(f"Files processed: {len(files_to_process)}")
+        logger.info(f"Files processed: {len(self.metrics.file_metrics)}/{len(files_to_process)}")
         self.metrics.log_summary()
+        
+        # Save interrupted state benchmark if interrupted
+        if len(self.metrics.file_metrics) < len(files_to_process):
+            interrupt_file = benchmarks_dir / f"interrupted_{timestamp}.json"
+            self.metrics.timestamp_end = datetime.now().isoformat()
+            self.metrics.save_to_file(interrupt_file)
+            logger.info(f"\nInterrupted state saved to: {interrupt_file}")
 
 def main():
     parser = argparse.ArgumentParser(description="Filter and enhance data using MLX models with batch processing and speculative decoding.")
     parser.add_argument("--input-dir", default="raw_data", help="Directory containing raw data files.")
     parser.add_argument("--output-dir", default="filtered_data", help="Directory to save the filtered data.")
     parser.add_argument("--limit", type=int, default=0, help="Limit the number of files to process (0 for all).")
-    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-30B-A3B-4bit-DWQ-053125", help="The MLX-compatible model to use.")
-    parser.add_argument("--draft-model", type=str, default="mlx-community/Qwen3-4B-4bit-DWQ-053125", help="The draft model for speculative decoding (e.g., mlx-community/Qwen2.5-0.5B-Instruct)")
-    parser.add_argument("--batch-size", type=int, default=16, help="Batch size for processing.")
+    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-14B-4bit-DWQ-053125", help="The MLX-compatible model to use.")
+    parser.add_argument("--draft-model", type=str, default=None, help="The draft model for speculative decoding (e.g., mlx-community/Qwen2.5-0.5B-Instruct)")
+    parser.add_argument("--batch-size", type=int, default=8, help="Batch size for processing.")
     parser.add_argument("--num-draft-tokens", type=int, default=4, help="Number of draft tokens for speculative decoding.")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging for debugging.")
     args = parser.parse_args()
@@ -533,17 +770,24 @@ def main():
             logger.error(f"Failed to install PyYAML. Please install it manually using 'pip install pyyaml'. Error: {e}")
             sys.exit(1)
 
-    data_filter = CyberDataFilter(
-        input_dir=args.input_dir, 
-        output_dir=args.output_dir, 
-        model_path=args.model,
-        draft_model_path=args.draft_model,
-        batch_size=args.batch_size,
-        num_draft_tokens=args.num_draft_tokens,
-        verbose=args.verbose
-    )
-    
-    data_filter.process_directory(limit=args.limit if args.limit > 0 else None)
+    try:
+        data_filter = CyberDataFilter(
+            input_dir=args.input_dir, 
+            output_dir=args.output_dir, 
+            model_path=args.model,
+            draft_model_path=args.draft_model,
+            batch_size=args.batch_size,
+            num_draft_tokens=args.num_draft_tokens,
+            verbose=args.verbose
+        )
+        
+        data_filter.process_directory(limit=args.limit if args.limit > 0 else None)
+    except KeyboardInterrupt:
+        logger.info("\nProcess interrupted by user. Benchmarks have been saved.")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"\nUnexpected error: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
