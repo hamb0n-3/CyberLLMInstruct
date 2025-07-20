@@ -1,3 +1,7 @@
+Of course! Here is a comprehensive README.md file for the provided Python script pipeline.
+
+---
+
 # Cyber Instruct Dataset Pipeline
 
 This project is a comprehensive, multi-stage pipeline designed to collect, filter, structure, and refine cybersecurity data into a high-quality, instruction-response dataset. The final output is suitable for training and fine-tuning Large Language Models (LLMs) to be proficient in cybersecurity-related tasks.
@@ -175,6 +179,24 @@ python3 8_final_assembler.py
 - **Command-Line Arguments**: Most scripts accept command-line arguments. Use the `--help` flag to see available options (e.g., `python3 2_data_filter.py --help`).
 - **LLM Models**: You can change the local MLX model used in the scripts (`2_data_filter.py`, `3_data_structurer.py`, etc.) via the `--model` argument. The default models are chosen for a balance of performance and capability (e.g., `mlx-community/Phi-3-mini-4k-instruct-4bit`).
 - **Data Sources**: To add a new data source, add a new `fetch_*` method in `1_data_collector.py` and register it in the `all_sources` dictionary in `main()`. You will also need a corresponding handler in `3_data_structurer.py` to convert its output to the instruction-response format.
+
+## 🚀 Performance Optimization TODOs
+
+The following optimizations are planned for future improvements to the pipeline:
+
+### Enhancement Processing Speed
+1. **Truncate Enhancement Text**: Currently, the enhancement phase sends the entire text content to the LLM, which can be thousands of tokens. Truncating to 1000-2000 characters would significantly reduce processing time without losing critical information.
+
+2. **Optimize Token Generation**: 
+   - Reduce `max_tokens` for enhancement from 1024 to 512 or lower if the JSON output is typically shorter
+   - Implement early stopping when valid JSON is detected
+   - Add streaming JSON parsing to stop generation once all required fields are present
+
+### Additional Performance Improvements
+- Implement true batch processing when MLX supports it
+- Add caching for repeated content
+- Parallelize file processing across multiple GPUs if available
+- Add option to skip enhancement for very short entries
 
 ## 📜 License
 
