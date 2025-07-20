@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-07-20T13:08:29.785185",
+  "model": "mlx-community/Qwen3-14B-4bit-DWQ-053125",
+  "draft_model": "mlx-community/Qwen3-4B-4bit-DWQ-053125",
+  "configurations_tested": 3,
+  "results": {
+    "speculative_batch": {
+      "description": "Speculative decoding with batching",
+      "total_time": 184.54460287094116,
+      "tokens_per_second": 32.930861912471315,
+      "total_items_processed": 16,
+      "total_items_retained": 7,
+      "retention_rate": 0.4375,
+      "files_processed": 1,
+      "batch_size": 8,
+      "use_draft_model": true,
+      "speculative_acceptance_rate": 0.2934013493500082,
+      "speedup_vs_single": 0.8418483045403333,
+      "token_speedup_vs_single": 0.8367580010527739
+    },
+    "standard_batch": {
+      "description": "Standard generation with batching",
+      "total_time": 157.6062331199646,
+      "tokens_per_second": 38.79219559940589,
+      "total_items_processed": 16,
+      "total_items_retained": 6,
+      "retention_rate": 0.375,
+      "files_processed": 1,
+      "batch_size": 8,
+      "use_draft_model": false,
+      "speedup_vs_single": 0.9857386853521029,
+      "token_speedup_vs_single": 0.9856917845783506
+    },
+    "standard_single": {
+      "description": "Standard generation without batching",
+      "total_time": 155.35856103897095,
+      "tokens_per_second": 39.35529970557686,
+      "total_items_processed": 16,
+      "total_items_retained": 6,
+      "retention_rate": 0.375,
+      "files_processed": 1,
+      "batch_size": 1,
+      "use_draft_model": false
+    }
+  }
+}

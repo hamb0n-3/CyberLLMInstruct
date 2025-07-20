@@ -1,0 +1,43 @@
+{
+  "timestamp": "2025-07-20T14:08:54.953909",
+  "model": {
+    "name": "mlx-community/Qwen3-14B-4bit-DWQ-053125",
+    "type": "qwen"
+  },
+  "system": {
+    "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
+    "python_version": "3.13.5",
+    "start_time": "2025-07-20T14:08:52.890034",
+    "end_time": "2025-07-20T14:08:54.953757"
+  },
+  "performance": {
+    "total_tokens_generated": 0,
+    "tokens_per_second": 0.0,
+    "total_generation_time": 0.0
+  },
+  "results": {
+    "total_items_processed": 215,
+    "total_items_retained": 0,
+    "overall_retention_rate": 0.0
+  },
+  "file_details": {
+    "arxiv_papers_20250715_183646.json": {
+      "processing_time": 0.025160789489746094,
+      "items_processed": 100,
+      "items_retained": 0,
+      "retention_rate": 0.0
+    },
+    "opencve_data_20250715_183643.json": {
+      "processing_time": 0.003921031951904297,
+      "items_processed": 1,
+      "items_retained": 0,
+      "retention_rate": 0.0
+    },
+    "microsoft_security_20250715_183647.json": {
+      "processing_time": 0.014113187789916992,
+      "items_processed": 114,
+      "items_retained": 0,
+      "retention_rate": 0.0
+    }
+  }
+}

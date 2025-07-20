@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-07-20T14:13:56.593152",
+  "model": {
+    "name": "mlx-community/Qwen3-14B-4bit-DWQ-053125",
+    "type": "qwen"
+  },
+  "system": {
+    "platform": "macOS-15.5-arm64-arm-64bit-Mach-O",
+    "python_version": "3.13.5",
+    "start_time": "2025-07-20T14:12:44.795673",
+    "end_time": "2025-07-20T14:13:56.593011"
+  },
+  "performance": {
+    "total_tokens_generated": 2526,
+    "tokens_per_second": 43.92219606355782,
+    "total_generation_time": 57.5107855796814
+  },
+  "results": {
+    "total_items_processed": 0,
+    "total_items_retained": 0,
+    "overall_retention_rate": 0.0
+  },
+  "file_details": {}
+}
