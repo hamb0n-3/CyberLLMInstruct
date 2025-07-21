@@ -1,0 +1,20 @@
+2025-07-20 20:23:49,566 - INFO - Loading model: mlx-community/Qwen3-14B-4bit-DWQ-053125...
+2025-07-20 20:23:49,567 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-20 20:23:49,735 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-14B-4bit-DWQ-053125/revision/main HTTP/1.1" 200 6184
+2025-07-20 20:23:50,354 - INFO - Model loaded successfully.
+2025-07-20 20:23:50,356 - INFO - 
+Starting batch processing of 8 files...
+
+2025-07-20 20:23:50,357 - INFO - 
+============================================================
+2025-07-20 20:23:50,357 - INFO - Processing 100 entries from arxiv_papers_20250715_183646.json
+2025-07-20 20:23:50,357 - INFO - ============================================================
+2025-07-20 20:23:50,373 - INFO - Rule-based pre-filter complete:
+2025-07-20 20:23:50,373 - INFO -   - Passed: 91/100 (91.0%)
+2025-07-20 20:23:50,373 - INFO -   - Failed: 9/100 (9.0%)
+2025-07-20 20:23:50,373 - INFO - Starting LLM enhancement for 91 candidates...
+2025-07-20 20:24:05,543 - DEBUG - LLM enhancement took 15.17s for 1333 chars
+2025-07-20 20:24:21,194 - DEBUG - LLM enhancement took 15.65s for 2166 chars
+2025-07-20 20:24:36,370 - DEBUG - LLM enhancement took 15.18s for 963 chars
+2025-07-20 20:24:48,750 - DEBUG - LLM enhancement took 12.38s for 396 chars
+2025-07-20 20:25:01,895 - DEBUG - LLM enhancement took 13.14s for 671 chars

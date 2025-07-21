@@ -1,0 +1,472 @@
+2025-07-20 19:15:33,220 - INFO - Loading model: mlx-community/Qwen3-14B-4bit-DWQ-053125...
+2025-07-20 19:15:33,221 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-20 19:15:33,447 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-14B-4bit-DWQ-053125/revision/main HTTP/1.1" 200 6184
+2025-07-20 19:15:34,070 - INFO - Model loaded successfully.
+2025-07-20 19:15:34,071 - INFO - 
+Starting batch processing of 8 files...
+
+2025-07-20 19:15:34,071 - INFO - 
+============================================================
+2025-07-20 19:15:34,071 - INFO - Processing 100 entries from arxiv_papers_20250715_183646.json
+2025-07-20 19:15:34,071 - INFO - ============================================================
+2025-07-20 19:15:34,087 - INFO - Rule-based pre-filter complete:
+2025-07-20 19:15:34,087 - INFO -   - Passed: 88/100 (88.0%)
+2025-07-20 19:15:34,087 - INFO -   - Failed: 12/100 (12.0%)
+2025-07-20 19:15:34,087 - INFO - Starting LLM enhancement for 88 candidates...
+2025-07-20 19:15:54,954 - DEBUG - LLM enhancement took 20.87s for 1333 chars
+2025-07-20 19:16:11,240 - DEBUG - LLM enhancement took 16.29s for 2166 chars
+2025-07-20 19:16:33,070 - DEBUG - LLM enhancement took 21.83s for 963 chars
+2025-07-20 19:16:55,005 - DEBUG - LLM enhancement took 21.93s for 396 chars
+2025-07-20 19:17:06,692 - DEBUG - LLM enhancement took 11.69s for 671 chars
+2025-07-20 19:17:25,438 - DEBUG - LLM enhancement took 18.75s for 949 chars
+2025-07-20 19:17:39,878 - DEBUG - LLM enhancement took 14.44s for 2123 chars
+2025-07-20 19:17:39,878 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 107
+  - Entries passed filter: 95 (88.8%)
+  - Entries failed filter: 12
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 1.176s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 15.547s
+  - Throughput: 0.85 entries/second
+
+Memory Usage:
+  - Current RSS: 8238.5 MB
+  - Peak RSS: 8238.5 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (41.7%)
+  - Contains exclusion pattern: non_security_academic: 4 (33.3%)
+  - Score 1 < 2: 3 (25.0%)
+
+Score Distribution:
+  - Score 0: 16 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 6 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 4 entries
+  - Score 10: 7 entries
+  - Score 11: 6 entries
+  - Score 12: 10 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 3 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 3 entries
+  - Score 23: 1 entries
+  - Score 25: 1 entries
+  - Score 26: 1 entries
+  - Score 29: 1 entries
+================================================================================
+
+2025-07-20 19:17:52,085 - DEBUG - LLM enhancement took 12.21s for 960 chars
+2025-07-20 19:18:03,841 - DEBUG - LLM enhancement took 11.76s for 892 chars
+2025-07-20 19:18:17,082 - DEBUG - LLM enhancement took 13.24s for 979 chars
+2025-07-20 19:18:17,082 - INFO - Progress: 10/88 - Avg time: 16.30s/entry - ETA: 21.2 min
+2025-07-20 19:18:29,620 - DEBUG - LLM enhancement took 12.54s for 791 chars
+2025-07-20 19:18:47,515 - DEBUG - LLM enhancement took 17.90s for 763 chars
+2025-07-20 19:19:00,838 - DEBUG - LLM enhancement took 13.32s for 1938 chars
+2025-07-20 19:19:15,598 - DEBUG - LLM enhancement took 14.76s for 669 chars
+2025-07-20 19:19:33,953 - DEBUG - LLM enhancement took 18.35s for 1115 chars
+2025-07-20 19:19:56,205 - DEBUG - LLM enhancement took 22.25s for 693 chars
+2025-07-20 19:20:14,175 - DEBUG - LLM enhancement took 17.97s for 1261 chars
+2025-07-20 19:20:36,366 - DEBUG - LLM enhancement took 22.19s for 1013 chars
+2025-07-20 19:20:48,199 - DEBUG - LLM enhancement took 11.83s for 365 chars
+2025-07-20 19:21:10,396 - DEBUG - LLM enhancement took 22.20s for 397 chars
+2025-07-20 19:21:10,396 - INFO - Progress: 20/88 - Avg time: 17.33s/entry - ETA: 19.6 min
+2025-07-20 19:21:27,812 - DEBUG - LLM enhancement took 17.42s for 289 chars
+2025-07-20 19:21:39,419 - DEBUG - LLM enhancement took 11.61s for 515 chars
+2025-07-20 19:21:58,537 - DEBUG - LLM enhancement took 19.12s for 1342 chars
+2025-07-20 19:22:21,350 - DEBUG - LLM enhancement took 22.81s for 938 chars
+2025-07-20 19:22:34,945 - DEBUG - LLM enhancement took 13.60s for 739 chars
+2025-07-20 19:22:49,589 - DEBUG - LLM enhancement took 14.64s for 496 chars
+2025-07-20 19:23:08,630 - DEBUG - LLM enhancement took 19.04s for 675 chars
+2025-07-20 19:23:24,054 - DEBUG - LLM enhancement took 15.42s for 1138 chars
+2025-07-20 19:23:38,483 - DEBUG - LLM enhancement took 14.43s for 806 chars
+2025-07-20 19:24:01,527 - DEBUG - LLM enhancement took 23.04s for 1514 chars
+2025-07-20 19:24:01,527 - INFO - Progress: 30/88 - Avg time: 17.11s/entry - ETA: 16.5 min
+2025-07-20 19:24:11,687 - DEBUG - LLM enhancement took 10.16s for 750 chars
+2025-07-20 19:24:34,148 - DEBUG - LLM enhancement took 22.46s for 672 chars
+2025-07-20 19:24:52,634 - DEBUG - LLM enhancement took 18.49s for 1067 chars
+2025-07-20 19:25:05,033 - DEBUG - LLM enhancement took 12.40s for 752 chars
+2025-07-20 19:25:24,620 - DEBUG - LLM enhancement took 19.59s for 1286 chars
+2025-07-20 19:25:39,554 - DEBUG - LLM enhancement took 14.93s for 1215 chars
+2025-07-20 19:25:50,540 - DEBUG - LLM enhancement took 10.99s for 327 chars
+2025-07-20 19:26:07,373 - DEBUG - LLM enhancement took 16.83s for 894 chars
+2025-07-20 19:26:20,095 - DEBUG - LLM enhancement took 12.72s for 1858 chars
+2025-07-20 19:26:36,544 - DEBUG - LLM enhancement took 16.45s for 835 chars
+2025-07-20 19:26:36,544 - INFO - Progress: 40/88 - Avg time: 15.50s/entry - ETA: 12.4 min
+2025-07-20 19:26:53,733 - DEBUG - LLM enhancement took 17.19s for 1421 chars
+2025-07-20 19:27:13,171 - DEBUG - LLM enhancement took 19.44s for 566 chars
+2025-07-20 19:27:32,567 - DEBUG - LLM enhancement took 19.40s for 528 chars
+2025-07-20 19:27:44,858 - DEBUG - LLM enhancement took 12.29s for 574 chars
+2025-07-20 19:28:00,126 - DEBUG - LLM enhancement took 15.27s for 699 chars
+2025-07-20 19:28:22,879 - DEBUG - LLM enhancement took 22.75s for 886 chars
+2025-07-20 19:28:42,364 - DEBUG - LLM enhancement took 19.49s for 854 chars
+2025-07-20 19:28:56,175 - DEBUG - LLM enhancement took 13.81s for 1044 chars
+2025-07-20 19:29:11,192 - DEBUG - LLM enhancement took 15.02s for 1043 chars
+2025-07-20 19:29:29,500 - DEBUG - LLM enhancement took 18.31s for 694 chars
+2025-07-20 19:29:29,500 - INFO - Progress: 50/88 - Avg time: 17.30s/entry - ETA: 11.0 min
+2025-07-20 19:29:42,375 - DEBUG - LLM enhancement took 12.87s for 764 chars
+2025-07-20 19:30:02,506 - DEBUG - LLM enhancement took 20.13s for 1349 chars
+2025-07-20 19:30:23,650 - DEBUG - LLM enhancement took 21.14s for 854 chars
+2025-07-20 19:30:46,685 - DEBUG - LLM enhancement took 23.03s for 1223 chars
+2025-07-20 19:31:00,487 - DEBUG - LLM enhancement took 13.80s for 866 chars
+2025-07-20 19:31:17,861 - DEBUG - LLM enhancement took 17.37s for 780 chars
+2025-07-20 19:31:40,789 - DEBUG - LLM enhancement took 22.93s for 907 chars
+2025-07-20 19:32:04,224 - DEBUG - LLM enhancement took 23.44s for 1525 chars
+2025-07-20 19:32:26,739 - DEBUG - LLM enhancement took 22.51s for 542 chars
+2025-07-20 19:32:37,961 - DEBUG - LLM enhancement took 11.22s for 760 chars
+2025-07-20 19:32:37,961 - INFO - Progress: 60/88 - Avg time: 18.85s/entry - ETA: 8.8 min
+2025-07-20 19:32:50,948 - DEBUG - LLM enhancement took 12.99s for 938 chars
+2025-07-20 19:33:07,290 - DEBUG - LLM enhancement took 16.34s for 839 chars
+2025-07-20 19:33:23,089 - DEBUG - LLM enhancement took 15.80s for 1079 chars
+2025-07-20 19:33:37,783 - DEBUG - LLM enhancement took 14.69s for 685 chars
+2025-07-20 19:33:57,732 - DEBUG - LLM enhancement took 19.95s for 922 chars
+2025-07-20 19:34:10,953 - DEBUG - LLM enhancement took 13.22s for 415 chars
+2025-07-20 19:34:22,252 - DEBUG - LLM enhancement took 11.30s for 1097 chars
+2025-07-20 19:34:41,387 - DEBUG - LLM enhancement took 19.13s for 1630 chars
+2025-07-20 19:34:55,241 - DEBUG - LLM enhancement took 13.85s for 1153 chars
+2025-07-20 19:35:15,097 - DEBUG - LLM enhancement took 19.86s for 954 chars
+2025-07-20 19:35:15,097 - INFO - Progress: 70/88 - Avg time: 15.71s/entry - ETA: 4.7 min
+2025-07-20 19:35:33,237 - DEBUG - LLM enhancement took 18.14s for 1506 chars
+2025-07-20 19:35:53,518 - DEBUG - LLM enhancement took 20.28s for 734 chars
+2025-07-20 19:36:12,654 - DEBUG - LLM enhancement took 19.14s for 929 chars
+2025-07-20 19:36:35,888 - DEBUG - LLM enhancement took 23.23s for 1420 chars
+2025-07-20 19:36:48,131 - DEBUG - LLM enhancement took 12.24s for 953 chars
+2025-07-20 19:37:04,002 - DEBUG - LLM enhancement took 15.87s for 889 chars
+2025-07-20 19:37:25,237 - DEBUG - LLM enhancement took 21.23s for 800 chars
+2025-07-20 19:37:44,199 - DEBUG - LLM enhancement took 18.96s for 1217 chars
+2025-07-20 19:37:59,129 - DEBUG - LLM enhancement took 14.93s for 829 chars
+2025-07-20 19:38:15,833 - DEBUG - LLM enhancement took 16.70s for 1197 chars
+2025-07-20 19:38:15,833 - INFO - Progress: 80/88 - Avg time: 18.07s/entry - ETA: 2.4 min
+2025-07-20 19:38:33,383 - DEBUG - LLM enhancement took 17.55s for 624 chars
+2025-07-20 19:38:47,773 - DEBUG - LLM enhancement took 14.39s for 1316 chars
+2025-07-20 19:39:02,789 - DEBUG - LLM enhancement took 15.02s for 822 chars
+2025-07-20 19:39:24,451 - DEBUG - LLM enhancement took 21.66s for 1125 chars
+2025-07-20 19:39:40,292 - DEBUG - LLM enhancement took 15.84s for 903 chars
+2025-07-20 19:39:58,714 - DEBUG - LLM enhancement took 18.42s for 1193 chars
+2025-07-20 19:40:13,899 - DEBUG - LLM enhancement took 15.19s for 1206 chars
+2025-07-20 19:40:23,434 - DEBUG - LLM enhancement took 9.53s for 608 chars
+2025-07-20 19:40:23,434 - INFO - 
+Enhancement Summary:
+2025-07-20 19:40:23,434 - INFO -   - Total time: 1489.35s
+2025-07-20 19:40:23,434 - INFO -   - Average time per entry: 16.92s
+2025-07-20 19:40:23,434 - INFO -   - Min/Max times: 9.53s / 23.44s
+2025-07-20 19:40:23,434 - INFO - 
+File processing complete for arxiv_papers_20250715_183646.json:
+2025-07-20 19:40:23,434 - INFO -   - Total entries: 100
+2025-07-20 19:40:23,434 - INFO -   - Final retained: 88 (88.0%)
+2025-07-20 19:40:23,434 - INFO -   - Processing time: 1489.36s
+2025-07-20 19:40:23,435 - INFO -   - Avg time per entry: 14.894s
+2025-07-20 19:40:23,435 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 24.8 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 188
+  - Entries passed filter: 176 (93.6%)
+  - Entries failed filter: 12
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 7.922s
+  - Median time per entry: 0.000s
+  - 90th percentile: 20.340s
+  - 95th percentile: 22.367s
+  - Throughput: 0.13 entries/second
+
+Memory Usage:
+  - Current RSS: 8242.8 MB
+  - Peak RSS: 8242.8 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (41.7%)
+  - Contains exclusion pattern: non_security_academic: 4 (33.3%)
+  - Score 1 < 2: 3 (25.0%)
+
+Score Distribution:
+  - Score 0: 97 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 6 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 4 entries
+  - Score 10: 7 entries
+  - Score 11: 6 entries
+  - Score 12: 10 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 3 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 3 entries
+  - Score 23: 1 entries
+  - Score 25: 1 entries
+  - Score 26: 1 entries
+  - Score 29: 1 entries
+================================================================================
+
+2025-07-20 19:40:23,440 - INFO - Saved 88 entries to filtered_data/arxiv_papers_20250715_183646_filtered_20250720_194023.json
+2025-07-20 19:40:23,441 - INFO - Saved 12 entries to filtered_data/arxiv_papers_20250715_183646_removed_20250720_194023.json
+2025-07-20 19:40:23,442 - INFO - 
+============================================================
+2025-07-20 19:40:23,442 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-20 19:40:23,442 - INFO - ============================================================
+2025-07-20 19:40:23,455 - INFO - Rule-based pre-filter complete:
+2025-07-20 19:40:23,456 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-20 19:40:23,456 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-20 19:40:23,456 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-20 19:42:21,539 - DEBUG - LLM enhancement took 118.08s for 65534 chars
+2025-07-20 19:42:21,539 - INFO - 
+Enhancement Summary:
+2025-07-20 19:42:21,539 - INFO -   - Total time: 118.08s
+2025-07-20 19:42:21,539 - INFO -   - Average time per entry: 118.08s
+2025-07-20 19:42:21,539 - INFO -   - Min/Max times: 118.08s / 118.08s
+2025-07-20 19:42:21,539 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-20 19:42:21,539 - INFO -   - Total entries: 1
+2025-07-20 19:42:21,539 - INFO -   - Final retained: 1 (100.0%)
+2025-07-20 19:42:21,540 - INFO -   - Processing time: 118.10s
+2025-07-20 19:42:21,540 - INFO -   - Avg time per entry: 118.098s
+2025-07-20 19:42:21,540 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 26.8 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 190
+  - Entries passed filter: 178 (93.7%)
+  - Entries failed filter: 12
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 8.460s
+  - Median time per entry: 0.000s
+  - 90th percentile: 20.808s
+  - 95th percentile: 22.485s
+  - Throughput: 0.12 entries/second
+
+Memory Usage:
+  - Current RSS: 8251.1 MB
+  - Peak RSS: 8251.1 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (41.7%)
+  - Contains exclusion pattern: non_security_academic: 4 (33.3%)
+  - Score 1 < 2: 3 (25.0%)
+
+Score Distribution:
+  - Score 0: 98 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 6 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 4 entries
+  - Score 10: 7 entries
+  - Score 11: 6 entries
+  - Score 12: 10 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 3 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 3 entries
+  - Score 23: 1 entries
+  - Score 25: 1 entries
+  - Score 26: 1 entries
+  - Score 29: 1 entries
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-20 19:42:21,542 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_filtered_20250720_194221.json
+2025-07-20 19:42:21,542 - INFO - 
+============================================================
+2025-07-20 19:42:21,542 - INFO - Processing 114 entries from microsoft_security_20250715_183647.json
+2025-07-20 19:42:21,542 - INFO - ============================================================
+2025-07-20 19:42:21,551 - INFO - Rule-based pre-filter complete:
+2025-07-20 19:42:21,551 - INFO -   - Passed: 114/114 (100.0%)
+2025-07-20 19:42:21,551 - INFO -   - Failed: 0/114 (0.0%)
+2025-07-20 19:42:21,551 - INFO - Starting LLM enhancement for 114 candidates...
+2025-07-20 19:42:33,553 - DEBUG - LLM enhancement took 12.00s for 182 chars
+2025-07-20 19:42:56,936 - DEBUG - LLM enhancement took 23.38s for 183 chars
+2025-07-20 19:43:20,040 - DEBUG - LLM enhancement took 23.10s for 185 chars
+2025-07-20 19:43:42,903 - DEBUG - LLM enhancement took 22.86s for 184 chars
+2025-07-20 19:44:05,572 - DEBUG - LLM enhancement took 22.67s for 181 chars
+2025-07-20 19:44:28,195 - DEBUG - LLM enhancement took 22.62s for 181 chars
+2025-07-20 19:44:50,594 - DEBUG - LLM enhancement took 22.40s for 180 chars
+2025-07-20 19:45:12,989 - DEBUG - LLM enhancement took 22.40s for 185 chars
+2025-07-20 19:45:33,455 - DEBUG - LLM enhancement took 20.47s for 184 chars
+2025-07-20 19:45:33,456 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 30.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 313
+  - Entries passed filter: 301 (96.2%)
+  - Entries failed filter: 12
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 5.749s
+  - Median time per entry: 0.000s
+  - 90th percentile: 19.748s
+  - 95th percentile: 22.418s
+  - Throughput: 0.17 entries/second
+
+Memory Usage:
+  - Current RSS: 8251.5 MB
+  - Peak RSS: 8251.5 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (41.7%)
+  - Contains exclusion pattern: non_security_academic: 4 (33.3%)
+  - Score 1 < 2: 3 (25.0%)
+
+Score Distribution:
+  - Score 0: 107 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 120 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 4 entries
+  - Score 10: 7 entries
+  - Score 11: 6 entries
+  - Score 12: 10 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 3 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 3 entries
+  - Score 23: 1 entries
+  - Score 25: 1 entries
+  - Score 26: 1 entries
+  - Score 29: 1 entries
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-20 19:45:55,700 - DEBUG - LLM enhancement took 22.24s for 186 chars
+2025-07-20 19:45:55,701 - INFO - Progress: 10/114 - Avg time: 21.41s/entry - ETA: 37.1 min
+2025-07-20 19:46:17,933 - DEBUG - LLM enhancement took 22.23s for 182 chars
+2025-07-20 19:46:40,143 - DEBUG - LLM enhancement took 22.21s for 183 chars
+2025-07-20 19:47:02,423 - DEBUG - LLM enhancement took 22.28s for 185 chars
+2025-07-20 19:47:24,648 - DEBUG - LLM enhancement took 22.22s for 185 chars
+2025-07-20 19:47:46,180 - DEBUG - LLM enhancement took 21.53s for 184 chars
+2025-07-20 19:48:08,414 - DEBUG - LLM enhancement took 22.23s for 181 chars
+2025-07-20 19:48:30,670 - DEBUG - LLM enhancement took 22.26s for 181 chars
+2025-07-20 19:48:52,949 - DEBUG - LLM enhancement took 22.28s for 182 chars
+2025-07-20 19:49:15,276 - DEBUG - LLM enhancement took 22.33s for 180 chars
+2025-07-20 19:49:35,502 - DEBUG - LLM enhancement took 20.23s for 188 chars
+2025-07-20 19:49:35,502 - INFO - Progress: 20/114 - Avg time: 21.98s/entry - ETA: 34.4 min
+2025-07-20 19:49:57,821 - DEBUG - LLM enhancement took 22.32s for 185 chars
+2025-07-20 19:50:20,099 - DEBUG - LLM enhancement took 22.28s for 184 chars
+2025-07-20 19:50:42,372 - DEBUG - LLM enhancement took 22.27s for 186 chars
+2025-07-20 19:51:01,884 - DEBUG - LLM enhancement took 19.51s for 182 chars
+2025-07-20 19:51:24,201 - DEBUG - LLM enhancement took 22.32s for 183 chars
+2025-07-20 19:51:46,475 - DEBUG - LLM enhancement took 22.27s for 185 chars
+2025-07-20 19:52:08,751 - DEBUG - LLM enhancement took 22.28s for 185 chars
+2025-07-20 19:52:31,006 - DEBUG - LLM enhancement took 22.26s for 184 chars
+2025-07-20 19:52:53,277 - DEBUG - LLM enhancement took 22.27s for 181 chars
+2025-07-20 19:53:14,346 - DEBUG - LLM enhancement took 21.07s for 181 chars
+2025-07-20 19:53:14,346 - INFO - Progress: 30/114 - Avg time: 21.88s/entry - ETA: 30.6 min
+2025-07-20 19:53:36,618 - DEBUG - LLM enhancement took 22.27s for 182 chars
+2025-07-20 19:53:58,983 - DEBUG - LLM enhancement took 22.36s for 180 chars
+2025-07-20 19:54:19,761 - DEBUG - LLM enhancement took 20.78s for 185 chars
+2025-07-20 19:54:40,317 - DEBUG - LLM enhancement took 20.56s for 184 chars
+2025-07-20 19:54:52,193 - DEBUG - LLM enhancement took 11.88s for 186 chars
+2025-07-20 19:55:14,549 - DEBUG - LLM enhancement took 22.36s for 182 chars
+2025-07-20 19:55:36,834 - DEBUG - LLM enhancement took 22.28s for 183 chars
+2025-07-20 19:55:59,196 - DEBUG - LLM enhancement took 22.36s for 185 chars
+2025-07-20 19:56:21,416 - DEBUG - LLM enhancement took 22.22s for 185 chars
+2025-07-20 19:56:43,708 - DEBUG - LLM enhancement took 22.29s for 184 chars
+2025-07-20 19:56:43,708 - INFO - Progress: 40/114 - Avg time: 20.94s/entry - ETA: 25.8 min
+2025-07-20 19:57:06,007 - DEBUG - LLM enhancement took 22.30s for 181 chars
+2025-07-20 19:57:22,385 - DEBUG - LLM enhancement took 16.38s for 181 chars
+2025-07-20 19:57:44,713 - DEBUG - LLM enhancement took 22.33s for 182 chars
+2025-07-20 19:58:07,035 - DEBUG - LLM enhancement took 22.32s for 180 chars
+2025-07-20 19:58:29,360 - DEBUG - LLM enhancement took 22.33s for 185 chars
+2025-07-20 19:58:51,674 - DEBUG - LLM enhancement took 22.31s for 184 chars
+2025-07-20 19:59:14,055 - DEBUG - LLM enhancement took 22.38s for 186 chars
+2025-07-20 19:59:36,454 - DEBUG - LLM enhancement took 22.40s for 182 chars
+2025-07-20 19:59:58,797 - DEBUG - LLM enhancement took 22.34s for 183 chars
+2025-07-20 20:00:14,049 - DEBUG - LLM enhancement took 15.25s for 185 chars
+2025-07-20 20:00:14,050 - INFO - Progress: 50/114 - Avg time: 21.03s/entry - ETA: 22.4 min
+2025-07-20 20:00:36,345 - DEBUG - LLM enhancement took 22.30s for 185 chars
+2025-07-20 20:00:58,658 - DEBUG - LLM enhancement took 22.31s for 184 chars
+2025-07-20 20:01:18,978 - DEBUG - LLM enhancement took 20.32s for 181 chars
+2025-07-20 20:01:41,276 - DEBUG - LLM enhancement took 22.30s for 181 chars
+2025-07-20 20:02:03,608 - DEBUG - LLM enhancement took 22.33s for 182 chars
+2025-07-20 20:02:25,972 - DEBUG - LLM enhancement took 22.36s for 180 chars
+2025-07-20 20:02:38,699 - DEBUG - LLM enhancement took 12.73s for 185 chars
+2025-07-20 20:03:00,992 - DEBUG - LLM enhancement took 22.29s for 184 chars
+2025-07-20 20:03:23,288 - DEBUG - LLM enhancement took 22.30s for 186 chars
+2025-07-20 20:03:44,602 - DEBUG - LLM enhancement took 21.31s for 182 chars
+2025-07-20 20:03:44,602 - INFO - Progress: 60/114 - Avg time: 21.06s/entry - ETA: 18.9 min
+2025-07-20 20:04:02,025 - DEBUG - LLM enhancement took 17.42s for 183 chars
+2025-07-20 20:04:24,334 - DEBUG - LLM enhancement took 22.31s for 185 chars
+2025-07-20 20:04:46,761 - DEBUG - LLM enhancement took 22.43s for 185 chars
+2025-07-20 20:05:09,136 - DEBUG - LLM enhancement took 22.37s for 184 chars
+2025-07-20 20:05:31,447 - DEBUG - LLM enhancement took 22.31s for 181 chars
+2025-07-20 20:05:53,825 - DEBUG - LLM enhancement took 22.38s for 181 chars
+2025-07-20 20:06:16,141 - DEBUG - LLM enhancement took 22.32s for 182 chars
+2025-07-20 20:06:38,524 - DEBUG - LLM enhancement took 22.38s for 180 chars
+2025-07-20 20:07:00,850 - DEBUG - LLM enhancement took 22.33s for 185 chars
+2025-07-20 20:07:23,241 - DEBUG - LLM enhancement took 22.39s for 184 chars
+2025-07-20 20:07:23,242 - INFO - Progress: 70/114 - Avg time: 21.86s/entry - ETA: 16.0 min
+2025-07-20 20:07:45,576 - DEBUG - LLM enhancement took 22.33s for 186 chars
+2025-07-20 20:08:07,898 - DEBUG - LLM enhancement took 22.32s for 182 chars
+2025-07-20 20:08:30,211 - DEBUG - LLM enhancement took 22.31s for 183 chars
+2025-07-20 20:08:52,521 - DEBUG - LLM enhancement took 22.31s for 185 chars
+2025-07-20 20:09:14,876 - DEBUG - LLM enhancement took 22.36s for 185 chars
+2025-07-20 20:09:37,168 - DEBUG - LLM enhancement took 22.29s for 184 chars
+2025-07-20 20:09:53,329 - DEBUG - LLM enhancement took 16.16s for 181 chars
+2025-07-20 20:10:08,284 - DEBUG - LLM enhancement took 14.95s for 181 chars
+2025-07-20 20:10:30,616 - DEBUG - LLM enhancement took 22.33s for 182 chars
+2025-07-20 20:10:52,492 - DEBUG - LLM enhancement took 21.88s for 180 chars
+2025-07-20 20:10:52,492 - INFO - Progress: 80/114 - Avg time: 20.92s/entry - ETA: 11.9 min
+2025-07-20 20:11:14,835 - DEBUG - LLM enhancement took 22.34s for 185 chars
+2025-07-20 20:11:37,120 - DEBUG - LLM enhancement took 22.28s for 184 chars
+2025-07-20 20:11:59,475 - DEBUG - LLM enhancement took 22.35s for 186 chars
+2025-07-20 20:12:17,664 - DEBUG - LLM enhancement took 18.19s for 182 chars
+2025-07-20 20:12:39,938 - DEBUG - LLM enhancement took 22.27s for 183 chars
+2025-07-20 20:13:01,143 - DEBUG - LLM enhancement took 21.21s for 185 chars
+2025-07-20 20:13:23,406 - DEBUG - LLM enhancement took 22.26s for 185 chars
+2025-07-20 20:13:45,683 - DEBUG - LLM enhancement took 22.28s for 184 chars
+2025-07-20 20:14:07,984 - DEBUG - LLM enhancement took 22.30s for 181 chars
+2025-07-20 20:14:30,269 - DEBUG - LLM enhancement took 22.28s for 181 chars
+2025-07-20 20:14:30,269 - INFO - Progress: 90/114 - Avg time: 21.78s/entry - ETA: 8.7 min
+2025-07-20 20:14:52,560 - DEBUG - LLM enhancement took 22.29s for 182 chars
+2025-07-20 20:15:11,044 - DEBUG - LLM enhancement took 18.48s for 180 chars

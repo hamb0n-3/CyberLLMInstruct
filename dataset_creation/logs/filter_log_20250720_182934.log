@@ -1,0 +1,77 @@
+2025-07-20 18:29:34,934 - INFO - Loading model: mlx-community/Qwen3-14B-4bit-DWQ-053125...
+2025-07-20 18:29:35,711 - INFO - Model loaded successfully.
+2025-07-20 18:29:35,712 - INFO - 
+Starting batch processing of 8 files...
+
+2025-07-20 18:29:35,713 - INFO - 
+============================================================
+2025-07-20 18:29:35,713 - INFO - Processing 100 entries from arxiv_papers_20250715_183646.json
+2025-07-20 18:29:35,713 - INFO - ============================================================
+2025-07-20 18:29:35,730 - INFO - Rule-based pre-filter complete:
+2025-07-20 18:29:35,730 - INFO -   - Passed: 88/100 (88.0%)
+2025-07-20 18:29:35,730 - INFO -   - Failed: 12/100 (12.0%)
+2025-07-20 18:29:35,730 - INFO - Starting LLM enhancement for 88 candidates...
+2025-07-20 18:29:56,781 - DEBUG - LLM enhancement took 21.05s for 1333 chars
+2025-07-20 18:30:13,236 - DEBUG - LLM enhancement took 16.45s for 2166 chars
+2025-07-20 18:30:35,290 - DEBUG - LLM enhancement took 22.05s for 963 chars
+2025-07-20 18:30:57,204 - DEBUG - LLM enhancement took 21.91s for 396 chars
+2025-07-20 18:31:08,846 - DEBUG - LLM enhancement took 11.64s for 671 chars
+2025-07-20 18:31:28,045 - DEBUG - LLM enhancement took 19.20s for 949 chars
+2025-07-20 18:31:43,132 - DEBUG - LLM enhancement took 15.09s for 2123 chars
+2025-07-20 18:31:43,132 - INFO - 
+================================================================================
+2025-07-20 18:31:43,132 - INFO - BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+2025-07-20 18:31:43,132 - INFO - ================================================================================
+2025-07-20 18:31:43,133 - INFO - Progress Summary:
+2025-07-20 18:31:43,133 - INFO -   - Total entries processed: 107
+2025-07-20 18:31:43,133 - INFO -   - Entries passed filter: 95 (88.8%)
+2025-07-20 18:31:43,133 - INFO -   - Entries failed filter: 12
+2025-07-20 18:31:43,133 - INFO -   - Files completed: 0
+2025-07-20 18:31:43,133 - INFO - 
+Processing Speed:
+2025-07-20 18:31:43,133 - INFO -   - Average: 12001.67 entries/second
+2025-07-20 18:31:43,133 - INFO -   - Total rate: 0.83 entries/second
+2025-07-20 18:31:43,133 - INFO - 
+Memory Usage:
+2025-07-20 18:31:43,133 - INFO -   - Current RSS: 8237.8 MB
+2025-07-20 18:31:43,133 - INFO -   - Current VMS: 410847.8 MB
+2025-07-20 18:31:43,133 - INFO - 
+Top Rejection Reasons:
+2025-07-20 18:31:43,133 - INFO -   - Contains exclusion pattern: generic_terms: 5 (41.7%)
+2025-07-20 18:31:43,133 - INFO -   - Contains exclusion pattern: non_security_academic: 4 (33.3%)
+2025-07-20 18:31:43,133 - INFO -   - Score 1 < 2: 3 (25.0%)
+2025-07-20 18:31:43,133 - INFO - 
+Top Matched Keywords:
+2025-07-20 18:31:43,133 - INFO -   - ttp(medium_relevance): 91
+2025-07-20 18:31:43,133 - INFO -   - security(high_relevance): 35
+2025-07-20 18:31:43,133 - INFO -   - system(medium_relevance): 35
+2025-07-20 18:31:43,133 - INFO -   - des(medium_relevance): 34
+2025-07-20 18:31:43,133 - INFO -   - attack(high_relevance): 25
+2025-07-20 18:31:43,133 - INFO -   - key(medium_relevance): 24
+2025-07-20 18:31:43,133 - INFO -   - secure(high_relevance): 23
+2025-07-20 18:31:43,133 - INFO -   - protocol(medium_relevance): 22
+2025-07-20 18:31:43,133 - INFO -   - application(medium_relevance): 18
+2025-07-20 18:31:43,133 - INFO -   - signature(medium_relevance): 16
+2025-07-20 18:31:43,133 - INFO - 
+Score Distribution:
+2025-07-20 18:31:43,133 - INFO -   - Score 0-4: 29 entries
+2025-07-20 18:31:43,133 - INFO -   - Score 10-14: 30 entries
+2025-07-20 18:31:43,133 - INFO -   - Score 15-19: 6 entries
+2025-07-20 18:31:43,133 - INFO -   - Score 20-24: 10 entries
+2025-07-20 18:31:43,133 - INFO -   - Score 25-29: 3 entries
+2025-07-20 18:31:43,133 - INFO -   - Score 5-9: 29 entries
+2025-07-20 18:31:43,133 - INFO - 
+Average Stage Times:
+2025-07-20 18:31:43,133 - INFO -   - rule_based_filter: 0.017s
+2025-07-20 18:31:43,133 - INFO - ================================================================================
+
+2025-07-20 18:31:56,106 - DEBUG - LLM enhancement took 12.97s for 960 chars
+2025-07-20 18:32:09,196 - DEBUG - LLM enhancement took 13.09s for 892 chars
+2025-07-20 18:32:24,650 - DEBUG - LLM enhancement took 15.45s for 979 chars
+2025-07-20 18:32:24,650 - INFO - Progress: 10/88 - Avg time: 16.89s/entry - ETA: 22.0 min
+2025-07-20 18:32:39,672 - DEBUG - LLM enhancement took 15.02s for 791 chars
+2025-07-20 18:33:01,376 - DEBUG - LLM enhancement took 21.70s for 763 chars
+2025-07-20 18:33:17,464 - DEBUG - LLM enhancement took 16.09s for 1938 chars
+2025-07-20 18:33:35,076 - DEBUG - LLM enhancement took 17.61s for 669 chars
+2025-07-20 18:33:56,521 - DEBUG - LLM enhancement took 21.44s for 1115 chars
+2025-07-20 18:34:22,558 - DEBUG - LLM enhancement took 26.04s for 693 chars
