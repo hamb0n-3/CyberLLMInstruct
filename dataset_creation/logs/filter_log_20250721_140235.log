@@ -1,0 +1,522 @@
+2025-07-21 14:02:35,803 - INFO - Running without LLM enhancement (rule-based filtering only)
+2025-07-21 14:02:35,803 - INFO - 
+Starting batch processing of 5 files...
+
+2025-07-21 14:02:35,805 - INFO - 
+============================================================
+2025-07-21 14:02:35,805 - INFO - Processing 100 entries from arxiv_papers_20250715_183646.json
+2025-07-21 14:02:35,805 - INFO - ============================================================
+2025-07-21 14:02:35,805 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 14:02:36,528 - INFO - Rule-based filtering took 0.72s (138.3 entries/sec)
+2025-07-21 14:02:36,528 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:02:36,528 - INFO -   - Passed: 91/100 (91.0%)
+2025-07-21 14:02:36,528 - INFO -   - Failed: 9/100 (9.0%)
+2025-07-21 14:02:36,528 - INFO - Skipping LLM enhancement phase (no-enhancement mode)
+2025-07-21 14:02:36,528 - INFO - 
+File processing complete for arxiv_papers_20250715_183646.json:
+2025-07-21 14:02:36,528 - INFO -   - Total entries: 100
+2025-07-21 14:02:36,528 - INFO -   - Final retained: 91 (91.0%)
+2025-07-21 14:02:36,528 - INFO -   - Processing time: 0.72s
+2025-07-21 14:02:36,528 - INFO -   - Avg time per entry: 0.007s
+2025-07-21 14:02:36,528 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 100
+  - Entries passed filter: 91 (91.0%)
+  - Entries failed filter: 9
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 0.007s
+  - Median time per entry: 0.007s
+  - 90th percentile: 0.007s
+  - 95th percentile: 0.007s
+  - Throughput: 138.37 entries/second
+
+Memory Usage:
+  - Current RSS: 117.9 MB
+  - Peak RSS: 117.9 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (55.6%)
+  - Contains exclusion pattern: non_security_academic: 4 (44.4%)
+
+Score Distribution:
+  - Score 0: 9 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 1 entries
+  - Score 4: 3 entries
+  - Score 5: 6 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 6 entries
+  - Score 9: 6 entries
+  - Score 10: 7 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+================================================================================
+
+2025-07-21 14:02:36,532 - INFO - Saved 91 entries to test_cve_fix/arxiv_papers_20250715_183646_filtered_20250721_140236.json
+2025-07-21 14:02:36,533 - INFO - Saved 9 entries to test_cve_fix/arxiv_papers_20250715_183646_removed_20250721_140236.json
+2025-07-21 14:02:36,533 - INFO - 
+============================================================
+2025-07-21 14:02:36,533 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 14:02:36,533 - INFO - ============================================================
+2025-07-21 14:02:36,544 - INFO - Rule-based filtering took 0.01s (85.7 entries/sec)
+2025-07-21 14:02:36,545 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:02:36,545 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 14:02:36,545 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 14:02:36,545 - INFO - Skipping LLM enhancement phase (no-enhancement mode)
+2025-07-21 14:02:36,545 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 14:02:36,545 - INFO -   - Total entries: 1
+2025-07-21 14:02:36,545 - INFO -   - Final retained: 1 (100.0%)
+2025-07-21 14:02:36,545 - INFO -   - Processing time: 0.01s
+2025-07-21 14:02:36,545 - INFO -   - Avg time per entry: 0.012s
+2025-07-21 14:02:36,545 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 101
+  - Entries passed filter: 92 (91.1%)
+  - Entries failed filter: 9
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.007s
+  - Median time per entry: 0.007s
+  - 90th percentile: 0.007s
+  - 95th percentile: 0.007s
+  - Throughput: 137.54 entries/second
+
+Memory Usage:
+  - Current RSS: 119.0 MB
+  - Peak RSS: 119.0 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (55.6%)
+  - Contains exclusion pattern: non_security_academic: 4 (44.4%)
+
+Score Distribution:
+  - Score 0: 9 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 1 entries
+  - Score 4: 3 entries
+  - Score 5: 6 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 6 entries
+  - Score 9: 6 entries
+  - Score 10: 7 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-21 14:02:36,546 - INFO - Saved 1 entries to test_cve_fix/opencve_data_20250715_183643_filtered_20250721_140236.json
+2025-07-21 14:02:36,546 - INFO - 
+============================================================
+2025-07-21 14:02:36,546 - INFO - Processing 114 entries from microsoft_security_20250715_183647.json
+2025-07-21 14:02:36,546 - INFO - ============================================================
+2025-07-21 14:02:36,546 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 14:02:37,275 - INFO - Rule-based filtering took 0.73s (156.4 entries/sec)
+2025-07-21 14:02:37,275 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:02:37,275 - INFO -   - Passed: 114/114 (100.0%)
+2025-07-21 14:02:37,275 - INFO -   - Failed: 0/114 (0.0%)
+2025-07-21 14:02:37,275 - INFO - Skipping LLM enhancement phase (no-enhancement mode)
+2025-07-21 14:02:37,275 - INFO - 
+File processing complete for microsoft_security_20250715_183647.json:
+2025-07-21 14:02:37,275 - INFO -   - Total entries: 114
+2025-07-21 14:02:37,275 - INFO -   - Final retained: 114 (100.0%)
+2025-07-21 14:02:37,275 - INFO -   - Processing time: 0.73s
+2025-07-21 14:02:37,275 - INFO -   - Avg time per entry: 0.006s
+2025-07-21 14:02:37,275 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 215
+  - Entries passed filter: 206 (95.8%)
+  - Entries failed filter: 9
+  - Files completed: 3
+
+Processing Speed:
+  - Mean time per entry: 0.007s
+  - Median time per entry: 0.006s
+  - 90th percentile: 0.007s
+  - 95th percentile: 0.007s
+  - Throughput: 146.97 entries/second
+
+Memory Usage:
+  - Current RSS: 119.1 MB
+  - Peak RSS: 119.1 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (55.6%)
+  - Contains exclusion pattern: non_security_academic: 4 (44.4%)
+
+Score Distribution:
+  - Score 0: 9 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 1 entries
+  - Score 4: 61 entries
+  - Score 5: 62 entries
+  - Score 6: 7 entries
+  - Score 7: 5 entries
+  - Score 8: 6 entries
+  - Score 9: 6 entries
+  - Score 10: 7 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-21 14:02:37,276 - INFO - Saved 114 entries to test_cve_fix/microsoft_security_20250715_183647_filtered_20250721_140237.json
+2025-07-21 14:02:37,417 - INFO - 
+============================================================
+2025-07-21 14:02:37,417 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-21 14:02:37,417 - INFO - ============================================================
+2025-07-21 14:02:37,419 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 14:02:38,773 - INFO - Rule-based filtering took 1.36s (16704.0 entries/sec)
+2025-07-21 14:02:38,774 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:02:38,774 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-21 14:02:38,774 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-21 14:02:38,774 - INFO - Skipping LLM enhancement phase (no-enhancement mode)
+2025-07-21 14:02:38,774 - INFO - 
+File processing complete for mitre_attack_20250715_183644.json:
+2025-07-21 14:02:38,774 - INFO -   - Total entries: 22652
+2025-07-21 14:02:38,774 - INFO -   - Final retained: 22185 (97.9%)
+2025-07-21 14:02:38,774 - INFO -   - Processing time: 1.50s
+2025-07-21 14:02:38,774 - INFO -   - Avg time per entry: 0.000s
+2025-07-21 14:02:38,778 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22867
+  - Entries passed filter: 22391 (97.9%)
+  - Entries failed filter: 476
+  - Files completed: 4
+
+Processing Speed:
+  - Mean time per entry: 0.000s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 8277.81 entries/second
+
+Memory Usage:
+  - Current RSS: 525.1 MB
+  - Peak RSS: 525.1 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 472 (99.2%)
+  - Contains exclusion pattern: non_security_academic: 4 (0.8%)
+
+Score Distribution:
+  - Score 0: 476 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 1280 entries
+  - Score 4: 572 entries
+  - Score 5: 1041 entries
+  - Score 6: 1240 entries
+  - Score 7: 881 entries
+  - Score 8: 2280 entries
+  - Score 9: 1504 entries
+  - Score 10: 4002 entries
+  - Score 11: 2790 entries
+  - Score 12: 1600 entries
+  - Score 13: 1318 entries
+  - Score 14: 1137 entries
+  - Score 15: 784 entries
+  - Score 16: 402 entries
+  - Score 17: 373 entries
+  - Score 18: 247 entries
+  - Score 19: 158 entries
+  - Score 20: 123 entries
+  - Score 21: 85 entries
+  - Score 22: 73 entries
+  - Score 23: 76 entries
+  - Score 24: 46 entries
+  - Score 25: 48 entries
+  - Score 26: 51 entries
+  - Score 27: 43 entries
+  - Score 28: 31 entries
+  - Score 29: 27 entries
+  - Score 30: 27 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 14 entries
+  - Score 35: 9 entries
+  - Score 36: 9 entries
+  - Score 37: 4 entries
+  - Score 38: 6 entries
+  - Score 39: 11 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 2 entries
+  - Score 45: 3 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-21 14:02:39,069 - INFO - Saved 22185 entries to test_cve_fix/mitre_attack_20250715_183644_filtered_20250721_140238.json
+2025-07-21 14:02:39,084 - INFO - Saved 467 entries to test_cve_fix/mitre_attack_20250715_183644_removed_20250721_140239.json
+2025-07-21 14:02:39,084 - INFO - 
+============================================================
+2025-07-21 14:02:39,084 - INFO - Processing 33 entries from ctf_data_20250715_183648.json
+2025-07-21 14:02:39,084 - INFO - ============================================================
+2025-07-21 14:02:39,084 - INFO - Using multiprocessing with 3 workers for rule-based filtering
+2025-07-21 14:02:39,745 - INFO - Rule-based filtering took 0.66s (50.0 entries/sec)
+2025-07-21 14:02:39,745 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:02:39,745 - INFO -   - Passed: 29/33 (87.9%)
+2025-07-21 14:02:39,745 - INFO -   - Failed: 4/33 (12.1%)
+2025-07-21 14:02:39,745 - INFO - Skipping LLM enhancement phase (no-enhancement mode)
+2025-07-21 14:02:39,745 - INFO - 
+File processing complete for ctf_data_20250715_183648.json:
+2025-07-21 14:02:39,745 - INFO -   - Total entries: 33
+2025-07-21 14:02:39,745 - INFO -   - Final retained: 29 (87.9%)
+2025-07-21 14:02:39,745 - INFO -   - Processing time: 0.66s
+2025-07-21 14:02:39,745 - INFO -   - Avg time per entry: 0.020s
+2025-07-21 14:02:39,749 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22900
+  - Entries passed filter: 22420 (97.9%)
+  - Entries failed filter: 480
+  - Files completed: 5
+
+Processing Speed:
+  - Mean time per entry: 0.000s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 6690.61 entries/second
+
+Memory Usage:
+  - Current RSS: 471.9 MB
+  - Peak RSS: 525.1 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 476 (99.2%)
+  - Contains exclusion pattern: non_security_academic: 4 (0.8%)
+
+Score Distribution:
+  - Score 0: 480 entries
+  - Score 1: 9 entries
+  - Score 2: 5 entries
+  - Score 3: 1281 entries
+  - Score 4: 573 entries
+  - Score 5: 1044 entries
+  - Score 6: 1242 entries
+  - Score 7: 883 entries
+  - Score 8: 2282 entries
+  - Score 9: 1505 entries
+  - Score 10: 4004 entries
+  - Score 11: 2792 entries
+  - Score 12: 1601 entries
+  - Score 13: 1320 entries
+  - Score 14: 1137 entries
+  - Score 15: 784 entries
+  - Score 16: 403 entries
+  - Score 17: 373 entries
+  - Score 18: 248 entries
+  - Score 19: 158 entries
+  - Score 20: 123 entries
+  - Score 21: 85 entries
+  - Score 22: 73 entries
+  - Score 23: 77 entries
+  - Score 24: 46 entries
+  - Score 25: 48 entries
+  - Score 26: 51 entries
+  - Score 27: 43 entries
+  - Score 28: 31 entries
+  - Score 29: 27 entries
+  - Score 30: 27 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 14 entries
+  - Score 35: 9 entries
+  - Score 36: 9 entries
+  - Score 37: 4 entries
+  - Score 38: 6 entries
+  - Score 39: 11 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 2 entries
+  - Score 45: 3 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-21 14:02:39,762 - INFO - Saved 29 entries to test_cve_fix/ctf_data_20250715_183648_filtered_20250721_140239.json
+2025-07-21 14:02:39,762 - INFO - Saved 4 entries to test_cve_fix/ctf_data_20250715_183648_removed_20250721_140239.json
+2025-07-21 14:02:39,762 - INFO - 
+================================================================================
+2025-07-21 14:02:39,762 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 14:02:39,762 - INFO - ================================================================================
+2025-07-21 14:02:39,762 - INFO - Total files processed: 5
+2025-07-21 14:02:39,762 - INFO - Total entries processed: 22900
+2025-07-21 14:02:39,762 - INFO - 
+Filtering funnel:
+2025-07-21 14:02:39,762 - INFO -   1. Rule-based filter: 22420/22900 passed (97.9%)
+2025-07-21 14:02:39,762 - INFO -   2. LLM enhancement: 22420/22420 passed (100.0%)
+2025-07-21 14:02:39,762 - INFO - 
+Final retention rate: 22420/22900 (97.9%)
+2025-07-21 14:02:39,762 - INFO - 
+Performance metrics:
+2025-07-21 14:02:39,762 - INFO -   Total processing time: 3.63s
+2025-07-21 14:02:39,763 - INFO -   Average time per file: 0.73s
+2025-07-21 14:02:39,763 - INFO -   Average time per entry: 0.000s
+2025-07-21 14:02:39,763 - INFO - ================================================================================
+
+2025-07-21 14:02:39,763 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 14:02:39,767 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22900
+  - Entries passed filter: 22420 (97.9%)
+  - Entries failed filter: 480
+  - Files completed: 5
+
+Processing Speed:
+  - Mean time per entry: 0.000s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 6690.61 entries/second
+
+Memory Usage:
+  - Current RSS: 406.8 MB
+  - Peak RSS: 525.1 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 476 (99.2%)
+  - Contains exclusion pattern: non_security_academic: 4 (0.8%)
+
+Score Distribution:
+  - Score 0: 480 entries
+  - Score 1: 9 entries
+  - Score 2: 5 entries
+  - Score 3: 1281 entries
+  - Score 4: 573 entries
+  - Score 5: 1044 entries
+  - Score 6: 1242 entries
+  - Score 7: 883 entries
+  - Score 8: 2282 entries
+  - Score 9: 1505 entries
+  - Score 10: 4004 entries
+  - Score 11: 2792 entries
+  - Score 12: 1601 entries
+  - Score 13: 1320 entries
+  - Score 14: 1137 entries
+  - Score 15: 784 entries
+  - Score 16: 403 entries
+  - Score 17: 373 entries
+  - Score 18: 248 entries
+  - Score 19: 158 entries
+  - Score 20: 123 entries
+  - Score 21: 85 entries
+  - Score 22: 73 entries
+  - Score 23: 77 entries
+  - Score 24: 46 entries
+  - Score 25: 48 entries
+  - Score 26: 51 entries
+  - Score 27: 43 entries
+  - Score 28: 31 entries
+  - Score 29: 27 entries
+  - Score 30: 27 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 14 entries
+  - Score 35: 9 entries
+  - Score 36: 9 entries
+  - Score 37: 4 entries
+  - Score 38: 6 entries
+  - Score 39: 11 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 2 entries
+  - Score 45: 3 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+  - Score 502: 1 entries
+================================================================================
+

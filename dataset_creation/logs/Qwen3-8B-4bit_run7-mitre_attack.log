@@ -1,0 +1,241 @@
+2025-07-21 18:08:55,668 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 18:08:55,670 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 18:08:55,801 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 18:08:56,311 - INFO - Model loaded successfully.
+2025-07-21 18:08:56,311 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 18:08:56,312 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-21 18:08:56,312 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 18:08:56,452 - INFO - 
+============================================================
+2025-07-21 18:08:56,452 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-21 18:08:56,452 - INFO - ============================================================
+2025-07-21 18:08:56,454 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 18:08:57,816 - INFO - Rule-based filtering took 1.36s (16608.3 entries/sec)
+2025-07-21 18:08:57,816 - INFO - Rule-based pre-filter complete:
+2025-07-21 18:08:57,816 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-21 18:08:57,816 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-21 18:08:57,816 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-21 18:10:03,076 - INFO - Progress: 10/22185 - Avg time: 6.53s/entry - ETA: 2411.8 min
+2025-07-21 18:10:59,141 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22670
+  - Entries passed filter: 22203 (97.9%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.005s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 184.99 entries/second
+
+Memory Usage:
+  - Current RSS: 5105.7 MB
+  - Peak RSS: 5105.7 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 485 entries
+  - Score 3: 1279 entries
+  - Score 4: 513 entries
+  - Score 5: 865 entries
+  - Score 6: 1132 entries
+  - Score 7: 732 entries
+  - Score 8: 1818 entries
+  - Score 9: 1460 entries
+  - Score 10: 4228 entries
+  - Score 11: 2845 entries
+  - Score 12: 1746 entries
+  - Score 13: 1302 entries
+  - Score 14: 1269 entries
+  - Score 15: 914 entries
+  - Score 16: 412 entries
+  - Score 17: 365 entries
+  - Score 18: 295 entries
+  - Score 19: 189 entries
+  - Score 20: 118 entries
+  - Score 21: 88 entries
+  - Score 22: 86 entries
+  - Score 23: 79 entries
+  - Score 24: 52 entries
+  - Score 25: 43 entries
+  - Score 26: 37 entries
+  - Score 27: 44 entries
+  - Score 28: 49 entries
+  - Score 29: 28 entries
+  - Score 30: 31 entries
+  - Score 31: 26 entries
+  - Score 32: 21 entries
+  - Score 33: 17 entries
+  - Score 34: 16 entries
+  - Score 35: 14 entries
+  - Score 36: 11 entries
+  - Score 37: 8 entries
+  - Score 38: 5 entries
+  - Score 39: 7 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 42: 6 entries
+  - Score 43: 3 entries
+  - Score 44: 2 entries
+  - Score 45: 4 entries
+  - Score 46: 1 entries
+  - Score 47: 4 entries
+  - Score 49: 2 entries
+  - Score 50: 2 entries
+  - Score 52: 1 entries
+  - Score 58: 1 entries
+  - Score 62: 1 entries
+  - Score 69: 1 entries
+
+LLM Performance:
+  - Total calls: 18
+  - Tokens per second: 76.0 (median), 76.1 (mean)
+  - 90th percentile: 81.5 tokens/sec
+  - Generation time: 6.74s (median), 6.74s (mean)
+  - Avg tokens: 331 input, 512 output
+================================================================================
+
+2025-07-21 18:11:13,473 - INFO - Progress: 20/22185 - Avg time: 7.04s/entry - ETA: 2600.4 min
+2025-07-21 18:12:24,615 - INFO - Progress: 30/22185 - Avg time: 7.11s/entry - ETA: 2626.9 min
+2025-07-21 18:13:39,358 - INFO - Progress: 40/22185 - Avg time: 7.47s/entry - ETA: 2758.6 min
+2025-07-21 18:14:59,800 - INFO - Progress: 50/22185 - Avg time: 8.04s/entry - ETA: 2967.6 min
+2025-07-21 18:16:22,895 - INFO - Progress: 60/22185 - Avg time: 8.31s/entry - ETA: 3064.1 min
+2025-07-21 18:17:45,247 - INFO - Progress: 70/22185 - Avg time: 8.24s/entry - ETA: 3035.3 min
+2025-07-21 18:19:08,849 - INFO - Progress: 80/22185 - Avg time: 8.36s/entry - ETA: 3080.0 min
+2025-07-21 18:20:32,124 - INFO - Progress: 90/22185 - Avg time: 8.33s/entry - ETA: 3066.6 min
+2025-07-21 18:21:57,217 - INFO - Progress: 100/22185 - Avg time: 8.51s/entry - ETA: 3132.1 min
+2025-07-21 18:23:22,085 - INFO - Progress: 110/22185 - Avg time: 8.49s/entry - ETA: 3122.4 min
+2025-07-21 18:24:48,045 - INFO - Progress: 120/22185 - Avg time: 8.60s/entry - ETA: 3161.1 min
+2025-07-21 18:26:14,253 - INFO - Progress: 130/22185 - Avg time: 8.62s/entry - ETA: 3168.8 min
+2025-07-21 19:15:23,126 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 19:15:23,128 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 19:15:23,265 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 19:15:23,774 - INFO - Model loaded successfully.
+2025-07-21 19:15:23,775 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 19:15:23,775 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-21 19:15:23,775 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 19:15:23,913 - INFO - 
+============================================================
+2025-07-21 19:15:23,913 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-21 19:15:23,913 - INFO - ============================================================
+2025-07-21 19:15:23,915 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 19:15:25,200 - INFO - Rule-based filtering took 1.29s (17602.7 entries/sec)
+2025-07-21 19:15:25,200 - INFO - Rule-based pre-filter complete:
+2025-07-21 19:15:25,201 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-21 19:15:25,201 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-21 19:15:25,201 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-21 19:16:30,620 - INFO - Progress: 10/22185 - Avg time: 6.54s/entry - ETA: 2417.7 min
+2025-07-21 19:17:05,516 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 19:17:18,651 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 19:17:25,312 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22668
+  - Entries passed filter: 22201 (97.9%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.005s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 186.85 entries/second
+
+Memory Usage:
+  - Current RSS: 5087.2 MB
+  - Peak RSS: 5087.2 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 483 entries
+  - Score 3: 1279 entries
+  - Score 4: 509 entries
+  - Score 5: 1327 entries
+  - Score 6: 1298 entries
+  - Score 7: 1129 entries
+  - Score 8: 3144 entries
+  - Score 9: 1392 entries
+  - Score 10: 3637 entries
+  - Score 11: 2559 entries
+  - Score 12: 1423 entries
+  - Score 13: 1032 entries
+  - Score 14: 892 entries
+  - Score 15: 725 entries
+  - Score 16: 341 entries
+  - Score 17: 285 entries
+  - Score 18: 247 entries
+  - Score 19: 170 entries
+  - Score 20: 121 entries
+  - Score 21: 78 entries
+  - Score 22: 84 entries
+  - Score 23: 73 entries
+  - Score 24: 47 entries
+  - Score 25: 40 entries
+  - Score 26: 39 entries
+  - Score 27: 39 entries
+  - Score 28: 48 entries
+  - Score 29: 28 entries
+  - Score 30: 28 entries
+  - Score 31: 29 entries
+  - Score 32: 23 entries
+  - Score 33: 16 entries
+  - Score 34: 15 entries
+  - Score 35: 17 entries
+  - Score 36: 12 entries
+  - Score 37: 7 entries
+  - Score 38: 7 entries
+  - Score 39: 3 entries
+  - Score 40: 8 entries
+  - Score 41: 6 entries
+  - Score 42: 5 entries
+  - Score 43: 6 entries
+  - Score 44: 1 entries
+  - Score 45: 4 entries
+  - Score 46: 1 entries
+  - Score 47: 3 entries
+  - Score 50: 2 entries
+  - Score 51: 2 entries
+  - Score 52: 1 entries
+  - Score 58: 1 entries
+  - Score 62: 1 entries
+  - Score 69: 1 entries
+
+LLM Performance:
+  - Total calls: 17
+  - Tokens per second: 76.9 (median), 76.8 (mean)
+  - 90th percentile: 81.3 tokens/sec
+  - Generation time: 6.68s (median), 7.06s (mean)
+  - Avg tokens: 330 input, 542 output
+================================================================================
+
+2025-07-21 19:17:53,293 - INFO - Progress: 20/22185 - Avg time: 8.27s/entry - ETA: 3053.9 min
+2025-07-21 19:19:06,702 - INFO - Progress: 30/22185 - Avg time: 7.34s/entry - ETA: 2710.6 min
+2025-07-21 19:20:31,953 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 19:20:47,903 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 19:20:47,903 - INFO - Progress: 40/22185 - Avg time: 10.12s/entry - ETA: 3735.1 min
+2025-07-21 19:22:12,244 - INFO - Progress: 50/22185 - Avg time: 8.43s/entry - ETA: 3111.4 min
+2025-07-21 19:23:36,202 - INFO - Progress: 60/22185 - Avg time: 8.40s/entry - ETA: 3095.9 min
+2025-07-21 19:24:58,486 - INFO - Progress: 70/22185 - Avg time: 8.23s/entry - ETA: 3032.8 min
+2025-07-21 19:26:21,727 - INFO - Progress: 80/22185 - Avg time: 8.32s/entry - ETA: 3066.7 min
+2025-07-21 19:27:11,528 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 19:27:27,339 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 19:28:00,250 - INFO - Progress: 90/22185 - Avg time: 9.85s/entry - ETA: 3628.1 min
+2025-07-21 19:29:24,280 - INFO - Progress: 100/22185 - Avg time: 8.40s/entry - ETA: 3092.9 min
+2025-07-21 19:30:48,383 - INFO - Progress: 110/22185 - Avg time: 8.41s/entry - ETA: 3094.3 min
+2025-07-21 19:32:12,893 - INFO - Progress: 120/22185 - Avg time: 8.45s/entry - ETA: 3107.8 min

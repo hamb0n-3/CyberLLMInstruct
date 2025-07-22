@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+import os
+# Disable tokenizers parallelism to avoid multiprocessing conflicts
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import json
 import logging
 import re
@@ -12,10 +16,15 @@ import argparse
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
+# Import shared utilities
+from utils import extract_first_json_object, BenchmarkTracker
 
 # Import MLX libraries
 try:
     from mlx_lm import load, generate
+    from mlx_lm.sample_utils import make_sampler, make_repetition_penalty
+    import mlx.core as mx
+    mx.set_default_device(mx.gpu)
     MLX_AVAILABLE = True
 except ImportError:
     MLX_AVAILABLE = False
@@ -24,14 +33,28 @@ except ImportError:
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+
 class CyberDataStructurer:
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, workers: int, disable_llm: bool):
+    def __init__(self, input_dir: str, output_dir: str, llm_model: str, workers: int, disable_llm: bool,
+                 temperature: float = 0.7, top_p: float = 1.0, top_k: int = 0,
+                 min_p: float = 0.0, repetition_penalty: float = 1.0):
         """Initialize the data structurer."""
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.num_workers = workers
         self.model, self.tokenizer, self.llm_available = None, None, False
+        self.sampler = None
+        
+        # Store sampling parameters
+        self.temperature = temperature
+        self.top_p = top_p
+        self.top_k = top_k
+        self.min_p = min_p
+        self.repetition_penalty = repetition_penalty
+        
+        # Initialize benchmark tracker
+        self.benchmark = BenchmarkTracker(logger=logger)
 
         if not disable_llm and MLX_AVAILABLE:
             try:
@@ -39,6 +62,19 @@ class CyberDataStructurer:
                 self.model, self.tokenizer = load(llm_model)
                 self.llm_available = True
                 logger.info("MLX model loaded successfully.")
+                
+                # Create sampler with configured parameters
+                self.sampler = make_sampler(
+                    temp=self.temperature,
+                    top_p=self.top_p,
+                    top_k=self.top_k,
+                    min_p=self.min_p,
+                    min_tokens_to_keep=1
+                )
+                
+                # Log sampler configuration
+                logger.info(f"Sampler configured: temp={self.temperature}, top_p={self.top_p}, "
+                           f"top_k={self.top_k}, min_p={self.min_p}, rep_penalty={self.repetition_penalty}")
             except Exception as e:
                 logger.error(f"Failed to load MLX model: {e}")
                 self.llm_available = False
@@ -56,14 +92,65 @@ class CyberDataStructurer:
         }
 
     def _call_llm(self, prompt: str) -> Optional[str]:
-        """Call the local MLX model."""
-        if not self.llm_available: return None
-        try:
-            # Removed temp/temperature argument for compatibility
-            return generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=400)
-        except Exception as e:
-            logger.error(f"Error during MLX generation: {e}")
+        """Call the local MLX model with retry logic."""
+        if not self.llm_available: 
             return None
+            
+        max_attempts = 3
+        token_limits = [512, 1024, 1500]
+        
+        for attempt in range(max_attempts):
+            try:
+                # Count input tokens
+                input_tokens = len(self.tokenizer.encode(prompt)) if self.tokenizer else len(prompt.split())
+                
+                start_time = time.time()
+                
+                # Create logits processors for repetition penalty if needed
+                logits_processors = []
+                if self.repetition_penalty != 1.0:
+                    rep_penalty_processor = make_repetition_penalty(
+                        penalty=self.repetition_penalty,
+                        context_size=20
+                    )
+                    logits_processors.append(rep_penalty_processor)
+                
+                response = generate(
+                    self.model, 
+                    self.tokenizer, 
+                    prompt=prompt, 
+                    verbose=False,
+                    max_tokens=token_limits[attempt],
+                    sampler=self.sampler,
+                    logits_processors=logits_processors if logits_processors else None
+                )
+                
+                generation_time = time.time() - start_time
+                
+                # Count output tokens
+                output_tokens = len(self.tokenizer.encode(response)) if self.tokenizer else len(response.split())
+                tokens_per_second = output_tokens / generation_time if generation_time > 0 else 0
+                
+                # Record in benchmark
+                self.benchmark.record_llm_performance(tokens_per_second, input_tokens, output_tokens, generation_time)
+                
+                # Check if response was likely cut off
+                if output_tokens >= token_limits[attempt] - 10 and attempt < max_attempts - 1:
+                    # Response likely truncated, retry with higher limit
+                    logger.warning(f"Response likely truncated at {output_tokens} tokens (limit: {token_limits[attempt]}), retrying with higher limit...")
+                    continue
+                
+                if attempt > 0:
+                    logger.info(f"Successfully generated response on attempt {attempt + 1} with {token_limits[attempt]} max tokens")
+                
+                return response
+                
+            except Exception as e:
+                logger.error(f"Error during MLX generation (attempt {attempt + 1}): {e}")
+                if attempt == max_attempts - 1:
+                    return None
+                    
+        return None
 
     def _load_data(self, file_path: Path) -> Optional[List[Dict]]:
         """Load and normalize data from a JSON file."""

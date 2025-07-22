@@ -1,0 +1,2172 @@
+2025-07-21 11:19:20,866 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 11:19:20,867 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 11:19:21,001 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 11:19:21,569 - INFO - Model loaded successfully.
+2025-07-21 11:19:21,569 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 11:19:21,569 - INFO - 
+Starting batch processing of 8 files...
+
+2025-07-21 11:19:21,570 - INFO - 
+============================================================
+2025-07-21 11:19:21,570 - INFO - Processing 100 entries from arxiv_papers_20250715_183646.json
+2025-07-21 11:19:21,570 - INFO - ============================================================
+2025-07-21 11:19:21,570 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 11:19:22,277 - INFO - Rule-based filtering took 0.71s (141.4 entries/sec)
+2025-07-21 11:19:22,277 - INFO - Rule-based pre-filter complete:
+2025-07-21 11:19:22,277 - INFO -   - Passed: 91/100 (91.0%)
+2025-07-21 11:19:22,277 - INFO -   - Failed: 9/100 (9.0%)
+2025-07-21 11:19:22,277 - INFO - Starting LLM enhancement for 91 candidates...
+2025-07-21 11:19:28,981 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 426 tokens)
+2025-07-21 11:19:28,981 - DEBUG - Successfully extracted JSON from 2822 char response
+2025-07-21 11:19:36,053 - INFO - LLM: 512 tokens in 7.07s = 72.4 tokens/sec (input: 566 tokens)
+2025-07-21 11:19:36,053 - DEBUG - Successfully extracted JSON from 2706 char response
+2025-07-21 11:19:42,857 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 312 tokens)
+2025-07-21 11:19:42,857 - DEBUG - Successfully extracted JSON from 2639 char response
+2025-07-21 11:19:49,436 - INFO - LLM: 512 tokens in 6.58s = 77.8 tokens/sec (input: 191 tokens)
+2025-07-21 11:19:49,436 - DEBUG - Successfully extracted JSON from 2779 char response
+2025-07-21 11:19:56,264 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 262 tokens)
+2025-07-21 11:19:56,264 - DEBUG - Successfully extracted JSON from 2627 char response
+2025-07-21 11:20:03,269 - INFO - LLM: 512 tokens in 7.00s = 73.1 tokens/sec (input: 312 tokens)
+2025-07-21 11:20:03,269 - DEBUG - Successfully extracted JSON from 2539 char response
+2025-07-21 11:20:10,015 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 165 tokens)
+2025-07-21 11:20:10,016 - DEBUG - Successfully extracted JSON from 2129 char response
+2025-07-21 11:20:17,729 - INFO - LLM: 512 tokens in 7.71s = 66.4 tokens/sec (input: 544 tokens)
+2025-07-21 11:20:17,729 - DEBUG - Successfully extracted JSON from 2829 char response
+2025-07-21 11:20:25,178 - INFO - LLM: 512 tokens in 7.45s = 68.8 tokens/sec (input: 324 tokens)
+2025-07-21 11:20:25,178 - DEBUG - Successfully extracted JSON from 2802 char response
+2025-07-21 11:20:32,691 - INFO - LLM: 512 tokens in 7.51s = 68.2 tokens/sec (input: 289 tokens)
+2025-07-21 11:20:32,692 - DEBUG - Successfully extracted JSON from 2823 char response
+2025-07-21 11:20:32,692 - INFO - Progress: 10/91 - Avg time: 7.04s/entry - ETA: 9.5 min
+2025-07-21 11:20:40,384 - INFO - LLM: 512 tokens in 7.69s = 66.6 tokens/sec (input: 310 tokens)
+2025-07-21 11:20:40,384 - DEBUG - Successfully extracted JSON from 2940 char response
+2025-07-21 11:20:47,964 - INFO - LLM: 512 tokens in 7.58s = 67.6 tokens/sec (input: 278 tokens)
+2025-07-21 11:20:47,964 - DEBUG - Successfully extracted JSON from 2743 char response
+2025-07-21 11:20:55,451 - INFO - LLM: 512 tokens in 7.48s = 68.4 tokens/sec (input: 272 tokens)
+2025-07-21 11:20:55,451 - DEBUG - Successfully extracted JSON from 2867 char response
+2025-07-21 11:21:03,385 - INFO - LLM: 512 tokens in 7.93s = 64.6 tokens/sec (input: 576 tokens)
+2025-07-21 11:21:03,385 - DEBUG - Successfully extracted JSON from 2748 char response
+2025-07-21 11:21:10,474 - INFO - LLM: 512 tokens in 7.09s = 72.2 tokens/sec (input: 238 tokens)
+2025-07-21 11:21:10,474 - DEBUG - Successfully extracted JSON from 2890 char response
+2025-07-21 11:21:17,792 - INFO - LLM: 512 tokens in 7.32s = 70.0 tokens/sec (input: 346 tokens)
+2025-07-21 11:21:17,792 - DEBUG - Successfully extracted JSON from 2566 char response
+2025-07-21 11:21:25,008 - INFO - LLM: 512 tokens in 7.21s = 71.0 tokens/sec (input: 267 tokens)
+2025-07-21 11:21:25,008 - DEBUG - Successfully extracted JSON from 2354 char response
+2025-07-21 11:21:25,008 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 117
+  - Entries passed filter: 108 (92.3%)
+  - Entries failed filter: 9
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 1.055s
+  - Median time per entry: 0.007s
+  - 90th percentile: 7.019s
+  - 95th percentile: 7.490s
+  - Throughput: 0.95 entries/second
+
+Memory Usage:
+  - Current RSS: 4729.3 MB
+  - Peak RSS: 4729.3 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (55.6%)
+  - Contains exclusion pattern: non_security_academic: 4 (44.4%)
+
+Score Distribution:
+  - Score 0: 26 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 6 entries
+  - Score 6: 6 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 5 entries
+  - Score 10: 6 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+
+LLM Performance:
+  - Total calls: 17
+  - Tokens per second: 71.0 (median), 71.2 (mean)
+  - 90th percentile: 76.7 tokens/sec
+  - Generation time: 7.21s (median), 7.22s (mean)
+  - Avg tokens: 334 input, 512 output
+================================================================================
+
+2025-07-21 11:21:32,372 - INFO - LLM: 512 tokens in 7.36s = 69.5 tokens/sec (input: 368 tokens)
+2025-07-21 11:21:32,373 - DEBUG - Successfully extracted JSON from 2633 char response
+2025-07-21 11:21:39,655 - INFO - LLM: 512 tokens in 7.28s = 70.3 tokens/sec (input: 352 tokens)
+2025-07-21 11:21:39,656 - DEBUG - Successfully extracted JSON from 2594 char response
+2025-07-21 11:21:46,555 - INFO - LLM: 512 tokens in 6.90s = 74.2 tokens/sec (input: 193 tokens)
+2025-07-21 11:21:46,555 - DEBUG - Successfully extracted JSON from 2515 char response
+2025-07-21 11:21:46,555 - INFO - Progress: 20/91 - Avg time: 7.39s/entry - ETA: 8.7 min
+2025-07-21 11:21:53,410 - INFO - LLM: 512 tokens in 6.85s = 74.7 tokens/sec (input: 224 tokens)
+2025-07-21 11:21:53,410 - DEBUG - Successfully extracted JSON from 2636 char response
+2025-07-21 11:22:00,344 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 207 tokens)
+2025-07-21 11:22:00,344 - DEBUG - Successfully extracted JSON from 2251 char response
+2025-07-21 11:22:07,254 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 190 tokens)
+2025-07-21 11:22:07,255 - DEBUG - Successfully extracted JSON from 2578 char response
+2025-07-21 11:22:14,265 - INFO - LLM: 512 tokens in 7.01s = 73.0 tokens/sec (input: 218 tokens)
+2025-07-21 11:22:14,265 - DEBUG - Successfully extracted JSON from 2923 char response
+2025-07-21 11:22:21,805 - INFO - LLM: 512 tokens in 7.54s = 67.9 tokens/sec (input: 389 tokens)
+2025-07-21 11:22:21,805 - DEBUG - Successfully extracted JSON from 2766 char response
+2025-07-21 11:22:29,216 - INFO - LLM: 512 tokens in 7.41s = 69.1 tokens/sec (input: 346 tokens)
+2025-07-21 11:22:29,216 - DEBUG - Successfully extracted JSON from 2367 char response
+2025-07-21 11:22:36,470 - INFO - LLM: 512 tokens in 7.25s = 70.6 tokens/sec (input: 267 tokens)
+2025-07-21 11:22:36,470 - DEBUG - Successfully extracted JSON from 2653 char response
+2025-07-21 11:22:43,532 - INFO - LLM: 512 tokens in 7.06s = 72.5 tokens/sec (input: 217 tokens)
+2025-07-21 11:22:43,532 - DEBUG - Successfully extracted JSON from 2671 char response
+2025-07-21 11:22:50,766 - INFO - LLM: 512 tokens in 7.23s = 70.8 tokens/sec (input: 257 tokens)
+2025-07-21 11:22:50,767 - DEBUG - Successfully extracted JSON from 2887 char response
+2025-07-21 11:22:58,412 - INFO - LLM: 512 tokens in 7.64s = 67.0 tokens/sec (input: 389 tokens)
+2025-07-21 11:22:58,412 - DEBUG - Successfully extracted JSON from 2614 char response
+2025-07-21 11:22:58,412 - INFO - Progress: 30/91 - Avg time: 7.19s/entry - ETA: 7.3 min
+2025-07-21 11:23:05,741 - INFO - LLM: 512 tokens in 7.33s = 69.9 tokens/sec (input: 289 tokens)
+2025-07-21 11:23:05,741 - DEBUG - Successfully extracted JSON from 2634 char response
+2025-07-21 11:23:13,397 - INFO - LLM: 512 tokens in 7.65s = 66.9 tokens/sec (input: 439 tokens)
+2025-07-21 11:23:13,397 - DEBUG - Successfully extracted JSON from 2850 char response
+2025-07-21 11:23:20,635 - INFO - LLM: 512 tokens in 7.24s = 70.8 tokens/sec (input: 266 tokens)
+2025-07-21 11:23:20,635 - DEBUG - Successfully extracted JSON from 2612 char response
+2025-07-21 11:23:28,187 - INFO - LLM: 512 tokens in 7.55s = 67.8 tokens/sec (input: 394 tokens)
+2025-07-21 11:23:28,188 - DEBUG - Successfully extracted JSON from 2492 char response
+2025-07-21 11:23:35,462 - INFO - LLM: 512 tokens in 7.27s = 70.4 tokens/sec (input: 250 tokens)
+2025-07-21 11:23:35,462 - DEBUG - Successfully extracted JSON from 2734 char response
+2025-07-21 11:23:42,898 - INFO - LLM: 512 tokens in 7.43s = 68.9 tokens/sec (input: 350 tokens)
+2025-07-21 11:23:42,899 - DEBUG - Successfully extracted JSON from 2568 char response
+2025-07-21 11:23:50,104 - INFO - LLM: 512 tokens in 7.20s = 71.1 tokens/sec (input: 274 tokens)
+2025-07-21 11:23:50,104 - DEBUG - Successfully extracted JSON from 2751 char response
+2025-07-21 11:23:57,547 - INFO - LLM: 512 tokens in 7.44s = 68.8 tokens/sec (input: 374 tokens)
+2025-07-21 11:23:57,548 - DEBUG - Successfully extracted JSON from 2805 char response
+2025-07-21 11:24:05,077 - INFO - LLM: 512 tokens in 7.53s = 68.0 tokens/sec (input: 377 tokens)
+2025-07-21 11:24:05,077 - DEBUG - Successfully extracted JSON from 2741 char response
+2025-07-21 11:24:12,042 - INFO - LLM: 512 tokens in 6.96s = 73.5 tokens/sec (input: 178 tokens)
+2025-07-21 11:24:12,042 - DEBUG - Successfully extracted JSON from 2841 char response
+2025-07-21 11:24:12,042 - INFO - Progress: 40/91 - Avg time: 7.36s/entry - ETA: 6.3 min
+2025-07-21 11:24:19,393 - INFO - LLM: 512 tokens in 7.35s = 69.7 tokens/sec (input: 297 tokens)
+2025-07-21 11:24:19,393 - DEBUG - Successfully extracted JSON from 2771 char response
+2025-07-21 11:24:27,273 - INFO - LLM: 512 tokens in 7.88s = 65.0 tokens/sec (input: 565 tokens)
+2025-07-21 11:24:27,273 - DEBUG - Successfully extracted JSON from 2561 char response
+2025-07-21 11:24:34,584 - INFO - LLM: 512 tokens in 7.31s = 70.1 tokens/sec (input: 306 tokens)
+2025-07-21 11:24:34,584 - DEBUG - Successfully extracted JSON from 2539 char response
+2025-07-21 11:24:42,066 - INFO - LLM: 512 tokens in 7.48s = 68.5 tokens/sec (input: 398 tokens)
+2025-07-21 11:24:42,066 - DEBUG - Successfully extracted JSON from 2902 char response
+2025-07-21 11:24:49,289 - INFO - LLM: 512 tokens in 7.22s = 70.9 tokens/sec (input: 227 tokens)
+2025-07-21 11:24:49,289 - DEBUG - Successfully extracted JSON from 2854 char response
+2025-07-21 11:24:56,549 - INFO - LLM: 512 tokens in 7.26s = 70.5 tokens/sec (input: 233 tokens)
+2025-07-21 11:24:56,549 - DEBUG - Successfully extracted JSON from 2481 char response
+2025-07-21 11:25:03,309 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 228 tokens)
+2025-07-21 11:25:03,309 - DEBUG - Successfully extracted JSON from 2835 char response
+2025-07-21 11:25:10,138 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 262 tokens)
+2025-07-21 11:25:10,138 - DEBUG - Successfully extracted JSON from 2744 char response
+2025-07-21 11:25:16,968 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 284 tokens)
+2025-07-21 11:25:16,968 - DEBUG - Successfully extracted JSON from 2779 char response
+2025-07-21 11:25:23,850 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 314 tokens)
+2025-07-21 11:25:23,850 - DEBUG - Successfully extracted JSON from 2631 char response
+2025-07-21 11:25:23,850 - INFO - Progress: 50/91 - Avg time: 7.18s/entry - ETA: 4.9 min
+2025-07-21 11:25:30,822 - INFO - LLM: 512 tokens in 6.97s = 73.5 tokens/sec (input: 339 tokens)
+2025-07-21 11:25:30,822 - DEBUG - Successfully extracted JSON from 2726 char response
+2025-07-21 11:25:37,770 - INFO - LLM: 512 tokens in 6.95s = 73.7 tokens/sec (input: 341 tokens)
+2025-07-21 11:25:37,770 - DEBUG - Successfully extracted JSON from 2615 char response
+2025-07-21 11:25:44,534 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 245 tokens)
+2025-07-21 11:25:44,534 - DEBUG - Successfully extracted JSON from 2893 char response
+2025-07-21 11:25:51,360 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 267 tokens)
+2025-07-21 11:25:51,360 - DEBUG - Successfully extracted JSON from 2966 char response
+2025-07-21 11:25:58,591 - INFO - LLM: 512 tokens in 7.23s = 70.8 tokens/sec (input: 395 tokens)
+2025-07-21 11:25:58,591 - DEBUG - Successfully extracted JSON from 2617 char response
+2025-07-21 11:26:05,388 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 292 tokens)
+2025-07-21 11:26:05,389 - DEBUG - Successfully extracted JSON from 2744 char response
+2025-07-21 11:26:12,373 - INFO - LLM: 512 tokens in 6.98s = 73.3 tokens/sec (input: 375 tokens)
+2025-07-21 11:26:12,373 - DEBUG - Successfully extracted JSON from 2648 char response
+2025-07-21 11:26:19,297 - INFO - LLM: 512 tokens in 6.92s = 74.0 tokens/sec (input: 307 tokens)
+2025-07-21 11:26:19,297 - DEBUG - Successfully extracted JSON from 2884 char response
+2025-07-21 11:26:26,051 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 284 tokens)
+2025-07-21 11:26:26,051 - DEBUG - Successfully extracted JSON from 2426 char response
+2025-07-21 11:26:32,943 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 321 tokens)
+2025-07-21 11:26:32,943 - DEBUG - Successfully extracted JSON from 2714 char response
+2025-07-21 11:26:32,943 - INFO - Progress: 60/91 - Avg time: 6.91s/entry - ETA: 3.6 min
+2025-07-21 11:26:40,050 - INFO - LLM: 512 tokens in 7.10s = 72.1 tokens/sec (input: 444 tokens)
+2025-07-21 11:26:40,050 - DEBUG - Successfully extracted JSON from 2928 char response
+2025-07-21 11:26:46,731 - INFO - LLM: 512 tokens in 6.68s = 76.7 tokens/sec (input: 225 tokens)
+2025-07-21 11:26:46,731 - DEBUG - Successfully extracted JSON from 2678 char response
+2025-07-21 11:26:53,431 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 251 tokens)
+2025-07-21 11:26:53,431 - DEBUG - Successfully extracted JSON from 3018 char response
+2025-07-21 11:27:00,260 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 314 tokens)
+2025-07-21 11:27:00,260 - DEBUG - Successfully extracted JSON from 2454 char response
+2025-07-21 11:27:07,027 - INFO - LLM: 512 tokens in 6.77s = 75.7 tokens/sec (input: 285 tokens)
+2025-07-21 11:27:07,027 - DEBUG - Successfully extracted JSON from 2587 char response
+2025-07-21 11:27:14,033 - INFO - LLM: 512 tokens in 7.00s = 73.1 tokens/sec (input: 391 tokens)
+2025-07-21 11:27:14,033 - DEBUG - Successfully extracted JSON from 2804 char response
+2025-07-21 11:27:20,765 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 264 tokens)
+2025-07-21 11:27:20,765 - DEBUG - Successfully extracted JSON from 2654 char response
+2025-07-21 11:27:27,567 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 298 tokens)
+2025-07-21 11:27:27,567 - DEBUG - Successfully extracted JSON from 2528 char response
+2025-07-21 11:27:34,169 - INFO - LLM: 512 tokens in 6.60s = 77.6 tokens/sec (input: 200 tokens)
+2025-07-21 11:27:34,169 - DEBUG - Successfully extracted JSON from 2548 char response
+2025-07-21 11:27:41,037 - INFO - LLM: 512 tokens in 6.87s = 74.6 tokens/sec (input: 349 tokens)
+2025-07-21 11:27:41,037 - DEBUG - Successfully extracted JSON from 2797 char response
+2025-07-21 11:27:41,037 - INFO - Progress: 70/91 - Avg time: 6.81s/entry - ETA: 2.4 min
+2025-07-21 11:27:48,041 - INFO - LLM: 512 tokens in 7.00s = 73.1 tokens/sec (input: 413 tokens)
+2025-07-21 11:27:48,041 - DEBUG - Successfully extracted JSON from 2726 char response
+2025-07-21 11:27:54,916 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 342 tokens)
+2025-07-21 11:27:54,916 - DEBUG - Successfully extracted JSON from 2780 char response
+2025-07-21 11:28:01,757 - INFO - LLM: 512 tokens in 6.84s = 74.9 tokens/sec (input: 322 tokens)
+2025-07-21 11:28:01,757 - DEBUG - Successfully extracted JSON from 2676 char response
+2025-07-21 11:28:08,803 - INFO - LLM: 512 tokens in 7.04s = 72.7 tokens/sec (input: 432 tokens)
+2025-07-21 11:28:08,803 - DEBUG - Successfully extracted JSON from 2646 char response
+2025-07-21 11:28:15,518 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 288 tokens)
+2025-07-21 11:28:15,518 - DEBUG - Successfully extracted JSON from 2618 char response
+2025-07-21 11:28:22,386 - INFO - LLM: 512 tokens in 6.87s = 74.6 tokens/sec (input: 343 tokens)
+2025-07-21 11:28:22,386 - DEBUG - Successfully extracted JSON from 2636 char response
+2025-07-21 11:28:29,377 - INFO - LLM: 512 tokens in 6.99s = 73.2 tokens/sec (input: 411 tokens)
+2025-07-21 11:28:29,378 - DEBUG - Successfully extracted JSON from 2672 char response
+2025-07-21 11:28:36,155 - INFO - LLM: 512 tokens in 6.78s = 75.6 tokens/sec (input: 291 tokens)
+2025-07-21 11:28:36,155 - DEBUG - Successfully extracted JSON from 2760 char response
+2025-07-21 11:28:42,940 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 301 tokens)
+2025-07-21 11:28:42,941 - DEBUG - Successfully extracted JSON from 2689 char response
+2025-07-21 11:28:49,669 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 285 tokens)
+2025-07-21 11:28:49,670 - DEBUG - Successfully extracted JSON from 2682 char response
+2025-07-21 11:28:49,670 - INFO - Progress: 80/91 - Avg time: 6.86s/entry - ETA: 1.3 min
+2025-07-21 11:28:56,651 - INFO - LLM: 512 tokens in 6.98s = 73.4 tokens/sec (input: 389 tokens)
+2025-07-21 11:28:56,651 - DEBUG - Successfully extracted JSON from 2764 char response
+2025-07-21 11:29:03,442 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 299 tokens)
+2025-07-21 11:29:03,442 - DEBUG - Successfully extracted JSON from 2327 char response
+2025-07-21 11:29:10,366 - INFO - LLM: 512 tokens in 6.92s = 74.0 tokens/sec (input: 384 tokens)
+2025-07-21 11:29:10,366 - DEBUG - Successfully extracted JSON from 2675 char response
+2025-07-21 11:29:17,015 - INFO - LLM: 512 tokens in 6.65s = 77.0 tokens/sec (input: 251 tokens)
+2025-07-21 11:29:17,015 - DEBUG - Successfully extracted JSON from 2583 char response
+2025-07-21 11:29:23,921 - INFO - LLM: 512 tokens in 6.90s = 74.2 tokens/sec (input: 371 tokens)
+2025-07-21 11:29:23,921 - DEBUG - Successfully extracted JSON from 2807 char response
+2025-07-21 11:29:30,651 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 269 tokens)
+2025-07-21 11:29:30,652 - DEBUG - Successfully extracted JSON from 2913 char response
+2025-07-21 11:29:37,470 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 343 tokens)
+2025-07-21 11:29:37,470 - DEBUG - Successfully extracted JSON from 2808 char response
+2025-07-21 11:29:44,302 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 322 tokens)
+2025-07-21 11:29:44,302 - DEBUG - Successfully extracted JSON from 2855 char response
+2025-07-21 11:29:51,219 - INFO - LLM: 512 tokens in 6.91s = 74.0 tokens/sec (input: 372 tokens)
+2025-07-21 11:29:51,219 - DEBUG - Successfully extracted JSON from 2716 char response
+2025-07-21 11:29:58,112 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 357 tokens)
+2025-07-21 11:29:58,113 - DEBUG - Successfully extracted JSON from 2513 char response
+2025-07-21 11:29:58,113 - INFO - Progress: 90/91 - Avg time: 6.84s/entry - ETA: 0.1 min
+2025-07-21 11:30:04,752 - INFO - LLM: 512 tokens in 6.64s = 77.1 tokens/sec (input: 242 tokens)
+2025-07-21 11:30:04,752 - DEBUG - Successfully extracted JSON from 2663 char response
+2025-07-21 11:30:04,752 - INFO - 
+Enhancement Summary:
+2025-07-21 11:30:04,752 - INFO -   - Total time: 642.47s
+2025-07-21 11:30:04,752 - INFO -   - Average time per entry: 7.06s
+2025-07-21 11:30:04,752 - INFO -   - Min/Max times: 6.58s / 7.93s
+2025-07-21 11:30:04,752 - INFO - 
+File processing complete for arxiv_papers_20250715_183646.json:
+2025-07-21 11:30:04,752 - INFO -   - Total entries: 100
+2025-07-21 11:30:04,752 - INFO -   - Final retained: 91 (91.0%)
+2025-07-21 11:30:04,752 - INFO -   - Processing time: 643.18s
+2025-07-21 11:30:04,752 - INFO -   - Avg time per entry: 6.432s
+2025-07-21 11:30:04,753 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 10.7 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 191
+  - Entries passed filter: 182 (95.3%)
+  - Entries failed filter: 9
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 3.367s
+  - Median time per entry: 0.007s
+  - 90th percentile: 7.346s
+  - 95th percentile: 7.534s
+  - Throughput: 0.30 entries/second
+
+Memory Usage:
+  - Current RSS: 4729.6 MB
+  - Peak RSS: 4729.6 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (55.6%)
+  - Contains exclusion pattern: non_security_academic: 4 (44.4%)
+
+Score Distribution:
+  - Score 0: 100 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 6 entries
+  - Score 6: 6 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 5 entries
+  - Score 10: 6 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+
+LLM Performance:
+  - Total calls: 91
+  - Tokens per second: 73.5 (median), 72.7 (mean)
+  - 90th percentile: 76.1 tokens/sec
+  - Generation time: 6.96s (median), 7.06s (mean)
+  - Avg tokens: 317 input, 512 output
+================================================================================
+
+2025-07-21 11:30:04,758 - INFO - Saved 91 entries to filtered_data/arxiv_papers_20250715_183646_filtered_20250721_113004.json
+2025-07-21 11:30:04,759 - INFO - Saved 9 entries to filtered_data/arxiv_papers_20250715_183646_removed_20250721_113004.json
+2025-07-21 11:30:04,759 - INFO - 
+============================================================
+2025-07-21 11:30:04,759 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 11:30:04,759 - INFO - ============================================================
+2025-07-21 11:30:04,773 - INFO - Rule-based filtering took 0.01s (73.9 entries/sec)
+2025-07-21 11:30:04,773 - INFO - Rule-based pre-filter complete:
+2025-07-21 11:30:04,773 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 11:30:04,773 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 11:30:04,773 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-21 11:31:02,991 - INFO - LLM: 512 tokens in 58.19s = 8.8 tokens/sec (input: 21179 tokens)
+2025-07-21 11:31:02,991 - DEBUG - Successfully extracted JSON from 2415 char response
+2025-07-21 11:31:02,991 - INFO - 
+Enhancement Summary:
+2025-07-21 11:31:02,991 - INFO -   - Total time: 58.22s
+2025-07-21 11:31:02,991 - INFO -   - Average time per entry: 58.22s
+2025-07-21 11:31:02,991 - INFO -   - Min/Max times: 58.22s / 58.22s
+2025-07-21 11:31:02,991 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 11:31:02,991 - INFO -   - Total entries: 1
+2025-07-21 11:31:02,991 - INFO -   - Final retained: 1 (100.0%)
+2025-07-21 11:31:02,991 - INFO -   - Processing time: 58.23s
+2025-07-21 11:31:02,991 - INFO -   - Avg time per entry: 58.233s
+2025-07-21 11:31:02,992 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 11.7 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 193
+  - Entries passed filter: 184 (95.3%)
+  - Entries failed filter: 9
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 3.634s
+  - Median time per entry: 0.007s
+  - 90th percentile: 7.359s
+  - 95th percentile: 7.544s
+  - Throughput: 0.28 entries/second
+
+Memory Usage:
+  - Current RSS: 4729.0 MB
+  - Peak RSS: 4729.6 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (55.6%)
+  - Contains exclusion pattern: non_security_academic: 4 (44.4%)
+
+Score Distribution:
+  - Score 0: 101 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 4 entries
+  - Score 5: 6 entries
+  - Score 6: 6 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 5 entries
+  - Score 10: 6 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 92
+  - Tokens per second: 73.5 (median), 72.0 (mean)
+  - 90th percentile: 76.1 tokens/sec
+  - Generation time: 6.97s (median), 7.61s (mean)
+  - Avg tokens: 543 input, 512 output
+================================================================================
+
+2025-07-21 11:31:02,994 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_filtered_20250721_113102.json
+2025-07-21 11:31:02,994 - INFO - 
+============================================================
+2025-07-21 11:31:02,994 - INFO - Processing 114 entries from microsoft_security_20250715_183647.json
+2025-07-21 11:31:02,994 - INFO - ============================================================
+2025-07-21 11:31:02,994 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 11:31:03,947 - INFO - Rule-based filtering took 0.95s (119.7 entries/sec)
+2025-07-21 11:31:03,947 - INFO - Rule-based pre-filter complete:
+2025-07-21 11:31:03,947 - INFO -   - Passed: 114/114 (100.0%)
+2025-07-21 11:31:03,947 - INFO -   - Failed: 0/114 (0.0%)
+2025-07-21 11:31:03,947 - INFO - Starting LLM enhancement for 114 candidates...
+2025-07-21 11:31:10,368 - INFO - LLM: 512 tokens in 6.42s = 79.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:10,368 - DEBUG - Successfully extracted JSON from 2001 char response
+2025-07-21 11:31:16,858 - INFO - LLM: 512 tokens in 6.49s = 78.9 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:16,858 - DEBUG - Successfully extracted JSON from 2389 char response
+2025-07-21 11:31:23,344 - INFO - LLM: 512 tokens in 6.48s = 79.0 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:23,344 - DEBUG - Successfully extracted JSON from 1461 char response
+2025-07-21 11:31:29,886 - INFO - LLM: 512 tokens in 6.54s = 78.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:29,886 - DEBUG - Successfully extracted JSON from 2431 char response
+2025-07-21 11:31:36,364 - INFO - LLM: 512 tokens in 6.48s = 79.0 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:36,364 - DEBUG - Successfully extracted JSON from 2385 char response
+2025-07-21 11:31:42,816 - INFO - LLM: 512 tokens in 6.45s = 79.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:42,816 - DEBUG - Successfully extracted JSON from 2169 char response
+2025-07-21 11:31:49,281 - INFO - LLM: 512 tokens in 6.46s = 79.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:49,281 - DEBUG - Successfully extracted JSON from 2462 char response
+2025-07-21 11:31:55,732 - INFO - LLM: 512 tokens in 6.45s = 79.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:31:55,732 - DEBUG - Successfully extracted JSON from 2651 char response
+2025-07-21 11:32:02,240 - INFO - LLM: 512 tokens in 6.51s = 78.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:02,240 - DEBUG - Successfully extracted JSON from 2241 char response
+2025-07-21 11:32:08,679 - INFO - LLM: 512 tokens in 6.44s = 79.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:08,679 - DEBUG - Successfully extracted JSON from 2133 char response
+2025-07-21 11:32:08,679 - INFO - Progress: 10/114 - Avg time: 6.47s/entry - ETA: 11.2 min
+2025-07-21 11:32:15,138 - INFO - LLM: 512 tokens in 6.46s = 79.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:15,138 - DEBUG - Successfully extracted JSON from 2392 char response
+2025-07-21 11:32:21,590 - INFO - LLM: 512 tokens in 6.45s = 79.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:21,590 - DEBUG - Successfully extracted JSON from 2391 char response
+2025-07-21 11:32:28,047 - INFO - LLM: 512 tokens in 6.46s = 79.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:28,047 - DEBUG - Successfully extracted JSON from 2333 char response
+2025-07-21 11:32:34,473 - INFO - LLM: 512 tokens in 6.42s = 79.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:34,473 - DEBUG - Successfully extracted JSON from 2291 char response
+2025-07-21 11:32:40,916 - INFO - LLM: 512 tokens in 6.44s = 79.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:40,916 - DEBUG - Successfully extracted JSON from 2486 char response
+2025-07-21 11:32:47,352 - INFO - LLM: 512 tokens in 6.43s = 79.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:47,352 - DEBUG - Successfully extracted JSON from 1940 char response
+2025-07-21 11:32:53,783 - INFO - LLM: 512 tokens in 6.43s = 79.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:32:53,783 - DEBUG - Successfully extracted JSON from 2534 char response
+2025-07-21 11:33:00,222 - INFO - LLM: 512 tokens in 6.44s = 79.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:00,222 - DEBUG - Successfully extracted JSON from 2178 char response
+2025-07-21 11:33:06,628 - INFO - LLM: 512 tokens in 6.40s = 79.9 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:06,629 - DEBUG - Successfully extracted JSON from 2453 char response
+2025-07-21 11:33:13,048 - INFO - LLM: 512 tokens in 6.42s = 79.8 tokens/sec (input: 153 tokens)
+2025-07-21 11:33:13,048 - DEBUG - Successfully extracted JSON from 2433 char response
+2025-07-21 11:33:13,048 - INFO - Progress: 20/114 - Avg time: 6.44s/entry - ETA: 10.1 min
+2025-07-21 11:33:19,434 - INFO - LLM: 512 tokens in 6.38s = 80.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:19,434 - DEBUG - Successfully extracted JSON from 2561 char response
+2025-07-21 11:33:25,818 - INFO - LLM: 512 tokens in 6.38s = 80.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:25,818 - DEBUG - Successfully extracted JSON from 2338 char response
+2025-07-21 11:33:32,210 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:32,210 - DEBUG - Successfully extracted JSON from 2296 char response
+2025-07-21 11:33:38,627 - INFO - LLM: 512 tokens in 6.42s = 79.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:38,627 - DEBUG - Successfully extracted JSON from 2421 char response
+2025-07-21 11:33:45,014 - INFO - LLM: 512 tokens in 6.39s = 80.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:45,014 - DEBUG - Successfully extracted JSON from 2325 char response
+2025-07-21 11:33:51,392 - INFO - LLM: 512 tokens in 6.38s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:33:51,392 - DEBUG - Successfully extracted JSON from 2337 char response
+2025-07-21 11:33:57,765 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 151 tokens)
+2025-07-21 11:33:57,765 - DEBUG - Successfully extracted JSON from 2389 char response
+2025-07-21 11:34:04,147 - INFO - LLM: 512 tokens in 6.38s = 80.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:04,147 - DEBUG - Successfully extracted JSON from 1892 char response
+2025-07-21 11:34:10,523 - INFO - LLM: 512 tokens in 6.37s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:10,523 - DEBUG - Successfully extracted JSON from 2273 char response
+2025-07-21 11:34:16,892 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:16,892 - DEBUG - Successfully extracted JSON from 2415 char response
+2025-07-21 11:34:16,892 - INFO - Progress: 30/114 - Avg time: 6.38s/entry - ETA: 8.9 min
+2025-07-21 11:34:23,257 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:23,257 - DEBUG - Successfully extracted JSON from 2370 char response
+2025-07-21 11:34:29,666 - INFO - LLM: 512 tokens in 6.41s = 79.9 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:29,666 - DEBUG - Successfully extracted JSON from 2335 char response
+2025-07-21 11:34:36,031 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:36,031 - DEBUG - Successfully extracted JSON from 2586 char response
+2025-07-21 11:34:42,425 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:42,425 - DEBUG - Successfully extracted JSON from 2259 char response
+2025-07-21 11:34:48,816 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:48,816 - DEBUG - Successfully extracted JSON from 2529 char response
+2025-07-21 11:34:55,186 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:34:55,186 - DEBUG - Successfully extracted JSON from 2277 char response
+2025-07-21 11:35:01,567 - INFO - LLM: 512 tokens in 6.38s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:01,567 - DEBUG - Successfully extracted JSON from 2660 char response
+2025-07-21 11:35:07,952 - INFO - LLM: 512 tokens in 6.38s = 80.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:07,952 - DEBUG - Successfully extracted JSON from 2540 char response
+2025-07-21 11:35:14,353 - INFO - LLM: 512 tokens in 6.40s = 80.0 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:14,353 - DEBUG - Successfully extracted JSON from 2761 char response
+2025-07-21 11:35:20,747 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:20,747 - DEBUG - Successfully extracted JSON from 2506 char response
+2025-07-21 11:35:20,747 - INFO - Progress: 40/114 - Avg time: 6.39s/entry - ETA: 7.9 min
+2025-07-21 11:35:27,139 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:27,139 - DEBUG - Successfully extracted JSON from 2532 char response
+2025-07-21 11:35:33,572 - INFO - LLM: 512 tokens in 6.43s = 79.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:33,572 - DEBUG - Successfully extracted JSON from 2438 char response
+2025-07-21 11:35:39,960 - INFO - LLM: 512 tokens in 6.39s = 80.2 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:39,960 - DEBUG - Successfully extracted JSON from 2016 char response
+2025-07-21 11:35:46,354 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:46,354 - DEBUG - Successfully extracted JSON from 2418 char response
+2025-07-21 11:35:52,748 - INFO - LLM: 513 tokens in 6.39s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:52,748 - DEBUG - Successfully extracted JSON from 2378 char response
+2025-07-21 11:35:59,140 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:35:59,140 - DEBUG - Successfully extracted JSON from 2410 char response
+2025-07-21 11:36:05,538 - INFO - LLM: 512 tokens in 6.40s = 80.0 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:05,538 - DEBUG - Successfully extracted JSON from 2268 char response
+2025-07-21 11:36:11,931 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:11,931 - DEBUG - Successfully extracted JSON from 2470 char response
+2025-07-21 11:36:18,340 - INFO - LLM: 512 tokens in 6.41s = 79.9 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:18,340 - DEBUG - Successfully extracted JSON from 2406 char response
+2025-07-21 11:36:24,742 - INFO - LLM: 512 tokens in 6.40s = 80.0 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:24,742 - DEBUG - Successfully extracted JSON from 2486 char response
+2025-07-21 11:36:24,742 - INFO - Progress: 50/114 - Avg time: 6.40s/entry - ETA: 6.8 min
+2025-07-21 11:36:31,132 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:31,132 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 11:36:31,132 - ERROR - {
+  "technical_description": "The vulnerability allows an attacker to execute arbitrary code on the affected system by exploiting a buffer overflow in the handling of specially crafted HTTP requests.",
+  "risk_level": "High",
+  "affected_systems": [
+    "Microsoft Windows 10 (all versions)",
+    "Microsoft Windows Server 2016",
+    "Microsoft Windows Server 2019",
+    "Microsoft Windows Server 2022",
+    "Microsoft Windows 8.1",
+    "Microsoft Windows Server 2008 R2 SP1",
+    "Microsoft Windows ...
+2025-07-21 11:36:31,132 - ERROR - Response length: 1661 chars, tokens: 512
+2025-07-21 11:36:37,533 - INFO - LLM: 512 tokens in 6.40s = 80.0 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:37,533 - DEBUG - Successfully extracted JSON from 2354 char response
+2025-07-21 11:36:43,927 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:43,927 - DEBUG - Successfully extracted JSON from 2156 char response
+2025-07-21 11:36:50,306 - INFO - LLM: 512 tokens in 6.38s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:50,306 - DEBUG - Successfully extracted JSON from 2581 char response
+2025-07-21 11:36:56,699 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:36:56,699 - DEBUG - Successfully extracted JSON from 2608 char response
+2025-07-21 11:37:03,094 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:03,094 - DEBUG - Successfully extracted JSON from 2437 char response
+2025-07-21 11:37:09,472 - INFO - LLM: 512 tokens in 6.38s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:09,472 - DEBUG - Successfully extracted JSON from 2240 char response
+2025-07-21 11:37:15,879 - INFO - LLM: 512 tokens in 6.41s = 79.9 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:15,879 - DEBUG - Successfully extracted JSON from 2490 char response
+2025-07-21 11:37:22,228 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:22,228 - DEBUG - Successfully extracted JSON from 2601 char response
+2025-07-21 11:37:28,578 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:28,578 - DEBUG - Successfully extracted JSON from 2310 char response
+2025-07-21 11:37:28,578 - INFO - Progress: 60/114 - Avg time: 6.38s/entry - ETA: 5.7 min
+2025-07-21 11:37:34,914 - INFO - LLM: 512 tokens in 6.33s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:34,914 - DEBUG - Successfully extracted JSON from 2494 char response
+2025-07-21 11:37:41,278 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:41,279 - DEBUG - Successfully extracted JSON from 2298 char response
+2025-07-21 11:37:47,657 - INFO - LLM: 512 tokens in 6.38s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:47,658 - DEBUG - Successfully extracted JSON from 2562 char response
+2025-07-21 11:37:53,998 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:37:53,998 - DEBUG - Successfully extracted JSON from 2496 char response
+2025-07-21 11:38:00,344 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:00,344 - DEBUG - Successfully extracted JSON from 2458 char response
+2025-07-21 11:38:06,687 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:06,688 - DEBUG - Successfully extracted JSON from 2376 char response
+2025-07-21 11:38:13,032 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:13,032 - DEBUG - Successfully extracted JSON from 2437 char response
+2025-07-21 11:38:19,379 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:19,379 - DEBUG - Successfully extracted JSON from 2470 char response
+2025-07-21 11:38:25,745 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:25,745 - DEBUG - Successfully extracted JSON from 2337 char response
+2025-07-21 11:38:32,096 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:32,096 - DEBUG - Successfully extracted JSON from 2624 char response
+2025-07-21 11:38:32,096 - INFO - Progress: 70/114 - Avg time: 6.35s/entry - ETA: 4.7 min
+2025-07-21 11:38:38,437 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:38,437 - DEBUG - Successfully extracted JSON from 2486 char response
+2025-07-21 11:38:44,783 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:44,783 - DEBUG - Successfully extracted JSON from 2320 char response
+2025-07-21 11:38:51,137 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:51,137 - DEBUG - Successfully extracted JSON from 2203 char response
+2025-07-21 11:38:57,477 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:38:57,477 - DEBUG - Successfully extracted JSON from 2387 char response
+2025-07-21 11:39:03,870 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:03,870 - DEBUG - Successfully extracted JSON from 2127 char response
+2025-07-21 11:39:10,261 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:10,261 - DEBUG - Successfully extracted JSON from 2218 char response
+2025-07-21 11:39:16,636 - INFO - LLM: 512 tokens in 6.37s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:16,636 - DEBUG - Successfully extracted JSON from 2431 char response
+2025-07-21 11:39:22,981 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:22,981 - DEBUG - Successfully extracted JSON from 2356 char response
+2025-07-21 11:39:29,334 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:29,334 - DEBUG - Successfully extracted JSON from 2427 char response
+2025-07-21 11:39:35,727 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:35,727 - DEBUG - Successfully extracted JSON from 2450 char response
+2025-07-21 11:39:35,727 - INFO - Progress: 80/114 - Avg time: 6.36s/entry - ETA: 3.6 min
+2025-07-21 11:39:42,088 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:42,088 - DEBUG - Successfully extracted JSON from 2382 char response
+2025-07-21 11:39:48,437 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:48,437 - DEBUG - Successfully extracted JSON from 2347 char response
+2025-07-21 11:39:54,785 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:39:54,785 - DEBUG - Successfully extracted JSON from 2486 char response
+2025-07-21 11:40:01,140 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:01,140 - DEBUG - Successfully extracted JSON from 2426 char response
+2025-07-21 11:40:07,492 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:07,492 - DEBUG - Successfully extracted JSON from 2473 char response
+2025-07-21 11:40:13,840 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:13,840 - DEBUG - Successfully extracted JSON from 2588 char response
+2025-07-21 11:40:20,198 - INFO - LLM: 512 tokens in 6.36s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:20,198 - DEBUG - Successfully extracted JSON from 2555 char response
+2025-07-21 11:40:26,554 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:26,554 - DEBUG - Successfully extracted JSON from 2508 char response
+2025-07-21 11:40:32,909 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:32,909 - DEBUG - Successfully extracted JSON from 2037 char response
+2025-07-21 11:40:39,254 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:39,254 - DEBUG - Successfully extracted JSON from 2525 char response
+2025-07-21 11:40:39,254 - INFO - Progress: 90/114 - Avg time: 6.35s/entry - ETA: 2.5 min
+2025-07-21 11:40:45,623 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:45,623 - DEBUG - Successfully extracted JSON from 2331 char response
+2025-07-21 11:40:51,974 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:51,974 - DEBUG - Successfully extracted JSON from 2206 char response
+2025-07-21 11:40:58,330 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:40:58,330 - DEBUG - Successfully extracted JSON from 2739 char response
+2025-07-21 11:41:04,692 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:04,692 - DEBUG - Successfully extracted JSON from 2429 char response
+2025-07-21 11:41:11,046 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:11,046 - DEBUG - Successfully extracted JSON from 2508 char response
+2025-07-21 11:41:17,397 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:17,397 - DEBUG - Successfully extracted JSON from 2471 char response
+2025-07-21 11:41:23,758 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:23,758 - DEBUG - Successfully extracted JSON from 2285 char response
+2025-07-21 11:41:30,115 - INFO - LLM: 512 tokens in 6.36s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:30,115 - DEBUG - Successfully extracted JSON from 2305 char response
+2025-07-21 11:41:36,462 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:36,462 - DEBUG - Successfully extracted JSON from 2476 char response
+2025-07-21 11:41:42,808 - INFO - LLM: 512 tokens in 6.35s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:42,808 - DEBUG - Successfully extracted JSON from 2452 char response
+2025-07-21 11:41:42,808 - INFO - Progress: 100/114 - Avg time: 6.36s/entry - ETA: 1.5 min
+2025-07-21 11:41:49,166 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:49,166 - DEBUG - Successfully extracted JSON from 2408 char response
+2025-07-21 11:41:55,506 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:41:55,506 - DEBUG - Successfully extracted JSON from 2613 char response
+2025-07-21 11:42:01,856 - INFO - LLM: 512 tokens in 6.35s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:01,856 - DEBUG - Successfully extracted JSON from 2477 char response
+2025-07-21 11:42:08,193 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:08,193 - DEBUG - Successfully extracted JSON from 2336 char response
+2025-07-21 11:42:14,534 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:14,534 - DEBUG - Successfully extracted JSON from 2544 char response
+2025-07-21 11:42:20,878 - INFO - LLM: 512 tokens in 6.34s = 80.7 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:20,879 - DEBUG - Successfully extracted JSON from 2636 char response
+2025-07-21 11:42:27,274 - INFO - LLM: 512 tokens in 6.39s = 80.1 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:27,274 - DEBUG - Successfully extracted JSON from 1972 char response
+2025-07-21 11:42:33,615 - INFO - LLM: 512 tokens in 6.34s = 80.8 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:33,615 - DEBUG - Successfully extracted JSON from 2252 char response
+2025-07-21 11:42:39,975 - INFO - LLM: 512 tokens in 6.36s = 80.5 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:39,975 - DEBUG - Successfully extracted JSON from 2542 char response
+2025-07-21 11:42:46,332 - INFO - LLM: 512 tokens in 6.36s = 80.6 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:46,332 - DEBUG - Successfully extracted JSON from 2319 char response
+2025-07-21 11:42:46,332 - INFO - Progress: 110/114 - Avg time: 6.35s/entry - ETA: 0.4 min
+2025-07-21 11:42:52,707 - INFO - LLM: 512 tokens in 6.37s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:52,707 - DEBUG - Successfully extracted JSON from 1990 char response
+2025-07-21 11:42:59,075 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:42:59,075 - DEBUG - Successfully extracted JSON from 2124 char response
+2025-07-21 11:43:05,448 - INFO - LLM: 512 tokens in 6.37s = 80.4 tokens/sec (input: 148 tokens)
+2025-07-21 11:43:05,448 - DEBUG - Successfully extracted JSON from 2393 char response
+2025-07-21 11:43:11,822 - INFO - LLM: 512 tokens in 6.37s = 80.3 tokens/sec (input: 148 tokens)
+2025-07-21 11:43:11,822 - DEBUG - Successfully extracted JSON from 2399 char response
+2025-07-21 11:43:11,822 - INFO - 
+Enhancement Summary:
+2025-07-21 11:43:11,822 - INFO -   - Total time: 727.88s
+2025-07-21 11:43:11,822 - INFO -   - Average time per entry: 6.38s
+2025-07-21 11:43:11,822 - INFO -   - Min/Max times: 6.34s / 6.54s
+2025-07-21 11:43:11,822 - INFO - 
+File processing complete for microsoft_security_20250715_183647.json:
+2025-07-21 11:43:11,822 - INFO -   - Total entries: 114
+2025-07-21 11:43:11,822 - INFO -   - Final retained: 113 (99.1%)
+2025-07-21 11:43:11,822 - INFO -   - Processing time: 728.83s
+2025-07-21 11:43:11,822 - INFO -   - Avg time per entry: 6.393s
+2025-07-21 11:43:11,823 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 23.8 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 421
+  - Entries passed filter: 411 (97.6%)
+  - Entries failed filter: 10
+  - Files completed: 3
+
+Processing Speed:
+  - Mean time per entry: 3.397s
+  - Median time per entry: 0.008s
+  - 90th percentile: 7.001s
+  - 95th percentile: 7.327s
+  - Throughput: 0.29 entries/second
+
+Memory Usage:
+  - Current RSS: 4731.6 MB
+  - Peak RSS: 4731.6 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 5 (50.0%)
+  - Contains exclusion pattern: non_security_academic: 4 (40.0%)
+  - Enhancement failed: 1 (10.0%)
+
+Score Distribution:
+  - Score 0: 215 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 2 entries
+  - Score 4: 32 entries
+  - Score 5: 92 entries
+  - Score 6: 6 entries
+  - Score 7: 5 entries
+  - Score 8: 7 entries
+  - Score 9: 5 entries
+  - Score 10: 6 entries
+  - Score 11: 5 entries
+  - Score 12: 11 entries
+  - Score 13: 3 entries
+  - Score 14: 4 entries
+  - Score 15: 4 entries
+  - Score 16: 2 entries
+  - Score 17: 1 entries
+  - Score 20: 5 entries
+  - Score 21: 1 entries
+  - Score 22: 2 entries
+  - Score 23: 1 entries
+  - Score 24: 1 entries
+  - Score 25: 1 entries
+  - Score 27: 1 entries
+  - Score 29: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 206
+  - Tokens per second: 79.4 (median), 76.5 (mean)
+  - 90th percentile: 80.7 tokens/sec
+  - Generation time: 6.45s (median), 6.93s (mean)
+  - Avg tokens: 325 input, 512 output
+================================================================================
+
+2025-07-21 11:43:11,826 - INFO - Saved 113 entries to filtered_data/microsoft_security_20250715_183647_filtered_20250721_114311.json
+2025-07-21 11:43:11,826 - INFO - Saved 1 entries to filtered_data/microsoft_security_20250715_183647_removed_20250721_114311.json
+2025-07-21 11:43:11,974 - INFO - 
+============================================================
+2025-07-21 11:43:11,974 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-21 11:43:11,974 - INFO - ============================================================
+2025-07-21 11:43:11,976 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 11:43:13,971 - INFO - Rule-based filtering took 2.00s (11347.1 entries/sec)
+2025-07-21 11:43:13,971 - INFO - Rule-based pre-filter complete:
+2025-07-21 11:43:13,971 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-21 11:43:13,971 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-21 11:43:13,971 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-21 11:43:20,399 - INFO - LLM: 512 tokens in 6.43s = 79.7 tokens/sec (input: 296 tokens)
+2025-07-21 11:43:20,399 - DEBUG - Successfully extracted JSON from 2430 char response
+2025-07-21 11:43:27,189 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 323 tokens)
+2025-07-21 11:43:27,189 - DEBUG - Successfully extracted JSON from 2576 char response
+2025-07-21 11:43:33,820 - INFO - LLM: 512 tokens in 6.63s = 77.2 tokens/sec (input: 257 tokens)
+2025-07-21 11:43:33,820 - DEBUG - Successfully extracted JSON from 2801 char response
+2025-07-21 11:43:40,550 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 303 tokens)
+2025-07-21 11:43:40,550 - DEBUG - Successfully extracted JSON from 2403 char response
+2025-07-21 11:43:47,306 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 326 tokens)
+2025-07-21 11:43:47,306 - DEBUG - Successfully extracted JSON from 2906 char response
+2025-07-21 11:43:54,349 - INFO - LLM: 512 tokens in 7.04s = 72.7 tokens/sec (input: 471 tokens)
+2025-07-21 11:43:54,349 - DEBUG - Successfully extracted JSON from 2191 char response
+2025-07-21 11:44:01,112 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 341 tokens)
+2025-07-21 11:44:01,112 - DEBUG - Successfully extracted JSON from 2463 char response
+2025-07-21 11:44:07,805 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 281 tokens)
+2025-07-21 11:44:07,805 - DEBUG - Successfully extracted JSON from 2084 char response
+2025-07-21 11:44:14,487 - INFO - LLM: 512 tokens in 6.68s = 76.6 tokens/sec (input: 293 tokens)
+2025-07-21 11:44:14,487 - DEBUG - Successfully extracted JSON from 2640 char response
+2025-07-21 11:44:21,188 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 320 tokens)
+2025-07-21 11:44:21,188 - DEBUG - Successfully extracted JSON from 2555 char response
+2025-07-21 11:44:21,188 - INFO - Progress: 10/22185 - Avg time: 6.72s/entry - ETA: 2484.2 min
+2025-07-21 11:44:28,045 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 383 tokens)
+2025-07-21 11:44:28,045 - DEBUG - Successfully extracted JSON from 2694 char response
+2025-07-21 11:44:34,838 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 323 tokens)
+2025-07-21 11:44:34,839 - DEBUG - Successfully extracted JSON from 2621 char response
+2025-07-21 11:44:42,147 - INFO - LLM: 512 tokens in 7.31s = 70.1 tokens/sec (input: 616 tokens)
+2025-07-21 11:44:42,147 - DEBUG - Successfully extracted JSON from 2705 char response
+2025-07-21 11:44:48,929 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 325 tokens)
+2025-07-21 11:44:48,929 - DEBUG - Successfully extracted JSON from 2415 char response
+2025-07-21 11:44:55,541 - INFO - LLM: 512 tokens in 6.61s = 77.5 tokens/sec (input: 253 tokens)
+2025-07-21 11:44:55,541 - DEBUG - Successfully extracted JSON from 2379 char response
+2025-07-21 11:45:02,240 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 253 tokens)
+2025-07-21 11:45:02,240 - DEBUG - Successfully extracted JSON from 2510 char response
+2025-07-21 11:45:08,998 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 290 tokens)
+2025-07-21 11:45:08,998 - DEBUG - Successfully extracted JSON from 2059 char response
+2025-07-21 11:45:15,729 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 300 tokens)
+2025-07-21 11:45:15,729 - DEBUG - Successfully extracted JSON from 2527 char response
+2025-07-21 11:45:22,525 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 333 tokens)
+2025-07-21 11:45:22,525 - DEBUG - Successfully extracted JSON from 2759 char response
+2025-07-21 11:45:29,785 - INFO - LLM: 512 tokens in 7.26s = 70.5 tokens/sec (input: 532 tokens)
+2025-07-21 11:45:29,785 - DEBUG - Successfully extracted JSON from 2886 char response
+2025-07-21 11:45:29,785 - INFO - Progress: 20/22185 - Avg time: 6.86s/entry - ETA: 2534.0 min
+2025-07-21 11:45:37,366 - INFO - LLM: 512 tokens in 7.58s = 67.6 tokens/sec (input: 736 tokens)
+2025-07-21 11:45:37,366 - DEBUG - Successfully extracted JSON from 2649 char response
+2025-07-21 11:45:44,079 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 278 tokens)
+2025-07-21 11:45:44,079 - DEBUG - Successfully extracted JSON from 2455 char response
+2025-07-21 11:45:51,310 - INFO - LLM: 512 tokens in 7.23s = 70.8 tokens/sec (input: 535 tokens)
+2025-07-21 11:45:51,310 - DEBUG - Successfully extracted JSON from 2923 char response
+2025-07-21 11:45:58,110 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 339 tokens)
+2025-07-21 11:45:58,110 - DEBUG - Successfully extracted JSON from 2605 char response
+2025-07-21 11:46:04,993 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 364 tokens)
+2025-07-21 11:46:04,993 - DEBUG - Successfully extracted JSON from 2700 char response
+2025-07-21 11:46:11,807 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 344 tokens)
+2025-07-21 11:46:11,807 - DEBUG - Successfully extracted JSON from 2693 char response
+2025-07-21 11:46:18,616 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 337 tokens)
+2025-07-21 11:46:18,616 - DEBUG - Successfully extracted JSON from 2608 char response
+2025-07-21 11:46:25,418 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 341 tokens)
+2025-07-21 11:46:25,418 - DEBUG - Successfully extracted JSON from 2419 char response
+2025-07-21 11:46:32,093 - INFO - LLM: 512 tokens in 6.67s = 76.7 tokens/sec (input: 280 tokens)
+2025-07-21 11:46:32,093 - DEBUG - Successfully extracted JSON from 2364 char response
+2025-07-21 11:46:38,960 - INFO - LLM: 512 tokens in 6.87s = 74.6 tokens/sec (input: 353 tokens)
+2025-07-21 11:46:38,960 - DEBUG - Successfully extracted JSON from 2896 char response
+2025-07-21 11:46:38,960 - INFO - Progress: 30/22185 - Avg time: 6.92s/entry - ETA: 2554.2 min
+2025-07-21 11:46:45,657 - INFO - LLM: 512 tokens in 6.70s = 76.5 tokens/sec (input: 286 tokens)
+2025-07-21 11:46:45,657 - DEBUG - Successfully extracted JSON from 2562 char response
+2025-07-21 11:46:53,148 - INFO - LLM: 512 tokens in 7.49s = 68.4 tokens/sec (input: 704 tokens)
+2025-07-21 11:46:53,148 - DEBUG - Successfully extracted JSON from 2371 char response
+2025-07-21 11:46:59,877 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 295 tokens)
+2025-07-21 11:46:59,877 - DEBUG - Successfully extracted JSON from 2635 char response
+2025-07-21 11:47:06,739 - INFO - LLM: 512 tokens in 6.86s = 74.6 tokens/sec (input: 372 tokens)
+2025-07-21 11:47:06,740 - DEBUG - Successfully extracted JSON from 2764 char response
+2025-07-21 11:47:13,544 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 342 tokens)
+2025-07-21 11:47:13,544 - DEBUG - Successfully extracted JSON from 2538 char response
+2025-07-21 11:47:20,747 - INFO - LLM: 512 tokens in 7.20s = 71.1 tokens/sec (input: 551 tokens)
+2025-07-21 11:47:20,747 - DEBUG - Successfully extracted JSON from 2542 char response
+2025-07-21 11:47:27,848 - INFO - LLM: 512 tokens in 7.10s = 72.1 tokens/sec (input: 486 tokens)
+2025-07-21 11:47:27,848 - DEBUG - Successfully extracted JSON from 2693 char response
+2025-07-21 11:47:34,707 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 379 tokens)
+2025-07-21 11:47:34,707 - DEBUG - Successfully extracted JSON from 2544 char response
+2025-07-21 11:47:42,196 - INFO - LLM: 512 tokens in 7.49s = 68.4 tokens/sec (input: 694 tokens)
+2025-07-21 11:47:42,196 - DEBUG - Successfully extracted JSON from 1911 char response
+2025-07-21 11:47:48,922 - INFO - LLM: 512 tokens in 6.72s = 76.1 tokens/sec (input: 294 tokens)
+2025-07-21 11:47:48,922 - DEBUG - Successfully extracted JSON from 2681 char response
+2025-07-21 11:47:48,922 - INFO - Progress: 40/22185 - Avg time: 7.00s/entry - ETA: 2582.1 min
+2025-07-21 11:47:55,700 - INFO - LLM: 512 tokens in 6.78s = 75.6 tokens/sec (input: 340 tokens)
+2025-07-21 11:47:55,700 - DEBUG - Successfully extracted JSON from 2893 char response
+2025-07-21 11:48:02,338 - INFO - LLM: 512 tokens in 6.64s = 77.1 tokens/sec (input: 288 tokens)
+2025-07-21 11:48:02,338 - DEBUG - Successfully extracted JSON from 2360 char response
+2025-07-21 11:48:09,142 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 350 tokens)
+2025-07-21 11:48:09,143 - DEBUG - Successfully extracted JSON from 2671 char response
+2025-07-21 11:48:15,937 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 341 tokens)
+2025-07-21 11:48:15,938 - DEBUG - Successfully extracted JSON from 2795 char response
+2025-07-21 11:48:23,480 - INFO - LLM: 512 tokens in 7.54s = 67.9 tokens/sec (input: 713 tokens)
+2025-07-21 11:48:23,480 - DEBUG - Successfully extracted JSON from 2606 char response
+2025-07-21 11:48:30,191 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 300 tokens)
+2025-07-21 11:48:30,191 - DEBUG - Successfully extracted JSON from 2683 char response
+2025-07-21 11:48:37,050 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 376 tokens)
+2025-07-21 11:48:37,051 - DEBUG - Successfully extracted JSON from 2732 char response
+2025-07-21 11:48:44,527 - INFO - LLM: 512 tokens in 7.47s = 68.5 tokens/sec (input: 689 tokens)
+2025-07-21 11:48:44,527 - DEBUG - Successfully extracted JSON from 2649 char response
+2025-07-21 11:48:51,727 - INFO - LLM: 512 tokens in 7.20s = 71.1 tokens/sec (input: 528 tokens)
+2025-07-21 11:48:51,727 - DEBUG - Successfully extracted JSON from 2714 char response
+2025-07-21 11:48:58,520 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 344 tokens)
+2025-07-21 11:48:58,521 - DEBUG - Successfully extracted JSON from 2765 char response
+2025-07-21 11:48:58,521 - INFO - Progress: 50/22185 - Avg time: 6.96s/entry - ETA: 2567.6 min
+2025-07-21 11:49:05,474 - INFO - LLM: 512 tokens in 6.95s = 73.6 tokens/sec (input: 357 tokens)
+2025-07-21 11:49:05,474 - DEBUG - Successfully extracted JSON from 2462 char response
+2025-07-21 11:49:12,841 - INFO - LLM: 512 tokens in 7.36s = 69.5 tokens/sec (input: 640 tokens)
+2025-07-21 11:49:12,841 - DEBUG - Successfully extracted JSON from 2680 char response
+2025-07-21 11:49:19,467 - INFO - LLM: 512 tokens in 6.62s = 77.3 tokens/sec (input: 256 tokens)
+2025-07-21 11:49:19,467 - DEBUG - Successfully extracted JSON from 1504 char response
+2025-07-21 11:49:26,116 - INFO - LLM: 512 tokens in 6.65s = 77.0 tokens/sec (input: 258 tokens)
+2025-07-21 11:49:26,116 - DEBUG - Successfully extracted JSON from 2414 char response
+2025-07-21 11:49:26,121 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 30.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 23127
+  - Entries passed filter: 22650 (97.9%)
+  - Entries failed filter: 477
+  - Files completed: 3
+
+Processing Speed:
+  - Mean time per entry: 0.078s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 12.82 entries/second
+
+Memory Usage:
+  - Current RSS: 5100.2 MB
+  - Peak RSS: 5100.2 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 472 (99.0%)
+  - Contains exclusion pattern: non_security_academic: 4 (0.8%)
+  - Enhancement failed: 1 (0.2%)
+
+Score Distribution:
+  - Score 0: 736 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 1281 entries
+  - Score 4: 544 entries
+  - Score 5: 1528 entries
+  - Score 6: 1432 entries
+  - Score 7: 1283 entries
+  - Score 8: 3561 entries
+  - Score 9: 1436 entries
+  - Score 10: 3429 entries
+  - Score 11: 2561 entries
+  - Score 12: 1253 entries
+  - Score 13: 1010 entries
+  - Score 14: 773 entries
+  - Score 15: 599 entries
+  - Score 16: 336 entries
+  - Score 17: 280 entries
+  - Score 18: 190 entries
+  - Score 19: 129 entries
+  - Score 20: 130 entries
+  - Score 21: 83 entries
+  - Score 22: 70 entries
+  - Score 23: 67 entries
+  - Score 24: 39 entries
+  - Score 25: 50 entries
+  - Score 26: 51 entries
+  - Score 27: 38 entries
+  - Score 28: 30 entries
+  - Score 29: 29 entries
+  - Score 30: 26 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 16 entries
+  - Score 34: 15 entries
+  - Score 35: 11 entries
+  - Score 36: 10 entries
+  - Score 37: 3 entries
+  - Score 38: 7 entries
+  - Score 39: 8 entries
+  - Score 40: 7 entries
+  - Score 41: 5 entries
+  - Score 42: 3 entries
+  - Score 43: 3 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 2 entries
+  - Score 47: 1 entries
+  - Score 49: 2 entries
+  - Score 50: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 260
+  - Tokens per second: 76.4 (median), 76.1 (mean)
+  - 90th percentile: 80.6 tokens/sec
+  - Generation time: 6.70s (median), 6.92s (mean)
+  - Avg tokens: 338 input, 512 output
+================================================================================
+
+2025-07-21 11:49:33,619 - INFO - LLM: 512 tokens in 7.50s = 68.3 tokens/sec (input: 683 tokens)
+2025-07-21 11:49:33,619 - DEBUG - Successfully extracted JSON from 2571 char response
+2025-07-21 11:49:40,586 - INFO - LLM: 512 tokens in 6.96s = 73.5 tokens/sec (input: 400 tokens)
+2025-07-21 11:49:40,586 - DEBUG - Successfully extracted JSON from 2728 char response
+2025-07-21 11:49:47,370 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 335 tokens)
+2025-07-21 11:49:47,370 - DEBUG - Successfully extracted JSON from 2670 char response
+2025-07-21 11:49:54,236 - INFO - LLM: 512 tokens in 6.86s = 74.6 tokens/sec (input: 369 tokens)
+2025-07-21 11:49:54,236 - DEBUG - Successfully extracted JSON from 2853 char response
+2025-07-21 11:50:01,037 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 343 tokens)
+2025-07-21 11:50:01,037 - DEBUG - Successfully extracted JSON from 2769 char response
+2025-07-21 11:50:08,096 - INFO - LLM: 512 tokens in 7.06s = 72.6 tokens/sec (input: 473 tokens)
+2025-07-21 11:50:08,096 - DEBUG - Successfully extracted JSON from 2534 char response
+2025-07-21 11:50:08,096 - INFO - Progress: 60/22185 - Avg time: 6.96s/entry - ETA: 2565.4 min
+2025-07-21 11:50:15,024 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 413 tokens)
+2025-07-21 11:50:15,024 - DEBUG - Successfully extracted JSON from 2738 char response
+2025-07-21 11:50:21,699 - INFO - LLM: 512 tokens in 6.67s = 76.7 tokens/sec (input: 265 tokens)
+2025-07-21 11:50:21,699 - DEBUG - Successfully extracted JSON from 2724 char response
+2025-07-21 11:50:28,502 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 348 tokens)
+2025-07-21 11:50:28,502 - DEBUG - Successfully extracted JSON from 2654 char response
+2025-07-21 11:50:35,416 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 387 tokens)
+2025-07-21 11:50:35,416 - DEBUG - Successfully extracted JSON from 2751 char response
+2025-07-21 11:50:42,492 - INFO - LLM: 512 tokens in 7.07s = 72.4 tokens/sec (input: 474 tokens)
+2025-07-21 11:50:42,492 - DEBUG - Successfully extracted JSON from 2670 char response
+2025-07-21 11:50:49,211 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 297 tokens)
+2025-07-21 11:50:49,211 - DEBUG - Successfully extracted JSON from 2426 char response
+2025-07-21 11:50:55,922 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 310 tokens)
+2025-07-21 11:50:55,922 - DEBUG - Successfully extracted JSON from 2659 char response
+2025-07-21 11:51:02,587 - INFO - LLM: 512 tokens in 6.66s = 76.8 tokens/sec (input: 266 tokens)
+2025-07-21 11:51:02,587 - DEBUG - Successfully extracted JSON from 2452 char response
+2025-07-21 11:51:09,367 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 333 tokens)
+2025-07-21 11:51:09,367 - DEBUG - Successfully extracted JSON from 2972 char response
+2025-07-21 11:51:16,154 - INFO - LLM: 512 tokens in 6.79s = 75.5 tokens/sec (input: 352 tokens)
+2025-07-21 11:51:16,154 - DEBUG - Successfully extracted JSON from 2392 char response
+2025-07-21 11:51:16,154 - INFO - Progress: 70/22185 - Avg time: 6.81s/entry - ETA: 2508.5 min
+2025-07-21 11:51:23,068 - INFO - LLM: 513 tokens in 6.91s = 74.2 tokens/sec (input: 400 tokens)
+2025-07-21 11:51:23,069 - DEBUG - Successfully extracted JSON from 2819 char response
+2025-07-21 11:51:29,898 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 357 tokens)
+2025-07-21 11:51:29,898 - DEBUG - Successfully extracted JSON from 2641 char response
+2025-07-21 11:51:36,789 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 401 tokens)
+2025-07-21 11:51:36,789 - DEBUG - Successfully extracted JSON from 2530 char response
+2025-07-21 11:51:43,649 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 362 tokens)
+2025-07-21 11:51:43,649 - DEBUG - Successfully extracted JSON from 2619 char response
+2025-07-21 11:51:50,335 - INFO - LLM: 512 tokens in 6.68s = 76.6 tokens/sec (input: 289 tokens)
+2025-07-21 11:51:50,335 - DEBUG - Successfully extracted JSON from 2287 char response
+2025-07-21 11:51:57,222 - INFO - LLM: 512 tokens in 6.89s = 74.4 tokens/sec (input: 392 tokens)
+2025-07-21 11:51:57,223 - DEBUG - Successfully extracted JSON from 2710 char response
+2025-07-21 11:52:04,128 - INFO - LLM: 512 tokens in 6.90s = 74.2 tokens/sec (input: 387 tokens)
+2025-07-21 11:52:04,128 - DEBUG - Successfully extracted JSON from 2937 char response
+2025-07-21 11:52:10,824 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 320 tokens)
+2025-07-21 11:52:10,824 - DEBUG - Successfully extracted JSON from 2610 char response
+2025-07-21 11:52:17,649 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 376 tokens)
+2025-07-21 11:52:17,649 - DEBUG - Successfully extracted JSON from 2623 char response
+2025-07-21 11:52:24,884 - INFO - LLM: 512 tokens in 7.23s = 70.8 tokens/sec (input: 560 tokens)
+2025-07-21 11:52:24,884 - DEBUG - Successfully extracted JSON from 2526 char response
+2025-07-21 11:52:24,884 - INFO - Progress: 80/22185 - Avg time: 6.87s/entry - ETA: 2532.1 min
+2025-07-21 11:52:31,613 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 320 tokens)
+2025-07-21 11:52:31,613 - DEBUG - Successfully extracted JSON from 2836 char response
+2025-07-21 11:52:38,815 - INFO - LLM: 512 tokens in 7.20s = 71.1 tokens/sec (input: 557 tokens)
+2025-07-21 11:52:38,815 - DEBUG - Successfully extracted JSON from 2691 char response
+2025-07-21 11:52:45,652 - INFO - LLM: 512 tokens in 6.84s = 74.9 tokens/sec (input: 359 tokens)
+2025-07-21 11:52:45,653 - DEBUG - Successfully extracted JSON from 2623 char response
+2025-07-21 11:52:52,549 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 399 tokens)
+2025-07-21 11:52:52,549 - DEBUG - Successfully extracted JSON from 2688 char response
+2025-07-21 11:52:59,182 - INFO - LLM: 512 tokens in 6.63s = 77.2 tokens/sec (input: 270 tokens)
+2025-07-21 11:52:59,182 - DEBUG - Successfully extracted JSON from 2683 char response
+2025-07-21 11:53:05,895 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 291 tokens)
+2025-07-21 11:53:05,896 - DEBUG - Successfully extracted JSON from 2633 char response
+2025-07-21 11:53:12,602 - INFO - LLM: 512 tokens in 6.71s = 76.4 tokens/sec (input: 298 tokens)
+2025-07-21 11:53:12,602 - DEBUG - Successfully extracted JSON from 2504 char response
+2025-07-21 11:53:19,376 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 345 tokens)
+2025-07-21 11:53:19,376 - DEBUG - Successfully extracted JSON from 2732 char response
+2025-07-21 11:53:26,209 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 358 tokens)
+2025-07-21 11:53:26,209 - DEBUG - Successfully extracted JSON from 2518 char response
+2025-07-21 11:53:32,851 - INFO - LLM: 512 tokens in 6.64s = 77.1 tokens/sec (input: 262 tokens)
+2025-07-21 11:53:32,851 - DEBUG - Successfully extracted JSON from 2637 char response
+2025-07-21 11:53:32,851 - INFO - Progress: 90/22185 - Avg time: 6.80s/entry - ETA: 2502.9 min
+2025-07-21 11:53:39,743 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 401 tokens)
+2025-07-21 11:53:39,743 - DEBUG - Successfully extracted JSON from 2715 char response
+2025-07-21 11:53:46,620 - INFO - LLM: 512 tokens in 6.88s = 74.5 tokens/sec (input: 347 tokens)
+2025-07-21 11:53:46,620 - DEBUG - Successfully extracted JSON from 2121 char response
+2025-07-21 11:53:53,648 - INFO - LLM: 512 tokens in 7.03s = 72.9 tokens/sec (input: 450 tokens)
+2025-07-21 11:53:53,648 - DEBUG - Successfully extracted JSON from 2705 char response
+2025-07-21 11:54:00,360 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 311 tokens)
+2025-07-21 11:54:00,360 - DEBUG - Successfully extracted JSON from 2622 char response
+2025-07-21 11:54:07,003 - INFO - LLM: 512 tokens in 6.64s = 77.1 tokens/sec (input: 274 tokens)
+2025-07-21 11:54:07,003 - DEBUG - Successfully extracted JSON from 2472 char response
+2025-07-21 11:54:13,792 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 346 tokens)
+2025-07-21 11:54:13,792 - DEBUG - Successfully extracted JSON from 2681 char response
+2025-07-21 11:54:21,287 - INFO - LLM: 512 tokens in 7.49s = 68.3 tokens/sec (input: 678 tokens)
+2025-07-21 11:54:21,287 - DEBUG - Successfully extracted JSON from 2612 char response
+2025-07-21 11:54:28,136 - INFO - LLM: 512 tokens in 6.85s = 74.8 tokens/sec (input: 354 tokens)
+2025-07-21 11:54:28,137 - DEBUG - Successfully extracted JSON from 2788 char response
+2025-07-21 11:54:35,170 - INFO - LLM: 512 tokens in 7.03s = 72.8 tokens/sec (input: 451 tokens)
+2025-07-21 11:54:35,171 - DEBUG - Successfully extracted JSON from 2636 char response
+2025-07-21 11:54:41,942 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 348 tokens)
+2025-07-21 11:54:41,943 - DEBUG - Successfully extracted JSON from 2638 char response
+2025-07-21 11:54:41,943 - INFO - Progress: 100/22185 - Avg time: 6.91s/entry - ETA: 2543.1 min
+2025-07-21 11:54:49,100 - INFO - LLM: 512 tokens in 7.16s = 71.6 tokens/sec (input: 514 tokens)
+2025-07-21 11:54:49,100 - DEBUG - Successfully extracted JSON from 2810 char response
+2025-07-21 11:54:55,789 - INFO - LLM: 512 tokens in 6.69s = 76.6 tokens/sec (input: 294 tokens)
+2025-07-21 11:54:55,789 - DEBUG - Successfully extracted JSON from 2526 char response
+2025-07-21 11:55:02,499 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 305 tokens)
+2025-07-21 11:55:02,499 - DEBUG - Successfully extracted JSON from 2467 char response
+2025-07-21 11:55:09,290 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 336 tokens)
+2025-07-21 11:55:09,290 - DEBUG - Successfully extracted JSON from 2663 char response
+2025-07-21 11:55:16,555 - INFO - LLM: 512 tokens in 7.26s = 70.5 tokens/sec (input: 592 tokens)
+2025-07-21 11:55:16,556 - DEBUG - Successfully extracted JSON from 2686 char response
+2025-07-21 11:55:23,541 - INFO - LLM: 512 tokens in 6.98s = 73.3 tokens/sec (input: 441 tokens)
+2025-07-21 11:55:23,541 - DEBUG - Successfully extracted JSON from 2609 char response
+2025-07-21 11:55:30,433 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 391 tokens)
+2025-07-21 11:55:30,433 - DEBUG - Successfully extracted JSON from 2627 char response
+2025-07-21 11:55:37,069 - INFO - LLM: 512 tokens in 6.64s = 77.2 tokens/sec (input: 266 tokens)
+2025-07-21 11:55:37,069 - DEBUG - Successfully extracted JSON from 2595 char response
+2025-07-21 11:55:43,884 - INFO - LLM: 512 tokens in 6.81s = 75.1 tokens/sec (input: 347 tokens)
+2025-07-21 11:55:43,885 - DEBUG - Successfully extracted JSON from 2639 char response
+2025-07-21 11:55:50,651 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 336 tokens)
+2025-07-21 11:55:50,651 - DEBUG - Successfully extracted JSON from 2757 char response
+2025-07-21 11:55:50,651 - INFO - Progress: 110/22185 - Avg time: 6.87s/entry - ETA: 2527.8 min
+2025-07-21 11:55:57,282 - INFO - LLM: 512 tokens in 6.63s = 77.2 tokens/sec (input: 264 tokens)
+2025-07-21 11:55:57,282 - DEBUG - Successfully extracted JSON from 2585 char response
+2025-07-21 11:56:04,197 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 405 tokens)
+2025-07-21 11:56:04,197 - DEBUG - Successfully extracted JSON from 2195 char response
+2025-07-21 11:56:10,900 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 293 tokens)
+2025-07-21 11:56:10,900 - DEBUG - Successfully extracted JSON from 2775 char response
+2025-07-21 11:56:18,242 - INFO - LLM: 512 tokens in 7.34s = 69.8 tokens/sec (input: 633 tokens)
+2025-07-21 11:56:18,243 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 11:56:18,243 - ERROR - {
+  "technical_description": "Privileged Process Integrity is a security framework designed to safeguard highly privileged processes (e.g., system services, antivirus, authentication processes) from tampering, injection, or compromise. It focuses on protecting critical processes that interact with essential components, making them vulnerable to attacks like code injection, privilege escalation, and process manipulation. The framework includes mechanisms such as protected process settings, code s...
+2025-07-21 11:56:18,243 - ERROR - Response length: 2537 chars, tokens: 512
+2025-07-21 11:56:24,954 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 301 tokens)
+2025-07-21 11:56:24,954 - DEBUG - Successfully extracted JSON from 2336 char response
+2025-07-21 11:56:31,675 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 315 tokens)
+2025-07-21 11:56:31,675 - DEBUG - Successfully extracted JSON from 2495 char response
+2025-07-21 11:56:38,387 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 306 tokens)
+2025-07-21 11:56:38,387 - DEBUG - Successfully extracted JSON from 2656 char response
+2025-07-21 11:56:45,851 - INFO - LLM: 512 tokens in 7.46s = 68.6 tokens/sec (input: 692 tokens)
+2025-07-21 11:56:45,851 - DEBUG - Successfully extracted JSON from 2832 char response
+2025-07-21 11:56:53,020 - INFO - LLM: 512 tokens in 7.17s = 71.4 tokens/sec (input: 521 tokens)
+2025-07-21 11:56:53,020 - DEBUG - Successfully extracted JSON from 2822 char response
+2025-07-21 11:56:59,730 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 309 tokens)
+2025-07-21 11:56:59,730 - DEBUG - Successfully extracted JSON from 2867 char response
+2025-07-21 11:56:59,730 - INFO - Progress: 120/22185 - Avg time: 6.91s/entry - ETA: 2540.4 min
+2025-07-21 11:57:06,385 - INFO - LLM: 512 tokens in 6.65s = 77.0 tokens/sec (input: 285 tokens)
+2025-07-21 11:57:06,385 - DEBUG - Successfully extracted JSON from 2551 char response
+2025-07-21 11:57:13,564 - INFO - LLM: 512 tokens in 7.18s = 71.3 tokens/sec (input: 526 tokens)
+2025-07-21 11:57:13,564 - DEBUG - Successfully extracted JSON from 2721 char response
+2025-07-21 11:57:20,595 - INFO - LLM: 512 tokens in 7.03s = 72.8 tokens/sec (input: 475 tokens)
+2025-07-21 11:57:20,595 - DEBUG - Successfully extracted JSON from 2193 char response
+2025-07-21 11:57:27,362 - INFO - LLM: 512 tokens in 6.77s = 75.7 tokens/sec (input: 348 tokens)
+2025-07-21 11:57:27,362 - DEBUG - Successfully extracted JSON from 2694 char response
+2025-07-21 11:57:34,589 - INFO - LLM: 512 tokens in 7.23s = 70.9 tokens/sec (input: 553 tokens)
+2025-07-21 11:57:34,589 - DEBUG - Successfully extracted JSON from 2574 char response
+2025-07-21 11:57:41,370 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 341 tokens)
+2025-07-21 11:57:41,371 - DEBUG - Successfully extracted JSON from 2584 char response
+2025-07-21 11:57:48,063 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 262 tokens)
+2025-07-21 11:57:48,063 - DEBUG - Successfully extracted JSON from 2591 char response
+2025-07-21 11:57:54,894 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 372 tokens)
+2025-07-21 11:57:54,894 - DEBUG - Successfully extracted JSON from 2858 char response
+2025-07-21 11:58:01,915 - INFO - LLM: 512 tokens in 7.02s = 72.9 tokens/sec (input: 479 tokens)
+2025-07-21 11:58:01,915 - DEBUG - Successfully extracted JSON from 2380 char response
+2025-07-21 11:58:08,676 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 324 tokens)
+2025-07-21 11:58:08,676 - DEBUG - Successfully extracted JSON from 2526 char response
+2025-07-21 11:58:08,676 - INFO - Progress: 130/22185 - Avg time: 6.89s/entry - ETA: 2534.3 min
+2025-07-21 11:58:15,564 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 393 tokens)
+2025-07-21 11:58:15,564 - DEBUG - Successfully extracted JSON from 2677 char response
+2025-07-21 11:58:22,255 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 297 tokens)
+2025-07-21 11:58:22,255 - DEBUG - Successfully extracted JSON from 2803 char response
+2025-07-21 11:58:29,088 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 366 tokens)
+2025-07-21 11:58:29,088 - DEBUG - Successfully extracted JSON from 3111 char response
+2025-07-21 11:58:35,733 - INFO - LLM: 512 tokens in 6.64s = 77.1 tokens/sec (input: 269 tokens)
+2025-07-21 11:58:35,734 - DEBUG - Successfully extracted JSON from 2579 char response
+2025-07-21 11:58:43,316 - INFO - LLM: 512 tokens in 7.58s = 67.5 tokens/sec (input: 748 tokens)
+2025-07-21 11:58:43,316 - DEBUG - Successfully extracted JSON from 2790 char response
+2025-07-21 11:58:49,982 - INFO - LLM: 512 tokens in 6.66s = 76.8 tokens/sec (input: 287 tokens)
+2025-07-21 11:58:49,982 - DEBUG - Successfully extracted JSON from 2642 char response
+2025-07-21 11:58:56,747 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 332 tokens)
+2025-07-21 11:58:56,747 - DEBUG - Successfully extracted JSON from 2552 char response
+2025-07-21 11:59:03,790 - INFO - LLM: 512 tokens in 7.04s = 72.7 tokens/sec (input: 478 tokens)
+2025-07-21 11:59:03,790 - DEBUG - Successfully extracted JSON from 2620 char response
+2025-07-21 11:59:10,485 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 290 tokens)
+2025-07-21 11:59:10,485 - DEBUG - Successfully extracted JSON from 2326 char response
+2025-07-21 11:59:17,441 - INFO - LLM: 512 tokens in 6.95s = 73.6 tokens/sec (input: 439 tokens)
+2025-07-21 11:59:17,441 - DEBUG - Successfully extracted JSON from 2842 char response
+2025-07-21 11:59:17,441 - INFO - Progress: 140/22185 - Avg time: 6.88s/entry - ETA: 2526.5 min
+2025-07-21 11:59:24,229 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 342 tokens)
+2025-07-21 11:59:24,229 - DEBUG - Successfully extracted JSON from 2424 char response
+2025-07-21 11:59:31,724 - INFO - LLM: 512 tokens in 7.49s = 68.3 tokens/sec (input: 642 tokens)
+2025-07-21 11:59:31,724 - DEBUG - Successfully extracted JSON from 2530 char response
+2025-07-21 11:59:39,007 - INFO - LLM: 512 tokens in 7.28s = 70.3 tokens/sec (input: 589 tokens)
+2025-07-21 11:59:39,008 - DEBUG - Successfully extracted JSON from 2669 char response
+2025-07-21 11:59:45,969 - INFO - LLM: 512 tokens in 6.96s = 73.6 tokens/sec (input: 418 tokens)
+2025-07-21 11:59:45,969 - DEBUG - Successfully extracted JSON from 2600 char response
+2025-07-21 11:59:52,686 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 317 tokens)
+2025-07-21 11:59:52,686 - DEBUG - Successfully extracted JSON from 2653 char response
+2025-07-21 11:59:59,537 - INFO - LLM: 512 tokens in 6.85s = 74.7 tokens/sec (input: 363 tokens)
+2025-07-21 11:59:59,537 - DEBUG - Successfully extracted JSON from 2760 char response
+2025-07-21 12:00:06,587 - INFO - LLM: 512 tokens in 7.05s = 72.6 tokens/sec (input: 478 tokens)
+2025-07-21 12:00:06,587 - DEBUG - Successfully extracted JSON from 2684 char response
+2025-07-21 12:00:13,382 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 337 tokens)
+2025-07-21 12:00:13,382 - DEBUG - Successfully extracted JSON from 2685 char response
+2025-07-21 12:00:21,013 - INFO - LLM: 512 tokens in 7.63s = 67.1 tokens/sec (input: 774 tokens)
+2025-07-21 12:00:21,013 - DEBUG - Successfully extracted JSON from 2746 char response
+2025-07-21 12:00:27,805 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 339 tokens)
+2025-07-21 12:00:27,805 - DEBUG - Successfully extracted JSON from 2351 char response
+2025-07-21 12:00:27,805 - INFO - Progress: 150/22185 - Avg time: 7.04s/entry - ETA: 2584.1 min
+2025-07-21 12:00:34,526 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 306 tokens)
+2025-07-21 12:00:34,526 - DEBUG - Successfully extracted JSON from 2577 char response
+2025-07-21 12:00:41,392 - INFO - LLM: 512 tokens in 6.86s = 74.6 tokens/sec (input: 368 tokens)
+2025-07-21 12:00:41,392 - DEBUG - Successfully extracted JSON from 2889 char response
+2025-07-21 12:00:48,110 - INFO - LLM: 511 tokens in 6.72s = 76.1 tokens/sec (input: 314 tokens)
+2025-07-21 12:00:48,110 - DEBUG - Successfully extracted JSON from 2660 char response
+2025-07-21 12:00:54,846 - INFO - LLM: 512 tokens in 6.73s = 76.0 tokens/sec (input: 314 tokens)
+2025-07-21 12:00:54,846 - DEBUG - Successfully extracted JSON from 2370 char response
+2025-07-21 12:01:01,638 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 333 tokens)
+2025-07-21 12:01:01,638 - DEBUG - Successfully extracted JSON from 2409 char response
+2025-07-21 12:01:08,363 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 303 tokens)
+2025-07-21 12:01:08,364 - DEBUG - Successfully extracted JSON from 2784 char response
+2025-07-21 12:01:15,604 - INFO - LLM: 512 tokens in 7.24s = 70.7 tokens/sec (input: 553 tokens)
+2025-07-21 12:01:15,604 - DEBUG - Successfully extracted JSON from 2242 char response
+2025-07-21 12:01:22,722 - INFO - LLM: 512 tokens in 7.12s = 72.0 tokens/sec (input: 491 tokens)
+2025-07-21 12:01:22,722 - DEBUG - Successfully extracted JSON from 2778 char response
+2025-07-21 12:01:29,658 - INFO - LLM: 512 tokens in 6.93s = 73.8 tokens/sec (input: 388 tokens)
+2025-07-21 12:01:29,658 - DEBUG - Successfully extracted JSON from 2787 char response
+2025-07-21 12:01:36,494 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 341 tokens)
+2025-07-21 12:01:36,494 - DEBUG - Successfully extracted JSON from 2699 char response
+2025-07-21 12:01:36,494 - INFO - Progress: 160/22185 - Avg time: 6.87s/entry - ETA: 2521.4 min
+2025-07-21 12:01:43,368 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 358 tokens)
+2025-07-21 12:01:43,368 - DEBUG - Successfully extracted JSON from 2685 char response
+2025-07-21 12:01:50,776 - INFO - LLM: 512 tokens in 7.41s = 69.1 tokens/sec (input: 641 tokens)
+2025-07-21 12:01:50,776 - DEBUG - Successfully extracted JSON from 2396 char response
+2025-07-21 12:01:57,510 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 300 tokens)
+2025-07-21 12:01:57,510 - DEBUG - Successfully extracted JSON from 2675 char response
+2025-07-21 12:02:04,329 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 338 tokens)
+2025-07-21 12:02:04,329 - DEBUG - Successfully extracted JSON from 1994 char response
+2025-07-21 12:02:11,203 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 365 tokens)
+2025-07-21 12:02:11,203 - DEBUG - Successfully extracted JSON from 2802 char response
+2025-07-21 12:02:18,148 - INFO - LLM: 512 tokens in 6.94s = 73.7 tokens/sec (input: 403 tokens)
+2025-07-21 12:02:18,148 - DEBUG - Successfully extracted JSON from 2531 char response
+2025-07-21 12:02:24,951 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 342 tokens)
+2025-07-21 12:02:24,951 - DEBUG - Successfully extracted JSON from 2219 char response
+2025-07-21 12:02:31,878 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 396 tokens)
+2025-07-21 12:02:31,878 - DEBUG - Successfully extracted JSON from 2677 char response
+2025-07-21 12:02:38,742 - INFO - LLM: 512 tokens in 6.86s = 74.6 tokens/sec (input: 371 tokens)
+2025-07-21 12:02:38,742 - DEBUG - Successfully extracted JSON from 2798 char response
+2025-07-21 12:02:46,405 - INFO - LLM: 512 tokens in 7.66s = 66.8 tokens/sec (input: 786 tokens)
+2025-07-21 12:02:46,405 - DEBUG - Successfully extracted JSON from 2715 char response
+2025-07-21 12:02:46,405 - INFO - Progress: 170/22185 - Avg time: 6.99s/entry - ETA: 2565.1 min
+2025-07-21 12:02:53,216 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 339 tokens)
+2025-07-21 12:02:53,216 - DEBUG - Successfully extracted JSON from 2727 char response
+2025-07-21 12:02:59,893 - INFO - LLM: 512 tokens in 6.68s = 76.7 tokens/sec (input: 288 tokens)
+2025-07-21 12:02:59,893 - DEBUG - Successfully extracted JSON from 2579 char response
+2025-07-21 12:03:06,639 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 299 tokens)
+2025-07-21 12:03:06,639 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:03:06,639 - ERROR - {
+  "technical_description": "Host-based sensors must monitor all network adapters for usage and prevent the unauthorized creation of new adapters to maintain network visibility and prevent data exfiltration through alternative network pathways.",
+  "risk_level": "High",
+  "affected_systems": ["Windows systems with Bluetooth capabilities"],
+  "mitigations": [
+    "Implement Group Policy Objects (GPOs) to restrict Bluetooth adapter creation and usage as per Microsoft and TechRepublic guidelines."...
+2025-07-21 12:03:06,639 - ERROR - Response length: 2722 chars, tokens: 512
+2025-07-21 12:03:13,515 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 369 tokens)
+2025-07-21 12:03:13,515 - DEBUG - Successfully extracted JSON from 2741 char response
+2025-07-21 12:03:20,507 - INFO - LLM: 512 tokens in 6.99s = 73.2 tokens/sec (input: 436 tokens)
+2025-07-21 12:03:20,507 - DEBUG - Successfully extracted JSON from 2575 char response
+2025-07-21 12:03:27,313 - INFO - LLM: 512 tokens in 6.80s = 75.2 tokens/sec (input: 341 tokens)
+2025-07-21 12:03:27,313 - DEBUG - Successfully extracted JSON from 2288 char response
+2025-07-21 12:03:34,136 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 344 tokens)
+2025-07-21 12:03:34,136 - DEBUG - Successfully extracted JSON from 2773 char response
+2025-07-21 12:03:41,631 - INFO - LLM: 512 tokens in 7.49s = 68.3 tokens/sec (input: 693 tokens)
+2025-07-21 12:03:41,631 - DEBUG - Successfully extracted JSON from 1972 char response
+2025-07-21 12:03:48,410 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 308 tokens)
+2025-07-21 12:03:48,411 - DEBUG - Successfully extracted JSON from 2893 char response
+2025-07-21 12:03:55,784 - INFO - LLM: 512 tokens in 7.37s = 69.5 tokens/sec (input: 623 tokens)
+2025-07-21 12:03:55,784 - DEBUG - Successfully extracted JSON from 2299 char response
+2025-07-21 12:03:55,784 - INFO - Progress: 180/22185 - Avg time: 6.94s/entry - ETA: 2544.4 min
+2025-07-21 12:04:02,604 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 334 tokens)
+2025-07-21 12:04:02,604 - DEBUG - Successfully extracted JSON from 2543 char response
+2025-07-21 12:04:09,492 - INFO - LLM: 512 tokens in 6.89s = 74.4 tokens/sec (input: 358 tokens)
+2025-07-21 12:04:09,492 - DEBUG - Successfully extracted JSON from 2857 char response
+2025-07-21 12:04:16,240 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 294 tokens)
+2025-07-21 12:04:16,240 - DEBUG - Successfully extracted JSON from 2573 char response
+2025-07-21 12:04:23,709 - INFO - LLM: 512 tokens in 7.47s = 68.6 tokens/sec (input: 668 tokens)
+2025-07-21 12:04:23,709 - DEBUG - Successfully extracted JSON from 2723 char response
+2025-07-21 12:04:30,874 - INFO - LLM: 512 tokens in 7.16s = 71.5 tokens/sec (input: 508 tokens)
+2025-07-21 12:04:30,874 - DEBUG - Successfully extracted JSON from 2972 char response
+2025-07-21 12:04:37,761 - INFO - LLM: 512 tokens in 6.89s = 74.4 tokens/sec (input: 353 tokens)
+2025-07-21 12:04:37,761 - DEBUG - Successfully extracted JSON from 2773 char response
+2025-07-21 12:04:44,729 - INFO - LLM: 512 tokens in 6.97s = 73.5 tokens/sec (input: 400 tokens)
+2025-07-21 12:04:44,729 - DEBUG - Successfully extracted JSON from 2614 char response
+2025-07-21 12:04:51,703 - INFO - LLM: 512 tokens in 6.97s = 73.4 tokens/sec (input: 387 tokens)
+2025-07-21 12:04:51,703 - DEBUG - Successfully extracted JSON from 2715 char response
+2025-07-21 12:04:58,783 - INFO - LLM: 512 tokens in 7.08s = 72.3 tokens/sec (input: 462 tokens)
+2025-07-21 12:04:58,783 - DEBUG - Successfully extracted JSON from 2587 char response
+2025-07-21 12:05:05,612 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 344 tokens)
+2025-07-21 12:05:05,612 - DEBUG - Successfully extracted JSON from 2694 char response
+2025-07-21 12:05:05,612 - INFO - Progress: 190/22185 - Avg time: 6.98s/entry - ETA: 2559.7 min
+2025-07-21 12:05:12,446 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 339 tokens)
+2025-07-21 12:05:12,446 - DEBUG - Successfully extracted JSON from 2504 char response
+2025-07-21 12:05:19,483 - INFO - LLM: 512 tokens in 7.04s = 72.8 tokens/sec (input: 431 tokens)
+2025-07-21 12:05:19,483 - DEBUG - Successfully extracted JSON from 2581 char response
+2025-07-21 12:05:26,314 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 347 tokens)
+2025-07-21 12:05:26,314 - DEBUG - Successfully extracted JSON from 2656 char response
+2025-07-21 12:05:32,951 - INFO - LLM: 512 tokens in 6.64s = 77.2 tokens/sec (input: 255 tokens)
+2025-07-21 12:05:32,951 - DEBUG - Successfully extracted JSON from 2755 char response
+2025-07-21 12:05:39,702 - INFO - LLM: 513 tokens in 6.75s = 76.0 tokens/sec (input: 291 tokens)
+2025-07-21 12:05:39,702 - DEBUG - Successfully extracted JSON from 3046 char response
+2025-07-21 12:05:46,446 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 290 tokens)
+2025-07-21 12:05:46,447 - DEBUG - Successfully extracted JSON from 2806 char response
+2025-07-21 12:05:53,560 - INFO - LLM: 512 tokens in 7.11s = 72.0 tokens/sec (input: 473 tokens)
+2025-07-21 12:05:53,561 - DEBUG - Successfully extracted JSON from 2537 char response
+2025-07-21 12:06:00,393 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 346 tokens)
+2025-07-21 12:06:00,393 - DEBUG - Successfully extracted JSON from 2720 char response
+2025-07-21 12:06:07,309 - INFO - LLM: 512 tokens in 6.92s = 74.0 tokens/sec (input: 380 tokens)
+2025-07-21 12:06:07,309 - DEBUG - Successfully extracted JSON from 2798 char response
+2025-07-21 12:06:14,212 - INFO - LLM: 512 tokens in 6.90s = 74.2 tokens/sec (input: 363 tokens)
+2025-07-21 12:06:14,212 - DEBUG - Successfully extracted JSON from 2654 char response
+2025-07-21 12:06:14,212 - INFO - Progress: 200/22185 - Avg time: 6.86s/entry - ETA: 2513.6 min
+2025-07-21 12:06:21,171 - INFO - LLM: 512 tokens in 6.96s = 73.6 tokens/sec (input: 397 tokens)
+2025-07-21 12:06:21,171 - DEBUG - Successfully extracted JSON from 2987 char response
+2025-07-21 12:06:27,984 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 348 tokens)
+2025-07-21 12:06:27,985 - DEBUG - Successfully extracted JSON from 2671 char response
+2025-07-21 12:06:35,337 - INFO - LLM: 512 tokens in 7.35s = 69.7 tokens/sec (input: 587 tokens)
+2025-07-21 12:06:35,337 - DEBUG - Successfully extracted JSON from 2900 char response
+2025-07-21 12:06:42,227 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 359 tokens)
+2025-07-21 12:06:42,227 - DEBUG - Successfully extracted JSON from 2764 char response
+2025-07-21 12:06:49,120 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 368 tokens)
+2025-07-21 12:06:49,120 - DEBUG - Successfully extracted JSON from 2351 char response
+2025-07-21 12:06:55,871 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 301 tokens)
+2025-07-21 12:06:55,871 - DEBUG - Successfully extracted JSON from 2781 char response
+2025-07-21 12:07:02,758 - INFO - LLM: 512 tokens in 6.89s = 74.4 tokens/sec (input: 353 tokens)
+2025-07-21 12:07:02,758 - DEBUG - Successfully extracted JSON from 2648 char response
+2025-07-21 12:07:09,588 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 347 tokens)
+2025-07-21 12:07:09,589 - DEBUG - Successfully extracted JSON from 2642 char response
+2025-07-21 12:07:16,412 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 348 tokens)
+2025-07-21 12:07:16,413 - DEBUG - Successfully extracted JSON from 2730 char response
+2025-07-21 12:07:23,320 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 382 tokens)
+2025-07-21 12:07:23,320 - DEBUG - Successfully extracted JSON from 2780 char response
+2025-07-21 12:07:23,320 - INFO - Progress: 210/22185 - Avg time: 6.91s/entry - ETA: 2531.0 min
+2025-07-21 12:07:30,642 - INFO - LLM: 512 tokens in 7.32s = 69.9 tokens/sec (input: 579 tokens)
+2025-07-21 12:07:30,642 - DEBUG - Successfully extracted JSON from 2706 char response
+2025-07-21 12:07:37,400 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 303 tokens)
+2025-07-21 12:07:37,400 - DEBUG - Successfully extracted JSON from 2535 char response
+2025-07-21 12:07:44,679 - INFO - LLM: 512 tokens in 7.28s = 70.4 tokens/sec (input: 557 tokens)
+2025-07-21 12:07:44,679 - DEBUG - Successfully extracted JSON from 2878 char response
+2025-07-21 12:07:51,577 - INFO - LLM: 512 tokens in 6.90s = 74.2 tokens/sec (input: 368 tokens)
+2025-07-21 12:07:51,577 - DEBUG - Successfully extracted JSON from 2689 char response
+2025-07-21 12:07:58,500 - INFO - LLM: 512 tokens in 6.92s = 74.0 tokens/sec (input: 386 tokens)
+2025-07-21 12:07:58,500 - DEBUG - Successfully extracted JSON from 2826 char response
+2025-07-21 12:08:05,379 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 371 tokens)
+2025-07-21 12:08:05,379 - DEBUG - Successfully extracted JSON from 2896 char response
+2025-07-21 12:08:12,218 - INFO - LLM: 512 tokens in 6.84s = 74.9 tokens/sec (input: 342 tokens)
+2025-07-21 12:08:12,218 - DEBUG - Successfully extracted JSON from 2668 char response
+2025-07-21 12:08:19,049 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 345 tokens)
+2025-07-21 12:08:19,049 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:08:19,049 - ERROR - {
+  "technical_description": "The text advises identifying and blocking unnecessary system utilities or potentially malicious software that could access data on a network share. It recommends using whitelisting tools such as AppLocker, Software Restriction Policies, or other similar tools to audit and block such software. The mitigation focuses on preventing unauthorized or malicious software from accessing network shares by restricting their execution based on predefined policies.",
+  "risk_lev...
+2025-07-21 12:08:19,049 - ERROR - Response length: 2748 chars, tokens: 512
+2025-07-21 12:08:25,936 - INFO - LLM: 512 tokens in 6.89s = 74.4 tokens/sec (input: 366 tokens)
+2025-07-21 12:08:25,936 - DEBUG - Successfully extracted JSON from 2849 char response
+2025-07-21 12:08:32,761 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 345 tokens)
+2025-07-21 12:08:32,761 - DEBUG - Successfully extracted JSON from 3056 char response
+2025-07-21 12:08:32,761 - INFO - Progress: 220/22185 - Avg time: 6.94s/entry - ETA: 2542.1 min
+2025-07-21 12:08:39,518 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 301 tokens)
+2025-07-21 12:08:39,518 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:08:39,518 - ERROR - {
+  "technical_description": "Setting the timestamp_timeout to 0 enforces password reauthentication for each sudo command, while enabling tty_tickets prevents password caching across terminal sessions.",
+  "risk_level": "High",
+  "affected_systems": ["Unix-like operating systems using sudo"],
+  "mitigations": [
+    "Set timestamp_timeout to 0 in sudoers file",
+    "Enable tty_tickets in sudoers file",
+    "Regularly update sudo to the latest version (e.g., 3.2.0 or newer)"
+  ]
+  "course_of_actio...
+2025-07-21 12:08:39,518 - ERROR - Response length: 2229 chars, tokens: 512
+2025-07-21 12:08:46,273 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 295 tokens)
+2025-07-21 12:08:46,273 - DEBUG - Successfully extracted JSON from 2760 char response
+2025-07-21 12:08:53,104 - INFO - LLM: 511 tokens in 6.83s = 74.8 tokens/sec (input: 343 tokens)
+2025-07-21 12:08:53,104 - DEBUG - Successfully extracted JSON from 2691 char response
+2025-07-21 12:09:00,331 - INFO - LLM: 512 tokens in 7.23s = 70.9 tokens/sec (input: 533 tokens)
+2025-07-21 12:09:00,331 - DEBUG - Successfully extracted JSON from 2608 char response
+2025-07-21 12:09:07,013 - INFO - LLM: 512 tokens in 6.68s = 76.6 tokens/sec (input: 266 tokens)
+2025-07-21 12:09:07,013 - DEBUG - Successfully extracted JSON from 2418 char response
+2025-07-21 12:09:14,709 - INFO - LLM: 512 tokens in 7.69s = 66.5 tokens/sec (input: 773 tokens)
+2025-07-21 12:09:14,709 - DEBUG - Successfully extracted JSON from 2720 char response
+2025-07-21 12:09:21,462 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 292 tokens)
+2025-07-21 12:09:21,462 - DEBUG - Successfully extracted JSON from 2664 char response
+2025-07-21 12:09:28,956 - INFO - LLM: 512 tokens in 7.49s = 68.3 tokens/sec (input: 660 tokens)
+2025-07-21 12:09:28,956 - DEBUG - Successfully extracted JSON from 2676 char response
+2025-07-21 12:09:36,375 - INFO - LLM: 512 tokens in 7.42s = 69.0 tokens/sec (input: 624 tokens)
+2025-07-21 12:09:36,375 - DEBUG - Successfully extracted JSON from 2462 char response
+2025-07-21 12:09:43,307 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 364 tokens)
+2025-07-21 12:09:43,307 - DEBUG - Successfully extracted JSON from 2455 char response
+2025-07-21 12:09:43,307 - INFO - Progress: 230/22185 - Avg time: 7.05s/entry - ETA: 2581.4 min
+2025-07-21 12:09:50,260 - INFO - LLM: 512 tokens in 6.95s = 73.7 tokens/sec (input: 390 tokens)
+2025-07-21 12:09:50,260 - DEBUG - Successfully extracted JSON from 2834 char response
+2025-07-21 12:09:57,547 - INFO - LLM: 511 tokens in 7.29s = 70.1 tokens/sec (input: 547 tokens)
+2025-07-21 12:09:57,547 - DEBUG - Successfully extracted JSON from 2621 char response
+2025-07-21 12:10:04,280 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 283 tokens)
+2025-07-21 12:10:04,280 - DEBUG - Successfully extracted JSON from 2682 char response
+2025-07-21 12:10:11,055 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 314 tokens)
+2025-07-21 12:10:11,055 - DEBUG - Successfully extracted JSON from 2735 char response
+2025-07-21 12:10:18,014 - INFO - LLM: 512 tokens in 6.96s = 73.6 tokens/sec (input: 397 tokens)
+2025-07-21 12:10:18,014 - DEBUG - Successfully extracted JSON from 2714 char response
+2025-07-21 12:10:24,976 - INFO - LLM: 512 tokens in 6.96s = 73.6 tokens/sec (input: 416 tokens)
+2025-07-21 12:10:24,976 - DEBUG - Successfully extracted JSON from 2527 char response
+2025-07-21 12:10:31,927 - INFO - LLM: 512 tokens in 6.95s = 73.7 tokens/sec (input: 392 tokens)
+2025-07-21 12:10:31,927 - DEBUG - Successfully extracted JSON from 2879 char response
+2025-07-21 12:10:38,953 - INFO - LLM: 512 tokens in 7.02s = 72.9 tokens/sec (input: 404 tokens)
+2025-07-21 12:10:38,953 - DEBUG - Successfully extracted JSON from 2858 char response
+2025-07-21 12:10:45,842 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 357 tokens)
+2025-07-21 12:10:45,843 - DEBUG - Successfully extracted JSON from 2703 char response
+2025-07-21 12:10:53,114 - INFO - LLM: 512 tokens in 7.27s = 70.4 tokens/sec (input: 574 tokens)
+2025-07-21 12:10:53,115 - DEBUG - Successfully extracted JSON from 2850 char response
+2025-07-21 12:10:53,115 - INFO - Progress: 240/22185 - Avg time: 6.98s/entry - ETA: 2553.2 min
+2025-07-21 12:11:00,146 - INFO - LLM: 512 tokens in 7.03s = 72.8 tokens/sec (input: 440 tokens)
+2025-07-21 12:11:00,146 - DEBUG - Successfully extracted JSON from 2724 char response
+2025-07-21 12:11:07,090 - INFO - LLM: 512 tokens in 6.94s = 73.8 tokens/sec (input: 385 tokens)
+2025-07-21 12:11:07,090 - DEBUG - Successfully extracted JSON from 2713 char response
+2025-07-21 12:11:13,910 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 340 tokens)
+2025-07-21 12:11:13,910 - DEBUG - Successfully extracted JSON from 2651 char response
+2025-07-21 12:11:20,595 - INFO - LLM: 512 tokens in 6.68s = 76.6 tokens/sec (input: 271 tokens)
+2025-07-21 12:11:20,595 - DEBUG - Successfully extracted JSON from 2498 char response
+2025-07-21 12:11:27,593 - INFO - LLM: 512 tokens in 7.00s = 73.2 tokens/sec (input: 427 tokens)
+2025-07-21 12:11:27,593 - DEBUG - Successfully extracted JSON from 2602 char response
+2025-07-21 12:11:34,286 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 258 tokens)
+2025-07-21 12:11:34,286 - DEBUG - Successfully extracted JSON from 2524 char response
+2025-07-21 12:11:41,112 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 346 tokens)
+2025-07-21 12:11:41,112 - DEBUG - Successfully extracted JSON from 2755 char response
+2025-07-21 12:11:48,004 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 384 tokens)
+2025-07-21 12:11:48,004 - DEBUG - Successfully extracted JSON from 2925 char response
+2025-07-21 12:11:55,283 - INFO - LLM: 512 tokens in 7.28s = 70.4 tokens/sec (input: 515 tokens)
+2025-07-21 12:11:55,283 - DEBUG - Successfully extracted JSON from 2286 char response
+2025-07-21 12:12:02,165 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 380 tokens)
+2025-07-21 12:12:02,165 - DEBUG - Successfully extracted JSON from 1880 char response
+2025-07-21 12:12:02,165 - INFO - Progress: 250/22185 - Avg time: 6.90s/entry - ETA: 2524.3 min
+2025-07-21 12:12:08,910 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 297 tokens)
+2025-07-21 12:12:08,910 - DEBUG - Successfully extracted JSON from 2017 char response
+2025-07-21 12:12:15,939 - INFO - LLM: 512 tokens in 7.03s = 72.9 tokens/sec (input: 425 tokens)
+2025-07-21 12:12:15,939 - DEBUG - Successfully extracted JSON from 2422 char response
+2025-07-21 12:12:22,830 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 370 tokens)
+2025-07-21 12:12:22,830 - DEBUG - Successfully extracted JSON from 2429 char response
+2025-07-21 12:12:29,565 - INFO - LLM: 512 tokens in 6.73s = 76.0 tokens/sec (input: 319 tokens)
+2025-07-21 12:12:29,565 - DEBUG - Successfully extracted JSON from 2527 char response
+2025-07-21 12:12:36,497 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 397 tokens)
+2025-07-21 12:12:36,497 - DEBUG - Successfully extracted JSON from 2444 char response
+2025-07-21 12:12:43,303 - INFO - LLM: 512 tokens in 6.80s = 75.2 tokens/sec (input: 326 tokens)
+2025-07-21 12:12:43,303 - DEBUG - Successfully extracted JSON from 1567 char response
+2025-07-21 12:12:50,285 - INFO - LLM: 512 tokens in 6.98s = 73.3 tokens/sec (input: 426 tokens)
+2025-07-21 12:12:50,285 - DEBUG - Successfully extracted JSON from 2565 char response
+2025-07-21 12:12:57,366 - INFO - LLM: 512 tokens in 7.08s = 72.3 tokens/sec (input: 466 tokens)
+2025-07-21 12:12:57,367 - DEBUG - Successfully extracted JSON from 2357 char response
+2025-07-21 12:13:04,162 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 315 tokens)
+2025-07-21 12:13:04,162 - DEBUG - Successfully extracted JSON from 2381 char response
+2025-07-21 12:13:11,068 - INFO - LLM: 512 tokens in 6.90s = 74.2 tokens/sec (input: 369 tokens)
+2025-07-21 12:13:11,068 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:13:11,068 - ERROR - {
+  "technical_description": "RCSession is a C++ backdoor used since 2018 by Mustang Panda and Threat Group-3390. It has capabilities including persistence, remote code execution, and potential network traversal. The malware has been observed with versions up to 3.2.0, and it is associated with multiple attack campaigns and threat groups.",
+  "risk_level": "High",
+  "affected_systems": ["Windows systems"],
+  "mitigations": [
+    "Implement network segmentation to limit lateral movement.",
+ 
+  ]
+...
+2025-07-21 12:13:11,068 - ERROR - Response length: 2321 chars, tokens: 512
+2025-07-21 12:13:11,068 - INFO - Progress: 260/22185 - Avg time: 6.89s/entry - ETA: 2517.8 min
+2025-07-21 12:13:17,746 - INFO - LLM: 512 tokens in 6.68s = 76.7 tokens/sec (input: 287 tokens)
+2025-07-21 12:13:17,746 - DEBUG - Successfully extracted JSON from 2099 char response
+2025-07-21 12:13:24,490 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 305 tokens)
+2025-07-21 12:13:24,490 - DEBUG - Successfully extracted JSON from 2242 char response
+2025-07-21 12:13:31,229 - INFO - LLM: 512 tokens in 6.74s = 76.0 tokens/sec (input: 311 tokens)
+2025-07-21 12:13:31,229 - DEBUG - Successfully extracted JSON from 2282 char response
+2025-07-21 12:13:38,162 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 408 tokens)
+2025-07-21 12:13:38,162 - DEBUG - Successfully extracted JSON from 2371 char response
+2025-07-21 12:13:44,887 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 296 tokens)
+2025-07-21 12:13:44,887 - DEBUG - Successfully extracted JSON from 2167 char response
+2025-07-21 12:13:51,964 - INFO - LLM: 512 tokens in 7.08s = 72.4 tokens/sec (input: 472 tokens)
+2025-07-21 12:13:51,964 - DEBUG - Successfully extracted JSON from 2490 char response
+2025-07-21 12:13:58,687 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 291 tokens)
+2025-07-21 12:13:58,687 - DEBUG - Successfully extracted JSON from 2429 char response
+2025-07-21 12:14:05,425 - INFO - LLM: 512 tokens in 6.74s = 76.0 tokens/sec (input: 305 tokens)
+2025-07-21 12:14:05,425 - DEBUG - Successfully extracted JSON from 2376 char response
+2025-07-21 12:14:12,168 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 299 tokens)
+2025-07-21 12:14:12,168 - DEBUG - Successfully extracted JSON from 2456 char response
+2025-07-21 12:14:19,102 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 365 tokens)
+2025-07-21 12:14:19,102 - DEBUG - Successfully extracted JSON from 2380 char response
+2025-07-21 12:14:19,103 - INFO - Progress: 270/22185 - Avg time: 6.80s/entry - ETA: 2484.9 min
+2025-07-21 12:14:25,840 - INFO - LLM: 512 tokens in 6.74s = 76.0 tokens/sec (input: 320 tokens)
+2025-07-21 12:14:25,840 - DEBUG - Successfully extracted JSON from 2823 char response
+2025-07-21 12:14:32,573 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 302 tokens)
+2025-07-21 12:14:32,573 - DEBUG - Successfully extracted JSON from 1865 char response
+2025-07-21 12:14:39,459 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 378 tokens)
+2025-07-21 12:14:39,459 - DEBUG - Successfully extracted JSON from 2510 char response
+2025-07-21 12:14:46,255 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 334 tokens)
+2025-07-21 12:14:46,255 - DEBUG - Successfully extracted JSON from 2315 char response
+2025-07-21 12:14:53,066 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 340 tokens)
+2025-07-21 12:14:53,066 - DEBUG - Successfully extracted JSON from 2373 char response
+2025-07-21 12:15:00,007 - INFO - LLM: 512 tokens in 6.94s = 73.8 tokens/sec (input: 411 tokens)
+2025-07-21 12:15:00,007 - DEBUG - Successfully extracted JSON from 2097 char response
+2025-07-21 12:15:06,688 - INFO - LLM: 512 tokens in 6.68s = 76.6 tokens/sec (input: 287 tokens)
+2025-07-21 12:15:06,688 - DEBUG - Successfully extracted JSON from 2196 char response
+2025-07-21 12:15:13,566 - INFO - LLM: 512 tokens in 6.88s = 74.5 tokens/sec (input: 379 tokens)
+2025-07-21 12:15:13,566 - DEBUG - Successfully extracted JSON from 2519 char response
+2025-07-21 12:15:20,363 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 332 tokens)
+2025-07-21 12:15:20,363 - DEBUG - Successfully extracted JSON from 2429 char response
+2025-07-21 12:15:27,413 - INFO - LLM: 512 tokens in 7.05s = 72.6 tokens/sec (input: 453 tokens)
+2025-07-21 12:15:27,413 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:15:27,413 - ERROR - {
+  "technical_description": "Stuxnet is a sophisticated malware designed to target industrial control systems (ICS) devices. It exploits multiple zero-day vulnerabilities, employs a complex Windows rootkit, and has network infection capabilities. It was first discovered in 2010, with some components in use as early as November 2008.",
+  "risk_level": "High",
+  "affected_systems": [
+    "Industrial Control Systems (ICS)",
+    "Windows-based systems",
+    "Specific ICS devices (e.g., centrifuges ...
+2025-07-21 12:15:27,413 - ERROR - Response length: 2376 chars, tokens: 512
+2025-07-21 12:15:27,413 - INFO - Progress: 280/22185 - Avg time: 6.83s/entry - ETA: 2493.9 min
+2025-07-21 12:15:34,164 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 315 tokens)
+2025-07-21 12:15:34,164 - DEBUG - Successfully extracted JSON from 2238 char response
+2025-07-21 12:15:41,050 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 378 tokens)
+2025-07-21 12:15:41,050 - DEBUG - Successfully extracted JSON from 2468 char response
+2025-07-21 12:15:48,072 - INFO - LLM: 512 tokens in 7.02s = 72.9 tokens/sec (input: 423 tokens)
+2025-07-21 12:15:48,072 - DEBUG - Successfully extracted JSON from 2383 char response
+2025-07-21 12:15:54,829 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 305 tokens)
+2025-07-21 12:15:54,829 - DEBUG - Successfully extracted JSON from 2082 char response
+2025-07-21 12:16:01,704 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 361 tokens)
+2025-07-21 12:16:01,704 - DEBUG - Successfully extracted JSON from 2360 char response
+2025-07-21 12:16:08,401 - INFO - LLM: 512 tokens in 6.70s = 76.5 tokens/sec (input: 287 tokens)
+2025-07-21 12:16:08,401 - DEBUG - Successfully extracted JSON from 2398 char response
+2025-07-21 12:16:15,152 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 302 tokens)
+2025-07-21 12:16:15,152 - DEBUG - Successfully extracted JSON from 2451 char response
+2025-07-21 12:16:21,906 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 306 tokens)
+2025-07-21 12:16:21,906 - DEBUG - Successfully extracted JSON from 2326 char response
+2025-07-21 12:16:28,921 - INFO - LLM: 512 tokens in 7.01s = 73.0 tokens/sec (input: 417 tokens)
+2025-07-21 12:16:28,921 - DEBUG - Successfully extracted JSON from 2546 char response
+2025-07-21 12:16:35,695 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 314 tokens)
+2025-07-21 12:16:35,695 - DEBUG - Successfully extracted JSON from 2504 char response
+2025-07-21 12:16:35,695 - INFO - Progress: 290/22185 - Avg time: 6.83s/entry - ETA: 2491.7 min
+2025-07-21 12:16:42,440 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 301 tokens)
+2025-07-21 12:16:42,441 - DEBUG - Successfully extracted JSON from 2037 char response
+2025-07-21 12:16:49,280 - INFO - LLM: 512 tokens in 6.84s = 74.9 tokens/sec (input: 350 tokens)
+2025-07-21 12:16:49,280 - DEBUG - Successfully extracted JSON from 2500 char response
+2025-07-21 12:16:56,027 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 295 tokens)
+2025-07-21 12:16:56,027 - DEBUG - Successfully extracted JSON from 2498 char response
+2025-07-21 12:17:03,188 - INFO - LLM: 512 tokens in 7.16s = 71.5 tokens/sec (input: 466 tokens)
+2025-07-21 12:17:03,188 - DEBUG - Successfully extracted JSON from 2248 char response
+2025-07-21 12:17:10,073 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 370 tokens)
+2025-07-21 12:17:10,074 - DEBUG - Successfully extracted JSON from 1680 char response
+2025-07-21 12:17:16,963 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 355 tokens)
+2025-07-21 12:17:16,963 - DEBUG - Successfully extracted JSON from 2418 char response
+2025-07-21 12:17:23,660 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 286 tokens)
+2025-07-21 12:17:23,660 - DEBUG - Successfully extracted JSON from 2540 char response
+2025-07-21 12:17:30,493 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 349 tokens)
+2025-07-21 12:17:30,493 - DEBUG - Successfully extracted JSON from 2453 char response
+2025-07-21 12:17:37,267 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 303 tokens)
+2025-07-21 12:17:37,267 - DEBUG - Successfully extracted JSON from 2235 char response
+2025-07-21 12:17:44,038 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 311 tokens)
+2025-07-21 12:17:44,039 - DEBUG - Successfully extracted JSON from 2679 char response
+2025-07-21 12:17:44,039 - INFO - Progress: 300/22185 - Avg time: 6.83s/entry - ETA: 2492.8 min
+2025-07-21 12:17:50,799 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 308 tokens)
+2025-07-21 12:17:50,800 - DEBUG - Successfully extracted JSON from 2412 char response
+2025-07-21 12:17:57,584 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 316 tokens)
+2025-07-21 12:17:57,584 - DEBUG - Successfully extracted JSON from 2507 char response
+2025-07-21 12:18:04,377 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 312 tokens)
+2025-07-21 12:18:04,377 - DEBUG - Successfully extracted JSON from 2352 char response
+2025-07-21 12:18:11,199 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 328 tokens)
+2025-07-21 12:18:11,199 - DEBUG - Successfully extracted JSON from 2195 char response
+2025-07-21 12:18:17,967 - INFO - LLM: 512 tokens in 6.77s = 75.7 tokens/sec (input: 316 tokens)
+2025-07-21 12:18:17,967 - DEBUG - Successfully extracted JSON from 2309 char response
+2025-07-21 12:18:24,666 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 285 tokens)
+2025-07-21 12:18:24,666 - DEBUG - Successfully extracted JSON from 1406 char response
+2025-07-21 12:18:31,481 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 334 tokens)
+2025-07-21 12:18:31,481 - DEBUG - Successfully extracted JSON from 2273 char response
+2025-07-21 12:18:38,174 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 288 tokens)
+2025-07-21 12:18:38,174 - DEBUG - Successfully extracted JSON from 2051 char response
+2025-07-21 12:18:44,923 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 297 tokens)
+2025-07-21 12:18:44,923 - DEBUG - Successfully extracted JSON from 2326 char response
+2025-07-21 12:18:51,675 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 304 tokens)
+2025-07-21 12:18:51,675 - DEBUG - Successfully extracted JSON from 2230 char response
+2025-07-21 12:18:51,675 - INFO - Progress: 310/22185 - Avg time: 6.76s/entry - ETA: 2465.9 min
+2025-07-21 12:18:58,615 - INFO - LLM: 512 tokens in 6.94s = 73.8 tokens/sec (input: 405 tokens)
+2025-07-21 12:18:58,615 - DEBUG - Successfully extracted JSON from 2418 char response
+2025-07-21 12:19:05,498 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 364 tokens)
+2025-07-21 12:19:05,498 - DEBUG - Successfully extracted JSON from 2400 char response
+2025-07-21 12:19:12,434 - INFO - LLM: 512 tokens in 6.93s = 73.8 tokens/sec (input: 394 tokens)
+2025-07-21 12:19:12,434 - DEBUG - Successfully extracted JSON from 2365 char response
+2025-07-21 12:19:19,240 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 342 tokens)
+2025-07-21 12:19:19,240 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:19:19,241 - ERROR - {
+  "technical_description": "ZLib is a full-featured backdoor used as a second-stage implant during Operation Dust Storm since at least 2014. It is malware and should not be confused with the legitimate compression library of the same name.",
+  "risk_level": "High",
+  "affected_systems": ["Windows", "Linux", "macOS"],
+  "mitigations": [
+    "Implement network segmentation to limit lateral movement.",
+ 
+  ]
+}
+``` 
+
+I need to extract the technical description, risk level, affected systems, and mi...
+2025-07-21 12:19:19,241 - ERROR - Response length: 2367 chars, tokens: 512
+2025-07-21 12:19:26,047 - INFO - LLM: 512 tokens in 6.80s = 75.2 tokens/sec (input: 345 tokens)
+2025-07-21 12:19:26,047 - DEBUG - Successfully extracted JSON from 2389 char response
+2025-07-21 12:19:32,764 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 289 tokens)
+2025-07-21 12:19:32,764 - DEBUG - Successfully extracted JSON from 2715 char response
+2025-07-21 12:19:32,769 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 60.2 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 23389
+  - Entries passed filter: 22905 (97.9%)
+  - Entries failed filter: 484
+  - Files completed: 3
+
+Processing Speed:
+  - Mean time per entry: 0.154s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 6.48 entries/second
+
+Memory Usage:
+  - Current RSS: 5102.4 MB
+  - Peak RSS: 5102.4 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 472 (97.5%)
+  - Enhancement failed: 8 (1.7%)
+  - Contains exclusion pattern: non_security_academic: 4 (0.8%)
+
+Score Distribution:
+  - Score 0: 998 entries
+  - Score 1: 3 entries
+  - Score 2: 4 entries
+  - Score 3: 1281 entries
+  - Score 4: 544 entries
+  - Score 5: 1528 entries
+  - Score 6: 1432 entries
+  - Score 7: 1283 entries
+  - Score 8: 3561 entries
+  - Score 9: 1436 entries
+  - Score 10: 3429 entries
+  - Score 11: 2561 entries
+  - Score 12: 1253 entries
+  - Score 13: 1010 entries
+  - Score 14: 773 entries
+  - Score 15: 599 entries
+  - Score 16: 336 entries
+  - Score 17: 280 entries
+  - Score 18: 190 entries
+  - Score 19: 129 entries
+  - Score 20: 130 entries
+  - Score 21: 83 entries
+  - Score 22: 70 entries
+  - Score 23: 67 entries
+  - Score 24: 39 entries
+  - Score 25: 50 entries
+  - Score 26: 51 entries
+  - Score 27: 38 entries
+  - Score 28: 30 entries
+  - Score 29: 29 entries
+  - Score 30: 26 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 16 entries
+  - Score 34: 15 entries
+  - Score 35: 11 entries
+  - Score 36: 10 entries
+  - Score 37: 3 entries
+  - Score 38: 7 entries
+  - Score 39: 8 entries
+  - Score 40: 7 entries
+  - Score 41: 5 entries
+  - Score 42: 3 entries
+  - Score 43: 3 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 2 entries
+  - Score 47: 1 entries
+  - Score 49: 2 entries
+  - Score 50: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 522
+  - Tokens per second: 75.4 (median), 75.2 (mean)
+  - 90th percentile: 80.4 tokens/sec
+  - Generation time: 6.79s (median), 6.91s (mean)
+  - Avg tokens: 360 input, 512 output
+================================================================================
+
+2025-07-21 12:19:39,621 - INFO - LLM: 512 tokens in 6.85s = 74.7 tokens/sec (input: 359 tokens)
+2025-07-21 12:19:39,622 - DEBUG - Successfully extracted JSON from 2469 char response
+2025-07-21 12:19:46,417 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 341 tokens)
+2025-07-21 12:19:46,417 - DEBUG - Successfully extracted JSON from 2347 char response
+2025-07-21 12:19:53,139 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 314 tokens)
+2025-07-21 12:19:53,139 - DEBUG - Successfully extracted JSON from 2290 char response
+2025-07-21 12:19:59,988 - INFO - LLM: 512 tokens in 6.85s = 74.8 tokens/sec (input: 364 tokens)
+2025-07-21 12:19:59,988 - DEBUG - Successfully extracted JSON from 2495 char response
+2025-07-21 12:19:59,988 - INFO - Progress: 320/22185 - Avg time: 6.83s/entry - ETA: 2489.2 min
+2025-07-21 12:20:06,692 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 301 tokens)
+2025-07-21 12:20:06,692 - DEBUG - Successfully extracted JSON from 2139 char response
+2025-07-21 12:20:13,559 - INFO - LLM: 512 tokens in 6.87s = 74.6 tokens/sec (input: 375 tokens)
+2025-07-21 12:20:13,559 - DEBUG - Successfully extracted JSON from 2238 char response
+2025-07-21 12:20:20,400 - INFO - LLM: 512 tokens in 6.84s = 74.9 tokens/sec (input: 361 tokens)
+2025-07-21 12:20:20,400 - DEBUG - Successfully extracted JSON from 2330 char response
+2025-07-21 12:20:27,087 - INFO - LLM: 512 tokens in 6.69s = 76.6 tokens/sec (input: 306 tokens)
+2025-07-21 12:20:27,088 - DEBUG - Successfully extracted JSON from 2458 char response
+2025-07-21 12:20:33,880 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 347 tokens)
+2025-07-21 12:20:33,880 - DEBUG - Successfully extracted JSON from 2448 char response
+2025-07-21 12:20:40,737 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 355 tokens)
+2025-07-21 12:20:40,737 - DEBUG - Successfully extracted JSON from 2429 char response
+2025-07-21 12:20:47,465 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 320 tokens)
+2025-07-21 12:20:47,465 - DEBUG - Successfully extracted JSON from 2106 char response
+2025-07-21 12:20:54,254 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 344 tokens)
+2025-07-21 12:20:54,254 - DEBUG - Successfully extracted JSON from 2408 char response
+2025-07-21 12:21:00,961 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 313 tokens)
+2025-07-21 12:21:00,961 - DEBUG - Successfully extracted JSON from 2200 char response
+2025-07-21 12:21:07,678 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 313 tokens)
+2025-07-21 12:21:07,679 - DEBUG - Successfully extracted JSON from 2397 char response
+2025-07-21 12:21:07,679 - INFO - Progress: 330/22185 - Avg time: 6.77s/entry - ETA: 2465.6 min
+2025-07-21 12:21:14,437 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 311 tokens)
+2025-07-21 12:21:14,437 - DEBUG - Successfully extracted JSON from 2370 char response
+2025-07-21 12:21:21,319 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 382 tokens)
+2025-07-21 12:21:21,319 - DEBUG - Successfully extracted JSON from 2706 char response
+2025-07-21 12:21:28,037 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 306 tokens)
+2025-07-21 12:21:28,037 - DEBUG - Successfully extracted JSON from 2472 char response
+2025-07-21 12:21:34,747 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 293 tokens)
+2025-07-21 12:21:34,748 - DEBUG - Successfully extracted JSON from 1959 char response
+2025-07-21 12:21:41,471 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 305 tokens)
+2025-07-21 12:21:41,471 - DEBUG - Successfully extracted JSON from 2161 char response
+2025-07-21 12:21:48,143 - INFO - LLM: 512 tokens in 6.67s = 76.7 tokens/sec (input: 283 tokens)
+2025-07-21 12:21:48,143 - DEBUG - Successfully extracted JSON from 2434 char response
+2025-07-21 12:21:54,857 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 302 tokens)
+2025-07-21 12:21:54,857 - DEBUG - Successfully extracted JSON from 2046 char response
+2025-07-21 12:22:01,660 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 325 tokens)
+2025-07-21 12:22:01,660 - DEBUG - Successfully extracted JSON from 2187 char response
+2025-07-21 12:22:08,519 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 358 tokens)
+2025-07-21 12:22:08,519 - DEBUG - Successfully extracted JSON from 2099 char response
+2025-07-21 12:22:15,199 - INFO - LLM: 512 tokens in 6.68s = 76.7 tokens/sec (input: 278 tokens)
+2025-07-21 12:22:15,199 - DEBUG - Successfully extracted JSON from 2547 char response
+2025-07-21 12:22:15,199 - INFO - Progress: 340/22185 - Avg time: 6.75s/entry - ETA: 2458.3 min
+2025-07-21 12:22:21,946 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 308 tokens)
+2025-07-21 12:22:21,946 - DEBUG - Successfully extracted JSON from 2589 char response
+2025-07-21 12:22:28,771 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 344 tokens)
+2025-07-21 12:22:28,771 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:22:28,771 - ERROR - {
+  "technical_description": "OceanSalt is a Trojan malware associated with the MITRE ATT&CK framework under software S0346. It shares code similarities with SpyNote RAT (S0305), linked to APT1. The malware was used in campaigns targeting South Korea, United States, and Canada. It has been observed in versions such as 1.1 and 3.2.0.",
+  "risk_level": "High",
+  "affected_systems": ["South Korea", "United States", "Canada"],
+  "mitigations": [
+    "Implement network segmentation to limit lateral m...
+2025-07-21 12:22:28,771 - ERROR - Response length: 2477 chars, tokens: 512
+2025-07-21 12:22:35,711 - INFO - LLM: 512 tokens in 6.94s = 73.8 tokens/sec (input: 415 tokens)
+2025-07-21 12:22:35,711 - DEBUG - Successfully extracted JSON from 2383 char response
+2025-07-21 12:22:42,573 - INFO - LLM: 512 tokens in 6.86s = 74.6 tokens/sec (input: 361 tokens)
+2025-07-21 12:22:42,574 - DEBUG - Successfully extracted JSON from 2450 char response
+2025-07-21 12:22:49,309 - INFO - LLM: 512 tokens in 6.73s = 76.0 tokens/sec (input: 304 tokens)
+2025-07-21 12:22:49,309 - DEBUG - Successfully extracted JSON from 2031 char response
+2025-07-21 12:22:56,179 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 367 tokens)
+2025-07-21 12:22:56,179 - DEBUG - Successfully extracted JSON from 2482 char response
+2025-07-21 12:23:02,915 - INFO - LLM: 512 tokens in 6.73s = 76.0 tokens/sec (input: 317 tokens)
+2025-07-21 12:23:02,915 - DEBUG - Successfully extracted JSON from 2305 char response
+2025-07-21 12:23:09,739 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 338 tokens)
+2025-07-21 12:23:09,739 - DEBUG - Successfully extracted JSON from 2478 char response
+2025-07-21 12:23:16,675 - INFO - LLM: 512 tokens in 6.93s = 73.8 tokens/sec (input: 401 tokens)
+2025-07-21 12:23:16,675 - DEBUG - Successfully extracted JSON from 2348 char response
+2025-07-21 12:23:23,429 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 306 tokens)
+2025-07-21 12:23:23,429 - DEBUG - Successfully extracted JSON from 1594 char response
+2025-07-21 12:23:23,429 - INFO - Progress: 350/22185 - Avg time: 6.82s/entry - ETA: 2482.9 min
+2025-07-21 12:23:30,227 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 333 tokens)
+2025-07-21 12:23:30,227 - DEBUG - Successfully extracted JSON from 2065 char response
+2025-07-21 12:23:36,963 - INFO - LLM: 512 tokens in 6.73s = 76.0 tokens/sec (input: 314 tokens)
+2025-07-21 12:23:36,963 - DEBUG - Successfully extracted JSON from 2289 char response
+2025-07-21 12:23:43,841 - INFO - LLM: 512 tokens in 6.88s = 74.5 tokens/sec (input: 377 tokens)
+2025-07-21 12:23:43,841 - DEBUG - Successfully extracted JSON from 2427 char response
+2025-07-21 12:23:50,584 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 310 tokens)
+2025-07-21 12:23:50,584 - DEBUG - Successfully extracted JSON from 2356 char response
+2025-07-21 12:23:57,456 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 358 tokens)
+2025-07-21 12:23:57,456 - DEBUG - Successfully extracted JSON from 2409 char response
+2025-07-21 12:24:04,157 - INFO - LLM: 512 tokens in 6.70s = 76.4 tokens/sec (input: 276 tokens)
+2025-07-21 12:24:04,157 - DEBUG - Successfully extracted JSON from 2209 char response
+2025-07-21 12:24:10,909 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 313 tokens)
+2025-07-21 12:24:10,909 - DEBUG - Successfully extracted JSON from 1589 char response
+2025-07-21 12:24:17,693 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 305 tokens)
+2025-07-21 12:24:17,693 - DEBUG - Successfully extracted JSON from 2513 char response
+2025-07-21 12:24:24,493 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 325 tokens)
+2025-07-21 12:24:24,493 - DEBUG - Successfully extracted JSON from 2520 char response
+2025-07-21 12:24:31,245 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 299 tokens)
+2025-07-21 12:24:31,245 - DEBUG - Successfully extracted JSON from 2118 char response
+2025-07-21 12:24:31,245 - INFO - Progress: 360/22185 - Avg time: 6.78s/entry - ETA: 2466.8 min
+2025-07-21 12:24:37,988 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 313 tokens)
+2025-07-21 12:24:37,988 - DEBUG - Successfully extracted JSON from 2582 char response
+2025-07-21 12:24:44,732 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 306 tokens)
+2025-07-21 12:24:44,732 - DEBUG - Successfully extracted JSON from 2136 char response
+2025-07-21 12:24:51,487 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 299 tokens)
+2025-07-21 12:24:51,488 - DEBUG - Successfully extracted JSON from 2230 char response
+2025-07-21 12:24:58,287 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 332 tokens)
+2025-07-21 12:24:58,287 - DEBUG - Successfully extracted JSON from 2364 char response
+2025-07-21 12:25:05,102 - INFO - LLM: 512 tokens in 6.81s = 75.1 tokens/sec (input: 329 tokens)
+2025-07-21 12:25:05,103 - DEBUG - Successfully extracted JSON from 2351 char response
+2025-07-21 12:25:11,712 - INFO - LLM: 512 tokens in 6.61s = 77.5 tokens/sec (input: 239 tokens)
+2025-07-21 12:25:11,712 - DEBUG - Successfully extracted JSON from 2340 char response
+2025-07-21 12:25:18,484 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 307 tokens)
+2025-07-21 12:25:18,484 - DEBUG - Successfully extracted JSON from 2260 char response
+2025-07-21 12:25:25,259 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 305 tokens)
+2025-07-21 12:25:25,259 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:25:25,259 - ERROR - {
+  "technical_description": "Aria-body is a custom backdoor utilized by the Naikon group since 2017. It has been observed in versions up to 3.2.0, with specific activity noted on 2024-04-11 and 2020-05-26. The malware is associated with the MITRE ATT&CK framework as a custom backdoor (S0456) and is linked to the Naikon group (G0019).",
+  "risk_level": "High",
+  "affected_systems": ["Windows"],
+  "mitigations": [
+    "Implement strict network segmentation to limit lateral movement.",
+ 
+  ]
+}
+```...
+2025-07-21 12:25:25,259 - ERROR - Response length: 2129 chars, tokens: 512
+2025-07-21 12:25:32,087 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 352 tokens)
+2025-07-21 12:25:32,087 - DEBUG - Successfully extracted JSON from 2413 char response
+2025-07-21 12:25:38,818 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 303 tokens)
+2025-07-21 12:25:38,818 - DEBUG - Successfully extracted JSON from 2241 char response
+2025-07-21 12:25:38,818 - INFO - Progress: 370/22185 - Avg time: 6.76s/entry - ETA: 2456.8 min
+2025-07-21 12:25:45,772 - INFO - LLM: 512 tokens in 6.95s = 73.6 tokens/sec (input: 413 tokens)
+2025-07-21 12:25:45,773 - DEBUG - Successfully extracted JSON from 2505 char response
+2025-07-21 12:25:52,707 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 407 tokens)
+2025-07-21 12:25:52,707 - DEBUG - Successfully extracted JSON from 2163 char response
+2025-07-21 12:25:59,450 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 317 tokens)
+2025-07-21 12:25:59,450 - DEBUG - Successfully extracted JSON from 2375 char response
+2025-07-21 12:26:06,336 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 368 tokens)
+2025-07-21 12:26:06,336 - DEBUG - Successfully extracted JSON from 2370 char response
+2025-07-21 12:26:13,207 - INFO - LLM: 512 tokens in 6.87s = 74.5 tokens/sec (input: 360 tokens)
+2025-07-21 12:26:13,207 - DEBUG - Successfully extracted JSON from 2122 char response
+2025-07-21 12:26:19,934 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 302 tokens)
+2025-07-21 12:26:19,934 - DEBUG - Successfully extracted JSON from 2632 char response
+2025-07-21 12:26:26,845 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 382 tokens)
+2025-07-21 12:26:26,845 - DEBUG - Successfully extracted JSON from 2366 char response
+2025-07-21 12:26:33,701 - INFO - LLM: 512 tokens in 6.85s = 74.7 tokens/sec (input: 364 tokens)
+2025-07-21 12:26:33,701 - DEBUG - Successfully extracted JSON from 2284 char response
+2025-07-21 12:26:40,510 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 341 tokens)
+2025-07-21 12:26:40,510 - DEBUG - Successfully extracted JSON from 2089 char response
+2025-07-21 12:26:47,238 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 304 tokens)
+2025-07-21 12:26:47,239 - DEBUG - Successfully extracted JSON from 2520 char response
+2025-07-21 12:26:47,239 - INFO - Progress: 380/22185 - Avg time: 6.84s/entry - ETA: 2486.5 min
+2025-07-21 12:26:53,978 - INFO - LLM: 512 tokens in 6.74s = 76.0 tokens/sec (input: 318 tokens)
+2025-07-21 12:26:53,979 - DEBUG - Successfully extracted JSON from 2187 char response
+2025-07-21 12:27:00,696 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 298 tokens)
+2025-07-21 12:27:00,696 - DEBUG - Successfully extracted JSON from 2294 char response
+2025-07-21 12:27:07,494 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 330 tokens)
+2025-07-21 12:27:07,494 - DEBUG - Successfully extracted JSON from 2165 char response
+2025-07-21 12:27:14,237 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 300 tokens)
+2025-07-21 12:27:14,237 - DEBUG - Successfully extracted JSON from 2248 char response
+2025-07-21 12:27:21,247 - INFO - LLM: 512 tokens in 7.01s = 73.1 tokens/sec (input: 427 tokens)
+2025-07-21 12:27:21,247 - DEBUG - Successfully extracted JSON from 2455 char response
+2025-07-21 12:27:28,105 - INFO - LLM: 512 tokens in 6.86s = 74.7 tokens/sec (input: 369 tokens)
+2025-07-21 12:27:28,105 - DEBUG - Successfully extracted JSON from 2619 char response
+2025-07-21 12:27:34,908 - INFO - LLM: 512 tokens in 6.80s = 75.3 tokens/sec (input: 342 tokens)
+2025-07-21 12:27:34,908 - DEBUG - Successfully extracted JSON from 2361 char response
+2025-07-21 12:27:41,651 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 316 tokens)
+2025-07-21 12:27:41,651 - DEBUG - Successfully extracted JSON from 2463 char response
+2025-07-21 12:27:48,328 - INFO - LLM: 512 tokens in 6.68s = 76.7 tokens/sec (input: 277 tokens)
+2025-07-21 12:27:48,328 - DEBUG - Successfully extracted JSON from 2698 char response
+2025-07-21 12:27:55,064 - INFO - LLM: 512 tokens in 6.73s = 76.0 tokens/sec (input: 295 tokens)
+2025-07-21 12:27:55,064 - DEBUG - Successfully extracted JSON from 2487 char response
+2025-07-21 12:27:55,064 - INFO - Progress: 390/22185 - Avg time: 6.78s/entry - ETA: 2463.7 min
+2025-07-21 12:28:01,908 - INFO - LLM: 512 tokens in 6.84s = 74.8 tokens/sec (input: 353 tokens)
+2025-07-21 12:28:01,908 - DEBUG - Successfully extracted JSON from 2420 char response
+2025-07-21 12:28:08,636 - INFO - LLM: 512 tokens in 6.73s = 76.1 tokens/sec (input: 297 tokens)
+2025-07-21 12:28:08,636 - DEBUG - Successfully extracted JSON from 2105 char response
+2025-07-21 12:28:15,527 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 360 tokens)
+2025-07-21 12:28:15,528 - DEBUG - Successfully extracted JSON from 2434 char response
+2025-07-21 12:28:22,248 - INFO - LLM: 512 tokens in 6.72s = 76.2 tokens/sec (input: 302 tokens)
+2025-07-21 12:28:22,248 - DEBUG - Successfully extracted JSON from 2220 char response
+2025-07-21 12:28:29,059 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 347 tokens)
+2025-07-21 12:28:29,059 - DEBUG - Successfully extracted JSON from 2139 char response
+2025-07-21 12:28:35,687 - INFO - LLM: 512 tokens in 6.63s = 77.3 tokens/sec (input: 250 tokens)
+2025-07-21 12:28:35,687 - DEBUG - Successfully extracted JSON from 2434 char response
+2025-07-21 12:28:42,449 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 318 tokens)
+2025-07-21 12:28:42,449 - DEBUG - Successfully extracted JSON from 2301 char response
+2025-07-21 12:28:49,272 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 352 tokens)
+2025-07-21 12:28:49,272 - DEBUG - Successfully extracted JSON from 2401 char response
+2025-07-21 12:28:56,091 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 330 tokens)
+2025-07-21 12:28:56,091 - DEBUG - Successfully extracted JSON from 2432 char response
+2025-07-21 12:29:02,839 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 290 tokens)
+2025-07-21 12:29:02,840 - DEBUG - Successfully extracted JSON from 2459 char response
+2025-07-21 12:29:02,840 - INFO - Progress: 400/22185 - Avg time: 6.78s/entry - ETA: 2460.8 min
+2025-07-21 12:29:09,598 - INFO - LLM: 513 tokens in 6.76s = 75.9 tokens/sec (input: 304 tokens)
+2025-07-21 12:29:09,598 - DEBUG - Successfully extracted JSON from 1343 char response
+2025-07-21 12:29:16,346 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 297 tokens)
+2025-07-21 12:29:16,346 - DEBUG - Successfully extracted JSON from 2290 char response
+2025-07-21 12:29:23,261 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 358 tokens)
+2025-07-21 12:29:23,261 - DEBUG - Successfully extracted JSON from 2290 char response
+2025-07-21 12:29:30,071 - INFO - LLM: 512 tokens in 6.81s = 75.2 tokens/sec (input: 327 tokens)
+2025-07-21 12:29:30,072 - DEBUG - Successfully extracted JSON from 2311 char response
+2025-07-21 12:29:37,020 - INFO - LLM: 512 tokens in 6.95s = 73.7 tokens/sec (input: 402 tokens)
+2025-07-21 12:29:37,020 - DEBUG - Successfully extracted JSON from 2506 char response
+2025-07-21 12:29:43,777 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 299 tokens)
+2025-07-21 12:29:43,777 - DEBUG - Successfully extracted JSON from 2446 char response
+2025-07-21 12:29:50,640 - INFO - LLM: 512 tokens in 6.86s = 74.6 tokens/sec (input: 333 tokens)
+2025-07-21 12:29:50,640 - DEBUG - Successfully extracted JSON from 2521 char response
+2025-07-21 12:29:57,474 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 339 tokens)
+2025-07-21 12:29:57,474 - DEBUG - Successfully extracted JSON from 2145 char response
+2025-07-21 12:30:04,427 - INFO - LLM: 512 tokens in 6.95s = 73.7 tokens/sec (input: 385 tokens)
+2025-07-21 12:30:04,427 - DEBUG - Successfully extracted JSON from 2374 char response
+2025-07-21 12:30:11,197 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 320 tokens)
+2025-07-21 12:30:11,197 - DEBUG - Successfully extracted JSON from 2043 char response
+2025-07-21 12:30:11,197 - INFO - Progress: 410/22185 - Avg time: 6.84s/entry - ETA: 2480.8 min
+2025-07-21 12:30:17,957 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 303 tokens)
+2025-07-21 12:30:17,958 - DEBUG - Successfully extracted JSON from 2094 char response
+2025-07-21 12:30:24,844 - INFO - LLM: 512 tokens in 6.88s = 74.4 tokens/sec (input: 364 tokens)
+2025-07-21 12:30:24,844 - DEBUG - Successfully extracted JSON from 2391 char response
+2025-07-21 12:30:31,713 - INFO - LLM: 512 tokens in 6.87s = 74.6 tokens/sec (input: 311 tokens)
+2025-07-21 12:30:31,713 - DEBUG - Successfully extracted JSON from 2076 char response
+2025-07-21 12:30:38,455 - INFO - LLM: 512 tokens in 6.74s = 76.0 tokens/sec (input: 284 tokens)
+2025-07-21 12:30:38,455 - DEBUG - Successfully extracted JSON from 2306 char response
+2025-07-21 12:30:45,397 - INFO - LLM: 512 tokens in 6.94s = 73.8 tokens/sec (input: 381 tokens)
+2025-07-21 12:30:45,397 - DEBUG - Successfully extracted JSON from 2360 char response
+2025-07-21 12:30:52,313 - INFO - LLM: 512 tokens in 6.91s = 74.0 tokens/sec (input: 373 tokens)
+2025-07-21 12:30:52,313 - DEBUG - Successfully extracted JSON from 2303 char response
+2025-07-21 12:30:59,076 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 300 tokens)
+2025-07-21 12:30:59,076 - DEBUG - Successfully extracted JSON from 2386 char response
+2025-07-21 12:31:05,985 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 378 tokens)
+2025-07-21 12:31:05,985 - DEBUG - Successfully extracted JSON from 2461 char response
+2025-07-21 12:31:12,820 - INFO - LLM: 512 tokens in 6.83s = 74.9 tokens/sec (input: 342 tokens)
+2025-07-21 12:31:12,820 - DEBUG - Successfully extracted JSON from 2307 char response
+2025-07-21 12:31:19,808 - INFO - LLM: 512 tokens in 6.99s = 73.3 tokens/sec (input: 364 tokens)
+2025-07-21 12:31:19,808 - DEBUG - Successfully extracted JSON from 2038 char response
+2025-07-21 12:31:19,808 - INFO - Progress: 420/22185 - Avg time: 6.86s/entry - ETA: 2488.8 min
+2025-07-21 12:31:26,575 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 318 tokens)
+2025-07-21 12:31:26,575 - DEBUG - Successfully extracted JSON from 2381 char response
+2025-07-21 12:31:33,610 - INFO - LLM: 512 tokens in 7.03s = 72.8 tokens/sec (input: 426 tokens)
+2025-07-21 12:31:33,610 - DEBUG - Successfully extracted JSON from 2232 char response
+2025-07-21 12:31:40,365 - INFO - LLM: 512 tokens in 6.75s = 75.8 tokens/sec (input: 304 tokens)
+2025-07-21 12:31:40,365 - DEBUG - Successfully extracted JSON from 2385 char response
+2025-07-21 12:31:47,277 - INFO - LLM: 512 tokens in 6.91s = 74.1 tokens/sec (input: 379 tokens)
+2025-07-21 12:31:47,277 - DEBUG - Successfully extracted JSON from 2465 char response
+2025-07-21 12:31:54,058 - INFO - LLM: 512 tokens in 6.78s = 75.5 tokens/sec (input: 318 tokens)
+2025-07-21 12:31:54,058 - DEBUG - Successfully extracted JSON from 2505 char response
+2025-07-21 12:32:00,883 - INFO - LLM: 512 tokens in 6.82s = 75.0 tokens/sec (input: 337 tokens)
+2025-07-21 12:32:00,883 - DEBUG - Successfully extracted JSON from 2427 char response
+2025-07-21 12:32:07,705 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 321 tokens)
+2025-07-21 12:32:07,705 - DEBUG - Successfully extracted JSON from 1886 char response
+2025-07-21 12:32:14,466 - INFO - LLM: 512 tokens in 6.76s = 75.7 tokens/sec (input: 294 tokens)
+2025-07-21 12:32:14,466 - DEBUG - Successfully extracted JSON from 2301 char response
+2025-07-21 12:32:21,296 - INFO - LLM: 512 tokens in 6.83s = 75.0 tokens/sec (input: 334 tokens)
+2025-07-21 12:32:21,296 - DEBUG - Successfully extracted JSON from 2356 char response
+2025-07-21 12:32:28,011 - INFO - LLM: 512 tokens in 6.71s = 76.3 tokens/sec (input: 259 tokens)
+2025-07-21 12:32:28,011 - DEBUG - Successfully extracted JSON from 2159 char response
+2025-07-21 12:32:28,011 - INFO - Progress: 430/22185 - Avg time: 6.82s/entry - ETA: 2472.9 min
+2025-07-21 12:32:34,828 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 327 tokens)
+2025-07-21 12:32:34,828 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:32:34,828 - ERROR - {
+  "technical_description": "ZeroT is a Trojan malware associated with the TA459 group, commonly used in conjunction with PlugX. It has been observed in multiple campaigns with varying versions, including versions 1.2 and 3.2.0. The malware is linked to MITRE ATT&CK framework as part of their software catalog.",
+  "risk_level": "High",
+  "affected_systems": ["Windows systems", "Network infrastructure"],
+  "mitigations": [
+    "Implement network segmentation to limit lateral movement.",
+ 
+  ]
+}
+...
+2025-07-21 12:32:34,828 - ERROR - Response length: 2316 chars, tokens: 512
+2025-07-21 12:32:41,520 - INFO - LLM: 512 tokens in 6.69s = 76.5 tokens/sec (input: 267 tokens)
+2025-07-21 12:32:41,520 - DEBUG - Successfully extracted JSON from 2574 char response
+2025-07-21 12:32:48,678 - INFO - LLM: 512 tokens in 7.16s = 71.5 tokens/sec (input: 499 tokens)
+2025-07-21 12:32:48,678 - DEBUG - Successfully extracted JSON from 2515 char response
+2025-07-21 12:32:55,498 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 330 tokens)
+2025-07-21 12:32:55,498 - DEBUG - Successfully extracted JSON from 2476 char response
+2025-07-21 12:33:02,290 - INFO - LLM: 512 tokens in 6.79s = 75.4 tokens/sec (input: 293 tokens)
+2025-07-21 12:33:02,290 - DEBUG - Successfully extracted JSON from 2291 char response
+2025-07-21 12:33:09,061 - INFO - LLM: 512 tokens in 6.77s = 75.6 tokens/sec (input: 276 tokens)
+2025-07-21 12:33:09,061 - DEBUG - Successfully extracted JSON from 2607 char response
+2025-07-21 12:33:15,809 - INFO - LLM: 512 tokens in 6.75s = 75.9 tokens/sec (input: 303 tokens)
+2025-07-21 12:33:15,810 - DEBUG - Successfully extracted JSON from 1790 char response
+2025-07-21 12:33:22,699 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 366 tokens)
+2025-07-21 12:33:22,699 - DEBUG - Successfully extracted JSON from 2463 char response
+2025-07-21 12:33:29,444 - INFO - LLM: 512 tokens in 6.74s = 75.9 tokens/sec (input: 307 tokens)
+2025-07-21 12:33:29,444 - DEBUG - Successfully extracted JSON from 2173 char response
+2025-07-21 12:33:36,298 - INFO - LLM: 512 tokens in 6.85s = 74.7 tokens/sec (input: 337 tokens)
+2025-07-21 12:33:36,298 - DEBUG - Successfully extracted JSON from 2457 char response
+2025-07-21 12:33:36,298 - INFO - Progress: 440/22185 - Avg time: 6.83s/entry - ETA: 2474.8 min
+2025-07-21 12:33:43,186 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 341 tokens)
+2025-07-21 12:33:43,186 - DEBUG - Successfully extracted JSON from 2676 char response
+2025-07-21 12:33:50,005 - INFO - LLM: 512 tokens in 6.82s = 75.1 tokens/sec (input: 345 tokens)
+2025-07-21 12:33:50,005 - DEBUG - Successfully extracted JSON from 1942 char response
+2025-07-21 12:33:56,763 - INFO - LLM: 512 tokens in 6.76s = 75.8 tokens/sec (input: 312 tokens)
+2025-07-21 12:33:56,764 - DEBUG - Successfully extracted JSON from 1995 char response
+2025-07-21 12:34:03,897 - INFO - LLM: 512 tokens in 7.13s = 71.8 tokens/sec (input: 418 tokens)
+2025-07-21 12:34:03,897 - DEBUG - Successfully extracted JSON from 2562 char response
+2025-07-21 12:34:11,297 - INFO - LLM: 512 tokens in 7.40s = 69.2 tokens/sec (input: 578 tokens)
+2025-07-21 12:34:11,298 - DEBUG - Successfully extracted JSON from 2248 char response
+2025-07-21 12:34:18,552 - INFO - LLM: 512 tokens in 7.25s = 70.6 tokens/sec (input: 471 tokens)
+2025-07-21 12:34:18,552 - DEBUG - Successfully extracted JSON from 2355 char response
+2025-07-21 12:34:25,441 - INFO - LLM: 512 tokens in 6.89s = 74.3 tokens/sec (input: 300 tokens)
+2025-07-21 12:34:25,442 - DEBUG - Successfully extracted JSON from 2578 char response
+2025-07-21 12:34:32,506 - INFO - LLM: 512 tokens in 7.06s = 72.5 tokens/sec (input: 402 tokens)
+2025-07-21 12:34:32,507 - DEBUG - Successfully extracted JSON from 2437 char response
+2025-07-21 12:34:39,655 - INFO - LLM: 512 tokens in 7.15s = 71.6 tokens/sec (input: 428 tokens)
+2025-07-21 12:34:39,655 - DEBUG - Successfully extracted JSON from 2314 char response
+2025-07-21 12:34:46,677 - INFO - LLM: 512 tokens in 7.02s = 72.9 tokens/sec (input: 364 tokens)
+2025-07-21 12:34:46,677 - DEBUG - Successfully extracted JSON from 2282 char response
+2025-07-21 12:34:46,677 - INFO - Progress: 450/22185 - Avg time: 7.04s/entry - ETA: 2549.5 min
+2025-07-21 12:34:53,670 - INFO - LLM: 512 tokens in 6.99s = 73.2 tokens/sec (input: 347 tokens)
+2025-07-21 12:34:53,670 - DEBUG - Successfully extracted JSON from 2484 char response
+2025-07-21 12:35:00,597 - INFO - LLM: 512 tokens in 6.93s = 73.9 tokens/sec (input: 316 tokens)
+2025-07-21 12:35:00,598 - DEBUG - Successfully extracted JSON from 2496 char response
+2025-07-21 12:35:07,656 - INFO - LLM: 512 tokens in 7.06s = 72.6 tokens/sec (input: 309 tokens)
+2025-07-21 12:35:07,656 - DEBUG - Successfully extracted JSON from 2723 char response
+2025-07-21 12:35:14,794 - INFO - LLM: 512 tokens in 7.14s = 71.7 tokens/sec (input: 368 tokens)
+2025-07-21 12:35:14,794 - DEBUG - Successfully extracted JSON from 2555 char response
+2025-07-21 12:35:21,828 - INFO - LLM: 512 tokens in 7.03s = 72.8 tokens/sec (input: 304 tokens)
+2025-07-21 12:35:21,828 - DEBUG - Successfully extracted JSON from 2273 char response
+2025-07-21 12:35:28,949 - INFO - LLM: 512 tokens in 7.12s = 71.9 tokens/sec (input: 352 tokens)
+2025-07-21 12:35:28,949 - DEBUG - Successfully extracted JSON from 2386 char response
+2025-07-21 12:35:36,032 - INFO - LLM: 512 tokens in 7.08s = 72.3 tokens/sec (input: 296 tokens)
+2025-07-21 12:35:36,032 - DEBUG - Successfully extracted JSON from 2344 char response
+2025-07-21 12:35:43,163 - INFO - LLM: 512 tokens in 7.13s = 71.8 tokens/sec (input: 291 tokens)
+2025-07-21 12:35:43,163 - DEBUG - Successfully extracted JSON from 1979 char response
+2025-07-21 12:35:50,417 - INFO - LLM: 512 tokens in 7.25s = 70.6 tokens/sec (input: 372 tokens)
+2025-07-21 12:35:50,417 - DEBUG - Successfully extracted JSON from 2695 char response
+2025-07-21 12:35:58,133 - INFO - LLM: 512 tokens in 7.71s = 66.4 tokens/sec (input: 320 tokens)
+2025-07-21 12:35:58,133 - DEBUG - Successfully extracted JSON from 2345 char response
+2025-07-21 12:35:58,133 - INFO - Progress: 460/22185 - Avg time: 7.15s/entry - ETA: 2587.3 min
+2025-07-21 12:36:05,162 - INFO - LLM: 512 tokens in 7.03s = 72.9 tokens/sec (input: 321 tokens)
+2025-07-21 12:36:05,162 - DEBUG - Successfully extracted JSON from 2584 char response
+2025-07-21 12:36:12,288 - INFO - LLM: 512 tokens in 7.12s = 71.9 tokens/sec (input: 285 tokens)
+2025-07-21 12:36:12,288 - DEBUG - Successfully extracted JSON from 2328 char response
+2025-07-21 12:36:19,484 - INFO - LLM: 512 tokens in 7.19s = 71.2 tokens/sec (input: 297 tokens)
+2025-07-21 12:36:19,484 - DEBUG - Successfully extracted JSON from 2458 char response
+2025-07-21 12:36:26,836 - INFO - LLM: 512 tokens in 7.35s = 69.7 tokens/sec (input: 295 tokens)
+2025-07-21 12:36:26,836 - DEBUG - Successfully extracted JSON from 2563 char response
+2025-07-21 12:36:34,152 - INFO - LLM: 512 tokens in 7.31s = 70.0 tokens/sec (input: 316 tokens)
+2025-07-21 12:36:34,152 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:36:34,152 - ERROR - {
+  "technical_description": "NETEAGLE is a backdoor developed by APT30, with variants named 'Scout' and 'Norton'. It has been active since at least 2008 and includes multiple versions, such as 3.2.0. The malware has been observed in the wild with specific identifiers and timestamps, indicating long-term persistence and potential for data exfiltration.",
+  "risk_level": "High",
+  "affected_systems": [
+    "Windows",
+    "Linux",
+    "macOS"
+  ],
+  "mitigations": [
+    "Implement network segmenta...
+2025-07-21 12:36:34,152 - ERROR - Response length: 2152 chars, tokens: 512
+2025-07-21 12:36:41,446 - INFO - LLM: 512 tokens in 7.29s = 70.2 tokens/sec (input: 307 tokens)
+2025-07-21 12:36:41,446 - DEBUG - Successfully extracted JSON from 2147 char response
+2025-07-21 12:36:49,062 - INFO - LLM: 512 tokens in 7.61s = 67.2 tokens/sec (input: 445 tokens)
+2025-07-21 12:36:49,063 - DEBUG - Successfully extracted JSON from 2561 char response
+2025-07-21 12:36:56,431 - INFO - LLM: 512 tokens in 7.37s = 69.5 tokens/sec (input: 349 tokens)
+2025-07-21 12:36:56,431 - DEBUG - Successfully extracted JSON from 2055 char response
+2025-07-21 12:37:03,768 - INFO - LLM: 512 tokens in 7.34s = 69.8 tokens/sec (input: 297 tokens)
+2025-07-21 12:37:03,768 - DEBUG - Successfully extracted JSON from 2382 char response
+2025-07-21 12:37:11,191 - INFO - LLM: 512 tokens in 7.42s = 69.0 tokens/sec (input: 299 tokens)
+2025-07-21 12:37:11,191 - DEBUG - Successfully extracted JSON from 1598 char response
+2025-07-21 12:37:11,191 - INFO - Progress: 470/22185 - Avg time: 7.31s/entry - ETA: 2644.0 min
+2025-07-21 12:37:18,548 - INFO - LLM: 512 tokens in 7.36s = 69.6 tokens/sec (input: 292 tokens)
+2025-07-21 12:37:18,548 - DEBUG - Successfully extracted JSON from 2002 char response
+2025-07-21 12:37:26,031 - INFO - LLM: 512 tokens in 7.48s = 68.4 tokens/sec (input: 371 tokens)
+2025-07-21 12:37:26,031 - DEBUG - Successfully extracted JSON from 2607 char response
+2025-07-21 12:37:33,389 - INFO - LLM: 512 tokens in 7.36s = 69.6 tokens/sec (input: 313 tokens)
+2025-07-21 12:37:33,389 - DEBUG - Successfully extracted JSON from 2233 char response
+2025-07-21 12:37:40,917 - INFO - LLM: 512 tokens in 7.53s = 68.0 tokens/sec (input: 302 tokens)
+2025-07-21 12:37:40,917 - DEBUG - Successfully extracted JSON from 2587 char response
+2025-07-21 12:37:48,373 - INFO - LLM: 512 tokens in 7.45s = 68.7 tokens/sec (input: 318 tokens)
+2025-07-21 12:37:48,373 - DEBUG - Successfully extracted JSON from 2521 char response
+2025-07-21 12:37:55,932 - INFO - LLM: 512 tokens in 7.56s = 67.8 tokens/sec (input: 358 tokens)
+2025-07-21 12:37:55,932 - DEBUG - Successfully extracted JSON from 2399 char response
+2025-07-21 12:38:03,685 - INFO - LLM: 512 tokens in 7.75s = 66.1 tokens/sec (input: 395 tokens)
+2025-07-21 12:38:03,685 - DEBUG - Successfully extracted JSON from 2638 char response
+2025-07-21 12:38:11,144 - INFO - LLM: 512 tokens in 7.46s = 68.7 tokens/sec (input: 301 tokens)
+2025-07-21 12:38:11,144 - DEBUG - Successfully extracted JSON from 2770 char response
+2025-07-21 12:38:18,814 - INFO - LLM: 512 tokens in 7.67s = 66.8 tokens/sec (input: 401 tokens)
+2025-07-21 12:38:18,815 - DEBUG - Successfully extracted JSON from 2271 char response
+2025-07-21 12:38:26,286 - INFO - LLM: 512 tokens in 7.47s = 68.5 tokens/sec (input: 305 tokens)
+2025-07-21 12:38:26,286 - DEBUG - Successfully extracted JSON from 2467 char response
+2025-07-21 12:38:26,286 - INFO - Progress: 480/22185 - Avg time: 7.51s/entry - ETA: 2716.5 min
+2025-07-21 12:38:34,262 - INFO - LLM: 512 tokens in 7.97s = 64.2 tokens/sec (input: 499 tokens)
+2025-07-21 12:38:34,262 - DEBUG - Successfully extracted JSON from 2363 char response
+2025-07-21 12:38:41,994 - INFO - LLM: 512 tokens in 7.73s = 66.2 tokens/sec (input: 357 tokens)
+2025-07-21 12:38:41,994 - DEBUG - Successfully extracted JSON from 2665 char response
+2025-07-21 12:38:49,525 - INFO - LLM: 512 tokens in 7.53s = 68.0 tokens/sec (input: 322 tokens)
+2025-07-21 12:38:49,526 - DEBUG - Successfully extracted JSON from 1817 char response
+2025-07-21 12:38:57,189 - INFO - LLM: 512 tokens in 7.66s = 66.8 tokens/sec (input: 331 tokens)
+2025-07-21 12:38:57,189 - DEBUG - Successfully extracted JSON from 2226 char response
+2025-07-21 12:39:05,723 - INFO - LLM: 512 tokens in 8.53s = 60.0 tokens/sec (input: 343 tokens)
+2025-07-21 12:39:05,723 - DEBUG - Successfully extracted JSON from 2512 char response
+2025-07-21 12:39:13,420 - INFO - LLM: 512 tokens in 7.69s = 66.6 tokens/sec (input: 287 tokens)
+2025-07-21 12:39:13,420 - DEBUG - Successfully extracted JSON from 2371 char response
+2025-07-21 12:39:20,898 - INFO - LLM: 512 tokens in 7.48s = 68.5 tokens/sec (input: 308 tokens)
+2025-07-21 12:39:20,898 - DEBUG - Successfully extracted JSON from 2267 char response
+2025-07-21 12:39:28,448 - INFO - LLM: 512 tokens in 7.55s = 67.8 tokens/sec (input: 340 tokens)
+2025-07-21 12:39:28,448 - DEBUG - Successfully extracted JSON from 2284 char response
+2025-07-21 12:39:36,254 - INFO - LLM: 512 tokens in 7.80s = 65.6 tokens/sec (input: 418 tokens)
+2025-07-21 12:39:36,254 - DEBUG - Successfully extracted JSON from 2492 char response
+2025-07-21 12:39:43,912 - INFO - LLM: 512 tokens in 7.66s = 66.9 tokens/sec (input: 324 tokens)
+2025-07-21 12:39:43,912 - DEBUG - Successfully extracted JSON from 2467 char response
+2025-07-21 12:39:43,912 - INFO - Progress: 490/22185 - Avg time: 7.76s/entry - ETA: 2806.8 min
+2025-07-21 12:39:51,557 - INFO - LLM: 512 tokens in 7.64s = 67.0 tokens/sec (input: 306 tokens)
+2025-07-21 12:39:51,557 - DEBUG - Successfully extracted JSON from 2191 char response
+2025-07-21 12:39:59,108 - INFO - LLM: 512 tokens in 7.55s = 67.8 tokens/sec (input: 314 tokens)
+2025-07-21 12:39:59,108 - DEBUG - Successfully extracted JSON from 2232 char response
+2025-07-21 12:40:06,727 - INFO - LLM: 512 tokens in 7.62s = 67.2 tokens/sec (input: 335 tokens)
+2025-07-21 12:40:06,727 - DEBUG - Successfully extracted JSON from 2216 char response
+2025-07-21 12:40:14,415 - INFO - LLM: 512 tokens in 7.69s = 66.6 tokens/sec (input: 372 tokens)
+2025-07-21 12:40:14,415 - DEBUG - Successfully extracted JSON from 2426 char response
+2025-07-21 12:40:22,221 - INFO - LLM: 512 tokens in 7.80s = 65.6 tokens/sec (input: 392 tokens)
+2025-07-21 12:40:22,221 - DEBUG - Successfully extracted JSON from 2595 char response
+2025-07-21 12:40:30,039 - INFO - LLM: 512 tokens in 7.82s = 65.5 tokens/sec (input: 378 tokens)
+2025-07-21 12:40:30,039 - DEBUG - Successfully extracted JSON from 2364 char response
+2025-07-21 12:40:37,603 - INFO - LLM: 512 tokens in 7.56s = 67.7 tokens/sec (input: 292 tokens)
+2025-07-21 12:40:37,603 - DEBUG - Successfully extracted JSON from 2513 char response
+2025-07-21 12:40:45,154 - INFO - LLM: 512 tokens in 7.55s = 67.8 tokens/sec (input: 315 tokens)
+2025-07-21 12:40:45,155 - DEBUG - Successfully extracted JSON from 2354 char response
+2025-07-21 12:40:52,878 - INFO - LLM: 512 tokens in 7.72s = 66.3 tokens/sec (input: 357 tokens)
+2025-07-21 12:40:52,879 - DEBUG - Successfully extracted JSON from 2447 char response
+2025-07-21 12:41:00,481 - INFO - LLM: 512 tokens in 7.60s = 67.4 tokens/sec (input: 290 tokens)
+2025-07-21 12:41:00,481 - DEBUG - Successfully extracted JSON from 2598 char response
+2025-07-21 12:41:00,481 - INFO - Progress: 500/22185 - Avg time: 7.66s/entry - ETA: 2767.3 min
+2025-07-21 12:41:08,130 - INFO - LLM: 512 tokens in 7.65s = 67.0 tokens/sec (input: 298 tokens)
+2025-07-21 12:41:08,131 - DEBUG - Successfully extracted JSON from 2366 char response
+2025-07-21 12:41:15,773 - INFO - LLM: 512 tokens in 7.64s = 67.0 tokens/sec (input: 340 tokens)
+2025-07-21 12:41:15,773 - DEBUG - Successfully extracted JSON from 2769 char response
+2025-07-21 12:41:23,686 - INFO - LLM: 512 tokens in 7.91s = 64.7 tokens/sec (input: 441 tokens)
+2025-07-21 12:41:23,686 - DEBUG - Successfully extracted JSON from 2388 char response
+2025-07-21 12:41:31,477 - INFO - LLM: 512 tokens in 7.79s = 65.7 tokens/sec (input: 372 tokens)
+2025-07-21 12:41:31,477 - DEBUG - Successfully extracted JSON from 2336 char response
+2025-07-21 12:41:39,137 - INFO - LLM: 512 tokens in 7.66s = 66.9 tokens/sec (input: 310 tokens)
+2025-07-21 12:41:39,137 - DEBUG - Successfully extracted JSON from 1919 char response
+2025-07-21 12:41:46,940 - INFO - LLM: 512 tokens in 7.80s = 65.6 tokens/sec (input: 406 tokens)
+2025-07-21 12:41:46,940 - DEBUG - Successfully extracted JSON from 1804 char response
+2025-07-21 12:41:54,692 - INFO - LLM: 512 tokens in 7.75s = 66.1 tokens/sec (input: 340 tokens)
+2025-07-21 12:41:54,692 - DEBUG - Successfully extracted JSON from 2401 char response
+2025-07-21 12:42:02,583 - INFO - LLM: 512 tokens in 7.89s = 64.9 tokens/sec (input: 300 tokens)
+2025-07-21 12:42:02,583 - DEBUG - Successfully extracted JSON from 2383 char response
+2025-07-21 12:42:10,225 - INFO - LLM: 512 tokens in 7.64s = 67.0 tokens/sec (input: 331 tokens)
+2025-07-21 12:42:10,225 - DEBUG - Successfully extracted JSON from 2265 char response
+2025-07-21 12:42:18,199 - INFO - LLM: 512 tokens in 7.97s = 64.2 tokens/sec (input: 400 tokens)
+2025-07-21 12:42:18,199 - DEBUG - Successfully extracted JSON from 2227 char response
+2025-07-21 12:42:18,199 - INFO - Progress: 510/22185 - Avg time: 7.77s/entry - ETA: 2807.5 min
+2025-07-21 12:42:25,992 - INFO - LLM: 512 tokens in 7.79s = 65.7 tokens/sec (input: 329 tokens)
+2025-07-21 12:42:25,992 - DEBUG - Successfully extracted JSON from 2190 char response
+2025-07-21 12:42:33,777 - INFO - LLM: 512 tokens in 7.78s = 65.8 tokens/sec (input: 325 tokens)
+2025-07-21 12:42:33,777 - DEBUG - Successfully extracted JSON from 1884 char response
+2025-07-21 12:42:41,506 - INFO - LLM: 512 tokens in 7.73s = 66.3 tokens/sec (input: 339 tokens)
+2025-07-21 12:42:41,506 - DEBUG - Successfully extracted JSON from 2710 char response
+2025-07-21 12:42:49,160 - INFO - LLM: 512 tokens in 7.65s = 66.9 tokens/sec (input: 298 tokens)
+2025-07-21 12:42:49,160 - DEBUG - Successfully extracted JSON from 2253 char response
+2025-07-21 12:42:57,052 - INFO - LLM: 512 tokens in 7.89s = 64.9 tokens/sec (input: 395 tokens)
+2025-07-21 12:42:57,052 - DEBUG - Successfully extracted JSON from 2414 char response
+2025-07-21 12:43:04,898 - INFO - LLM: 512 tokens in 7.84s = 65.3 tokens/sec (input: 376 tokens)
+2025-07-21 12:43:04,898 - DEBUG - Successfully extracted JSON from 2293 char response
+2025-07-21 12:43:12,684 - INFO - LLM: 512 tokens in 7.78s = 65.8 tokens/sec (input: 323 tokens)
+2025-07-21 12:43:12,684 - DEBUG - Successfully extracted JSON from 1948 char response
+2025-07-21 12:43:20,520 - INFO - LLM: 512 tokens in 7.83s = 65.4 tokens/sec (input: 323 tokens)
+2025-07-21 12:43:20,520 - DEBUG - Successfully extracted JSON from 2353 char response
+2025-07-21 12:43:28,583 - INFO - LLM: 512 tokens in 8.06s = 63.5 tokens/sec (input: 441 tokens)
+2025-07-21 12:43:28,583 - DEBUG - Successfully extracted JSON from 2465 char response
+2025-07-21 12:43:36,476 - INFO - LLM: 512 tokens in 7.89s = 64.9 tokens/sec (input: 374 tokens)
+2025-07-21 12:43:36,477 - DEBUG - Successfully extracted JSON from 2431 char response
+2025-07-21 12:43:36,477 - INFO - Progress: 520/22185 - Avg time: 7.83s/entry - ETA: 2826.4 min
+2025-07-21 12:43:44,370 - INFO - LLM: 512 tokens in 7.89s = 64.9 tokens/sec (input: 331 tokens)
+2025-07-21 12:43:44,370 - DEBUG - Successfully extracted JSON from 2441 char response
+2025-07-21 12:43:52,118 - INFO - LLM: 512 tokens in 7.75s = 66.1 tokens/sec (input: 297 tokens)
+2025-07-21 12:43:52,118 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:43:52,118 - ERROR - {
+  "technical_description": "DarkWatchman is a lightweight JavaScript-based remote access tool (RAT) that avoids file operations, first observed in November 2021. It is a malware variant that has been updated through multiple versions, including versions from 2022-01-10 and 2024-08-26.",
+  "risk_level": "High",
+  "affected_systems": ["Windows systems", "Networked environments with JavaScript execution capabilities"],
+  "mitigations": [
+    "Implement strict application whitelisting to prevent u...
+2025-07-21 12:43:52,118 - ERROR - Response length: 2390 chars, tokens: 512
+2025-07-21 12:43:59,915 - INFO - LLM: 512 tokens in 7.80s = 65.7 tokens/sec (input: 294 tokens)
+2025-07-21 12:43:59,915 - DEBUG - Successfully extracted JSON from 2416 char response
+2025-07-21 12:44:07,804 - INFO - LLM: 512 tokens in 7.89s = 64.9 tokens/sec (input: 342 tokens)
+2025-07-21 12:44:07,804 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 12:44:07,804 - ERROR - {
+  "technical_description": "BlackMould is a web shell malware targeting Microsoft IIS servers, based on the China Chopper framework. It was first reported in December 2019 and has been associated with the GALLIUM group in targeting telecommunication providers.",
+  "risk_level": "High",
+  "affected_systems": ["Microsoft IIS servers"],
+  "mitigations": [
+    "Regularly update and patch Microsoft IIS to address known vulnerabilities.",
+ 
+    "Implement strong access controls and restrict unnecess...
+2025-07-21 12:44:07,804 - ERROR - Response length: 2459 chars, tokens: 512
+2025-07-21 12:44:15,794 - INFO - LLM: 512 tokens in 7.99s = 64.1 tokens/sec (input: 303 tokens)
+2025-07-21 12:44:15,794 - DEBUG - Successfully extracted JSON from 2492 char response

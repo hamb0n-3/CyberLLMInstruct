@@ -1,0 +1,207 @@
+2025-07-21 13:32:36,699 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 13:32:36,701 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 13:32:36,828 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 13:32:37,318 - INFO - Model loaded successfully.
+2025-07-21 13:32:37,318 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 13:32:37,319 - INFO - Filtered to 1 files matching sources: ['ctf_data']
+2025-07-21 13:32:37,319 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 13:32:37,320 - INFO - 
+============================================================
+2025-07-21 13:32:37,320 - INFO - Processing 33 entries from ctf_data_20250715_183648.json
+2025-07-21 13:32:37,320 - INFO - ============================================================
+2025-07-21 13:32:37,320 - INFO - Using multiprocessing with 3 workers for rule-based filtering
+2025-07-21 13:32:37,963 - INFO - Rule-based filtering took 0.64s (51.3 entries/sec)
+2025-07-21 13:32:37,964 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:32:37,964 - INFO -   - Passed: 29/33 (87.9%)
+2025-07-21 13:32:37,964 - INFO -   - Failed: 4/33 (12.1%)
+2025-07-21 13:32:37,964 - INFO - Starting LLM enhancement for 29 candidates...
+2025-07-21 13:33:36,383 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 13:33:36,383 - ERROR - {
+  "technical_description": "The text promotes the World Wide CTF 2025 event, a competition for cybersecurity professionals and enthusiasts. It lists various categories such as Reverse, Web, Crypto, Pwn, OSINT, Forensics, Web3, and Jail, which are typical of Capture The Flag (CTF) competitions. The event includes challenges related to reversing malware, web exploitation, cryptographic puzzles, and other cybersecurity domains. The event runs from July 26th to July 28th, 2025.",
+  "risk_level": "...
+2025-07-21 13:33:36,383 - ERROR - Response length: 2319 chars, tokens: 512
+2025-07-21 13:33:43,124 - INFO - Progress: 10/29 - Avg time: 6.52s/entry - ETA: 2.1 min
+2025-07-21 13:34:42,799 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 51
+  - Entries passed filter: 46 (90.2%)
+  - Entries failed filter: 5
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 2.460s
+  - Median time per entry: 0.019s
+  - 90th percentile: 7.230s
+  - 95th percentile: 7.682s
+  - Throughput: 0.41 entries/second
+
+Memory Usage:
+  - Current RSS: 4706.5 MB
+  - Peak RSS: 4706.5 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 4 (80.0%)
+  - Enhancement failed: 1 (20.0%)
+
+Score Distribution:
+  - Score 0: 22 entries
+  - Score 1: 4 entries
+  - Score 2: 1 entries
+  - Score 3: 3 entries
+  - Score 4: 2 entries
+  - Score 5: 2 entries
+  - Score 6: 4 entries
+  - Score 7: 1 entries
+  - Score 9: 3 entries
+  - Score 11: 2 entries
+  - Score 12: 3 entries
+  - Score 14: 1 entries
+  - Score 17: 2 entries
+  - Score 24: 1 entries
+
+LLM Performance:
+  - Total calls: 18
+  - Tokens per second: 75.8 (median), 74.3 (mean)
+  - 90th percentile: 80.8 tokens/sec
+  - Generation time: 6.76s (median), 6.93s (mean)
+  - Avg tokens: 315 input, 512 output
+================================================================================
+
+2025-07-21 13:34:57,668 - INFO - Progress: 20/29 - Avg time: 7.45s/entry - ETA: 1.1 min
+2025-07-21 13:36:11,918 - INFO - 
+Enhancement Summary:
+2025-07-21 13:36:11,918 - INFO -   - Total time: 213.95s
+2025-07-21 13:36:11,918 - INFO -   - Average time per entry: 7.38s
+2025-07-21 13:36:11,918 - INFO -   - Min/Max times: 6.29s / 9.65s
+2025-07-21 13:36:11,918 - INFO - 
+File processing complete for ctf_data_20250715_183648.json:
+2025-07-21 13:36:11,918 - INFO -   - Total entries: 33
+2025-07-21 13:36:11,918 - INFO -   - Final retained: 28 (84.8%)
+2025-07-21 13:36:11,919 - INFO -   - Processing time: 214.60s
+2025-07-21 13:36:11,919 - INFO -   - Avg time per entry: 6.503s
+2025-07-21 13:36:11,919 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 3.6 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 62
+  - Entries passed filter: 57 (91.9%)
+  - Entries failed filter: 5
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 3.461s
+  - Median time per entry: 0.019s
+  - 90th percentile: 8.094s
+  - 95th percentile: 8.898s
+  - Throughput: 0.29 entries/second
+
+Memory Usage:
+  - Current RSS: 4706.3 MB
+  - Peak RSS: 4706.5 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 4 (80.0%)
+  - Enhancement failed: 1 (20.0%)
+
+Score Distribution:
+  - Score 0: 33 entries
+  - Score 1: 4 entries
+  - Score 2: 1 entries
+  - Score 3: 3 entries
+  - Score 4: 2 entries
+  - Score 5: 2 entries
+  - Score 6: 4 entries
+  - Score 7: 1 entries
+  - Score 9: 3 entries
+  - Score 11: 2 entries
+  - Score 12: 3 entries
+  - Score 14: 1 entries
+  - Score 17: 2 entries
+  - Score 24: 1 entries
+
+LLM Performance:
+  - Total calls: 29
+  - Tokens per second: 70.7 (median), 70.3 (mean)
+  - 90th percentile: 80.3 tokens/sec
+  - Generation time: 7.24s (median), 7.38s (mean)
+  - Avg tokens: 308 input, 512 output
+================================================================================
+
+2025-07-21 13:36:11,921 - INFO - Saved 28 entries to filtered_data/ctf_data_20250715_183648_filtered_20250721_133611.json
+2025-07-21 13:36:11,921 - INFO - Saved 5 entries to filtered_data/ctf_data_20250715_183648_removed_20250721_133611.json
+2025-07-21 13:36:11,921 - INFO - 
+================================================================================
+2025-07-21 13:36:11,921 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 13:36:11,921 - INFO - ================================================================================
+2025-07-21 13:36:11,921 - INFO - Total files processed: 1
+2025-07-21 13:36:11,921 - INFO - Total entries processed: 33
+2025-07-21 13:36:11,921 - INFO - 
+Filtering funnel:
+2025-07-21 13:36:11,921 - INFO -   1. Rule-based filter: 29/33 passed (87.9%)
+2025-07-21 13:36:11,921 - INFO -   2. LLM enhancement: 28/29 passed (96.6%)
+2025-07-21 13:36:11,921 - INFO - 
+Final retention rate: 28/33 (84.8%)
+2025-07-21 13:36:11,921 - INFO - 
+Performance metrics:
+2025-07-21 13:36:11,921 - INFO -   Total processing time: 214.60s
+2025-07-21 13:36:11,921 - INFO -   Average time per file: 214.60s
+2025-07-21 13:36:11,921 - INFO -   Average time per entry: 6.503s
+2025-07-21 13:36:11,921 - INFO - ================================================================================
+
+2025-07-21 13:36:11,921 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 13:36:11,922 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 3.6 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 62
+  - Entries passed filter: 57 (91.9%)
+  - Entries failed filter: 5
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 3.461s
+  - Median time per entry: 0.019s
+  - 90th percentile: 8.094s
+  - 95th percentile: 8.898s
+  - Throughput: 0.29 entries/second
+
+Memory Usage:
+  - Current RSS: 4706.3 MB
+  - Peak RSS: 4706.5 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 4 (80.0%)
+  - Enhancement failed: 1 (20.0%)
+
+Score Distribution:
+  - Score 0: 33 entries
+  - Score 1: 4 entries
+  - Score 2: 1 entries
+  - Score 3: 3 entries
+  - Score 4: 2 entries
+  - Score 5: 2 entries
+  - Score 6: 4 entries
+  - Score 7: 1 entries
+  - Score 9: 3 entries
+  - Score 11: 2 entries
+  - Score 12: 3 entries
+  - Score 14: 1 entries
+  - Score 17: 2 entries
+  - Score 24: 1 entries
+
+LLM Performance:
+  - Total calls: 29
+  - Tokens per second: 70.7 (median), 70.3 (mean)
+  - 90th percentile: 80.3 tokens/sec
+  - Generation time: 7.24s (median), 7.38s (mean)
+  - Avg tokens: 308 input, 512 output
+================================================================================
+

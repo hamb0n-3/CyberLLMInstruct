@@ -1,0 +1,188 @@
+2025-07-21 13:21:14,071 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 13:21:14,073 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 13:21:14,226 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 13:21:15,288 - INFO - Model loaded successfully.
+2025-07-21 13:21:15,289 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 13:21:15,289 - INFO - Filtered to 1 files matching sources: ['ubuntu_security']
+2025-07-21 13:21:15,289 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 13:21:15,290 - INFO - 
+============================================================
+2025-07-21 13:21:15,290 - INFO - Processing 10 entries from ubuntu_security_20250715_183646.json
+2025-07-21 13:21:15,290 - INFO - ============================================================
+2025-07-21 13:21:15,293 - INFO - Rule-based filtering took 0.00s (4172.2 entries/sec)
+2025-07-21 13:21:15,293 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:21:15,293 - INFO -   - Passed: 10/10 (100.0%)
+2025-07-21 13:21:15,293 - INFO -   - Failed: 0/10 (0.0%)
+2025-07-21 13:21:15,293 - INFO - Starting LLM enhancement for 10 candidates...
+2025-07-21 13:21:33,664 - DEBUG - Successfully extracted JSON from 2592 char response
+2025-07-21 13:21:52,660 - DEBUG - Successfully extracted JSON from 2234 char response
+2025-07-21 13:22:11,588 - DEBUG - Successfully extracted JSON from 2549 char response
+2025-07-21 13:22:30,142 - DEBUG - Successfully extracted JSON from 2157 char response
+2025-07-21 13:22:50,041 - DEBUG - Successfully extracted JSON from 2536 char response
+2025-07-21 13:23:08,999 - DEBUG - Successfully extracted JSON from 2413 char response
+2025-07-21 13:23:22,928 - DEBUG - Successfully extracted JSON from 2323 char response
+2025-07-21 13:23:22,928 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 17
+  - Entries passed filter: 17 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 7.508s
+  - Median time per entry: 0.000s
+  - 90th percentile: 19.177s
+  - 95th percentile: 19.989s
+  - Throughput: 0.13 entries/second
+
+Memory Usage:
+  - Current RSS: 4708.5 MB
+  - Peak RSS: 4708.5 MB
+
+Score Distribution:
+  - Score 0: 7 entries
+  - Score 12: 1 entries
+  - Score 14: 1 entries
+  - Score 19: 1 entries
+  - Score 36: 1 entries
+  - Score 38: 1 entries
+  - Score 39: 1 entries
+  - Score 41: 1 entries
+  - Score 53: 1 entries
+  - Score 59: 1 entries
+  - Score 79: 1 entries
+
+LLM Performance:
+  - Total calls: 7
+  - Tokens per second: 27.1 (median), 28.4 (mean)
+  - 90th percentile: 38.5 tokens/sec
+  - Generation time: 18.92s (median), 18.23s (mean)
+  - Avg tokens: 292 input, 512 output
+================================================================================
+
+2025-07-21 13:23:29,152 - DEBUG - Successfully extracted JSON from 2580 char response
+2025-07-21 13:23:38,652 - DEBUG - Successfully extracted JSON from 2231 char response
+2025-07-21 13:23:46,916 - DEBUG - Successfully extracted JSON from 2183 char response
+2025-07-21 13:23:46,916 - INFO - Progress: 10/10 - Avg time: 15.16s/entry - ETA: 0.0 min
+2025-07-21 13:23:46,916 - INFO - 
+Enhancement Summary:
+2025-07-21 13:23:46,916 - INFO -   - Total time: 151.62s
+2025-07-21 13:23:46,916 - INFO -   - Average time per entry: 15.16s
+2025-07-21 13:23:46,916 - INFO -   - Min/Max times: 6.22s / 19.90s
+2025-07-21 13:23:46,916 - INFO - 
+File processing complete for ubuntu_security_20250715_183646.json:
+2025-07-21 13:23:46,916 - INFO -   - Total entries: 10
+2025-07-21 13:23:46,916 - INFO -   - Final retained: 10 (100.0%)
+2025-07-21 13:23:46,916 - INFO -   - Processing time: 151.63s
+2025-07-21 13:23:46,916 - INFO -   - Avg time per entry: 15.163s
+2025-07-21 13:23:46,916 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.5 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 20
+  - Entries passed filter: 20 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 7.581s
+  - Median time per entry: 3.112s
+  - 90th percentile: 18.992s
+  - 95th percentile: 19.853s
+  - Throughput: 0.13 entries/second
+
+Memory Usage:
+  - Current RSS: 4709.1 MB
+  - Peak RSS: 4709.1 MB
+
+Score Distribution:
+  - Score 0: 10 entries
+  - Score 12: 1 entries
+  - Score 14: 1 entries
+  - Score 19: 1 entries
+  - Score 36: 1 entries
+  - Score 38: 1 entries
+  - Score 39: 1 entries
+  - Score 41: 1 entries
+  - Score 53: 1 entries
+  - Score 59: 1 entries
+  - Score 79: 1 entries
+
+LLM Performance:
+  - Total calls: 10
+  - Tokens per second: 27.7 (median), 39.7 (mean)
+  - 90th percentile: 80.3 tokens/sec
+  - Generation time: 18.46s (median), 15.16s (mean)
+  - Avg tokens: 384 input, 512 output
+================================================================================
+
+2025-07-21 13:23:46,917 - INFO - Saved 10 entries to filtered_data/ubuntu_security_20250715_183646_filtered_20250721_132346.json
+2025-07-21 13:23:46,917 - INFO - 
+================================================================================
+2025-07-21 13:23:46,917 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 13:23:46,917 - INFO - ================================================================================
+2025-07-21 13:23:46,917 - INFO - Total files processed: 1
+2025-07-21 13:23:46,917 - INFO - Total entries processed: 10
+2025-07-21 13:23:46,917 - INFO - 
+Filtering funnel:
+2025-07-21 13:23:46,917 - INFO -   1. Rule-based filter: 10/10 passed (100.0%)
+2025-07-21 13:23:46,917 - INFO -   2. LLM enhancement: 10/10 passed (100.0%)
+2025-07-21 13:23:46,917 - INFO - 
+Final retention rate: 10/10 (100.0%)
+2025-07-21 13:23:46,917 - INFO - 
+Performance metrics:
+2025-07-21 13:23:46,917 - INFO -   Total processing time: 151.63s
+2025-07-21 13:23:46,917 - INFO -   Average time per file: 151.63s
+2025-07-21 13:23:46,917 - INFO -   Average time per entry: 15.163s
+2025-07-21 13:23:46,917 - INFO - ================================================================================
+
+2025-07-21 13:23:46,917 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 13:23:46,917 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.5 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 20
+  - Entries passed filter: 20 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 7.581s
+  - Median time per entry: 3.112s
+  - 90th percentile: 18.992s
+  - 95th percentile: 19.853s
+  - Throughput: 0.13 entries/second
+
+Memory Usage:
+  - Current RSS: 4709.1 MB
+  - Peak RSS: 4709.1 MB
+
+Score Distribution:
+  - Score 0: 10 entries
+  - Score 12: 1 entries
+  - Score 14: 1 entries
+  - Score 19: 1 entries
+  - Score 36: 1 entries
+  - Score 38: 1 entries
+  - Score 39: 1 entries
+  - Score 41: 1 entries
+  - Score 53: 1 entries
+  - Score 59: 1 entries
+  - Score 79: 1 entries
+
+LLM Performance:
+  - Total calls: 10
+  - Tokens per second: 27.7 (median), 39.7 (mean)
+  - 90th percentile: 80.3 tokens/sec
+  - Generation time: 18.46s (median), 15.16s (mean)
+  - Avg tokens: 384 input, 512 output
+================================================================================
+

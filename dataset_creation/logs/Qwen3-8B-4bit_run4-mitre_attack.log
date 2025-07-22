@@ -1,0 +1,204 @@
+2025-07-21 12:57:29,859 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 12:57:29,861 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 12:57:30,000 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 12:57:30,500 - INFO - Model loaded successfully.
+2025-07-21 12:57:30,500 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 12:57:30,501 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-21 12:57:30,501 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 12:57:30,636 - INFO - 
+============================================================
+2025-07-21 12:57:30,636 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-21 12:57:30,636 - INFO - ============================================================
+2025-07-21 12:57:30,637 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 12:57:31,910 - INFO - Rule-based filtering took 1.27s (17778.1 entries/sec)
+2025-07-21 12:57:31,910 - INFO - Rule-based pre-filter complete:
+2025-07-21 12:57:31,910 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-21 12:57:31,910 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-21 12:57:31,910 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-21 12:57:38,213 - DEBUG - Successfully extracted JSON from 2492 char response
+2025-07-21 12:57:44,530 - DEBUG - Successfully extracted JSON from 2543 char response
+2025-07-21 12:57:50,903 - DEBUG - Successfully extracted JSON from 2588 char response
+2025-07-21 12:57:57,390 - DEBUG - Successfully extracted JSON from 2388 char response
+2025-07-21 12:58:03,991 - DEBUG - Successfully extracted JSON from 2554 char response
+2025-07-21 12:58:10,920 - DEBUG - Successfully extracted JSON from 2885 char response
+2025-07-21 12:58:17,653 - DEBUG - Successfully extracted JSON from 2809 char response
+2025-07-21 12:58:24,304 - DEBUG - Successfully extracted JSON from 2383 char response
+2025-07-21 12:58:31,051 - DEBUG - Successfully extracted JSON from 2612 char response
+2025-07-21 12:58:37,861 - DEBUG - Successfully extracted JSON from 2513 char response
+2025-07-21 12:58:37,861 - INFO - Progress: 10/22185 - Avg time: 6.59s/entry - ETA: 2437.4 min
+2025-07-21 12:58:44,942 - DEBUG - Successfully extracted JSON from 2865 char response
+2025-07-21 12:58:52,091 - DEBUG - Successfully extracted JSON from 2663 char response
+2025-07-21 12:58:59,824 - DEBUG - Successfully extracted JSON from 2760 char response
+2025-07-21 12:59:06,983 - DEBUG - Successfully extracted JSON from 2530 char response
+2025-07-21 12:59:13,900 - DEBUG - Successfully extracted JSON from 2517 char response
+2025-07-21 12:59:20,657 - DEBUG - Successfully extracted JSON from 2714 char response
+2025-07-21 12:59:27,509 - DEBUG - Successfully extracted JSON from 2215 char response
+2025-07-21 12:59:34,365 - DEBUG - Successfully extracted JSON from 2382 char response
+2025-07-21 12:59:34,369 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22670
+  - Entries passed filter: 22203 (97.9%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.005s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 183.33 entries/second
+
+Memory Usage:
+  - Current RSS: 5103.8 MB
+  - Peak RSS: 5103.8 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 485 entries
+  - Score 3: 1279 entries
+  - Score 4: 507 entries
+  - Score 5: 1116 entries
+  - Score 6: 1227 entries
+  - Score 7: 966 entries
+  - Score 8: 2660 entries
+  - Score 9: 1454 entries
+  - Score 10: 3873 entries
+  - Score 11: 2751 entries
+  - Score 12: 1499 entries
+  - Score 13: 1227 entries
+  - Score 14: 1025 entries
+  - Score 15: 739 entries
+  - Score 16: 371 entries
+  - Score 17: 330 entries
+  - Score 18: 249 entries
+  - Score 19: 148 entries
+  - Score 20: 117 entries
+  - Score 21: 94 entries
+  - Score 22: 72 entries
+  - Score 23: 74 entries
+  - Score 24: 39 entries
+  - Score 25: 48 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 26 entries
+  - Score 29: 27 entries
+  - Score 30: 27 entries
+  - Score 31: 24 entries
+  - Score 32: 20 entries
+  - Score 33: 16 entries
+  - Score 34: 15 entries
+  - Score 35: 11 entries
+  - Score 36: 10 entries
+  - Score 37: 5 entries
+  - Score 38: 5 entries
+  - Score 39: 9 entries
+  - Score 40: 6 entries
+  - Score 41: 5 entries
+  - Score 42: 4 entries
+  - Score 43: 2 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 2 entries
+  - Score 47: 2 entries
+  - Score 49: 2 entries
+  - Score 50: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 18
+  - Tokens per second: 75.5 (median), 75.5 (mean)
+  - 90th percentile: 81.1 tokens/sec
+  - Generation time: 6.78s (median), 6.80s (mean)
+  - Avg tokens: 331 input, 512 output
+================================================================================
+
+2025-07-21 12:59:41,347 - DEBUG - Successfully extracted JSON from 2940 char response
+2025-07-21 12:59:48,633 - DEBUG - Successfully extracted JSON from 2816 char response
+2025-07-21 12:59:48,633 - INFO - Progress: 20/22185 - Avg time: 7.08s/entry - ETA: 2614.2 min
+2025-07-21 12:59:56,208 - DEBUG - Successfully extracted JSON from 2495 char response
+2025-07-21 13:00:02,916 - DEBUG - Successfully extracted JSON from 2650 char response
+2025-07-21 13:00:10,125 - DEBUG - Successfully extracted JSON from 2806 char response
+2025-07-21 13:00:17,018 - DEBUG - Successfully extracted JSON from 2591 char response
+2025-07-21 13:00:24,007 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 13:00:24,007 - ERROR - {
+  "technical_description": "The technique involves mitigating the execution of unwanted or unknown code, particularly focusing on preventing audio recording by malicious software. This requires fine-grained API control and the use of whitelisting tools such as AppLocker or Software Restriction Policies to block unauthorized code execution.",
+  "risk_level": "High",
+  "affected_systems": ["Windows systems using AppLocker", "Windows systems using Software Restriction Policies"],
+  "mitigations":...
+2025-07-21 13:00:24,007 - ERROR - Response length: 2542 chars, tokens: 512
+2025-07-21 13:00:30,978 - DEBUG - Successfully extracted JSON from 2686 char response
+2025-07-21 13:00:37,990 - DEBUG - Successfully extracted JSON from 2714 char response
+2025-07-21 13:00:45,045 - DEBUG - Successfully extracted JSON from 3013 char response
+2025-07-21 13:00:51,983 - DEBUG - Successfully extracted JSON from 2674 char response
+2025-07-21 13:00:59,150 - DEBUG - Successfully extracted JSON from 2893 char response
+2025-07-21 13:00:59,150 - INFO - Progress: 30/22185 - Avg time: 7.05s/entry - ETA: 2603.8 min
+2025-07-21 13:01:06,140 - DEBUG - Successfully extracted JSON from 2819 char response
+2025-07-21 13:01:14,036 - DEBUG - Successfully extracted JSON from 2628 char response
+2025-07-21 13:01:21,105 - DEBUG - Successfully extracted JSON from 2552 char response
+2025-07-21 13:01:28,326 - DEBUG - Successfully extracted JSON from 2657 char response
+2025-07-21 13:01:35,481 - DEBUG - Successfully extracted JSON from 2709 char response
+2025-07-21 13:01:43,105 - DEBUG - Successfully extracted JSON from 2536 char response
+2025-07-21 13:01:50,616 - DEBUG - Successfully extracted JSON from 2679 char response
+2025-07-21 13:01:57,859 - DEBUG - Successfully extracted JSON from 2460 char response
+2025-07-21 13:02:05,750 - DEBUG - Successfully extracted JSON from 2624 char response
+2025-07-21 13:02:12,853 - DEBUG - Successfully extracted JSON from 2855 char response
+2025-07-21 13:02:12,853 - INFO - Progress: 40/22185 - Avg time: 7.37s/entry - ETA: 2720.2 min
+2025-07-21 13:02:20,036 - DEBUG - Successfully extracted JSON from 2886 char response
+2025-07-21 13:02:27,070 - DEBUG - Successfully extracted JSON from 2400 char response
+2025-07-21 13:02:34,290 - DEBUG - Successfully extracted JSON from 2656 char response
+2025-07-21 13:02:41,501 - DEBUG - Successfully extracted JSON from 2771 char response
+2025-07-21 13:02:49,422 - DEBUG - Successfully extracted JSON from 2689 char response
+2025-07-21 13:02:56,492 - DEBUG - Successfully extracted JSON from 2786 char response
+2025-07-21 13:03:03,733 - DEBUG - Successfully extracted JSON from 2832 char response
+2025-07-21 13:03:11,568 - DEBUG - Successfully extracted JSON from 2740 char response
+2025-07-21 13:03:19,092 - DEBUG - Successfully extracted JSON from 2912 char response
+2025-07-21 13:03:26,218 - DEBUG - Successfully extracted JSON from 2691 char response
+2025-07-21 13:03:26,218 - INFO - Progress: 50/22185 - Avg time: 7.34s/entry - ETA: 2706.5 min
+2025-07-21 13:03:33,416 - DEBUG - Successfully extracted JSON from 2221 char response
+2025-07-21 13:03:41,102 - DEBUG - Successfully extracted JSON from 2724 char response
+2025-07-21 13:03:48,018 - DEBUG - Successfully extracted JSON from 2871 char response
+2025-07-21 13:03:54,982 - DEBUG - Successfully extracted JSON from 2341 char response
+2025-07-21 13:04:16,656 - DEBUG - Successfully extracted JSON from 2282 char response
+2025-07-21 13:04:37,124 - DEBUG - Successfully extracted JSON from 2799 char response
+2025-07-21 13:04:56,758 - DEBUG - Successfully extracted JSON from 2519 char response
+2025-07-21 13:05:04,799 - DEBUG - Successfully extracted JSON from 2609 char response
+2025-07-21 13:05:11,119 - DEBUG - Successfully extracted JSON from 2664 char response
+2025-07-21 13:05:26,889 - DEBUG - Successfully extracted JSON from 2893 char response
+2025-07-21 13:05:26,889 - INFO - Progress: 60/22185 - Avg time: 12.07s/entry - ETA: 4449.7 min
+2025-07-21 13:05:46,837 - DEBUG - Successfully extracted JSON from 2790 char response
+2025-07-21 13:06:06,068 - DEBUG - Successfully extracted JSON from 2851 char response
+2025-07-21 13:06:25,473 - DEBUG - Successfully extracted JSON from 2566 char response
+2025-07-21 13:06:45,238 - DEBUG - Successfully extracted JSON from 2763 char response
+2025-07-21 13:07:05,203 - DEBUG - Successfully extracted JSON from 2779 char response
+2025-07-21 13:07:25,198 - DEBUG - Successfully extracted JSON from 2607 char response
+2025-07-21 13:07:44,746 - DEBUG - Successfully extracted JSON from 2854 char response
+2025-07-21 13:08:04,179 - DEBUG - Successfully extracted JSON from 2483 char response
+2025-07-21 13:08:24,216 - DEBUG - Successfully extracted JSON from 1989 char response
+2025-07-21 13:08:43,902 - DEBUG - Successfully extracted JSON from 2635 char response
+2025-07-21 13:08:43,902 - INFO - Progress: 70/22185 - Avg time: 19.70s/entry - ETA: 7261.5 min
+2025-07-21 13:09:03,754 - DEBUG - Successfully extracted JSON from 2692 char response
+2025-07-21 13:09:23,530 - DEBUG - Successfully extracted JSON from 2614 char response
+2025-07-21 13:09:44,106 - DEBUG - Successfully extracted JSON from 2721 char response
+2025-07-21 13:10:03,901 - DEBUG - Successfully extracted JSON from 2692 char response
+2025-07-21 13:10:23,502 - DEBUG - Successfully extracted JSON from 2628 char response
+2025-07-21 13:10:43,301 - DEBUG - Successfully extracted JSON from 2294 char response
+2025-07-21 13:11:03,213 - DEBUG - Successfully extracted JSON from 2755 char response
+2025-07-21 13:11:23,402 - DEBUG - Successfully extracted JSON from 2725 char response
+2025-07-21 13:11:43,188 - DEBUG - Successfully extracted JSON from 2043 char response
+2025-07-21 13:12:03,710 - DEBUG - Successfully extracted JSON from 2679 char response
+2025-07-21 13:12:03,711 - INFO - Progress: 80/22185 - Avg time: 19.98s/entry - ETA: 7361.2 min
+2025-07-21 13:12:23,885 - DEBUG - Successfully extracted JSON from 2524 char response
+2025-07-21 13:12:44,360 - DEBUG - Successfully extracted JSON from 2600 char response
+2025-07-21 13:13:04,189 - DEBUG - Successfully extracted JSON from 2752 char response
+2025-07-21 13:13:24,096 - DEBUG - Successfully extracted JSON from 2910 char response
+2025-07-21 13:13:43,918 - DEBUG - Successfully extracted JSON from 2732 char response

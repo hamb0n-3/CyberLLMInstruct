@@ -1,0 +1,92 @@
+2025-07-21 14:01:29,366 - INFO - Running without LLM enhancement (rule-based filtering only)
+2025-07-21 14:01:29,366 - INFO - Filtered to 2 files matching sources: ['cve_data']
+2025-07-21 14:01:29,366 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 14:01:29,366 - INFO - 
+============================================================
+2025-07-21 14:01:29,366 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 14:01:29,366 - INFO - ============================================================
+2025-07-21 14:01:29,379 - INFO - Rule-based filtering took 0.01s (80.7 entries/sec)
+2025-07-21 14:01:29,379 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:01:29,379 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 14:01:29,379 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 14:01:29,379 - INFO - Skipping LLM enhancement phase (no-enhancement mode)
+2025-07-21 14:01:29,379 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 14:01:29,379 - INFO -   - Total entries: 1
+2025-07-21 14:01:29,379 - INFO -   - Final retained: 1 (100.0%)
+2025-07-21 14:01:29,379 - INFO -   - Processing time: 0.01s
+2025-07-21 14:01:29,379 - INFO -   - Avg time per entry: 0.013s
+2025-07-21 14:01:29,379 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 1
+  - Entries passed filter: 1 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 0.012s
+  - Median time per entry: 0.012s
+  - 90th percentile: 0.012s
+  - 95th percentile: 0.012s
+  - Throughput: 80.73 entries/second
+
+Memory Usage:
+  - Current RSS: 116.9 MB
+  - Peak RSS: 116.9 MB
+
+Score Distribution:
+  - Score 502: 1 entries
+================================================================================
+
+2025-07-21 14:01:29,380 - INFO - Saved 1 entries to test_cve_fix/opencve_data_20250715_183643_filtered_20250721_140129.json
+2025-07-21 14:01:29,380 - INFO - 
+================================================================================
+2025-07-21 14:01:29,380 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 14:01:29,380 - INFO - ================================================================================
+2025-07-21 14:01:29,380 - INFO - Total files processed: 1
+2025-07-21 14:01:29,380 - INFO - Total entries processed: 1
+2025-07-21 14:01:29,380 - INFO - 
+Filtering funnel:
+2025-07-21 14:01:29,380 - INFO -   1. Rule-based filter: 1/1 passed (100.0%)
+2025-07-21 14:01:29,380 - INFO -   2. LLM enhancement: 1/1 passed (100.0%)
+2025-07-21 14:01:29,380 - INFO - 
+Final retention rate: 1/1 (100.0%)
+2025-07-21 14:01:29,380 - INFO - 
+Performance metrics:
+2025-07-21 14:01:29,380 - INFO -   Total processing time: 0.01s
+2025-07-21 14:01:29,380 - INFO -   Average time per file: 0.01s
+2025-07-21 14:01:29,380 - INFO -   Average time per entry: 0.013s
+2025-07-21 14:01:29,380 - INFO - ================================================================================
+
+2025-07-21 14:01:29,380 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 14:01:29,380 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 1
+  - Entries passed filter: 1 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 0.012s
+  - Median time per entry: 0.012s
+  - 90th percentile: 0.012s
+  - 95th percentile: 0.012s
+  - Throughput: 80.73 entries/second
+
+Memory Usage:
+  - Current RSS: 116.9 MB
+  - Peak RSS: 116.9 MB
+
+Score Distribution:
+  - Score 502: 1 entries
+================================================================================
+

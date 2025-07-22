@@ -1,0 +1,897 @@
+2025-07-21 13:37:04,328 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 13:37:04,330 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 13:37:04,451 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 13:37:04,970 - INFO - Model loaded successfully.
+2025-07-21 13:37:04,971 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 13:37:04,971 - INFO - Filtered to 2 files matching sources: ['cve_data']
+2025-07-21 13:37:04,971 - INFO - 
+Starting batch processing of 2 files...
+
+2025-07-21 13:37:04,973 - INFO - 
+============================================================
+2025-07-21 13:37:04,973 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 13:37:04,973 - INFO - ============================================================
+2025-07-21 13:37:04,985 - INFO - Rule-based filtering took 0.01s (83.1 entries/sec)
+2025-07-21 13:37:04,985 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:37:04,985 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 13:37:04,985 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 13:37:04,985 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-21 13:37:42,505 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 13:37:42,507 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 13:37:42,624 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 13:37:43,141 - INFO - Model loaded successfully.
+2025-07-21 13:37:43,142 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 13:37:43,142 - INFO - Filtered to 2 files matching sources: ['cve_data']
+2025-07-21 13:37:43,142 - INFO - 
+Starting batch processing of 2 files...
+
+2025-07-21 13:37:43,142 - INFO - 
+============================================================
+2025-07-21 13:37:43,142 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 13:37:43,142 - INFO - ============================================================
+2025-07-21 13:37:43,155 - INFO - Rule-based filtering took 0.01s (80.8 entries/sec)
+2025-07-21 13:37:43,155 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:37:43,155 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 13:37:43,155 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 13:37:43,155 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-21 13:38:45,502 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 13:38:45,502 - ERROR - {
+  "technical_description": "The provided text contains a list of multiple CVE entries detailing various vulnerabilities across different software systems. These include issues like command injection, buffer overflow, path traversal, SQL injection, and deserialization vulnerabilities. Each entry specifies the affected software, the nature of the vulnerability, and the versions impacted. Some vulnerabilities have patches available, while others do not, and some are marked as critical or problema...
+2025-07-21 13:38:45,502 - ERROR - Response length: 2196 chars, tokens: 512
+2025-07-21 13:38:45,502 - INFO - 
+Enhancement Summary:
+2025-07-21 13:38:45,502 - INFO -   - Total time: 62.35s
+2025-07-21 13:38:45,502 - INFO -   - Average time per entry: 62.35s
+2025-07-21 13:38:45,502 - INFO -   - Min/Max times: 62.35s / 62.35s
+2025-07-21 13:38:45,502 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 13:38:45,502 - INFO -   - Total entries: 1
+2025-07-21 13:38:45,502 - INFO -   - Final retained: 0 (0.0%)
+2025-07-21 13:38:45,503 - INFO -   - Processing time: 62.36s
+2025-07-21 13:38:45,503 - INFO -   - Avg time per entry: 62.360s
+2025-07-21 13:38:45,503 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2
+  - Entries passed filter: 1 (50.0%)
+  - Entries failed filter: 1
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 31.180s
+  - Median time per entry: 31.180s
+  - 90th percentile: 105.981s
+  - 95th percentile: 115.331s
+  - Throughput: 0.03 entries/second
+
+Memory Usage:
+  - Current RSS: 4714.0 MB
+  - Peak RSS: 4714.0 MB
+
+Top Rejection Reasons:
+  - Enhancement failed: 1 (100.0%)
+
+Score Distribution:
+  - Score 0: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 8.2 (median), 8.2 (mean)
+  - 90th percentile: 8.2 tokens/sec
+  - Generation time: 62.32s (median), 62.32s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:38:45,504 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_removed_20250721_133845.json
+2025-07-21 13:38:45,531 - INFO - 
+============================================================
+2025-07-21 13:38:45,531 - INFO - Processing 2000 entries from cve_data_20250715_183633.json
+2025-07-21 13:38:45,531 - INFO - ============================================================
+2025-07-21 13:38:45,531 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 13:38:46,538 - INFO - Rule-based filtering took 1.01s (1985.5 entries/sec)
+2025-07-21 13:38:46,538 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:38:46,539 - INFO -   - Passed: 0/2000 (0.0%)
+2025-07-21 13:38:46,539 - INFO -   - Failed: 2000/2000 (100.0%)
+2025-07-21 13:38:46,539 - INFO - Starting LLM enhancement for 0 candidates...
+2025-07-21 13:38:46,539 - INFO - 
+File processing complete for cve_data_20250715_183633.json:
+2025-07-21 13:38:46,539 - INFO -   - Total entries: 2000
+2025-07-21 13:38:46,539 - INFO -   - Final retained: 0 (0.0%)
+2025-07-21 13:38:46,539 - INFO -   - Processing time: 1.03s
+2025-07-21 13:38:46,539 - INFO -   - Avg time per entry: 0.001s
+2025-07-21 13:38:46,540 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2002
+  - Entries passed filter: 1 (0.0%)
+  - Entries failed filter: 2001
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.032s
+  - Median time per entry: 0.001s
+  - 90th percentile: 0.001s
+  - 95th percentile: 0.001s
+  - Throughput: 31.60 entries/second
+
+Memory Usage:
+  - Current RSS: 4737.6 MB
+  - Peak RSS: 4737.6 MB
+
+Top Rejection Reasons:
+  - Score 0 < 1: 2000 (100.0%)
+  - Enhancement failed: 1 (0.0%)
+
+Score Distribution:
+  - Score 0: 2001 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 8.2 (median), 8.2 (mean)
+  - 90th percentile: 8.2 tokens/sec
+  - Generation time: 62.32s (median), 62.32s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:38:46,799 - INFO - Saved 2000 entries to filtered_data/cve_data_20250715_183633_removed_20250721_133846.json
+2025-07-21 13:38:46,799 - INFO - 
+================================================================================
+2025-07-21 13:38:46,799 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 13:38:46,799 - INFO - ================================================================================
+2025-07-21 13:38:46,799 - INFO - Total files processed: 2
+2025-07-21 13:38:46,799 - INFO - Total entries processed: 2001
+2025-07-21 13:38:46,799 - INFO - 
+Filtering funnel:
+2025-07-21 13:38:46,799 - INFO -   1. Rule-based filter: 1/2001 passed (0.0%)
+2025-07-21 13:38:46,799 - INFO -   2. LLM enhancement: 0/1 passed (0.0%)
+2025-07-21 13:38:46,799 - INFO - 
+Final retention rate: 0/2001 (0.0%)
+2025-07-21 13:38:46,799 - INFO - 
+Performance metrics:
+2025-07-21 13:38:46,799 - INFO -   Total processing time: 63.39s
+2025-07-21 13:38:46,799 - INFO -   Average time per file: 31.70s
+2025-07-21 13:38:46,799 - INFO -   Average time per entry: 0.032s
+2025-07-21 13:38:46,799 - INFO - ================================================================================
+
+2025-07-21 13:38:46,799 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 13:38:46,800 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2002
+  - Entries passed filter: 1 (0.0%)
+  - Entries failed filter: 2001
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.032s
+  - Median time per entry: 0.001s
+  - 90th percentile: 0.001s
+  - 95th percentile: 0.001s
+  - Throughput: 31.60 entries/second
+
+Memory Usage:
+  - Current RSS: 4737.6 MB
+  - Peak RSS: 4737.6 MB
+
+Top Rejection Reasons:
+  - Score 0 < 1: 2000 (100.0%)
+  - Enhancement failed: 1 (0.0%)
+
+Score Distribution:
+  - Score 0: 2001 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 8.2 (median), 8.2 (mean)
+  - 90th percentile: 8.2 tokens/sec
+  - Generation time: 62.32s (median), 62.32s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:53:05,428 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 13:53:05,430 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 13:53:05,558 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 13:53:06,070 - INFO - Model loaded successfully.
+2025-07-21 13:53:06,070 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 13:53:06,071 - INFO - Filtered to 2 files matching sources: ['cve_data']
+2025-07-21 13:53:06,071 - INFO - 
+Starting batch processing of 2 files...
+
+2025-07-21 13:53:06,071 - INFO - 
+============================================================
+2025-07-21 13:53:06,071 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 13:53:06,071 - INFO - ============================================================
+2025-07-21 13:53:06,083 - INFO - Rule-based filtering took 0.01s (85.8 entries/sec)
+2025-07-21 13:53:06,083 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:53:06,083 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 13:53:06,083 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 13:53:06,083 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-21 13:54:02,806 - INFO - 
+Enhancement Summary:
+2025-07-21 13:54:02,806 - INFO -   - Total time: 56.72s
+2025-07-21 13:54:02,806 - INFO -   - Average time per entry: 56.72s
+2025-07-21 13:54:02,806 - INFO -   - Min/Max times: 56.72s / 56.72s
+2025-07-21 13:54:02,806 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 13:54:02,806 - INFO -   - Total entries: 1
+2025-07-21 13:54:02,806 - INFO -   - Final retained: 1 (100.0%)
+2025-07-21 13:54:02,806 - INFO -   - Processing time: 56.74s
+2025-07-21 13:54:02,806 - INFO -   - Avg time per entry: 56.735s
+2025-07-21 13:54:02,806 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2
+  - Entries passed filter: 2 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 28.367s
+  - Median time per entry: 28.367s
+  - 90th percentile: 96.421s
+  - 95th percentile: 104.927s
+  - Throughput: 0.04 entries/second
+
+Memory Usage:
+  - Current RSS: 4715.2 MB
+  - Peak RSS: 4715.2 MB
+
+Score Distribution:
+  - Score 0: 1 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 9.0 (median), 9.0 (mean)
+  - 90th percentile: 9.0 tokens/sec
+  - Generation time: 56.70s (median), 56.70s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:54:02,808 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_filtered_20250721_135402.json
+2025-07-21 13:54:02,833 - INFO - 
+============================================================
+2025-07-21 13:54:02,833 - INFO - Processing 2000 entries from cve_data_20250715_183633.json
+2025-07-21 13:54:02,833 - INFO - ============================================================
+2025-07-21 13:54:02,833 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 13:54:03,722 - INFO - Rule-based filtering took 0.89s (2248.4 entries/sec)
+2025-07-21 13:54:03,722 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:54:03,722 - INFO -   - Passed: 0/2000 (0.0%)
+2025-07-21 13:54:03,723 - INFO -   - Failed: 2000/2000 (100.0%)
+2025-07-21 13:54:03,723 - INFO - Starting LLM enhancement for 0 candidates...
+2025-07-21 13:54:03,723 - INFO - 
+File processing complete for cve_data_20250715_183633.json:
+2025-07-21 13:54:03,723 - INFO -   - Total entries: 2000
+2025-07-21 13:54:03,723 - INFO -   - Final retained: 0 (0.0%)
+2025-07-21 13:54:03,723 - INFO -   - Processing time: 0.91s
+2025-07-21 13:54:03,723 - INFO -   - Avg time per entry: 0.000s
+2025-07-21 13:54:03,724 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2002
+  - Entries passed filter: 2 (0.1%)
+  - Entries failed filter: 2000
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.029s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 34.74 entries/second
+
+Memory Usage:
+  - Current RSS: 4746.6 MB
+  - Peak RSS: 4746.6 MB
+
+Top Rejection Reasons:
+  - Score 0 < 1: 2000 (100.0%)
+
+Score Distribution:
+  - Score 0: 2001 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 9.0 (median), 9.0 (mean)
+  - 90th percentile: 9.0 tokens/sec
+  - Generation time: 56.70s (median), 56.70s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:54:03,922 - INFO - Saved 2000 entries to filtered_data/cve_data_20250715_183633_removed_20250721_135403.json
+2025-07-21 13:54:03,922 - INFO - 
+================================================================================
+2025-07-21 13:54:03,922 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 13:54:03,922 - INFO - ================================================================================
+2025-07-21 13:54:03,922 - INFO - Total files processed: 2
+2025-07-21 13:54:03,922 - INFO - Total entries processed: 2001
+2025-07-21 13:54:03,922 - INFO - 
+Filtering funnel:
+2025-07-21 13:54:03,922 - INFO -   1. Rule-based filter: 1/2001 passed (0.0%)
+2025-07-21 13:54:03,922 - INFO -   2. LLM enhancement: 1/1 passed (100.0%)
+2025-07-21 13:54:03,922 - INFO - 
+Final retention rate: 1/2001 (0.0%)
+2025-07-21 13:54:03,922 - INFO - 
+Performance metrics:
+2025-07-21 13:54:03,922 - INFO -   Total processing time: 57.65s
+2025-07-21 13:54:03,922 - INFO -   Average time per file: 28.83s
+2025-07-21 13:54:03,922 - INFO -   Average time per entry: 0.029s
+2025-07-21 13:54:03,922 - INFO - ================================================================================
+
+2025-07-21 13:54:03,922 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 13:54:03,923 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2002
+  - Entries passed filter: 2 (0.1%)
+  - Entries failed filter: 2000
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.029s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 34.74 entries/second
+
+Memory Usage:
+  - Current RSS: 4746.6 MB
+  - Peak RSS: 4746.6 MB
+
+Top Rejection Reasons:
+  - Score 0 < 1: 2000 (100.0%)
+
+Score Distribution:
+  - Score 0: 2001 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 9.0 (median), 9.0 (mean)
+  - 90th percentile: 9.0 tokens/sec
+  - Generation time: 56.70s (median), 56.70s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:56:37,750 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 13:56:37,751 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 13:56:37,878 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 13:56:38,398 - INFO - Model loaded successfully.
+2025-07-21 13:56:38,399 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 13:56:38,399 - INFO - Filtered to 2 files matching sources: ['cve_data']
+2025-07-21 13:56:38,399 - INFO - 
+Starting batch processing of 2 files...
+
+2025-07-21 13:56:38,399 - INFO - 
+============================================================
+2025-07-21 13:56:38,399 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 13:56:38,399 - INFO - ============================================================
+2025-07-21 13:56:38,411 - INFO - Rule-based filtering took 0.01s (84.4 entries/sec)
+2025-07-21 13:56:38,411 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:56:38,411 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 13:56:38,411 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 13:56:38,411 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-21 13:57:35,754 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 13:57:35,755 - ERROR - {
+  "technical_description": "The text contains a list of multiple CVE entries, each describing a different vulnerability. Vulnerabilities include command injection, buffer overflows, SQL injection, path traversal, and deserialization issues in various software systems such as Vim, Apache CXF, MySQL Server, GitHub Enterprise Server, and multiple open-source projects. Some vulnerabilities have patches available, while others do not. Several entries also mention vulnerabilities in VMware products,...
+2025-07-21 13:57:35,755 - ERROR - Response length: 2198 chars, tokens: 512
+2025-07-21 13:57:35,755 - INFO - 
+Enhancement Summary:
+2025-07-21 13:57:35,755 - INFO -   - Total time: 57.34s
+2025-07-21 13:57:35,755 - INFO -   - Average time per entry: 57.34s
+2025-07-21 13:57:35,755 - INFO -   - Min/Max times: 57.34s / 57.34s
+2025-07-21 13:57:35,755 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 13:57:35,755 - INFO -   - Total entries: 1
+2025-07-21 13:57:35,755 - INFO -   - Final retained: 0 (0.0%)
+2025-07-21 13:57:35,755 - INFO -   - Processing time: 57.36s
+2025-07-21 13:57:35,755 - INFO -   - Avg time per entry: 57.356s
+2025-07-21 13:57:35,755 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2
+  - Entries passed filter: 1 (50.0%)
+  - Entries failed filter: 1
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 28.678s
+  - Median time per entry: 28.678s
+  - 90th percentile: 97.475s
+  - 95th percentile: 106.075s
+  - Throughput: 0.03 entries/second
+
+Memory Usage:
+  - Current RSS: 4708.0 MB
+  - Peak RSS: 4708.0 MB
+
+Top Rejection Reasons:
+  - Enhancement failed: 1 (100.0%)
+
+Score Distribution:
+  - Score 0: 1 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 8.9 (median), 8.9 (mean)
+  - 90th percentile: 8.9 tokens/sec
+  - Generation time: 57.32s (median), 57.32s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:57:35,757 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_removed_20250721_135735.json
+2025-07-21 13:57:35,787 - INFO - 
+============================================================
+2025-07-21 13:57:35,787 - INFO - Processing 2000 entries from cve_data_20250715_183633.json
+2025-07-21 13:57:35,787 - INFO - ============================================================
+2025-07-21 13:57:35,788 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 13:57:37,140 - INFO - Rule-based filtering took 1.35s (1478.8 entries/sec)
+2025-07-21 13:57:37,140 - INFO - Rule-based pre-filter complete:
+2025-07-21 13:57:37,140 - INFO -   - Passed: 0/2000 (0.0%)
+2025-07-21 13:57:37,140 - INFO -   - Failed: 2000/2000 (100.0%)
+2025-07-21 13:57:37,140 - INFO - Starting LLM enhancement for 0 candidates...
+2025-07-21 13:57:37,141 - INFO - 
+File processing complete for cve_data_20250715_183633.json:
+2025-07-21 13:57:37,141 - INFO -   - Total entries: 2000
+2025-07-21 13:57:37,141 - INFO -   - Final retained: 0 (0.0%)
+2025-07-21 13:57:37,141 - INFO -   - Processing time: 1.38s
+2025-07-21 13:57:37,141 - INFO -   - Avg time per entry: 0.001s
+2025-07-21 13:57:37,142 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2002
+  - Entries passed filter: 1 (0.0%)
+  - Entries failed filter: 2001
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.029s
+  - Median time per entry: 0.001s
+  - 90th percentile: 0.001s
+  - 95th percentile: 0.001s
+  - Throughput: 34.10 entries/second
+
+Memory Usage:
+  - Current RSS: 4740.7 MB
+  - Peak RSS: 4740.7 MB
+
+Top Rejection Reasons:
+  - Score 0 < 1: 2000 (100.0%)
+  - Enhancement failed: 1 (0.0%)
+
+Score Distribution:
+  - Score 0: 2001 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 8.9 (median), 8.9 (mean)
+  - 90th percentile: 8.9 tokens/sec
+  - Generation time: 57.32s (median), 57.32s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 13:57:37,378 - INFO - Saved 2000 entries to filtered_data/cve_data_20250715_183633_removed_20250721_135737.json
+2025-07-21 13:57:37,378 - INFO - 
+================================================================================
+2025-07-21 13:57:37,378 - INFO - FINAL PROCESSING STATISTICS
+2025-07-21 13:57:37,378 - INFO - ================================================================================
+2025-07-21 13:57:37,378 - INFO - Total files processed: 2
+2025-07-21 13:57:37,378 - INFO - Total entries processed: 2001
+2025-07-21 13:57:37,378 - INFO - 
+Filtering funnel:
+2025-07-21 13:57:37,378 - INFO -   1. Rule-based filter: 1/2001 passed (0.0%)
+2025-07-21 13:57:37,378 - INFO -   2. LLM enhancement: 0/1 passed (0.0%)
+2025-07-21 13:57:37,378 - INFO - 
+Final retention rate: 0/2001 (0.0%)
+2025-07-21 13:57:37,378 - INFO - 
+Performance metrics:
+2025-07-21 13:57:37,378 - INFO -   Total processing time: 58.74s
+2025-07-21 13:57:37,378 - INFO -   Average time per file: 29.37s
+2025-07-21 13:57:37,378 - INFO -   Average time per entry: 0.029s
+2025-07-21 13:57:37,378 - INFO - ================================================================================
+
+2025-07-21 13:57:37,378 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-21 13:57:37,379 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2002
+  - Entries passed filter: 1 (0.0%)
+  - Entries failed filter: 2001
+  - Files completed: 2
+
+Processing Speed:
+  - Mean time per entry: 0.029s
+  - Median time per entry: 0.001s
+  - 90th percentile: 0.001s
+  - 95th percentile: 0.001s
+  - Throughput: 34.10 entries/second
+
+Memory Usage:
+  - Current RSS: 4740.7 MB
+  - Peak RSS: 4740.7 MB
+
+Top Rejection Reasons:
+  - Score 0 < 1: 2000 (100.0%)
+  - Enhancement failed: 1 (0.0%)
+
+Score Distribution:
+  - Score 0: 2001 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 8.9 (median), 8.9 (mean)
+  - 90th percentile: 8.9 tokens/sec
+  - Generation time: 57.32s (median), 57.32s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 14:04:06,969 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 14:04:06,970 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-21 14:04:07,105 - DEBUG - https://huggingface.co:443 "GET /api/models/mlx-community/Qwen3-8B-4bit/revision/main HTTP/1.1" 200 5998
+2025-07-21 14:04:07,622 - INFO - Model loaded successfully.
+2025-07-21 14:04:07,622 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 14:04:07,623 - INFO - Filtered to 2 files matching sources: ['cve_data']
+2025-07-21 14:04:07,623 - INFO - 
+Starting batch processing of 2 files...
+
+2025-07-21 14:04:07,623 - INFO - 
+============================================================
+2025-07-21 14:04:07,623 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-21 14:04:07,623 - INFO - ============================================================
+2025-07-21 14:04:07,634 - INFO - Rule-based filtering took 0.01s (87.1 entries/sec)
+2025-07-21 14:04:07,635 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:04:07,635 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-21 14:04:07,635 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-21 14:04:07,635 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-21 14:05:04,101 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:05:04,101 - ERROR - {
+  "technical_description": "The analyzed data contains a list of multiple CVE entries, each describing a distinct vulnerability in various software systems. These include command injection, buffer overflow, path traversal, SQL injection, and deserialization vulnerabilities affecting products such as Vim, MySQL Server, Oracle Java SE, GitHub Enterprise Server, Apache CXF, and others. Some vulnerabilities allow for remote code execution, unauthorized data access, denial of service, and privilege...
+2025-07-21 14:05:04,101 - ERROR - Response length: 2281 chars, tokens: 512
+2025-07-21 14:05:04,102 - INFO - 
+Enhancement Summary:
+2025-07-21 14:05:04,102 - INFO -   - Total time: 56.47s
+2025-07-21 14:05:04,102 - INFO -   - Average time per entry: 56.47s
+2025-07-21 14:05:04,102 - INFO -   - Min/Max times: 56.47s / 56.47s
+2025-07-21 14:05:04,102 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-21 14:05:04,102 - INFO -   - Total entries: 1
+2025-07-21 14:05:04,102 - INFO -   - Final retained: 0 (0.0%)
+2025-07-21 14:05:04,102 - INFO -   - Processing time: 56.48s
+2025-07-21 14:05:04,102 - INFO -   - Avg time per entry: 56.479s
+2025-07-21 14:05:04,102 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 1.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2
+  - Entries passed filter: 1 (50.0%)
+  - Entries failed filter: 1
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 28.239s
+  - Median time per entry: 28.239s
+  - 90th percentile: 95.985s
+  - 95th percentile: 104.453s
+  - Throughput: 0.04 entries/second
+
+Memory Usage:
+  - Current RSS: 4736.2 MB
+  - Peak RSS: 4736.2 MB
+
+Top Rejection Reasons:
+  - Enhancement failed: 1 (100.0%)
+
+Score Distribution:
+  - Score 0: 1 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 9.1 (median), 9.1 (mean)
+  - 90th percentile: 9.1 tokens/sec
+  - Generation time: 56.44s (median), 56.44s (mean)
+  - Avg tokens: 21179 input, 512 output
+================================================================================
+
+2025-07-21 14:05:04,104 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_removed_20250721_140504.json
+2025-07-21 14:05:04,128 - INFO - 
+============================================================
+2025-07-21 14:05:04,128 - INFO - Processing 2000 entries from cve_data_20250715_183633.json
+2025-07-21 14:05:04,128 - INFO - ============================================================
+2025-07-21 14:05:04,128 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 14:05:05,078 - INFO - Rule-based filtering took 0.95s (2104.9 entries/sec)
+2025-07-21 14:05:05,079 - INFO - Rule-based pre-filter complete:
+2025-07-21 14:05:05,079 - INFO -   - Passed: 1979/2000 (99.0%)
+2025-07-21 14:05:05,079 - INFO -   - Failed: 21/2000 (1.1%)
+2025-07-21 14:05:05,079 - INFO - Starting LLM enhancement for 1979 candidates...
+2025-07-21 14:06:17,319 - INFO - Progress: 10/1979 - Avg time: 7.22s/entry - ETA: 237.1 min
+2025-07-21 14:07:08,519 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 3.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2018
+  - Entries passed filter: 1996 (98.9%)
+  - Entries failed filter: 22
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 0.090s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 11.16 entries/second
+
+Memory Usage:
+  - Current RSS: 4769.1 MB
+  - Peak RSS: 4769.1 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 21 (95.5%)
+  - Enhancement failed: 1 (4.5%)
+
+Score Distribution:
+  - Score 0: 38 entries
+  - Score 6: 202 entries
+  - Score 7: 168 entries
+  - Score 8: 294 entries
+  - Score 9: 377 entries
+  - Score 10: 276 entries
+  - Score 11: 215 entries
+  - Score 12: 173 entries
+  - Score 13: 117 entries
+  - Score 14: 66 entries
+  - Score 15: 41 entries
+  - Score 16: 32 entries
+  - Score 17: 9 entries
+  - Score 18: 1 entries
+  - Score 20: 7 entries
+  - Score 24: 1 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 17
+  - Tokens per second: 69.3 (median), 63.6 (mean)
+  - 90th percentile: 73.6 tokens/sec
+  - Generation time: 7.39s (median), 10.58s (mean)
+  - Avg tokens: 1351 input, 512 output
+================================================================================
+
+2025-07-21 14:07:52,056 - INFO - Progress: 20/1979 - Avg time: 9.47s/entry - ETA: 309.3 min
+2025-07-21 14:09:29,852 - INFO - Progress: 30/1979 - Avg time: 9.78s/entry - ETA: 317.7 min
+2025-07-21 14:09:38,894 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:09:38,894 - ERROR - {
+  "technical_description": "A vulnerability exists in the LAT/Telnet Gateway (lattelnet) component of Ultrix 4.1 and 4.2 systems. This vulnerability allows attackers to escalate their privileges to root without requiring authentication, potentially leading to full system compromise.",
+  "risk_level": "High",
+  "affected_systems": ["Ultrix 4.1", "Ultrix 4.2"],
+  "mitigations": [
+    "Apply vendor-provided security patches for the lattelnet component.",
+ 
+  ]
+}
+```
+
+
+```json
+{
+  "technical_descr...
+2025-07-21 14:09:38,895 - ERROR - Response length: 2004 chars, tokens: 512
+2025-07-21 14:09:47,966 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:09:47,966 - ERROR - {
+  "technical_description": "A vulnerability exists in the rexec daemon (rexecd) of AT&T TCP/IP 4.0 for various SVR4 systems. This vulnerability allows remote attackers to execute arbitrary commands on the affected systems.",
+  "risk_level": "High",
+  "affected_systems": "AT&T TCP/IP 4.0 for various SVR4 systems",
+  "mitigations": [
+    "Upgrade to a version of AT&T TCP/IP that addresses this vulnerability.",
+ 
+  ]
+}
+``` The user's query has already been addressed. The provided JSON response is...
+2025-07-21 14:09:47,966 - ERROR - Response length: 2318 chars, tokens: 512
+2025-07-21 14:10:50,063 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:10:50,063 - ERROR - {
+  "technical_description": "A vulnerability exists in the integer multiplication emulation code within the SPARC architecture's implementation for SunOS 4.1 through 4.1.2. This flaw allows local users to either obtain root access or induce a denial of service (DoS) by causing a crash.",
+  "risk_level": "High",
+  "affected_systems": ["SunOS 4.1", "SunOS 4.1.1", "SunOS 4.1.2"],
+  "mitigations": [
+    "Upgrade to SunOS 4.1.3 or a later version which addresses this vulnerability.",
+ 
+  ]
+}
+``` The...
+2025-07-21 14:10:50,063 - ERROR - Response length: 2004 chars, tokens: 512
+2025-07-21 14:10:58,764 - INFO - Progress: 40/1979 - Avg time: 8.89s/entry - ETA: 287.3 min
+2025-07-21 14:12:24,920 - INFO - Progress: 50/1979 - Avg time: 8.62s/entry - ETA: 277.0 min
+2025-07-21 14:13:50,635 - INFO - Progress: 60/1979 - Avg time: 8.57s/entry - ETA: 274.1 min
+2025-07-21 14:15:16,968 - INFO - Progress: 70/1979 - Avg time: 8.63s/entry - ETA: 274.7 min
+2025-07-21 14:16:46,265 - INFO - Progress: 80/1979 - Avg time: 8.93s/entry - ETA: 282.6 min
+2025-07-21 14:18:14,687 - INFO - Progress: 90/1979 - Avg time: 8.84s/entry - ETA: 278.4 min
+2025-07-21 14:18:41,727 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:18:41,727 - ERROR - {
+  "technical_description": "In Cisco IOS 10.3, when using the tacacs-ds or tacacs keyword, an extended IP access control list (ACL) could bypass filtering, allowing unauthorized traffic to pass through.",
+  "risk_level": "High",
+  "affected_systems": ["Cisco IOS 10.3"],
+  "mitigations": [
+    "Upgrade to a version of Cisco IOS later than 10.3 that has addressed this vulnerability.",
+ 
+  ]
+}
+``` I need a JSON object, not a markdown. Make sure it's valid JSON. Please also make sure that the miti...
+2025-07-21 14:18:41,727 - ERROR - Response length: 2386 chars, tokens: 512
+2025-07-21 14:19:44,319 - INFO - Progress: 100/1979 - Avg time: 8.96s/entry - ETA: 280.7 min
+2025-07-21 14:21:13,211 - INFO - Progress: 110/1979 - Avg time: 8.89s/entry - ETA: 276.9 min
+2025-07-21 14:22:41,207 - INFO - Progress: 120/1979 - Avg time: 8.80s/entry - ETA: 272.6 min
+2025-07-21 14:24:08,788 - INFO - Progress: 130/1979 - Avg time: 8.76s/entry - ETA: 269.9 min
+2025-07-21 14:25:38,061 - INFO - Progress: 140/1979 - Avg time: 8.93s/entry - ETA: 273.6 min
+2025-07-21 14:27:09,544 - INFO - Progress: 150/1979 - Avg time: 9.15s/entry - ETA: 278.9 min
+2025-07-21 14:28:39,697 - INFO - Progress: 160/1979 - Avg time: 9.02s/entry - ETA: 273.3 min
+2025-07-21 14:30:08,932 - INFO - Progress: 170/1979 - Avg time: 8.92s/entry - ETA: 269.0 min
+2025-07-21 14:31:34,056 - INFO - Progress: 180/1979 - Avg time: 8.51s/entry - ETA: 255.2 min
+2025-07-21 14:32:56,521 - INFO - Progress: 190/1979 - Avg time: 8.25s/entry - ETA: 245.9 min
+2025-07-21 14:34:17,494 - INFO - Progress: 200/1979 - Avg time: 8.10s/entry - ETA: 240.1 min
+2025-07-21 14:35:06,341 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 31.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2208
+  - Entries passed filter: 2182 (98.8%)
+  - Entries failed filter: 26
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 0.842s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 8.776s
+  - Throughput: 1.19 entries/second
+
+Memory Usage:
+  - Current RSS: 4773.3 MB
+  - Peak RSS: 4773.3 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 21 (80.8%)
+  - Enhancement failed: 5 (19.2%)
+
+Score Distribution:
+  - Score 0: 228 entries
+  - Score 6: 202 entries
+  - Score 7: 168 entries
+  - Score 8: 294 entries
+  - Score 9: 377 entries
+  - Score 10: 276 entries
+  - Score 11: 215 entries
+  - Score 12: 173 entries
+  - Score 13: 117 entries
+  - Score 14: 66 entries
+  - Score 15: 41 entries
+  - Score 16: 32 entries
+  - Score 17: 9 entries
+  - Score 18: 1 entries
+  - Score 20: 7 entries
+  - Score 24: 1 entries
+  - Score 500: 1 entries
+
+LLM Performance:
+  - Total calls: 207
+  - Tokens per second: 58.3 (median), 58.6 (mean)
+  - 90th percentile: 63.8 tokens/sec
+  - Generation time: 8.79s (median), 8.97s (mean)
+  - Avg tokens: 208 input, 512 output
+================================================================================
+
+2025-07-21 14:35:38,156 - INFO - Progress: 210/1979 - Avg time: 8.07s/entry - ETA: 237.8 min
+2025-07-21 14:36:59,231 - INFO - Progress: 220/1979 - Avg time: 8.11s/entry - ETA: 237.7 min
+2025-07-21 14:38:21,098 - INFO - Progress: 230/1979 - Avg time: 8.19s/entry - ETA: 238.6 min
+2025-07-21 14:38:37,846 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:38:37,846 - ERROR - {
+  "technical_description": "A buffer overflow vulnerability exists in the MIME conversion handling of sendmail versions 8.8.3 and 8.8.4. This vulnerability allows remote attackers to execute arbitrary code by sending a specially crafted MIME message that triggers the overflow.",
+  "risk_level": "High",
+  "affected_systems": ["sendmail 8.8.3", "sendmail 8.8.4"],
+  "mitigations": [
+    "Upgrade to a version of sendmail that is not affected by this vulnerability (e.g., 8.9.x or later).",
+    "App...
+2025-07-21 14:38:37,846 - ERROR - Response length: 2237 chars, tokens: 512
+2025-07-21 14:39:37,458 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:39:37,458 - ERROR - {
+  "technical_description": "CVE-1999-1299 affects the 'rcp' utility on various Linux systems, including Red Hat 4.0. It allows a 'nobody' user or any user with UID 65535 to overwrite arbitrary files. This occurs because the UID 65535 is interpreted as -1 by chown and other system calls, leading to these calls failing to modify the ownership of the file.",
+  "risk_level": "High",
+  "affected_systems": ["Red Hat 4.0", "Various Linux systems"],
+  "mitigations": [
+    "Upgrade to a version of 'rcp...
+2025-07-21 14:39:37,458 - ERROR - Response length: 1947 chars, tokens: 512
+2025-07-21 14:39:46,248 - INFO - Progress: 240/1979 - Avg time: 8.51s/entry - ETA: 246.8 min
+2025-07-21 14:40:47,090 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:40:47,090 - ERROR - {
+  "technical_description": "The vulnerability described by CVE-1999-0106 allows an attacker to perform a 'finger bomb' by redirecting the Finger protocol to a remote server, potentially overwhelming the system and causing denial of service.",
+  "risk_level": "High",
+  "affected_systems": [
+    "Unix-based systems using the Finger service",
+    "Network services utilizing the Finger protocol"
+  ],
+  "mitigations": [
+    "Disable the Finger service on systems where it is not required",
+    "Impl...
+2025-07-21 14:40:47,090 - ERROR - Response length: 2341 chars, tokens: 512
+2025-07-21 14:41:13,474 - INFO - Progress: 250/1979 - Avg time: 8.72s/entry - ETA: 251.3 min
+2025-07-21 14:41:22,338 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:41:22,338 - ERROR - {
+  "technical_description": "CVE-1999-1128 in Internet Explorer 3.01 on Windows 95 allows remote malicious websites to execute arbitrary commands via a .isp file. The file is automatically downloaded and executed without user prompting.",
+  "risk_level": "High",
+  "affected_systems": ["Internet Explorer 3.01", "Windows 95"],
+  "mitigations": [
+    "Upgrade to a newer version of Internet Explorer or switch to a more secure browser.",
+ 
+  ]
+}
+``` That's the response I need. I need to make sure th...
+2025-07-21 14:41:22,338 - ERROR - Response length: 2140 chars, tokens: 512
+2025-07-21 14:42:42,679 - INFO - Progress: 260/1979 - Avg time: 8.92s/entry - ETA: 255.6 min
+2025-07-21 14:44:12,523 - INFO - Progress: 270/1979 - Avg time: 8.98s/entry - ETA: 255.9 min
+2025-07-21 14:45:42,396 - INFO - Progress: 280/1979 - Avg time: 8.99s/entry - ETA: 254.5 min
+2025-07-21 14:46:18,052 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:46:18,052 - ERROR - {
+  "technical_description": "CVE-1999-1449 is a vulnerability in SunOS 4.1.4 running on a Sparc 20 machine. It allows local users to trigger a denial of service (DoS) by reading from the /dev/tcx0 TCX device, leading to a kernel panic. This vulnerability is categorized under NVD-CWE-Other with the access vector (AV:L) and access complexity (AC:L), indicating that an attacker needs local access and low complexity to exploit it.",
+  "risk_level": "High",
+  "affected_systems": ["SunOS 4.1.4 on Spa...
+2025-07-21 14:46:18,052 - ERROR - Response length: 2117 chars, tokens: 512
+2025-07-21 14:47:11,089 - INFO - Progress: 290/1979 - Avg time: 8.87s/entry - ETA: 249.7 min
+2025-07-21 14:48:40,513 - INFO - Progress: 300/1979 - Avg time: 8.94s/entry - ETA: 250.2 min
+2025-07-21 14:50:09,587 - INFO - Progress: 310/1979 - Avg time: 8.91s/entry - ETA: 247.8 min
+2025-07-21 14:51:38,042 - INFO - Progress: 320/1979 - Avg time: 8.85s/entry - ETA: 244.6 min
+2025-07-21 14:52:13,599 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:52:13,599 - ERROR - {
+  "technical_description": "CVE-1999-0196 in Webgais 1.0's websendmail component allows remote users to access arbitrary files and execute arbitrary code by manipulating the receiver parameter ($VAR_receiver variable).",
+  "risk_level": "High",
+  "affected_systems": ["Webgais 1.0"],
+  "mitigations": [
+    "Upgrade to a version of Webgais that addresses this vulnerability (e.g., a version newer than 1.0).",
+ 
+  ]
+}
+``` I need to make sure the JSON is valid, with proper commas and brackets. Also...
+2025-07-21 14:52:13,599 - ERROR - Response length: 2117 chars, tokens: 512
+2025-07-21 14:53:06,783 - INFO - Progress: 330/1979 - Avg time: 8.87s/entry - ETA: 243.9 min
+2025-07-21 14:54:36,358 - INFO - Progress: 340/1979 - Avg time: 8.96s/entry - ETA: 244.7 min
+2025-07-21 14:56:13,219 - INFO - Progress: 350/1979 - Avg time: 9.69s/entry - ETA: 263.0 min
+2025-07-21 14:57:15,278 - ERROR - Failed to extract JSON from LLM response. Raw response (first 500 chars):
+2025-07-21 14:57:15,279 - ERROR - {
+  "technical_description": "A buffer overflow vulnerability exists in the Apache HTTP Server (httpd) cookie handling functionality for versions 1.1.1 and earlier. This vulnerability allows a remote attacker to send a specially crafted cookie that could overflow the buffer allocated for cookie processing, potentially leading to arbitrary code execution.",
+  "risk_level": "High",
+  "affected_systems": [
+    "Apache HTTP Server (httpd) versions 1.1.1 and earlier"
+  ],
+  "mitigations": [
+    "Upgr...
+2025-07-21 14:57:15,279 - ERROR - Response length: 2335 chars, tokens: 512
+2025-07-21 14:58:09,941 - INFO - Progress: 360/1979 - Avg time: 11.67s/entry - ETA: 314.9 min

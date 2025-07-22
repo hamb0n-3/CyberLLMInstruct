@@ -15,23 +15,21 @@ import statistics
 class BenchmarkTracker:
     """Tracks detailed performance metrics with comprehensive statistics."""
     
-    def __init__(self, logger: Optional[logging.Logger] = None, 
-                 log_interval_initial: int = 120, 
-                 log_interval_periodic: int = 1800):
+    def __init__(self, logger: Optional[logging.Logger] = None):
         """
         Initialize benchmark tracker.
         
         Args:
             logger: Optional logger instance. If None, uses module logger.
-            log_interval_initial: Initial interval for logging stats (seconds)
-            log_interval_periodic: Periodic interval for logging stats (seconds)
         """
         self.logger = logger or logging.getLogger(__name__)
         self.start_time = time.time()
-        self.log_interval_initial = log_interval_initial
-        self.log_interval_periodic = log_interval_periodic
-        self.next_log_time = self.start_time + log_interval_initial
-        self.initial_logged = False
+        
+        # Per-file timing configuration
+        self.file_start_time = None
+        self.file_log_intervals = [120, 1800]  # 2 min, 30 min, then hourly
+        self.file_log_index = 0
+        self.next_log_time = None
         
         # Performance metrics
         self.metrics = {
@@ -46,7 +44,13 @@ class BenchmarkTracker:
             'memory_usage': [],
             'processing_times': [],
             'entry_sizes': [],
-            'success_by_score': defaultdict(lambda: {'passed': 0, 'failed': 0})
+            'success_by_score': defaultdict(lambda: {'passed': 0, 'failed': 0}),
+            # LLM performance metrics
+            'llm_calls': 0,
+            'llm_tokens_per_second': [],
+            'llm_input_tokens': [],
+            'llm_output_tokens': [],
+            'llm_generation_times': []
         }
         
         # Initialize process for memory tracking
@@ -109,15 +113,34 @@ class BenchmarkTracker:
         """Record time taken for a processing stage."""
         self.metrics['stage_times'][stage].append(duration)
     
+    def record_llm_performance(self, tokens_per_second: float, input_tokens: int, output_tokens: int, generation_time: float):
+        """Record LLM performance metrics."""
+        self.metrics['llm_calls'] += 1
+        self.metrics['llm_tokens_per_second'].append(tokens_per_second)
+        self.metrics['llm_input_tokens'].append(input_tokens)
+        self.metrics['llm_output_tokens'].append(output_tokens)
+        self.metrics['llm_generation_times'].append(generation_time)
+    
+    def reset_file_timing(self):
+        """Reset timing for a new file."""
+        self.file_start_time = time.time()
+        self.file_log_index = 0
+        self.next_log_time = self.file_start_time + self.file_log_intervals[0]
+    
     def should_log(self) -> bool:
         """Check if it's time to log benchmark stats."""
+        if self.file_start_time is None:
+            return False
+            
         current_time = time.time()
-        if current_time >= self.next_log_time:
-            if not self.initial_logged:
-                self.initial_logged = True
-                self.next_log_time = self.start_time + self.log_interval_periodic
+        if self.next_log_time and current_time >= self.next_log_time:
+            # Move to next interval
+            if self.file_log_index < len(self.file_log_intervals) - 1:
+                self.file_log_index += 1
+                self.next_log_time = self.file_start_time + self.file_log_intervals[self.file_log_index]
             else:
-                self.next_log_time = current_time + self.log_interval_periodic
+                # After initial intervals, log hourly
+                self.next_log_time = current_time + 3600  # 1 hour
             return True
         return False
     
@@ -200,6 +223,36 @@ class BenchmarkTracker:
                 }
         stats['success_by_score'] = score_success
         
+        # LLM performance statistics
+        if self.metrics['llm_tokens_per_second']:
+            tps = self.metrics['llm_tokens_per_second']
+            input_tokens = self.metrics['llm_input_tokens']
+            output_tokens = self.metrics['llm_output_tokens']
+            gen_times = self.metrics['llm_generation_times']
+            
+            stats['llm_performance'] = {
+                'total_calls': self.metrics['llm_calls'],
+                'total_input_tokens': sum(input_tokens),
+                'total_output_tokens': sum(output_tokens),
+                'total_generation_time': sum(gen_times),
+                'tokens_per_second': {
+                    'mean': statistics.mean(tps),
+                    'median': statistics.median(tps),
+                    'min': min(tps),
+                    'max': max(tps),
+                    'p90': self.get_percentile(tps, 90),
+                    'p95': self.get_percentile(tps, 95)
+                },
+                'generation_times': {
+                    'mean': statistics.mean(gen_times),
+                    'median': statistics.median(gen_times),
+                    'min': min(gen_times),
+                    'max': max(gen_times)
+                },
+                'avg_input_tokens': statistics.mean(input_tokens),
+                'avg_output_tokens': statistics.mean(output_tokens)
+            }
+        
         return stats
     
     def get_summary(self) -> str:
@@ -252,6 +305,18 @@ class BenchmarkTracker:
             for score, count in sorted(stats['score_distribution'].items(), key=lambda x: int(x[0])):
                 lines.append(f"  - Score {score}: {count} entries")
         
+        # LLM performance
+        if 'llm_performance' in stats:
+            llm = stats['llm_performance']
+            lines.extend([
+                f"\nLLM Performance:",
+                f"  - Total calls: {llm['total_calls']}",
+                f"  - Tokens per second: {llm['tokens_per_second']['median']:.1f} (median), {llm['tokens_per_second']['mean']:.1f} (mean)",
+                f"  - 90th percentile: {llm['tokens_per_second']['p90']:.1f} tokens/sec",
+                f"  - Generation time: {llm['generation_times']['median']:.2f}s (median), {llm['generation_times']['mean']:.2f}s (mean)",
+                f"  - Avg tokens: {llm['avg_input_tokens']:.0f} input, {llm['avg_output_tokens']:.0f} output"
+            ])
+        
         lines.append(f"{'='*80}\n")
         return '\n'.join(lines)
     
@@ -270,8 +335,9 @@ class BenchmarkTracker:
     def reset(self):
         """Reset all metrics."""
         self.start_time = time.time()
-        self.next_log_time = self.start_time + self.log_interval_initial
-        self.initial_logged = False
+        self.file_start_time = None
+        self.file_log_index = 0
+        self.next_log_time = None
         
         # Reset all metrics
         self.metrics = {
@@ -286,7 +352,13 @@ class BenchmarkTracker:
             'memory_usage': [],
             'processing_times': [],
             'entry_sizes': [],
-            'success_by_score': defaultdict(lambda: {'passed': 0, 'failed': 0})
+            'success_by_score': defaultdict(lambda: {'passed': 0, 'failed': 0}),
+            # LLM performance metrics
+            'llm_calls': 0,
+            'llm_tokens_per_second': [],
+            'llm_input_tokens': [],
+            'llm_output_tokens': [],
+            'llm_generation_times': []
         }
         
         self._record_memory()
