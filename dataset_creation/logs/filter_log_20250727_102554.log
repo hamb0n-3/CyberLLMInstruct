@@ -1,0 +1,111 @@
+2025-07-27 10:25:54,766 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-27 10:26:47,166 - INFO - Model loaded successfully.
+2025-07-27 10:26:47,166 - INFO - Sampler configured: temp=0.6, top_p=0.95, top_k=20, min_p=0.0, rep_penalty=1.0
+2025-07-27 10:26:47,166 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-27 10:26:47,167 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-27 10:26:47,311 - INFO - 
+============================================================
+2025-07-27 10:26:47,311 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-27 10:26:47,311 - INFO - ============================================================
+2025-07-27 10:26:47,313 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-27 10:26:50,423 - INFO - Rule-based filtering took 3.11s (7277.7 entries/sec)
+2025-07-27 10:26:50,423 - INFO - Rule-based pre-filter complete:
+2025-07-27 10:26:50,424 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-27 10:26:50,424 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-27 10:26:50,424 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-27 10:27:11,743 - INFO - Progress: 10/22185 - Avg time: 2.13s/entry - ETA: 787.9 min
+2025-07-27 10:27:35,403 - INFO - Progress: 20/22185 - Avg time: 2.37s/entry - ETA: 874.0 min
+2025-07-27 10:28:00,431 - WARNING - Failed to extract JSON (attempt 1/3), response not truncated
+2025-07-27 10:28:02,872 - WARNING - Failed to extract JSON (attempt 2/3), response not truncated
+2025-07-27 10:28:05,432 - INFO - Successfully extracted JSON on attempt 3 with 1500 max tokens
+2025-07-27 10:28:05,432 - INFO - Progress: 30/22185 - Avg time: 3.00s/entry - ETA: 1108.8 min
+2025-07-27 10:28:35,765 - INFO - Progress: 40/22185 - Avg time: 3.03s/entry - ETA: 1119.5 min
+2025-07-27 10:28:48,731 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.9 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22697
+  - Entries passed filter: 22230 (97.9%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.005s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 187.07 entries/second
+
+Memory Usage:
+  - Current RSS: 6735.7 MB
+  - Peak RSS: 6735.7 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 512 entries
+  - Score 3: 1279 entries
+  - Score 4: 507 entries
+  - Score 5: 1074 entries
+  - Score 6: 1280 entries
+  - Score 7: 917 entries
+  - Score 8: 2408 entries
+  - Score 9: 1462 entries
+  - Score 10: 3928 entries
+  - Score 11: 2647 entries
+  - Score 12: 1595 entries
+  - Score 13: 1222 entries
+  - Score 14: 1092 entries
+  - Score 15: 800 entries
+  - Score 16: 392 entries
+  - Score 17: 333 entries
+  - Score 18: 259 entries
+  - Score 19: 180 entries
+  - Score 20: 123 entries
+  - Score 21: 76 entries
+  - Score 22: 91 entries
+  - Score 23: 77 entries
+  - Score 24: 46 entries
+  - Score 25: 44 entries
+  - Score 26: 37 entries
+  - Score 27: 43 entries
+  - Score 28: 49 entries
+  - Score 29: 29 entries
+  - Score 30: 33 entries
+  - Score 31: 22 entries
+  - Score 32: 22 entries
+  - Score 33: 17 entries
+  - Score 34: 17 entries
+  - Score 35: 13 entries
+  - Score 36: 10 entries
+  - Score 37: 9 entries
+  - Score 38: 7 entries
+  - Score 39: 5 entries
+  - Score 40: 10 entries
+  - Score 41: 4 entries
+  - Score 42: 5 entries
+  - Score 43: 2 entries
+  - Score 44: 2 entries
+  - Score 45: 4 entries
+  - Score 46: 1 entries
+  - Score 47: 4 entries
+  - Score 49: 2 entries
+  - Score 50: 2 entries
+  - Score 52: 1 entries
+  - Score 58: 1 entries
+  - Score 62: 1 entries
+  - Score 69: 1 entries
+
+LLM Performance:
+  - Total calls: 47
+  - Tokens per second: 59.2 (median), 59.3 (mean)
+  - 90th percentile: 64.1 tokens/sec
+  - Generation time: 2.26s (median), 2.52s (mean)
+  - Avg tokens: 391 input, 148 output
+================================================================================
+
+2025-07-27 10:29:02,343 - INFO - Progress: 50/22185 - Avg time: 2.66s/entry - ETA: 980.3 min

@@ -1,0 +1,153 @@
+2025-07-27 10:30:49,740 - INFO - Loading model: mlx-community/Qwen3-8B-4bit-DWQ-053125...
+2025-07-27 10:30:50,932 - INFO - Model loaded successfully.
+2025-07-27 10:30:50,932 - INFO - Sampler configured: temp=0.6, top_p=0.95, top_k=20, min_p=0.0, rep_penalty=1.0
+2025-07-27 10:30:50,933 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-27 10:30:50,933 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-27 10:30:51,074 - INFO - 
+============================================================
+2025-07-27 10:30:51,074 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-27 10:30:51,074 - INFO - ============================================================
+2025-07-27 10:30:51,076 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-27 10:30:54,150 - INFO - Rule-based filtering took 3.08s (7363.0 entries/sec)
+2025-07-27 10:30:54,151 - INFO - Rule-based pre-filter complete:
+2025-07-27 10:30:54,151 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-27 10:30:54,151 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-27 10:30:54,151 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-27 10:31:14,007 - INFO - Progress: 10/22185 - Avg time: 1.99s/entry - ETA: 733.8 min
+2025-07-27 10:31:35,044 - INFO - Progress: 20/22185 - Avg time: 2.10s/entry - ETA: 777.1 min
+2025-07-27 10:31:55,299 - INFO - Progress: 30/22185 - Avg time: 2.03s/entry - ETA: 747.9 min
+2025-07-27 10:32:23,136 - INFO - Progress: 40/22185 - Avg time: 2.78s/entry - ETA: 1027.3 min
+2025-07-27 10:32:48,576 - INFO - Progress: 50/22185 - Avg time: 2.54s/entry - ETA: 938.5 min
+2025-07-27 10:32:54,236 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22704
+  - Entries passed filter: 22237 (97.9%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.005s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 184.47 entries/second
+
+Memory Usage:
+  - Current RSS: 5421.7 MB
+  - Peak RSS: 5421.7 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 519 entries
+  - Score 3: 1279 entries
+  - Score 4: 509 entries
+  - Score 5: 1090 entries
+  - Score 6: 1208 entries
+  - Score 7: 919 entries
+  - Score 8: 2537 entries
+  - Score 9: 1421 entries
+  - Score 10: 3907 entries
+  - Score 11: 2680 entries
+  - Score 12: 1581 entries
+  - Score 13: 1199 entries
+  - Score 14: 1088 entries
+  - Score 15: 820 entries
+  - Score 16: 366 entries
+  - Score 17: 325 entries
+  - Score 18: 267 entries
+  - Score 19: 182 entries
+  - Score 20: 120 entries
+  - Score 21: 84 entries
+  - Score 22: 86 entries
+  - Score 23: 76 entries
+  - Score 24: 46 entries
+  - Score 25: 43 entries
+  - Score 26: 38 entries
+  - Score 27: 41 entries
+  - Score 28: 49 entries
+  - Score 29: 28 entries
+  - Score 30: 30 entries
+  - Score 31: 26 entries
+  - Score 32: 21 entries
+  - Score 33: 17 entries
+  - Score 34: 17 entries
+  - Score 35: 13 entries
+  - Score 36: 12 entries
+  - Score 37: 9 entries
+  - Score 38: 5 entries
+  - Score 39: 6 entries
+  - Score 40: 9 entries
+  - Score 41: 4 entries
+  - Score 42: 6 entries
+  - Score 43: 3 entries
+  - Score 44: 1 entries
+  - Score 45: 5 entries
+  - Score 46: 1 entries
+  - Score 47: 3 entries
+  - Score 49: 2 entries
+  - Score 50: 2 entries
+  - Score 52: 1 entries
+  - Score 58: 1 entries
+  - Score 62: 1 entries
+  - Score 69: 1 entries
+
+LLM Performance:
+  - Total calls: 52
+  - Tokens per second: 58.2 (median), 59.1 (mean)
+  - 90th percentile: 66.1 tokens/sec
+  - Generation time: 2.06s (median), 2.31s (mean)
+  - Avg tokens: 403 input, 137 output
+================================================================================
+
+2025-07-27 10:33:13,546 - INFO - Progress: 60/22185 - Avg time: 2.50s/entry - ETA: 920.6 min
+2025-07-27 10:33:37,539 - INFO - Progress: 70/22185 - Avg time: 2.40s/entry - ETA: 884.3 min
+2025-07-27 10:34:04,006 - INFO - Progress: 80/22185 - Avg time: 2.65s/entry - ETA: 975.0 min
+2025-07-27 10:34:27,141 - INFO - Progress: 90/22185 - Avg time: 2.31s/entry - ETA: 851.9 min
+2025-07-27 10:34:57,880 - INFO - Progress: 100/22185 - Avg time: 3.07s/entry - ETA: 1131.4 min
+2025-07-27 10:35:25,458 - INFO - Progress: 110/22185 - Avg time: 2.76s/entry - ETA: 1014.6 min
+2025-07-27 10:35:53,818 - INFO - Progress: 120/22185 - Avg time: 2.84s/entry - ETA: 1042.9 min
+2025-07-27 10:36:22,720 - INFO - Progress: 130/22185 - Avg time: 2.89s/entry - ETA: 1062.3 min
+2025-07-27 10:36:46,284 - INFO - Progress: 140/22185 - Avg time: 2.36s/entry - ETA: 865.8 min
+2025-07-27 10:37:15,260 - INFO - Progress: 150/22185 - Avg time: 2.90s/entry - ETA: 1064.1 min
+2025-07-27 10:37:39,300 - INFO - Progress: 160/22185 - Avg time: 2.40s/entry - ETA: 882.4 min
+2025-07-27 10:38:07,094 - INFO - Progress: 170/22185 - Avg time: 2.78s/entry - ETA: 1019.8 min
+2025-07-27 10:38:36,302 - INFO - Progress: 180/22185 - Avg time: 2.92s/entry - ETA: 1071.2 min
+2025-07-27 10:39:04,660 - INFO - Progress: 190/22185 - Avg time: 2.84s/entry - ETA: 1039.5 min
+2025-07-27 10:39:27,400 - INFO - Progress: 200/22185 - Avg time: 2.27s/entry - ETA: 833.2 min
+2025-07-27 10:39:53,018 - INFO - Progress: 210/22185 - Avg time: 2.56s/entry - ETA: 938.2 min
+2025-07-27 10:40:19,693 - INFO - Progress: 220/22185 - Avg time: 2.67s/entry - ETA: 976.5 min
+2025-07-27 10:40:46,269 - INFO - Progress: 230/22185 - Avg time: 2.66s/entry - ETA: 972.4 min
+2025-07-27 10:41:12,559 - INFO - Progress: 240/22185 - Avg time: 2.63s/entry - ETA: 961.5 min
+2025-07-27 10:41:37,278 - INFO - Progress: 250/22185 - Avg time: 2.47s/entry - ETA: 903.6 min
+2025-07-27 10:42:00,324 - INFO - Progress: 260/22185 - Avg time: 2.30s/entry - ETA: 842.1 min
+2025-07-27 10:42:22,739 - INFO - Progress: 270/22185 - Avg time: 2.24s/entry - ETA: 818.7 min
+2025-07-27 10:42:43,622 - INFO - Progress: 280/22185 - Avg time: 2.09s/entry - ETA: 762.3 min
+2025-07-27 10:43:07,464 - INFO - Progress: 290/22185 - Avg time: 2.38s/entry - ETA: 870.0 min
+2025-07-27 10:43:27,739 - INFO - Progress: 300/22185 - Avg time: 2.03s/entry - ETA: 739.5 min
+2025-07-27 10:43:47,537 - INFO - Progress: 310/22185 - Avg time: 1.98s/entry - ETA: 721.7 min
+2025-07-27 10:44:10,005 - INFO - Progress: 320/22185 - Avg time: 2.25s/entry - ETA: 818.7 min
+2025-07-27 10:44:31,709 - INFO - Progress: 330/22185 - Avg time: 2.17s/entry - ETA: 790.5 min
+2025-07-27 10:44:51,202 - INFO - Progress: 340/22185 - Avg time: 1.95s/entry - ETA: 709.7 min
+2025-07-27 10:45:12,422 - INFO - Progress: 350/22185 - Avg time: 2.12s/entry - ETA: 772.2 min
+2025-07-27 10:45:34,944 - INFO - Progress: 360/22185 - Avg time: 2.25s/entry - ETA: 819.2 min
+2025-07-27 10:45:56,747 - INFO - Progress: 370/22185 - Avg time: 2.18s/entry - ETA: 792.7 min
+2025-07-27 10:46:19,344 - INFO - Progress: 380/22185 - Avg time: 2.26s/entry - ETA: 821.1 min
+2025-07-27 10:46:41,063 - INFO - Progress: 390/22185 - Avg time: 2.17s/entry - ETA: 788.9 min
+2025-07-27 10:47:00,882 - INFO - Progress: 400/22185 - Avg time: 1.98s/entry - ETA: 719.5 min
+2025-07-27 10:47:23,170 - INFO - Progress: 410/22185 - Avg time: 2.23s/entry - ETA: 808.8 min
+2025-07-27 10:47:45,106 - INFO - Progress: 420/22185 - Avg time: 2.19s/entry - ETA: 795.7 min
+2025-07-27 10:48:07,294 - INFO - Progress: 430/22185 - Avg time: 2.22s/entry - ETA: 804.4 min
+2025-07-27 10:48:28,844 - INFO - Progress: 440/22185 - Avg time: 2.15s/entry - ETA: 781.0 min
+2025-07-27 10:48:52,201 - INFO - Progress: 450/22185 - Avg time: 2.34s/entry - ETA: 846.1 min
+2025-07-27 10:49:11,054 - INFO - Progress: 460/22185 - Avg time: 1.89s/entry - ETA: 682.6 min
+2025-07-27 10:49:32,006 - INFO - Progress: 470/22185 - Avg time: 2.10s/entry - ETA: 758.2 min
+2025-07-27 10:49:50,788 - INFO - Progress: 480/22185 - Avg time: 1.88s/entry - ETA: 679.4 min
+2025-07-27 10:50:13,123 - INFO - Progress: 490/22185 - Avg time: 2.23s/entry - ETA: 807.6 min
+2025-07-27 10:50:33,092 - INFO - Progress: 500/22185 - Avg time: 2.00s/entry - ETA: 721.6 min

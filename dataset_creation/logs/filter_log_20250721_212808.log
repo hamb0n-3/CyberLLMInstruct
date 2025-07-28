@@ -1,0 +1,1640 @@
+2025-07-21 21:28:08,643 - INFO - Loading model: mlx-community/Qwen3-8B-4bit...
+2025-07-21 21:28:09,299 - INFO - Model loaded successfully.
+2025-07-21 21:28:09,300 - INFO - Sampler configured: temp=0.7, top_p=1.0, top_k=0, min_p=0.0, rep_penalty=1.0
+2025-07-21 21:28:09,300 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-21 21:28:09,300 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-21 21:28:09,448 - INFO - 
+============================================================
+2025-07-21 21:28:09,448 - INFO - Processing 22652 entries from mitre_attack_20250715_183644.json
+2025-07-21 21:28:09,448 - INFO - ============================================================
+2025-07-21 21:28:09,450 - INFO - Using multiprocessing with 8 workers for rule-based filtering
+2025-07-21 21:28:10,744 - INFO - Rule-based filtering took 1.30s (17475.9 entries/sec)
+2025-07-21 21:28:10,744 - INFO - Rule-based pre-filter complete:
+2025-07-21 21:28:10,744 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-21 21:28:10,744 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-21 21:28:10,744 - INFO - Starting LLM enhancement for 22185 candidates...
+2025-07-21 21:29:18,182 - INFO - Progress: 10/22185 - Avg time: 6.74s/entry - ETA: 2492.3 min
+2025-07-21 21:30:10,565 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 2.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22669
+  - Entries passed filter: 22202 (97.9%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.005s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 187.28 entries/second
+
+Memory Usage:
+  - Current RSS: 5103.8 MB
+  - Peak RSS: 5103.8 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 484 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 17
+  - Tokens per second: 73.5 (median), 73.0 (mean)
+  - 90th percentile: 81.0 tokens/sec
+  - Generation time: 6.96s (median), 7.05s (mean)
+  - Avg tokens: 333 input, 512 output
+================================================================================
+
+2025-07-21 21:30:36,384 - INFO - Progress: 20/22185 - Avg time: 7.82s/entry - ETA: 2888.7 min
+2025-07-21 21:32:08,270 - INFO - Progress: 30/22185 - Avg time: 9.19s/entry - ETA: 3392.8 min
+2025-07-21 21:33:37,651 - INFO - Progress: 40/22185 - Avg time: 8.94s/entry - ETA: 3298.9 min
+2025-07-21 21:35:04,937 - INFO - Progress: 50/22185 - Avg time: 8.73s/entry - ETA: 3220.1 min
+2025-07-21 21:36:31,463 - INFO - Progress: 60/22185 - Avg time: 8.65s/entry - ETA: 3190.6 min
+2025-07-21 21:37:56,032 - INFO - Progress: 70/22185 - Avg time: 8.46s/entry - ETA: 3117.0 min
+2025-07-21 21:39:21,678 - INFO - Progress: 80/22185 - Avg time: 8.56s/entry - ETA: 3155.3 min
+2025-07-21 21:40:46,494 - INFO - Progress: 90/22185 - Avg time: 8.48s/entry - ETA: 3123.3 min
+2025-07-21 21:42:12,223 - INFO - Progress: 100/22185 - Avg time: 8.57s/entry - ETA: 3155.5 min
+2025-07-21 21:42:29,443 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 21:42:45,791 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 21:43:54,164 - INFO - Progress: 110/22185 - Avg time: 10.19s/entry - ETA: 3750.5 min
+2025-07-21 21:45:20,654 - INFO - Progress: 120/22185 - Avg time: 8.65s/entry - ETA: 3180.6 min
+2025-07-21 21:46:46,383 - INFO - Progress: 130/22185 - Avg time: 8.57s/entry - ETA: 3151.2 min
+2025-07-21 21:47:03,306 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 21:47:19,543 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 21:48:28,197 - INFO - Progress: 140/22185 - Avg time: 10.18s/entry - ETA: 3740.8 min
+2025-07-21 21:49:11,805 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 21:49:28,243 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 21:50:11,746 - INFO - Progress: 150/22185 - Avg time: 10.35s/entry - ETA: 3802.8 min
+2025-07-21 21:51:36,876 - INFO - Progress: 160/22185 - Avg time: 8.51s/entry - ETA: 3124.9 min
+2025-07-21 21:52:03,040 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 21:52:19,266 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 21:53:19,783 - INFO - Progress: 170/22185 - Avg time: 10.29s/entry - ETA: 3775.8 min
+2025-07-21 21:54:45,951 - INFO - Progress: 180/22185 - Avg time: 8.62s/entry - ETA: 3160.2 min
+2025-07-21 21:56:12,350 - INFO - Progress: 190/22185 - Avg time: 8.64s/entry - ETA: 3167.2 min
+2025-07-21 21:57:38,100 - INFO - Progress: 200/22185 - Avg time: 8.57s/entry - ETA: 3142.0 min
+2025-07-21 21:58:13,275 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 30.1 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 22856
+  - Entries passed filter: 22389 (98.0%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.079s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 12.67 entries/second
+
+Memory Usage:
+  - Current RSS: 5108.3 MB
+  - Peak RSS: 5108.3 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 671 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 208
+  - Tokens per second: 60.1 (median), 60.5 (mean)
+  - 90th percentile: 62.7 tokens/sec
+  - Generation time: 8.54s (median), 8.66s (mean)
+  - Avg tokens: 390 input, 522 output
+================================================================================
+
+2025-07-21 21:59:04,838 - INFO - Progress: 210/22185 - Avg time: 8.67s/entry - ETA: 3176.5 min
+2025-07-21 22:00:22,982 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:00:39,669 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:00:48,202 - INFO - Progress: 220/22185 - Avg time: 10.34s/entry - ETA: 3783.9 min
+2025-07-21 22:02:15,772 - INFO - Progress: 230/22185 - Avg time: 8.76s/entry - ETA: 3204.3 min
+2025-07-21 22:03:42,983 - INFO - Progress: 240/22185 - Avg time: 8.72s/entry - ETA: 3189.7 min
+2025-07-21 22:05:09,838 - INFO - Progress: 250/22185 - Avg time: 8.69s/entry - ETA: 3175.2 min
+2025-07-21 22:06:36,772 - INFO - Progress: 260/22185 - Avg time: 8.69s/entry - ETA: 3176.6 min
+2025-07-21 22:08:03,248 - INFO - Progress: 270/22185 - Avg time: 8.65s/entry - ETA: 3158.5 min
+2025-07-21 22:09:29,997 - INFO - Progress: 280/22185 - Avg time: 8.67s/entry - ETA: 3167.0 min
+2025-07-21 22:10:56,611 - INFO - Progress: 290/22185 - Avg time: 8.66s/entry - ETA: 3160.6 min
+2025-07-21 22:12:05,868 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:12:22,677 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:12:39,747 - INFO - Progress: 300/22185 - Avg time: 10.31s/entry - ETA: 3761.8 min
+2025-07-21 22:14:05,369 - INFO - Progress: 310/22185 - Avg time: 8.56s/entry - ETA: 3121.6 min
+2025-07-21 22:15:31,691 - INFO - Progress: 320/22185 - Avg time: 8.63s/entry - ETA: 3145.7 min
+2025-07-21 22:16:14,821 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:16:31,456 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:17:14,190 - INFO - Progress: 330/22185 - Avg time: 10.25s/entry - ETA: 3733.5 min
+2025-07-21 22:18:39,758 - INFO - Progress: 340/22185 - Avg time: 8.56s/entry - ETA: 3115.4 min
+2025-07-21 22:19:48,432 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:20:05,020 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:20:22,261 - INFO - Progress: 350/22185 - Avg time: 10.25s/entry - ETA: 3730.2 min
+2025-07-21 22:21:48,982 - INFO - Progress: 360/22185 - Avg time: 8.67s/entry - ETA: 3154.4 min
+2025-07-21 22:23:16,082 - INFO - Progress: 370/22185 - Avg time: 8.71s/entry - ETA: 3166.8 min
+2025-07-21 22:24:46,181 - INFO - Progress: 380/22185 - Avg time: 9.01s/entry - ETA: 3274.3 min
+2025-07-21 22:26:18,529 - INFO - Progress: 390/22185 - Avg time: 9.23s/entry - ETA: 3354.5 min
+2025-07-21 22:27:14,366 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:27:31,352 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:28:06,981 - INFO - Progress: 400/22185 - Avg time: 10.85s/entry - ETA: 3937.7 min
+2025-07-21 22:29:35,874 - INFO - Progress: 410/22185 - Avg time: 8.89s/entry - ETA: 3226.0 min
+2025-07-21 22:30:46,579 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:31:03,864 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:31:21,474 - INFO - Progress: 420/22185 - Avg time: 10.56s/entry - ETA: 3830.6 min
+2025-07-21 22:32:48,982 - INFO - Progress: 430/22185 - Avg time: 8.75s/entry - ETA: 3172.8 min
+2025-07-21 22:34:16,573 - INFO - Progress: 440/22185 - Avg time: 8.76s/entry - ETA: 3174.4 min
+2025-07-21 22:35:45,412 - INFO - Progress: 450/22185 - Avg time: 8.88s/entry - ETA: 3218.1 min
+2025-07-21 22:35:54,182 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:36:11,100 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:37:29,485 - INFO - Progress: 460/22185 - Avg time: 10.41s/entry - ETA: 3768.3 min
+2025-07-21 22:37:46,758 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:38:03,494 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:39:13,228 - INFO - Progress: 470/22185 - Avg time: 10.37s/entry - ETA: 3754.6 min
+2025-07-21 22:40:40,209 - INFO - Progress: 480/22185 - Avg time: 8.70s/entry - ETA: 3146.5 min
+2025-07-21 22:41:32,627 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:41:49,348 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:42:24,391 - INFO - Progress: 490/22185 - Avg time: 10.42s/entry - ETA: 3767.0 min
+2025-07-21 22:43:51,573 - INFO - Progress: 500/22185 - Avg time: 8.72s/entry - ETA: 3150.9 min
+2025-07-21 22:45:18,960 - INFO - Progress: 510/22185 - Avg time: 8.74s/entry - ETA: 3156.8 min
+2025-07-21 22:46:46,717 - INFO - Progress: 520/22185 - Avg time: 8.78s/entry - ETA: 3168.7 min
+2025-07-21 22:48:13,369 - INFO - Progress: 530/22185 - Avg time: 8.67s/entry - ETA: 3127.4 min
+2025-07-21 22:49:39,896 - INFO - Progress: 540/22185 - Avg time: 8.65s/entry - ETA: 3121.4 min
+2025-07-21 22:50:49,105 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:51:05,818 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:51:23,239 - INFO - Progress: 550/22185 - Avg time: 10.33s/entry - ETA: 3726.3 min
+2025-07-21 22:52:51,027 - INFO - Progress: 560/22185 - Avg time: 8.78s/entry - ETA: 3164.0 min
+2025-07-21 22:54:17,387 - INFO - Progress: 570/22185 - Avg time: 8.64s/entry - ETA: 3111.1 min
+2025-07-21 22:55:44,390 - INFO - Progress: 580/22185 - Avg time: 8.70s/entry - ETA: 3132.8 min
+2025-07-21 22:56:27,351 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:56:44,113 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:56:52,653 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 22:57:09,273 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 22:57:44,031 - INFO - Progress: 590/22185 - Avg time: 11.96s/entry - ETA: 4306.0 min
+2025-07-21 22:58:18,719 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 90.2 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 23246
+  - Entries passed filter: 22779 (98.0%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.233s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 4.30 entries/second
+
+Memory Usage:
+  - Current RSS: 5113.3 MB
+  - Peak RSS: 5113.3 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 1061 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 610
+  - Tokens per second: 59.3 (median), 59.4 (mean)
+  - 90th percentile: 61.2 tokens/sec
+  - Generation time: 8.65s (median), 8.86s (mean)
+  - Avg tokens: 360 input, 525 output
+================================================================================
+
+2025-07-21 22:59:11,223 - INFO - Progress: 600/22185 - Avg time: 8.72s/entry - ETA: 3136.5 min
+2025-07-21 23:00:37,886 - INFO - Progress: 610/22185 - Avg time: 8.67s/entry - ETA: 3116.2 min
+2025-07-21 23:02:03,518 - INFO - Progress: 620/22185 - Avg time: 8.56s/entry - ETA: 3077.7 min
+2025-07-21 23:03:29,897 - INFO - Progress: 630/22185 - Avg time: 8.64s/entry - ETA: 3103.1 min
+2025-07-21 23:04:55,374 - INFO - Progress: 640/22185 - Avg time: 8.55s/entry - ETA: 3069.3 min
+2025-07-21 23:06:21,669 - INFO - Progress: 650/22185 - Avg time: 8.63s/entry - ETA: 3097.3 min
+2025-07-21 23:07:22,019 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:07:38,711 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:08:04,437 - INFO - Progress: 660/22185 - Avg time: 10.28s/entry - ETA: 3686.7 min
+2025-07-21 23:09:30,639 - INFO - Progress: 670/22185 - Avg time: 8.62s/entry - ETA: 3091.0 min
+2025-07-21 23:10:56,419 - INFO - Progress: 680/22185 - Avg time: 8.58s/entry - ETA: 3074.4 min
+2025-07-21 23:11:13,574 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:11:30,218 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:12:39,125 - INFO - Progress: 690/22185 - Avg time: 10.27s/entry - ETA: 3679.4 min
+2025-07-21 23:13:22,191 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:13:39,095 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:14:22,034 - INFO - Progress: 700/22185 - Avg time: 10.29s/entry - ETA: 3684.9 min
+2025-07-21 23:15:47,567 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:16:04,057 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:16:04,057 - INFO - Progress: 710/22185 - Avg time: 10.20s/entry - ETA: 3651.5 min
+2025-07-21 23:17:29,853 - INFO - Progress: 720/22185 - Avg time: 8.58s/entry - ETA: 3069.3 min
+2025-07-21 23:18:55,368 - INFO - Progress: 730/22185 - Avg time: 8.55s/entry - ETA: 3057.9 min
+2025-07-21 23:20:21,803 - INFO - Progress: 740/22185 - Avg time: 8.64s/entry - ETA: 3089.3 min
+2025-07-21 23:21:47,420 - INFO - Progress: 750/22185 - Avg time: 8.56s/entry - ETA: 3058.6 min
+2025-07-21 23:22:30,284 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:22:46,778 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:23:12,066 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:23:28,683 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:23:45,620 - INFO - Progress: 760/22185 - Avg time: 11.82s/entry - ETA: 4220.7 min
+2025-07-21 23:25:11,059 - INFO - Progress: 770/22185 - Avg time: 8.54s/entry - ETA: 3049.4 min
+2025-07-21 23:26:36,408 - INFO - Progress: 780/22185 - Avg time: 8.53s/entry - ETA: 3044.8 min
+2025-07-21 23:28:01,762 - INFO - Progress: 790/22185 - Avg time: 8.54s/entry - ETA: 3043.6 min
+2025-07-21 23:29:27,661 - INFO - Progress: 800/22185 - Avg time: 8.59s/entry - ETA: 3061.5 min
+2025-07-21 23:31:01,218 - INFO - Progress: 810/22185 - Avg time: 9.36s/entry - ETA: 3332.9 min
+2025-07-21 23:32:37,168 - INFO - Progress: 820/22185 - Avg time: 9.59s/entry - ETA: 3416.5 min
+2025-07-21 23:34:10,661 - INFO - Progress: 830/22185 - Avg time: 9.35s/entry - ETA: 3327.5 min
+2025-07-21 23:35:41,121 - INFO - Progress: 840/22185 - Avg time: 9.05s/entry - ETA: 3218.1 min
+2025-07-21 23:37:09,928 - INFO - Progress: 850/22185 - Avg time: 8.88s/entry - ETA: 3157.8 min
+2025-07-21 23:38:37,252 - INFO - Progress: 860/22185 - Avg time: 8.73s/entry - ETA: 3103.6 min
+2025-07-21 23:40:04,463 - INFO - Progress: 870/22185 - Avg time: 8.72s/entry - ETA: 3098.1 min
+2025-07-21 23:41:31,173 - INFO - Progress: 880/22185 - Avg time: 8.67s/entry - ETA: 3078.9 min
+2025-07-21 23:42:05,658 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:42:22,384 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:43:14,048 - INFO - Progress: 890/22185 - Avg time: 10.29s/entry - ETA: 3651.2 min
+2025-07-21 23:43:31,848 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:43:48,744 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:44:58,157 - INFO - Progress: 900/22185 - Avg time: 10.41s/entry - ETA: 3693.2 min
+2025-07-21 23:46:25,354 - INFO - Progress: 910/22185 - Avg time: 8.72s/entry - ETA: 3091.8 min
+2025-07-21 23:47:51,627 - INFO - Progress: 920/22185 - Avg time: 8.63s/entry - ETA: 3057.6 min
+2025-07-21 23:49:17,398 - INFO - Progress: 930/22185 - Avg time: 8.58s/entry - ETA: 3038.4 min
+2025-07-21 23:50:43,056 - INFO - Progress: 940/22185 - Avg time: 8.57s/entry - ETA: 3033.0 min
+2025-07-21 23:51:43,056 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:51:59,646 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:52:25,400 - INFO - Progress: 950/22185 - Avg time: 10.23s/entry - ETA: 3622.1 min
+2025-07-21 23:53:25,576 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:53:42,090 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:54:07,717 - INFO - Progress: 960/22185 - Avg time: 10.23s/entry - ETA: 3619.4 min
+2025-07-21 23:55:32,958 - INFO - Progress: 970/22185 - Avg time: 8.52s/entry - ETA: 3013.9 min
+2025-07-21 23:56:58,162 - INFO - Progress: 980/22185 - Avg time: 8.52s/entry - ETA: 3011.2 min
+2025-07-21 23:57:06,594 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-21 23:57:23,051 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-21 23:58:22,711 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 150.2 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 23640
+  - Entries passed filter: 23173 (98.0%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.381s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 2.62 entries/second
+
+Memory Usage:
+  - Current RSS: 5119.2 MB
+  - Peak RSS: 5119.2 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 1455 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 1015
+  - Tokens per second: 59.4 (median), 59.3 (mean)
+  - 90th percentile: 60.9 tokens/sec
+  - Generation time: 8.63s (median), 8.88s (mean)
+  - Avg tokens: 349 input, 526 output
+================================================================================
+
+2025-07-21 23:58:39,822 - INFO - Progress: 990/22185 - Avg time: 10.17s/entry - ETA: 3590.9 min
+2025-07-22 00:00:05,339 - INFO - Progress: 1000/22185 - Avg time: 8.55s/entry - ETA: 3019.4 min
+2025-07-22 00:01:30,950 - INFO - Progress: 1010/22185 - Avg time: 8.56s/entry - ETA: 3021.3 min
+2025-07-22 00:03:01,230 - INFO - Progress: 1020/22185 - Avg time: 9.03s/entry - ETA: 3184.6 min
+2025-07-22 00:04:31,668 - INFO - Progress: 1030/22185 - Avg time: 9.04s/entry - ETA: 3188.6 min
+2025-07-22 00:06:05,312 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 00:06:23,239 - WARNING - Response likely truncated at 1024 tokens (limit: 1024), retrying with higher limit...
+2025-07-22 00:06:48,949 - INFO - Successfully extracted JSON on attempt 3 with 1500 max tokens
+2025-07-22 00:06:48,949 - INFO - Progress: 1040/22185 - Avg time: 13.73s/entry - ETA: 4838.0 min
+2025-07-22 00:08:22,888 - INFO - Progress: 1050/22185 - Avg time: 9.39s/entry - ETA: 3308.9 min
+2025-07-22 00:09:55,674 - INFO - Progress: 1060/22185 - Avg time: 9.28s/entry - ETA: 3266.8 min
+2025-07-22 00:11:27,359 - INFO - Progress: 1070/22185 - Avg time: 9.17s/entry - ETA: 3226.5 min
+2025-07-22 00:12:58,949 - INFO - Progress: 1080/22185 - Avg time: 9.16s/entry - ETA: 3221.6 min
+2025-07-22 00:14:30,620 - INFO - Progress: 1090/22185 - Avg time: 9.17s/entry - ETA: 3223.0 min
+2025-07-22 00:16:02,570 - INFO - Progress: 1100/22185 - Avg time: 9.19s/entry - ETA: 3231.2 min
+2025-07-22 00:17:35,414 - INFO - Progress: 1110/22185 - Avg time: 9.28s/entry - ETA: 3261.1 min
+2025-07-22 00:19:07,588 - INFO - Progress: 1120/22185 - Avg time: 9.22s/entry - ETA: 3236.0 min
+2025-07-22 00:20:39,192 - INFO - Progress: 1130/22185 - Avg time: 9.16s/entry - ETA: 3214.5 min
+2025-07-22 00:22:14,462 - INFO - Progress: 1140/22185 - Avg time: 9.53s/entry - ETA: 3341.6 min
+2025-07-22 00:23:45,476 - INFO - Progress: 1150/22185 - Avg time: 9.10s/entry - ETA: 3190.8 min
+2025-07-22 00:25:18,259 - INFO - Progress: 1160/22185 - Avg time: 9.28s/entry - ETA: 3251.2 min
+2025-07-22 00:26:51,658 - INFO - Progress: 1170/22185 - Avg time: 9.34s/entry - ETA: 3271.3 min
+2025-07-22 00:28:25,298 - INFO - Progress: 1180/22185 - Avg time: 9.36s/entry - ETA: 3278.1 min
+2025-07-22 00:29:29,774 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 00:29:46,750 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 00:30:14,761 - INFO - Progress: 1190/22185 - Avg time: 10.95s/entry - ETA: 3830.2 min
+2025-07-22 00:31:47,062 - INFO - Progress: 1200/22185 - Avg time: 9.23s/entry - ETA: 3228.2 min
+2025-07-22 00:33:20,905 - INFO - Progress: 1210/22185 - Avg time: 9.38s/entry - ETA: 3280.6 min
+2025-07-22 00:34:53,631 - INFO - Progress: 1220/22185 - Avg time: 9.27s/entry - ETA: 3240.0 min
+2025-07-22 00:36:28,708 - INFO - Progress: 1230/22185 - Avg time: 9.51s/entry - ETA: 3320.5 min
+2025-07-22 00:38:01,868 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 00:38:19,608 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 00:38:19,610 - INFO - Progress: 1240/22185 - Avg time: 11.09s/entry - ETA: 3871.3 min
+2025-07-22 00:39:52,926 - INFO - Progress: 1250/22185 - Avg time: 9.33s/entry - ETA: 3255.9 min
+2025-07-22 00:41:26,580 - INFO - Progress: 1260/22185 - Avg time: 9.37s/entry - ETA: 3266.1 min
+2025-07-22 00:43:00,822 - INFO - Progress: 1270/22185 - Avg time: 9.42s/entry - ETA: 3285.1 min
+2025-07-22 00:44:36,600 - INFO - Progress: 1280/22185 - Avg time: 9.58s/entry - ETA: 3337.0 min
+2025-07-22 00:46:09,961 - INFO - Progress: 1290/22185 - Avg time: 9.34s/entry - ETA: 3251.3 min
+2025-07-22 00:47:41,778 - INFO - Progress: 1300/22185 - Avg time: 9.18s/entry - ETA: 3195.9 min
+2025-07-22 00:49:15,668 - INFO - Progress: 1310/22185 - Avg time: 9.39s/entry - ETA: 3266.6 min
+2025-07-22 00:50:47,263 - INFO - Progress: 1320/22185 - Avg time: 9.16s/entry - ETA: 3185.2 min
+2025-07-22 00:52:21,428 - INFO - Progress: 1330/22185 - Avg time: 9.42s/entry - ETA: 3273.0 min
+2025-07-22 00:53:54,321 - INFO - Progress: 1340/22185 - Avg time: 9.29s/entry - ETA: 3227.2 min
+2025-07-22 00:55:27,222 - INFO - Progress: 1350/22185 - Avg time: 9.29s/entry - ETA: 3225.9 min
+2025-07-22 00:57:00,172 - INFO - Progress: 1360/22185 - Avg time: 9.29s/entry - ETA: 3226.1 min
+2025-07-22 00:58:31,523 - INFO - Progress: 1370/22185 - Avg time: 9.13s/entry - ETA: 3169.1 min
+2025-07-22 00:58:31,529 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 210.4 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 24022
+  - Entries passed filter: 23555 (98.1%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.525s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 8.484s
+  - Throughput: 1.90 entries/second
+
+Memory Usage:
+  - Current RSS: 5122.4 MB
+  - Peak RSS: 5122.4 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 1837 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 1401
+  - Tokens per second: 58.8 (median), 58.2 (mean)
+  - 90th percentile: 60.6 tokens/sec
+  - Generation time: 8.72s (median), 9.01s (mean)
+  - Avg tokens: 417 input, 524 output
+================================================================================
+
+2025-07-22 01:00:04,388 - INFO - Progress: 1380/22185 - Avg time: 9.29s/entry - ETA: 3219.8 min
+2025-07-22 01:01:34,506 - INFO - Progress: 1390/22185 - Avg time: 9.01s/entry - ETA: 3123.3 min
+2025-07-22 01:03:07,172 - INFO - Progress: 1400/22185 - Avg time: 9.27s/entry - ETA: 3210.1 min
+2025-07-22 01:04:39,849 - INFO - Progress: 1410/22185 - Avg time: 9.27s/entry - ETA: 3208.9 min
+2025-07-22 01:05:17,372 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 01:05:35,088 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 01:06:29,874 - INFO - Progress: 1420/22185 - Avg time: 11.00s/entry - ETA: 3807.7 min
+2025-07-22 01:08:01,745 - INFO - Progress: 1430/22185 - Avg time: 9.19s/entry - ETA: 3177.9 min
+2025-07-22 01:09:33,919 - INFO - Progress: 1440/22185 - Avg time: 9.22s/entry - ETA: 3186.9 min
+2025-07-22 01:11:05,233 - INFO - Progress: 1450/22185 - Avg time: 9.13s/entry - ETA: 3155.6 min
+2025-07-22 01:11:14,222 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 01:11:31,333 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 01:12:54,670 - INFO - Progress: 1460/22185 - Avg time: 10.94s/entry - ETA: 3780.1 min
+2025-07-22 01:14:27,199 - INFO - Progress: 1470/22185 - Avg time: 9.25s/entry - ETA: 3194.5 min
+2025-07-22 01:15:59,167 - INFO - Progress: 1480/22185 - Avg time: 9.20s/entry - ETA: 3173.6 min
+2025-07-22 01:17:31,477 - INFO - Progress: 1490/22185 - Avg time: 9.23s/entry - ETA: 3183.9 min
+2025-07-22 01:19:06,325 - INFO - Progress: 1500/22185 - Avg time: 9.48s/entry - ETA: 3269.8 min
+2025-07-22 01:20:39,802 - INFO - Progress: 1510/22185 - Avg time: 9.35s/entry - ETA: 3221.0 min
+2025-07-22 01:22:13,873 - INFO - Progress: 1520/22185 - Avg time: 9.41s/entry - ETA: 3239.9 min
+2025-07-22 01:23:44,893 - INFO - Progress: 1530/22185 - Avg time: 9.10s/entry - ETA: 3133.3 min
+2025-07-22 01:25:15,908 - INFO - Progress: 1540/22185 - Avg time: 9.10s/entry - ETA: 3131.7 min
+2025-07-22 01:26:54,008 - INFO - Progress: 1550/22185 - Avg time: 9.81s/entry - ETA: 3373.8 min
+2025-07-22 01:28:27,906 - INFO - Progress: 1560/22185 - Avg time: 9.39s/entry - ETA: 3227.7 min
+2025-07-22 01:29:59,490 - INFO - Progress: 1570/22185 - Avg time: 9.16s/entry - ETA: 3146.6 min
+2025-07-22 01:31:31,723 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 01:31:48,758 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 01:31:48,758 - INFO - Progress: 1580/22185 - Avg time: 10.93s/entry - ETA: 3752.4 min
+2025-07-22 01:33:16,741 - INFO - Progress: 1590/22185 - Avg time: 8.80s/entry - ETA: 3020.0 min
+2025-07-22 01:34:45,592 - INFO - Progress: 1600/22185 - Avg time: 8.88s/entry - ETA: 3048.3 min
+2025-07-22 01:36:15,064 - INFO - Progress: 1610/22185 - Avg time: 8.95s/entry - ETA: 3068.1 min
+2025-07-22 01:37:44,212 - INFO - Progress: 1620/22185 - Avg time: 8.91s/entry - ETA: 3055.5 min
+2025-07-22 01:39:11,739 - INFO - Progress: 1630/22185 - Avg time: 8.75s/entry - ETA: 2998.5 min
+2025-07-22 01:40:39,573 - INFO - Progress: 1640/22185 - Avg time: 8.78s/entry - ETA: 3007.5 min
+2025-07-22 01:42:08,459 - INFO - Progress: 1650/22185 - Avg time: 8.89s/entry - ETA: 3042.1 min
+2025-07-22 01:43:37,034 - INFO - Progress: 1660/22185 - Avg time: 8.86s/entry - ETA: 3030.0 min
+2025-07-22 01:45:05,961 - INFO - Progress: 1670/22185 - Avg time: 8.89s/entry - ETA: 3040.5 min
+2025-07-22 01:46:34,403 - INFO - Progress: 1680/22185 - Avg time: 8.84s/entry - ETA: 3022.5 min
+2025-07-22 01:47:27,429 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 01:47:44,289 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 01:48:20,206 - INFO - Progress: 1690/22185 - Avg time: 10.58s/entry - ETA: 3614.0 min
+2025-07-22 01:49:47,894 - INFO - Progress: 1700/22185 - Avg time: 8.77s/entry - ETA: 2993.8 min
+2025-07-22 01:51:15,513 - INFO - Progress: 1710/22185 - Avg time: 8.76s/entry - ETA: 2990.0 min
+2025-07-22 01:52:42,602 - INFO - Progress: 1720/22185 - Avg time: 8.71s/entry - ETA: 2970.4 min
+2025-07-22 01:54:12,284 - INFO - Progress: 1730/22185 - Avg time: 8.97s/entry - ETA: 3057.4 min
+2025-07-22 01:54:55,424 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 01:55:11,986 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 01:55:55,860 - INFO - Progress: 1740/22185 - Avg time: 10.36s/entry - ETA: 3529.3 min
+2025-07-22 01:57:24,065 - INFO - Progress: 1750/22185 - Avg time: 8.82s/entry - ETA: 3004.1 min
+2025-07-22 01:58:33,520 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 270.4 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 24410
+  - Entries passed filter: 23943 (98.1%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.665s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 8.626s
+  - Throughput: 1.50 entries/second
+
+Memory Usage:
+  - Current RSS: 5124.3 MB
+  - Peak RSS: 5124.3 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 2225 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 1794
+  - Tokens per second: 58.4 (median), 57.9 (mean)
+  - 90th percentile: 60.5 tokens/sec
+  - Generation time: 8.79s (median), 9.04s (mean)
+  - Avg tokens: 443 input, 523 output
+================================================================================
+
+2025-07-22 01:58:50,639 - INFO - Progress: 1760/22185 - Avg time: 8.66s/entry - ETA: 2946.8 min
+2025-07-22 02:00:17,208 - INFO - Progress: 1770/22185 - Avg time: 8.66s/entry - ETA: 2945.5 min
+2025-07-22 02:01:45,284 - INFO - Progress: 1780/22185 - Avg time: 8.81s/entry - ETA: 2995.3 min
+2025-07-22 02:03:13,359 - INFO - Progress: 1790/22185 - Avg time: 8.81s/entry - ETA: 2993.8 min
+2025-07-22 02:04:32,170 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 02:04:48,761 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 02:04:57,336 - INFO - Progress: 1800/22185 - Avg time: 10.40s/entry - ETA: 3532.6 min
+2025-07-22 02:06:25,061 - INFO - Progress: 1810/22185 - Avg time: 8.77s/entry - ETA: 2979.0 min
+2025-07-22 02:07:54,703 - INFO - Progress: 1820/22185 - Avg time: 8.96s/entry - ETA: 3042.5 min
+2025-07-22 02:09:22,107 - INFO - Progress: 1830/22185 - Avg time: 8.74s/entry - ETA: 2965.1 min
+2025-07-22 02:10:48,048 - INFO - Progress: 1840/22185 - Avg time: 8.59s/entry - ETA: 2914.1 min
+2025-07-22 02:12:14,766 - INFO - Progress: 1850/22185 - Avg time: 8.67s/entry - ETA: 2938.9 min
+2025-07-22 02:13:42,503 - INFO - Progress: 1860/22185 - Avg time: 8.77s/entry - ETA: 2972.1 min
+2025-07-22 02:15:10,439 - INFO - Progress: 1870/22185 - Avg time: 8.79s/entry - ETA: 2977.3 min
+2025-07-22 02:16:39,402 - INFO - Progress: 1880/22185 - Avg time: 8.90s/entry - ETA: 3010.6 min
+2025-07-22 02:18:06,139 - INFO - Progress: 1890/22185 - Avg time: 8.67s/entry - ETA: 2933.8 min
+2025-07-22 02:18:23,007 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 02:18:39,375 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 02:19:46,428 - INFO - Progress: 1900/22185 - Avg time: 10.03s/entry - ETA: 3390.6 min
+2025-07-22 02:21:10,168 - INFO - Progress: 1910/22185 - Avg time: 8.37s/entry - ETA: 2829.7 min
+2025-07-22 02:22:33,920 - INFO - Progress: 1920/22185 - Avg time: 8.38s/entry - ETA: 2828.7 min
+2025-07-22 02:23:58,151 - INFO - Progress: 1930/22185 - Avg time: 8.42s/entry - ETA: 2843.4 min
+2025-07-22 02:25:23,737 - INFO - Progress: 1940/22185 - Avg time: 8.56s/entry - ETA: 2887.8 min
+2025-07-22 02:26:49,131 - INFO - Progress: 1950/22185 - Avg time: 8.54s/entry - ETA: 2879.9 min
+2025-07-22 02:28:14,652 - INFO - Progress: 1960/22185 - Avg time: 8.55s/entry - ETA: 2882.7 min
+2025-07-22 02:29:40,149 - INFO - Progress: 1970/22185 - Avg time: 8.55s/entry - ETA: 2880.5 min
+2025-07-22 02:31:06,095 - INFO - Progress: 1980/22185 - Avg time: 8.59s/entry - ETA: 2894.2 min
+2025-07-22 02:32:31,618 - INFO - Progress: 1990/22185 - Avg time: 8.55s/entry - ETA: 2878.5 min
+2025-07-22 02:33:57,051 - INFO - Progress: 2000/22185 - Avg time: 8.54s/entry - ETA: 2874.1 min
+2025-07-22 02:35:22,782 - INFO - Progress: 2010/22185 - Avg time: 8.57s/entry - ETA: 2882.6 min
+2025-07-22 02:36:48,622 - INFO - Progress: 2020/22185 - Avg time: 8.58s/entry - ETA: 2884.9 min
+2025-07-22 02:38:14,271 - INFO - Progress: 2030/22185 - Avg time: 8.56s/entry - ETA: 2877.0 min
+2025-07-22 02:39:39,807 - INFO - Progress: 2040/22185 - Avg time: 8.55s/entry - ETA: 2871.8 min
+2025-07-22 02:40:48,102 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 02:41:04,608 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 02:41:22,539 - INFO - Progress: 2050/22185 - Avg time: 10.27s/entry - ETA: 3447.5 min
+2025-07-22 02:42:48,017 - INFO - Progress: 2060/22185 - Avg time: 8.55s/entry - ETA: 2867.0 min
+2025-07-22 02:44:13,286 - INFO - Progress: 2070/22185 - Avg time: 8.53s/entry - ETA: 2858.6 min
+2025-07-22 02:45:40,078 - INFO - Progress: 2080/22185 - Avg time: 8.68s/entry - ETA: 2908.2 min
+2025-07-22 02:47:06,164 - INFO - Progress: 2090/22185 - Avg time: 8.61s/entry - ETA: 2883.1 min
+2025-07-22 02:48:31,554 - INFO - Progress: 2100/22185 - Avg time: 8.54s/entry - ETA: 2858.4 min
+2025-07-22 02:49:57,115 - INFO - Progress: 2110/22185 - Avg time: 8.56s/entry - ETA: 2862.7 min
+2025-07-22 02:51:22,937 - INFO - Progress: 2120/22185 - Avg time: 8.58s/entry - ETA: 2870.0 min
+2025-07-22 02:52:48,864 - INFO - Progress: 2130/22185 - Avg time: 8.59s/entry - ETA: 2872.1 min
+2025-07-22 02:54:15,093 - INFO - Progress: 2140/22185 - Avg time: 8.62s/entry - ETA: 2880.7 min
+2025-07-22 02:55:41,143 - INFO - Progress: 2150/22185 - Avg time: 8.60s/entry - ETA: 2873.3 min
+2025-07-22 02:57:07,950 - INFO - Progress: 2160/22185 - Avg time: 8.68s/entry - ETA: 2897.2 min
+2025-07-22 02:58:33,505 - INFO - Progress: 2170/22185 - Avg time: 8.56s/entry - ETA: 2853.9 min
+2025-07-22 02:58:41,948 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 330.6 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 24823
+  - Entries passed filter: 24356 (98.1%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.799s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 8.658s
+  - Throughput: 1.25 entries/second
+
+Memory Usage:
+  - Current RSS: 5124.1 MB
+  - Peak RSS: 5124.3 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 2638 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 2210
+  - Tokens per second: 58.8 (median), 58.2 (mean)
+  - 90th percentile: 60.6 tokens/sec
+  - Generation time: 8.72s (median), 8.97s (mean)
+  - Avg tokens: 429 input, 521 output
+================================================================================
+
+2025-07-22 02:59:59,267 - INFO - Progress: 2180/22185 - Avg time: 8.58s/entry - ETA: 2859.1 min
+2025-07-22 03:01:24,569 - INFO - Progress: 2190/22185 - Avg time: 8.53s/entry - ETA: 2842.7 min
+2025-07-22 03:02:49,754 - INFO - Progress: 2200/22185 - Avg time: 8.52s/entry - ETA: 2837.3 min
+2025-07-22 03:03:49,348 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:04:05,858 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:04:31,566 - INFO - Progress: 2210/22185 - Avg time: 10.18s/entry - ETA: 3389.4 min
+2025-07-22 03:05:56,732 - INFO - Progress: 2220/22185 - Avg time: 8.52s/entry - ETA: 2833.9 min
+2025-07-22 03:07:21,504 - INFO - Progress: 2230/22185 - Avg time: 8.48s/entry - ETA: 2819.4 min
+2025-07-22 03:08:46,564 - INFO - Progress: 2240/22185 - Avg time: 8.51s/entry - ETA: 2827.5 min
+2025-07-22 03:10:11,863 - INFO - Progress: 2250/22185 - Avg time: 8.53s/entry - ETA: 2834.0 min
+2025-07-22 03:10:28,973 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:10:45,466 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:11:54,110 - INFO - Progress: 2260/22185 - Avg time: 10.22s/entry - ETA: 3395.4 min
+2025-07-22 03:13:19,469 - INFO - Progress: 2270/22185 - Avg time: 8.54s/entry - ETA: 2833.2 min
+2025-07-22 03:14:44,339 - INFO - Progress: 2280/22185 - Avg time: 8.49s/entry - ETA: 2815.5 min
+2025-07-22 03:16:09,553 - INFO - Progress: 2290/22185 - Avg time: 8.52s/entry - ETA: 2825.5 min
+2025-07-22 03:17:34,681 - INFO - Progress: 2300/22185 - Avg time: 8.51s/entry - ETA: 2821.3 min
+2025-07-22 03:18:59,666 - INFO - Progress: 2310/22185 - Avg time: 8.50s/entry - ETA: 2815.1 min
+2025-07-22 03:20:25,448 - INFO - Progress: 2320/22185 - Avg time: 8.58s/entry - ETA: 2840.1 min
+2025-07-22 03:21:50,819 - INFO - Progress: 2330/22185 - Avg time: 8.54s/entry - ETA: 2825.0 min
+2025-07-22 03:23:15,800 - INFO - Progress: 2340/22185 - Avg time: 8.50s/entry - ETA: 2810.7 min
+2025-07-22 03:24:41,141 - INFO - Progress: 2350/22185 - Avg time: 8.53s/entry - ETA: 2821.2 min
+2025-07-22 03:26:06,146 - INFO - Progress: 2360/22185 - Avg time: 8.50s/entry - ETA: 2808.7 min
+2025-07-22 03:27:30,965 - INFO - Progress: 2370/22185 - Avg time: 8.48s/entry - ETA: 2801.1 min
+2025-07-22 03:28:55,355 - INFO - Progress: 2380/22185 - Avg time: 8.44s/entry - ETA: 2785.5 min
+2025-07-22 03:30:20,592 - INFO - Progress: 2390/22185 - Avg time: 8.52s/entry - ETA: 2812.1 min
+2025-07-22 03:31:45,513 - INFO - Progress: 2400/22185 - Avg time: 8.49s/entry - ETA: 2800.2 min
+2025-07-22 03:33:10,742 - INFO - Progress: 2410/22185 - Avg time: 8.52s/entry - ETA: 2808.9 min
+2025-07-22 03:33:44,762 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:34:01,295 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:34:52,574 - INFO - Progress: 2420/22185 - Avg time: 10.18s/entry - ETA: 3354.5 min
+2025-07-22 03:35:26,731 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:35:43,177 - WARNING - Response likely truncated at 1024 tokens (limit: 1024), retrying with higher limit...
+2025-07-22 03:36:07,134 - INFO - Successfully extracted JSON on attempt 3 with 1500 max tokens
+2025-07-22 03:36:58,059 - INFO - Progress: 2430/22185 - Avg time: 12.55s/entry - ETA: 4131.5 min
+2025-07-22 03:38:24,176 - INFO - Progress: 2440/22185 - Avg time: 8.61s/entry - ETA: 2833.9 min
+2025-07-22 03:39:49,005 - INFO - Progress: 2450/22185 - Avg time: 8.48s/entry - ETA: 2790.1 min
+2025-07-22 03:40:48,514 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:41:04,917 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:41:30,372 - INFO - Progress: 2460/22185 - Avg time: 10.14s/entry - ETA: 3332.4 min
+2025-07-22 03:42:55,237 - INFO - Progress: 2470/22185 - Avg time: 8.49s/entry - ETA: 2788.5 min
+2025-07-22 03:44:20,409 - INFO - Progress: 2480/22185 - Avg time: 8.52s/entry - ETA: 2797.2 min
+2025-07-22 03:45:46,070 - INFO - Progress: 2490/22185 - Avg time: 8.57s/entry - ETA: 2811.8 min
+2025-07-22 03:47:11,267 - INFO - Progress: 2500/22185 - Avg time: 8.52s/entry - ETA: 2795.1 min
+2025-07-22 03:48:36,160 - INFO - Progress: 2510/22185 - Avg time: 8.49s/entry - ETA: 2783.7 min
+2025-07-22 03:48:44,729 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:49:01,249 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:50:17,419 - INFO - Progress: 2520/22185 - Avg time: 10.13s/entry - ETA: 3318.7 min
+2025-07-22 03:51:08,651 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:51:25,364 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:51:42,358 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 03:51:58,772 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 03:52:15,868 - INFO - Progress: 2530/22185 - Avg time: 11.84s/entry - ETA: 3880.1 min
+2025-07-22 03:53:41,235 - INFO - Progress: 2540/22185 - Avg time: 8.54s/entry - ETA: 2795.0 min
+2025-07-22 03:55:06,490 - INFO - Progress: 2550/22185 - Avg time: 8.53s/entry - ETA: 2789.9 min
+2025-07-22 03:56:31,692 - INFO - Progress: 2560/22185 - Avg time: 8.52s/entry - ETA: 2786.8 min
+2025-07-22 03:57:57,522 - INFO - Progress: 2570/22185 - Avg time: 8.58s/entry - ETA: 2805.9 min
+2025-07-22 03:58:48,752 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 390.7 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 25228
+  - Entries passed filter: 24761 (98.1%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 0.929s
+  - Median time per entry: 0.000s
+  - 90th percentile: 8.359s
+  - 95th percentile: 8.661s
+  - Throughput: 1.08 entries/second
+
+Memory Usage:
+  - Current RSS: 5124.9 MB
+  - Peak RSS: 5124.9 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 3043 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 2624
+  - Tokens per second: 59.3 (median), 58.5 (mean)
+  - 90th percentile: 60.6 tokens/sec
+  - Generation time: 8.65s (median), 8.93s (mean)
+  - Avg tokens: 418 input, 522 output
+================================================================================
+
+2025-07-22 03:59:22,871 - INFO - Progress: 2580/22185 - Avg time: 8.53s/entry - ETA: 2788.5 min
+2025-07-22 04:00:47,700 - INFO - Progress: 2590/22185 - Avg time: 8.48s/entry - ETA: 2770.4 min
+2025-07-22 04:02:12,626 - INFO - Progress: 2600/22185 - Avg time: 8.49s/entry - ETA: 2772.1 min
+2025-07-22 04:03:37,470 - INFO - Progress: 2610/22185 - Avg time: 8.48s/entry - ETA: 2768.0 min
+2025-07-22 04:05:02,382 - INFO - Progress: 2620/22185 - Avg time: 8.49s/entry - ETA: 2768.8 min
+2025-07-22 04:06:27,109 - INFO - Progress: 2630/22185 - Avg time: 8.47s/entry - ETA: 2761.4 min
+2025-07-22 04:07:51,653 - INFO - Progress: 2640/22185 - Avg time: 8.45s/entry - ETA: 2754.0 min
+2025-07-22 04:08:25,583 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 04:08:42,095 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 04:09:32,770 - INFO - Progress: 2650/22185 - Avg time: 10.11s/entry - ETA: 3292.2 min
+2025-07-22 04:10:57,689 - INFO - Progress: 2660/22185 - Avg time: 8.49s/entry - ETA: 2763.3 min
+2025-07-22 04:12:22,747 - INFO - Progress: 2670/22185 - Avg time: 8.51s/entry - ETA: 2766.5 min
+2025-07-22 04:13:47,444 - INFO - Progress: 2680/22185 - Avg time: 8.47s/entry - ETA: 2753.3 min
+2025-07-22 04:14:55,239 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 04:15:11,562 - WARNING - Response likely truncated at 1024 tokens (limit: 1024), retrying with higher limit...
+2025-07-22 04:15:35,379 - INFO - Successfully extracted JSON on attempt 3 with 1500 max tokens
+2025-07-22 04:15:52,296 - INFO - Progress: 2690/22185 - Avg time: 12.49s/entry - ETA: 4056.6 min
+2025-07-22 04:16:17,618 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 04:16:33,962 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 04:17:32,979 - INFO - Progress: 2700/22185 - Avg time: 10.07s/entry - ETA: 3269.6 min
+2025-07-22 04:18:57,499 - INFO - Progress: 2710/22185 - Avg time: 8.45s/entry - ETA: 2743.4 min
+2025-07-22 04:20:22,224 - INFO - Progress: 2720/22185 - Avg time: 8.47s/entry - ETA: 2748.6 min
+2025-07-22 04:21:47,013 - INFO - Progress: 2730/22185 - Avg time: 8.48s/entry - ETA: 2749.3 min
+2025-07-22 04:23:11,344 - INFO - Progress: 2740/22185 - Avg time: 8.43s/entry - ETA: 2733.0 min
+2025-07-22 04:24:10,548 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 04:24:26,865 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 04:24:52,260 - INFO - Progress: 2750/22185 - Avg time: 10.09s/entry - ETA: 3268.8 min
+2025-07-22 04:26:16,858 - INFO - Progress: 2760/22185 - Avg time: 8.46s/entry - ETA: 2738.8 min
+2025-07-22 04:27:41,597 - INFO - Progress: 2770/22185 - Avg time: 8.47s/entry - ETA: 2742.0 min
+2025-07-22 04:29:06,077 - INFO - Progress: 2780/22185 - Avg time: 8.45s/entry - ETA: 2732.2 min
+2025-07-22 04:30:30,601 - INFO - Progress: 2790/22185 - Avg time: 8.45s/entry - ETA: 2732.2 min
+2025-07-22 04:31:55,438 - INFO - Progress: 2800/22185 - Avg time: 8.48s/entry - ETA: 2740.9 min
+2025-07-22 04:33:20,492 - INFO - Progress: 2810/22185 - Avg time: 8.51s/entry - ETA: 2746.5 min
+2025-07-22 04:34:45,352 - INFO - Progress: 2820/22185 - Avg time: 8.49s/entry - ETA: 2738.8 min
+2025-07-22 04:36:09,986 - INFO - Progress: 2830/22185 - Avg time: 8.46s/entry - ETA: 2730.1 min
+2025-07-22 04:37:34,454 - INFO - Progress: 2840/22185 - Avg time: 8.45s/entry - ETA: 2723.4 min
+2025-07-22 04:38:59,200 - INFO - Progress: 2850/22185 - Avg time: 8.47s/entry - ETA: 2730.9 min
+2025-07-22 04:40:23,801 - INFO - Progress: 2860/22185 - Avg time: 8.46s/entry - ETA: 2724.8 min
+2025-07-22 04:41:48,243 - INFO - Progress: 2870/22185 - Avg time: 8.44s/entry - ETA: 2718.3 min
+2025-07-22 04:43:12,591 - INFO - Progress: 2880/22185 - Avg time: 8.43s/entry - ETA: 2713.9 min
+2025-07-22 04:44:37,530 - INFO - Progress: 2890/22185 - Avg time: 8.49s/entry - ETA: 2731.5 min
+2025-07-22 04:46:02,235 - INFO - Progress: 2900/22185 - Avg time: 8.47s/entry - ETA: 2722.5 min
+2025-07-22 04:47:26,335 - INFO - Progress: 2910/22185 - Avg time: 8.41s/entry - ETA: 2701.7 min
+2025-07-22 04:48:51,490 - INFO - Progress: 2920/22185 - Avg time: 8.52s/entry - ETA: 2734.2 min
+2025-07-22 04:50:15,943 - INFO - Progress: 2930/22185 - Avg time: 8.45s/entry - ETA: 2710.2 min
+2025-07-22 04:51:39,996 - INFO - Progress: 2940/22185 - Avg time: 8.41s/entry - ETA: 2696.0 min
+2025-07-22 04:53:04,051 - INFO - Progress: 2950/22185 - Avg time: 8.41s/entry - ETA: 2694.6 min
+2025-07-22 04:54:03,074 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 04:54:19,460 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 04:54:44,649 - INFO - Progress: 2960/22185 - Avg time: 10.06s/entry - ETA: 3223.3 min
+2025-07-22 04:56:09,454 - INFO - Progress: 2970/22185 - Avg time: 8.48s/entry - ETA: 2715.8 min
+2025-07-22 04:57:33,728 - INFO - Progress: 2980/22185 - Avg time: 8.43s/entry - ETA: 2697.4 min
+2025-07-22 04:58:49,543 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 450.7 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 25641
+  - Entries passed filter: 25174 (98.2%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 1.055s
+  - Median time per entry: 0.000s
+  - 90th percentile: 8.449s
+  - 95th percentile: 8.657s
+  - Throughput: 0.95 entries/second
+
+Memory Usage:
+  - Current RSS: 5125.6 MB
+  - Peak RSS: 5125.6 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 3456 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 3043
+  - Tokens per second: 59.6 (median), 58.8 (mean)
+  - 90th percentile: 60.8 tokens/sec
+  - Generation time: 8.60s (median), 8.88s (mean)
+  - Avg tokens: 408 input, 522 output
+================================================================================
+
+2025-07-22 04:58:57,996 - INFO - Progress: 2990/22185 - Avg time: 8.43s/entry - ETA: 2695.5 min
+2025-07-22 05:00:22,198 - INFO - Progress: 3000/22185 - Avg time: 8.42s/entry - ETA: 2692.3 min
+2025-07-22 05:01:46,720 - INFO - Progress: 3010/22185 - Avg time: 8.45s/entry - ETA: 2701.1 min
+2025-07-22 05:03:11,402 - INFO - Progress: 3020/22185 - Avg time: 8.47s/entry - ETA: 2704.9 min
+2025-07-22 05:04:35,620 - INFO - Progress: 3030/22185 - Avg time: 8.42s/entry - ETA: 2688.6 min
+2025-07-22 05:05:01,392 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 05:05:17,736 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 05:06:16,793 - INFO - Progress: 3040/22185 - Avg time: 10.12s/entry - ETA: 3228.2 min
+2025-07-22 05:07:40,605 - INFO - Progress: 3050/22185 - Avg time: 8.38s/entry - ETA: 2672.8 min
+2025-07-22 05:09:04,828 - INFO - Progress: 3060/22185 - Avg time: 8.42s/entry - ETA: 2684.6 min
+2025-07-22 05:10:29,037 - INFO - Progress: 3070/22185 - Avg time: 8.42s/entry - ETA: 2682.7 min
+2025-07-22 05:10:45,890 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 05:11:02,133 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 05:12:09,361 - INFO - Progress: 3080/22185 - Avg time: 10.03s/entry - ETA: 3194.4 min
+2025-07-22 05:13:33,428 - INFO - Progress: 3090/22185 - Avg time: 8.41s/entry - ETA: 2675.4 min
+2025-07-22 05:14:57,388 - INFO - Progress: 3100/22185 - Avg time: 8.40s/entry - ETA: 2670.6 min
+2025-07-22 05:16:21,488 - INFO - Progress: 3110/22185 - Avg time: 8.41s/entry - ETA: 2673.6 min
+2025-07-22 05:17:45,598 - INFO - Progress: 3120/22185 - Avg time: 8.41s/entry - ETA: 2672.5 min
+2025-07-22 05:19:09,841 - INFO - Progress: 3130/22185 - Avg time: 8.42s/entry - ETA: 2675.4 min
+2025-07-22 05:20:34,410 - INFO - Progress: 3140/22185 - Avg time: 8.46s/entry - ETA: 2684.3 min
+2025-07-22 05:21:00,027 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 05:21:12,168 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 05:22:11,266 - INFO - Progress: 3150/22185 - Avg time: 9.69s/entry - ETA: 3072.7 min
+2025-07-22 05:23:35,612 - INFO - Progress: 3160/22185 - Avg time: 8.43s/entry - ETA: 2674.4 min
+2025-07-22 05:24:59,603 - INFO - Progress: 3170/22185 - Avg time: 8.40s/entry - ETA: 2661.8 min
+2025-07-22 05:25:24,850 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 05:25:41,112 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 05:26:39,962 - INFO - Progress: 3180/22185 - Avg time: 10.04s/entry - ETA: 3178.8 min
+2025-07-22 05:28:04,139 - INFO - Progress: 3190/22185 - Avg time: 8.42s/entry - ETA: 2664.9 min
+2025-07-22 05:29:28,767 - INFO - Progress: 3200/22185 - Avg time: 8.46s/entry - ETA: 2677.7 min
+2025-07-22 05:30:52,749 - INFO - Progress: 3210/22185 - Avg time: 8.40s/entry - ETA: 2655.9 min
+2025-07-22 05:32:17,153 - INFO - Progress: 3220/22185 - Avg time: 8.44s/entry - ETA: 2667.8 min
+2025-07-22 05:33:41,457 - INFO - Progress: 3230/22185 - Avg time: 8.43s/entry - ETA: 2663.2 min
+2025-07-22 05:34:15,414 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 05:34:31,808 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 05:35:22,047 - INFO - Progress: 3240/22185 - Avg time: 10.06s/entry - ETA: 3176.1 min
+2025-07-22 05:36:46,163 - INFO - Progress: 3250/22185 - Avg time: 8.41s/entry - ETA: 2654.5 min
+2025-07-22 05:38:10,082 - INFO - Progress: 3260/22185 - Avg time: 8.39s/entry - ETA: 2646.9 min
+2025-07-22 05:39:34,778 - INFO - Progress: 3270/22185 - Avg time: 8.47s/entry - ETA: 2670.0 min
+2025-07-22 05:40:58,960 - INFO - Progress: 3280/22185 - Avg time: 8.42s/entry - ETA: 2652.4 min
+2025-07-22 05:42:23,448 - INFO - Progress: 3290/22185 - Avg time: 8.45s/entry - ETA: 2660.6 min
+2025-07-22 05:43:47,136 - INFO - Progress: 3300/22185 - Avg time: 8.37s/entry - ETA: 2634.0 min
+2025-07-22 05:45:11,777 - INFO - Progress: 3310/22185 - Avg time: 8.46s/entry - ETA: 2662.6 min
+2025-07-22 05:46:35,901 - INFO - Progress: 3320/22185 - Avg time: 8.41s/entry - ETA: 2645.0 min
+2025-07-22 05:48:00,561 - INFO - Progress: 3330/22185 - Avg time: 8.47s/entry - ETA: 2660.4 min
+2025-07-22 05:49:25,100 - INFO - Progress: 3340/22185 - Avg time: 8.45s/entry - ETA: 2655.2 min
+2025-07-22 05:50:49,457 - INFO - Progress: 3350/22185 - Avg time: 8.44s/entry - ETA: 2648.1 min
+2025-07-22 05:52:13,610 - INFO - Progress: 3360/22185 - Avg time: 8.42s/entry - ETA: 2640.2 min
+2025-07-22 05:53:37,824 - INFO - Progress: 3370/22185 - Avg time: 8.42s/entry - ETA: 2640.8 min
+2025-07-22 05:55:01,986 - INFO - Progress: 3380/22185 - Avg time: 8.42s/entry - ETA: 2637.7 min
+2025-07-22 05:56:25,679 - INFO - Progress: 3390/22185 - Avg time: 8.37s/entry - ETA: 2621.6 min
+2025-07-22 05:57:49,771 - INFO - Progress: 3400/22185 - Avg time: 8.41s/entry - ETA: 2632.8 min
+2025-07-22 05:58:57,295 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 510.8 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 26060
+  - Entries passed filter: 25593 (98.2%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 1.176s
+  - Median time per entry: 0.000s
+  - 90th percentile: 8.459s
+  - 95th percentile: 8.655s
+  - Throughput: 0.85 entries/second
+
+Memory Usage:
+  - Current RSS: 5126.2 MB
+  - Peak RSS: 5126.2 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 3875 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 3467
+  - Tokens per second: 59.8 (median), 59.0 (mean)
+  - 90th percentile: 61.0 tokens/sec
+  - Generation time: 8.57s (median), 8.84s (mean)
+  - Avg tokens: 402 input, 521 output
+================================================================================
+
+2025-07-22 05:59:14,211 - INFO - Progress: 3410/22185 - Avg time: 8.44s/entry - ETA: 2641.9 min
+2025-07-22 06:00:38,386 - INFO - Progress: 3420/22185 - Avg time: 8.42s/entry - ETA: 2632.5 min
+2025-07-22 06:01:45,777 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 06:02:02,007 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 06:02:18,729 - INFO - Progress: 3430/22185 - Avg time: 10.03s/entry - ETA: 3136.5 min
+2025-07-22 06:03:42,860 - INFO - Progress: 3440/22185 - Avg time: 8.41s/entry - ETA: 2628.3 min
+2025-07-22 06:05:06,891 - INFO - Progress: 3450/22185 - Avg time: 8.40s/entry - ETA: 2623.8 min
+2025-07-22 06:06:30,898 - INFO - Progress: 3460/22185 - Avg time: 8.40s/entry - ETA: 2621.7 min
+2025-07-22 06:07:54,477 - INFO - Progress: 3470/22185 - Avg time: 8.36s/entry - ETA: 2606.9 min
+2025-07-22 06:09:18,332 - INFO - Progress: 3480/22185 - Avg time: 8.39s/entry - ETA: 2614.1 min
+2025-07-22 06:10:41,995 - INFO - Progress: 3490/22185 - Avg time: 8.37s/entry - ETA: 2606.8 min
+2025-07-22 06:12:05,745 - INFO - Progress: 3500/22185 - Avg time: 8.37s/entry - ETA: 2608.1 min
+2025-07-22 06:13:29,454 - INFO - Progress: 3510/22185 - Avg time: 8.37s/entry - ETA: 2605.4 min
+2025-07-22 06:14:53,448 - INFO - Progress: 3520/22185 - Avg time: 8.40s/entry - ETA: 2612.9 min
+2025-07-22 06:16:16,974 - INFO - Progress: 3530/22185 - Avg time: 8.35s/entry - ETA: 2596.9 min
+2025-07-22 06:17:40,695 - INFO - Progress: 3540/22185 - Avg time: 8.37s/entry - ETA: 2601.6 min
+2025-07-22 06:19:03,912 - INFO - Progress: 3550/22185 - Avg time: 8.32s/entry - ETA: 2584.5 min
+2025-07-22 06:20:27,545 - INFO - Progress: 3560/22185 - Avg time: 8.36s/entry - ETA: 2596.1 min
+2025-07-22 06:21:51,515 - INFO - Progress: 3570/22185 - Avg time: 8.40s/entry - ETA: 2605.2 min
+2025-07-22 06:23:15,821 - INFO - Progress: 3580/22185 - Avg time: 8.43s/entry - ETA: 2614.1 min
+2025-07-22 06:23:32,514 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 06:23:48,689 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 06:24:55,590 - INFO - Progress: 3590/22185 - Avg time: 9.98s/entry - ETA: 3092.0 min
+2025-07-22 06:26:19,726 - INFO - Progress: 3600/22185 - Avg time: 8.41s/entry - ETA: 2606.1 min
+2025-07-22 06:27:43,367 - INFO - Progress: 3610/22185 - Avg time: 8.36s/entry - ETA: 2589.3 min
+2025-07-22 06:29:07,644 - INFO - Progress: 3620/22185 - Avg time: 8.43s/entry - ETA: 2607.6 min
+2025-07-22 06:30:31,801 - INFO - Progress: 3630/22185 - Avg time: 8.42s/entry - ETA: 2602.5 min
+2025-07-22 06:31:55,716 - INFO - Progress: 3640/22185 - Avg time: 8.39s/entry - ETA: 2593.6 min
+2025-07-22 06:32:46,100 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 06:33:02,369 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 06:33:27,365 - WARNING - Response likely truncated at 510 tokens (limit: 512), retrying with higher limit...
+2025-07-22 06:33:43,590 - WARNING - Response likely truncated at 1024 tokens (limit: 1024), retrying with higher limit...
+2025-07-22 06:34:07,144 - INFO - Successfully extracted JSON on attempt 3 with 1500 max tokens
+2025-07-22 06:34:15,538 - INFO - Progress: 3650/22185 - Avg time: 13.98s/entry - ETA: 4319.3 min
+2025-07-22 06:35:39,335 - INFO - Progress: 3660/22185 - Avg time: 8.38s/entry - ETA: 2587.2 min
+2025-07-22 06:37:02,918 - INFO - Progress: 3670/22185 - Avg time: 8.36s/entry - ETA: 2579.2 min
+2025-07-22 06:38:26,998 - INFO - Progress: 3680/22185 - Avg time: 8.41s/entry - ETA: 2593.1 min
+2025-07-22 06:39:51,205 - INFO - Progress: 3690/22185 - Avg time: 8.42s/entry - ETA: 2595.6 min
+2025-07-22 06:40:41,445 - WARNING - Response likely truncated at 508 tokens (limit: 512), retrying with higher limit...
+2025-07-22 06:40:57,645 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 06:41:31,235 - INFO - Progress: 3700/22185 - Avg time: 10.00s/entry - ETA: 3081.7 min
+2025-07-22 06:42:55,172 - INFO - Progress: 3710/22185 - Avg time: 8.39s/entry - ETA: 2584.5 min
+2025-07-22 06:44:18,995 - INFO - Progress: 3720/22185 - Avg time: 8.38s/entry - ETA: 2579.6 min
+2025-07-22 06:45:43,355 - INFO - Progress: 3730/22185 - Avg time: 8.44s/entry - ETA: 2594.7 min
+2025-07-22 06:47:07,334 - INFO - Progress: 3740/22185 - Avg time: 8.40s/entry - ETA: 2581.6 min
+2025-07-22 06:48:31,167 - INFO - Progress: 3750/22185 - Avg time: 8.38s/entry - ETA: 2575.7 min
+2025-07-22 06:48:39,516 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 06:48:55,689 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 06:50:10,865 - INFO - Progress: 3760/22185 - Avg time: 9.97s/entry - ETA: 3061.5 min
+2025-07-22 06:51:34,656 - INFO - Progress: 3770/22185 - Avg time: 8.38s/entry - ETA: 2571.6 min
+2025-07-22 06:52:58,273 - INFO - Progress: 3780/22185 - Avg time: 8.36s/entry - ETA: 2564.9 min
+2025-07-22 06:54:21,892 - INFO - Progress: 3790/22185 - Avg time: 8.36s/entry - ETA: 2563.6 min
+2025-07-22 06:55:45,923 - INFO - Progress: 3800/22185 - Avg time: 8.40s/entry - ETA: 2574.8 min
+2025-07-22 06:57:09,858 - INFO - Progress: 3810/22185 - Avg time: 8.39s/entry - ETA: 2570.5 min
+2025-07-22 06:58:33,628 - INFO - Progress: 3820/22185 - Avg time: 8.38s/entry - ETA: 2564.0 min
+2025-07-22 06:58:58,850 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 570.8 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 26475
+  - Entries passed filter: 26008 (98.2%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 1.294s
+  - Median time per entry: 0.000s
+  - 90th percentile: 8.462s
+  - 95th percentile: 8.653s
+  - Throughput: 0.77 entries/second
+
+Memory Usage:
+  - Current RSS: 5126.9 MB
+  - Peak RSS: 5126.9 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 4290 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 3889
+  - Tokens per second: 60.0 (median), 59.3 (mean)
+  - 90th percentile: 61.2 tokens/sec
+  - Generation time: 8.54s (median), 8.80s (mean)
+  - Avg tokens: 396 input, 521 output
+================================================================================
+
+2025-07-22 06:59:57,943 - INFO - Progress: 3830/22185 - Avg time: 8.43s/entry - ETA: 2579.0 min
+2025-07-22 07:01:13,104 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 07:01:29,217 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 07:01:37,601 - INFO - Progress: 3840/22185 - Avg time: 9.97s/entry - ETA: 3047.0 min
+2025-07-22 07:03:01,126 - INFO - Progress: 3850/22185 - Avg time: 8.35s/entry - ETA: 2552.3 min
+2025-07-22 07:04:25,032 - INFO - Progress: 3860/22185 - Avg time: 8.39s/entry - ETA: 2562.6 min
+2025-07-22 07:05:48,827 - INFO - Progress: 3870/22185 - Avg time: 8.38s/entry - ETA: 2557.8 min
+2025-07-22 07:07:12,720 - INFO - Progress: 3880/22185 - Avg time: 8.39s/entry - ETA: 2559.4 min
+2025-07-22 07:08:36,499 - INFO - Progress: 3890/22185 - Avg time: 8.38s/entry - ETA: 2554.5 min
+2025-07-22 07:09:59,857 - INFO - Progress: 3900/22185 - Avg time: 8.34s/entry - ETA: 2540.3 min
+2025-07-22 07:11:23,836 - INFO - Progress: 3910/22185 - Avg time: 8.40s/entry - ETA: 2557.8 min
+2025-07-22 07:12:47,259 - INFO - Progress: 3920/22185 - Avg time: 8.34s/entry - ETA: 2539.5 min
+2025-07-22 07:14:10,791 - INFO - Progress: 3930/22185 - Avg time: 8.35s/entry - ETA: 2541.4 min
+2025-07-22 07:15:34,116 - INFO - Progress: 3940/22185 - Avg time: 8.33s/entry - ETA: 2533.7 min
+2025-07-22 07:16:57,908 - INFO - Progress: 3950/22185 - Avg time: 8.38s/entry - ETA: 2546.5 min
+2025-07-22 07:18:21,266 - INFO - Progress: 3960/22185 - Avg time: 8.34s/entry - ETA: 2532.0 min
+2025-07-22 07:19:44,669 - INFO - Progress: 3970/22185 - Avg time: 8.34s/entry - ETA: 2531.9 min
+2025-07-22 07:21:08,213 - INFO - Progress: 3980/22185 - Avg time: 8.35s/entry - ETA: 2534.8 min
+2025-07-22 07:22:31,543 - INFO - Progress: 3990/22185 - Avg time: 8.33s/entry - ETA: 2527.0 min
+2025-07-22 07:23:54,963 - INFO - Progress: 4000/22185 - Avg time: 8.34s/entry - ETA: 2528.3 min
+2025-07-22 07:25:18,881 - INFO - Progress: 4010/22185 - Avg time: 8.39s/entry - ETA: 2542.0 min
+2025-07-22 07:26:42,263 - INFO - Progress: 4020/22185 - Avg time: 8.34s/entry - ETA: 2524.4 min
+2025-07-22 07:28:05,639 - INFO - Progress: 4030/22185 - Avg time: 8.34s/entry - ETA: 2522.8 min
+2025-07-22 07:29:04,287 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 07:29:20,389 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 07:29:45,536 - INFO - Progress: 4040/22185 - Avg time: 9.99s/entry - ETA: 3021.0 min
+2025-07-22 07:31:09,279 - INFO - Progress: 4050/22185 - Avg time: 8.37s/entry - ETA: 2531.1 min
+2025-07-22 07:32:33,031 - INFO - Progress: 4060/22185 - Avg time: 8.38s/entry - ETA: 2530.0 min
+2025-07-22 07:33:57,413 - INFO - Progress: 4070/22185 - Avg time: 8.44s/entry - ETA: 2547.6 min
+2025-07-22 07:35:21,043 - INFO - Progress: 4080/22185 - Avg time: 8.36s/entry - ETA: 2523.5 min
+2025-07-22 07:36:44,682 - INFO - Progress: 4090/22185 - Avg time: 8.36s/entry - ETA: 2522.4 min
+2025-07-22 07:38:08,097 - INFO - Progress: 4100/22185 - Avg time: 8.34s/entry - ETA: 2514.2 min
+2025-07-22 07:38:33,243 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 07:38:49,528 - WARNING - Response likely truncated at 1024 tokens (limit: 1024), retrying with higher limit...
+2025-07-22 07:39:13,161 - INFO - Successfully extracted JSON on attempt 3 with 1500 max tokens
+2025-07-22 07:40:11,567 - INFO - Progress: 4110/22185 - Avg time: 12.35s/entry - ETA: 3719.5 min
+2025-07-22 07:41:35,013 - INFO - Progress: 4120/22185 - Avg time: 8.34s/entry - ETA: 2512.4 min
+2025-07-22 07:42:58,674 - INFO - Progress: 4130/22185 - Avg time: 8.37s/entry - ETA: 2517.5 min
+2025-07-22 07:44:22,229 - INFO - Progress: 4140/22185 - Avg time: 8.36s/entry - ETA: 2512.9 min
+2025-07-22 07:45:45,598 - INFO - Progress: 4150/22185 - Avg time: 8.34s/entry - ETA: 2505.9 min
+2025-07-22 07:47:09,893 - INFO - Progress: 4160/22185 - Avg time: 8.43s/entry - ETA: 2532.3 min
+2025-07-22 07:48:33,574 - INFO - Progress: 4170/22185 - Avg time: 8.37s/entry - ETA: 2512.5 min
+2025-07-22 07:49:57,195 - INFO - Progress: 4180/22185 - Avg time: 8.36s/entry - ETA: 2509.3 min
+2025-07-22 07:51:20,506 - INFO - Progress: 4190/22185 - Avg time: 8.33s/entry - ETA: 2498.6 min
+2025-07-22 07:52:43,624 - INFO - Progress: 4200/22185 - Avg time: 8.31s/entry - ETA: 2491.4 min
+2025-07-22 07:54:06,948 - INFO - Progress: 4210/22185 - Avg time: 8.33s/entry - ETA: 2496.2 min
+2025-07-22 07:55:30,184 - INFO - Progress: 4220/22185 - Avg time: 8.32s/entry - ETA: 2492.2 min
+2025-07-22 07:56:54,511 - INFO - Progress: 4230/22185 - Avg time: 8.43s/entry - ETA: 2523.5 min
+2025-07-22 07:58:18,567 - INFO - Progress: 4240/22185 - Avg time: 8.41s/entry - ETA: 2513.9 min
+2025-07-22 07:59:01,257 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 630.9 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 26897
+  - Entries passed filter: 26430 (98.3%)
+  - Entries failed filter: 467
+  - Files completed: 0
+
+Processing Speed:
+  - Mean time per entry: 1.407s
+  - Median time per entry: 0.000s
+  - 90th percentile: 8.461s
+  - 95th percentile: 8.648s
+  - Throughput: 0.71 entries/second
+
+Memory Usage:
+  - Current RSS: 5127.5 MB
+  - Peak RSS: 5127.5 MB
+
+Top Rejection Reasons:
+  - Contains exclusion pattern: generic_terms: 467 (100.0%)
+
+Score Distribution:
+  - Score 0: 4712 entries
+  - Score 3: 1279 entries
+  - Score 4: 512 entries
+  - Score 5: 1224 entries
+  - Score 6: 1306 entries
+  - Score 7: 1089 entries
+  - Score 8: 2884 entries
+  - Score 9: 1461 entries
+  - Score 10: 3736 entries
+  - Score 11: 2722 entries
+  - Score 12: 1445 entries
+  - Score 13: 1094 entries
+  - Score 14: 925 entries
+  - Score 15: 691 entries
+  - Score 16: 381 entries
+  - Score 17: 322 entries
+  - Score 18: 227 entries
+  - Score 19: 140 entries
+  - Score 20: 118 entries
+  - Score 21: 86 entries
+  - Score 22: 60 entries
+  - Score 23: 74 entries
+  - Score 24: 45 entries
+  - Score 25: 47 entries
+  - Score 26: 51 entries
+  - Score 27: 40 entries
+  - Score 28: 30 entries
+  - Score 29: 25 entries
+  - Score 30: 29 entries
+  - Score 31: 21 entries
+  - Score 32: 20 entries
+  - Score 33: 17 entries
+  - Score 34: 12 entries
+  - Score 35: 10 entries
+  - Score 36: 11 entries
+  - Score 37: 2 entries
+  - Score 38: 6 entries
+  - Score 39: 10 entries
+  - Score 40: 10 entries
+  - Score 41: 3 entries
+  - Score 43: 4 entries
+  - Score 44: 3 entries
+  - Score 45: 2 entries
+  - Score 46: 1 entries
+  - Score 47: 2 entries
+  - Score 48: 2 entries
+  - Score 49: 2 entries
+  - Score 51: 1 entries
+  - Score 58: 1 entries
+  - Score 60: 1 entries
+  - Score 67: 1 entries
+
+LLM Performance:
+  - Total calls: 4315
+  - Tokens per second: 60.2 (median), 59.5 (mean)
+  - 90th percentile: 61.4 tokens/sec
+  - Generation time: 8.52s (median), 8.77s (mean)
+  - Avg tokens: 392 input, 521 output
+================================================================================
+
+2025-07-22 07:59:43,138 - INFO - Progress: 4250/22185 - Avg time: 8.46s/entry - ETA: 2527.6 min
+2025-07-22 08:01:07,589 - INFO - Progress: 4260/22185 - Avg time: 8.44s/entry - ETA: 2522.9 min
+2025-07-22 08:02:31,977 - INFO - Progress: 4270/22185 - Avg time: 8.44s/entry - ETA: 2519.6 min
+2025-07-22 08:03:24,346 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 08:03:40,705 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 08:04:14,674 - INFO - Progress: 4280/22185 - Avg time: 10.27s/entry - ETA: 3064.6 min
+2025-07-22 08:05:05,560 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 08:05:21,940 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 08:05:55,809 - INFO - Progress: 4290/22185 - Avg time: 10.11s/entry - ETA: 3016.3 min
+2025-07-22 08:07:21,300 - INFO - Progress: 4300/22185 - Avg time: 8.55s/entry - ETA: 2548.3 min
+2025-07-22 08:08:03,374 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 08:08:20,325 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 08:09:03,177 - INFO - Progress: 4310/22185 - Avg time: 10.19s/entry - ETA: 3035.0 min
+2025-07-22 08:10:30,089 - INFO - Progress: 4320/22185 - Avg time: 8.69s/entry - ETA: 2587.8 min
+2025-07-22 08:11:57,229 - INFO - Progress: 4330/22185 - Avg time: 8.71s/entry - ETA: 2593.1 min
+2025-07-22 08:13:25,605 - INFO - Progress: 4340/22185 - Avg time: 8.84s/entry - ETA: 2628.4 min
+2025-07-22 08:14:53,475 - INFO - Progress: 4350/22185 - Avg time: 8.79s/entry - ETA: 2611.9 min
+2025-07-22 08:16:21,695 - INFO - Progress: 4360/22185 - Avg time: 8.82s/entry - ETA: 2620.8 min
+2025-07-22 08:16:39,372 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 08:16:56,273 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 08:18:06,159 - INFO - Progress: 4370/22185 - Avg time: 10.45s/entry - ETA: 3101.7 min
+2025-07-22 08:19:33,459 - INFO - Progress: 4380/22185 - Avg time: 8.73s/entry - ETA: 2590.6 min
+2025-07-22 08:21:01,494 - INFO - Progress: 4390/22185 - Avg time: 8.80s/entry - ETA: 2610.9 min
+2025-07-22 08:22:28,390 - INFO - Progress: 4400/22185 - Avg time: 8.69s/entry - ETA: 2575.7 min
+2025-07-22 08:23:54,496 - INFO - Progress: 4410/22185 - Avg time: 8.61s/entry - ETA: 2550.8 min
+2025-07-22 08:25:18,032 - INFO - Progress: 4420/22185 - Avg time: 8.35s/entry - ETA: 2473.3 min
+2025-07-22 08:26:38,881 - INFO - Progress: 4430/22185 - Avg time: 8.08s/entry - ETA: 2392.4 min
+2025-07-22 08:28:00,131 - INFO - Progress: 4440/22185 - Avg time: 8.12s/entry - ETA: 2402.9 min
+2025-07-22 08:29:19,479 - INFO - Progress: 4450/22185 - Avg time: 7.93s/entry - ETA: 2345.4 min
+2025-07-22 08:30:39,647 - INFO - Progress: 4460/22185 - Avg time: 8.02s/entry - ETA: 2368.2 min
+2025-07-22 08:32:07,204 - INFO - Progress: 4470/22185 - Avg time: 8.76s/entry - ETA: 2585.1 min
+2025-07-22 08:33:31,153 - INFO - Progress: 4480/22185 - Avg time: 8.39s/entry - ETA: 2477.1 min
+2025-07-22 08:34:57,509 - INFO - Progress: 4490/22185 - Avg time: 8.64s/entry - ETA: 2546.7 min
+2025-07-22 08:36:25,164 - INFO - Progress: 4500/22185 - Avg time: 8.77s/entry - ETA: 2583.6 min
+2025-07-22 08:37:51,189 - INFO - Progress: 4510/22185 - Avg time: 8.60s/entry - ETA: 2534.1 min
+2025-07-22 08:39:15,933 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 08:39:32,014 - INFO - Successfully extracted JSON on attempt 2 with 1024 max tokens
+2025-07-22 08:39:32,014 - INFO - Progress: 4520/22185 - Avg time: 10.08s/entry - ETA: 2968.4 min
+2025-07-22 08:40:55,020 - INFO - Progress: 4530/22185 - Avg time: 8.30s/entry - ETA: 2442.4 min
+2025-07-22 08:42:18,867 - INFO - Progress: 4540/22185 - Avg time: 8.38s/entry - ETA: 2465.8 min
+2025-07-22 08:42:52,770 - WARNING - Response likely truncated at 512 tokens (limit: 512), retrying with higher limit...
+2025-07-22 08:43:09,126 - WARNING - Response likely truncated at 1024 tokens (limit: 1024), retrying with higher limit...
+2025-07-22 08:43:32,555 - WARNING - Failed to extract JSON after 3 attempts
+2025-07-22 08:44:23,367 - INFO - Progress: 4550/22185 - Avg time: 12.45s/entry - ETA: 3659.2 min

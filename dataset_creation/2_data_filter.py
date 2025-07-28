@@ -252,22 +252,7 @@ class CyberDataFilter:
                  benchmark_tracker: Optional[BenchmarkTracker] = None,
                  temperature: float = 0.0, top_p: float = 1.0, top_k: int = 0,
                  min_p: float = 0.0, repetition_penalty: float = 1.0):
-        """
-        Initialize CyberDataFilter.
-        
-        Args:
-            input_dir: Directory containing input files
-            output_dir: Directory for filtered output
-            model_path: Path to MLX model (optional if no_enhancement=True)
-            no_enhancement: Skip LLM enhancement phase
-            logger: Optional logger instance
-            benchmark_tracker: Optional BenchmarkTracker instance
-            temperature: Sampling temperature (0.0 = deterministic, higher = more random)
-            top_p: Nucleus sampling threshold (0.0-1.0)
-            top_k: Top-K sampling limit (0 = disabled)
-            min_p: Minimum probability threshold
-            repetition_penalty: Penalty for repeated tokens
-        """
+    
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
@@ -385,12 +370,26 @@ class CyberDataFilter:
 
     def get_enhancement(self, text_content: str) -> Optional[Dict]:
         """Pass 2: A slow, detailed enhancement for confirmed relevant items."""
-        prompt = f"""
-Analyze the following text. Respond ONLY with a single, clean JSON object containing "technical_description", "risk_level", "affected_systems", and "mitigations".
+        # Create messages in chat format
+        messages = [
+            {"role": "user", "content": f"""Analyze the following text. Respond ONLY with a single, clean JSON object containing "technical_description", "risk_level", "affected_systems", and "mitigations".
 Text to analyze:
 "{text_content}"
 ```json
-"""
+"""}
+        ]
+        
+        # Apply chat template if tokenizer supports it
+        if hasattr(self.tokenizer, 'apply_chat_template'):
+            prompt = self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=False  # We want direct JSON response, not thinking process
+            )
+        else:
+            # Fallback to raw prompt if tokenizer doesn't support chat template
+            prompt = messages[0]["content"]
         
         max_attempts = 3
         token_limits = [512, 1024, 1500]
@@ -847,18 +846,18 @@ def main():
     parser.add_argument("--input-dir", default="raw_data", help="Directory containing raw data files.")
     parser.add_argument("--output-dir", default="filtered_data", help="Directory to save the filtered data.")
     parser.add_argument("--limit", type=int, default=0, help="Limit the number of files to process (0 for all).")
-    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-8B-4bit", help="The MLX-compatible model to use. Smaller is faster.")
+    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-8B-4bit-DWQ-053125", help="The MLX-compatible model to use. Smaller is faster.")
     parser.add_argument("--no-enhancement", action="store_true", help="Skip LLM enhancement and use rule-based filtering only.")
     parser.add_argument("--log-file", help="Log file path (optional)")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging")
     
     # Sampling parameters
-    parser.add_argument("--temperature", type=float, default=0.7, help="Sampling temperature (0.0 = deterministic, higher = more random)")
-    parser.add_argument("--top-p", type=float, default=1.0, help="Nucleus sampling threshold (0.0-1.0)")
-    parser.add_argument("--top-k", type=int, default=0, help="Top-K sampling limit (0 = disabled)")
+    parser.add_argument("--temperature", type=float, default=0.6, help="Sampling temperature (0.0 = deterministic, higher = more random)")
+    parser.add_argument("--top-p", type=float, default=0.95, help="Nucleus sampling threshold (0.0-1.0)")
+    parser.add_argument("--top-k", type=int, default=20, help="Top-K sampling limit (0 = disabled)")
     parser.add_argument("--min-p", type=float, default=0.0, help="Minimum probability threshold")
     parser.add_argument("--repetition-penalty", type=float, default=1.0, help="Penalty for repeated tokens")
-    
+    #Temperature=0.6, TopP=0.95, TopK=20, and MinP=0
     # Source filtering
     parser.add_argument("--sources", nargs='+', help="Filter files by source names (e.g., opencve mitre_attack ubuntu_security)")
     args = parser.parse_args()

@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+import os
+# Disable tokenizers parallelism to avoid multiprocessing conflicts
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import json
 import logging
 import pandas as pd
@@ -14,9 +18,15 @@ from jinja2 import Template
 import argparse
 import time
 from tqdm import tqdm
+# Import shared utilities
+from utils import extract_first_json_object, BenchmarkTracker
 
+# Import MLX libraries
 try:
     from mlx_lm import load, generate
+    from mlx_lm.sample_utils import make_sampler, make_repetition_penalty
+    import mlx.core as mx
+    mx.set_default_device(mx.gpu)
     MLX_AVAILABLE = True
 except ImportError:
     MLX_AVAILABLE = False
@@ -25,12 +35,24 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 class SecurityAligner:
-    # CORRECTED: Removed 'workers' from __init__
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, disable_llm: bool):
+    def __init__(self, input_dir: str, output_dir: str, llm_model: str, disable_llm: bool,
+                 temperature: float = 0.7, top_p: float = 1.0, top_k: int = 0,
+                 min_p: float = 0.0, repetition_penalty: float = 1.0):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.model, self.tokenizer, self.llm_available = None, None, False
+        self.sampler = None
+        
+        # Store sampling parameters
+        self.temperature = temperature
+        self.top_p = top_p
+        self.top_k = top_k
+        self.min_p = min_p
+        self.repetition_penalty = repetition_penalty
+        
+        # Initialize benchmark tracker
+        self.benchmark = BenchmarkTracker(logger=logger)
 
         if not disable_llm and MLX_AVAILABLE:
             try:
@@ -38,8 +60,22 @@ class SecurityAligner:
                 self.model, self.tokenizer = load(llm_model)
                 self.llm_available = True
                 logger.info("MLX model loaded successfully.")
+                
+                # Create sampler with configured parameters
+                self.sampler = make_sampler(
+                    temp=self.temperature,
+                    top_p=self.top_p,
+                    top_k=self.top_k,
+                    min_p=self.min_p,
+                    min_tokens_to_keep=1
+                )
+                
+                # Log sampler configuration
+                logger.info(f"Sampler configured: temp={self.temperature}, top_p={self.top_p}, "
+                           f"top_k={self.top_k}, min_p={self.min_p}, rep_penalty={self.repetition_penalty}")
             except Exception as e:
                 logger.error(f"Failed to load MLX model: {e}")
+                self.llm_available = False
         else:
             logger.warning("LLM enhancement disabled or mlx-lm not found.")
 
@@ -78,8 +114,8 @@ class SecurityAligner:
             template_data = random.choice(self.template_categories[category][subcategory])
             content, security_metadata = self.render_template(template_data)
             
-            instruction = content.split('Instruction: ').split('Response: ').strip()
-            response = content.split('Response: ').strip() if 'Response: ' in content else ''
+            instruction = content.split('Instruction: ')[1].split('Response: ')[0].strip() if 'Instruction: ' in content else content
+            response = content.split('Response: ')[1].strip() if 'Response: ' in content else ''
             
             examples.append({'instruction': instruction, 'response': response, 'metadata': {'category': category, 'subcategory': subcategory, 'security_flags': security_metadata, 'generation_timestamp': datetime.now().isoformat(), 'template_hash': hashlib.sha256(template_data['template'].encode()).hexdigest()}})
         return examples
@@ -95,6 +131,69 @@ class SecurityAligner:
             logger.error(f"Error loading file {file_path}: {e}")
             return []
 
+    def _call_llm(self, prompt: str) -> Optional[str]:
+        """Call the local MLX model with retry logic."""
+        if not self.llm_available: 
+            return None
+            
+        max_attempts = 3
+        token_limits = [512, 1024, 2048]
+        
+        for attempt in range(max_attempts):
+            try:
+                # Count input tokens
+                input_tokens = len(self.tokenizer.encode(prompt)) if self.tokenizer else len(prompt.split())
+                
+                start_time = time.time()
+                
+                # Create logits processors for repetition penalty if needed
+                logits_processors = []
+                if self.repetition_penalty != 1.0:
+                    rep_penalty_processor = make_repetition_penalty(
+                        penalty=self.repetition_penalty,
+                        context_size=20
+                    )
+                    logits_processors.append(rep_penalty_processor)
+                
+                response = generate(
+                    self.model, 
+                    self.tokenizer, 
+                    prompt=prompt, 
+                    verbose=False,
+                    max_tokens=token_limits[attempt],
+                    sampler=self.sampler,
+                    logits_processors=logits_processors if logits_processors else None,
+                    kv_bits=8,
+                    kv_group_size=64
+                )
+                
+                generation_time = time.time() - start_time
+                
+                # Count output tokens
+                output_tokens = len(self.tokenizer.encode(response)) if self.tokenizer else len(response.split())
+                tokens_per_second = output_tokens / generation_time if generation_time > 0 else 0
+                
+                # Record in benchmark
+                self.benchmark.record_llm_performance(tokens_per_second, input_tokens, output_tokens, generation_time)
+                
+                # Check if response was likely cut off
+                if output_tokens >= token_limits[attempt] - 10 and attempt < max_attempts - 1:
+                    # Response likely truncated, retry with higher limit
+                    logger.warning(f"Response likely truncated at {output_tokens} tokens (limit: {token_limits[attempt]}), retrying with higher limit...")
+                    continue
+                
+                if attempt > 0:
+                    logger.info(f"Successfully generated response on attempt {attempt + 1} with {token_limits[attempt]} max tokens")
+                
+                return response
+                
+            except Exception as e:
+                logger.error(f"Error during MLX generation (attempt {attempt + 1}): {e}")
+                if attempt == max_attempts - 1:
+                    return None
+                    
+        return None
+
     def enhance_with_llm(self, entry: Dict) -> Dict:
         if not isinstance(entry, dict): return entry
         instruction = entry.get('instruction', '')
@@ -108,14 +207,22 @@ Original Response: {response}
 [/INST]"""
         
         try:
-            # CORRECTED LINE: Removed the temperature/temp argument entirely
-            ollama_response = generate(self.model, self.tokenizer, prompt=prompt, verbose=False, max_tokens=2048)
-            json_match = re.search(r'\{.*\}', ollama_response, re.DOTALL)
-            if json_match:
-                enhanced_data = json.loads(json_match.group(0))
-                entry['instruction'] = enhanced_data.get('enhanced_instruction', instruction)
-                entry['response'] = enhanced_data.get('enhanced_response', response)
-                entry.setdefault('metadata', {})['enhancement_timestamp'] = datetime.now().isoformat()
+            ollama_response = self._call_llm(prompt)
+            if ollama_response:
+                # Try to extract JSON object from response
+                json_obj = extract_first_json_object(ollama_response)
+                if json_obj:
+                    entry['instruction'] = json_obj.get('enhanced_instruction', instruction)
+                    entry['response'] = json_obj.get('enhanced_response', response)
+                    entry.setdefault('metadata', {})['enhancement_timestamp'] = datetime.now().isoformat()
+                else:
+                    # Fallback to regex
+                    json_match = re.search(r'\{.*\}', ollama_response, re.DOTALL)
+                    if json_match:
+                        enhanced_data = json.loads(json_match.group(0))
+                        entry['instruction'] = enhanced_data.get('enhanced_instruction', instruction)
+                        entry['response'] = enhanced_data.get('enhanced_response', response)
+                        entry.setdefault('metadata', {})['enhancement_timestamp'] = datetime.now().isoformat()
         except Exception as e:
             logger.error(f"Could not enhance entry due to error: {e}")
         
@@ -127,6 +234,9 @@ Original Response: {response}
 
         for file_path in input_files:
             logger.info(f"Processing {file_path.name}")
+            # Reset file timing for benchmark tracking
+            self.benchmark.reset_file_timing()
+            
             data = self.load_data(file_path)
             if not data: continue
 
@@ -141,15 +251,24 @@ Original Response: {response}
             enhanced_data = []
 
             if self.llm_available:
-                # CORRECTED: Using a sequential loop instead of ThreadPoolExecutor
+                # Using a sequential loop with benchmark tracking
                 for entry in tqdm(aligned_data, desc=f"Aligning {file_path.name}"):
                     enhanced_data.append(self.enhance_with_llm(entry))
+                    
+                    # Log benchmark stats periodically
+                    self.benchmark.log_benchmark_stats()
             else:
                 logger.info("LLM is disabled. Skipping enhancement step.")
                 enhanced_data = aligned_data
             
             random.shuffle(enhanced_data)
             self.save_data(enhanced_data, file_path)
+            
+            # Increment files completed
+            self.benchmark.metrics['files_completed'] += 1
+        
+        # Log final benchmark stats
+        self.benchmark.log_benchmark_stats(force=True)
 
     def save_data(self, data: List[Dict], original_file: Path):
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -167,10 +286,25 @@ def main():
     parser.add_argument('--ratio', type=float, default=0.2, help='Ratio of generated security examples to add.')
     parser.add_argument('--model', type=str, default="mlx-community/c4ai-command-r-v01-4bit", help="The MLX-compatible model to use.")
     parser.add_argument("--disable-llm", action="store_true", help="Disable LLM enhancement.")
+    # Add sampling parameters
+    parser.add_argument("--temperature", type=float, default=0.7, help="Sampling temperature (default: 0.7)")
+    parser.add_argument("--top-p", type=float, default=1.0, help="Top-p sampling parameter (default: 1.0)")
+    parser.add_argument("--top-k", type=int, default=0, help="Top-k sampling parameter (default: 0)")
+    parser.add_argument("--min-p", type=float, default=0.0, help="Min-p sampling parameter (default: 0.0)")
+    parser.add_argument("--repetition-penalty", type=float, default=1.0, help="Repetition penalty (default: 1.0)")
     args = parser.parse_args()
     
-    # CORRECTED: Removed 'workers' from the constructor call
-    aligner = SecurityAligner(input_dir=args.input_dir, output_dir=args.output_dir, llm_model=args.model, disable_llm=args.disable_llm, workers=1)
+    aligner = SecurityAligner(
+        input_dir=args.input_dir, 
+        output_dir=args.output_dir, 
+        llm_model=args.model, 
+        disable_llm=args.disable_llm,
+        temperature=args.temperature,
+        top_p=args.top_p,
+        top_k=args.top_k,
+        min_p=args.min_p,
+        repetition_penalty=args.repetition_penalty
+    )
     aligner.process_directory(security_example_ratio=args.ratio)
 
 if __name__ == "__main__":

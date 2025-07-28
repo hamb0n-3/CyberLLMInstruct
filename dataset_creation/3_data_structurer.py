@@ -88,7 +88,7 @@ class CyberDataStructurer:
             'microsoft_security': self._prepare_microsoft_tasks,
             'capec_data': self._prepare_capec_tasks,
             'opencve_data': self._prepare_opencve_tasks,
-            'mitre_attack': self._prepare_mitre_tasks,
+            'mitre_attack': self._prepare_mitre_attack_tasks,
         }
 
     def _call_llm(self, prompt: str) -> Optional[str]:
@@ -122,7 +122,9 @@ class CyberDataStructurer:
                     verbose=False,
                     max_tokens=token_limits[attempt],
                     sampler=self.sampler,
-                    logits_processors=logits_processors if logits_processors else None
+                    logits_processors=logits_processors if logits_processors else None,
+                    kv_bits=8,
+                    kv_group_size=64
                 )
                 
                 generation_time = time.time() - start_time
@@ -201,7 +203,7 @@ class CyberDataStructurer:
         structured_pairs = []
         for entry in data:
             if 'enhanced' in entry and entry['enhanced'].get('description'):
-                usn_id = entry.get('title', 'Unknown USN').split(':').strip()
+                usn_id = entry.get('title', 'Unknown USN').split(':')[0].strip()
                 cves = re.findall(r'CVE-\d{4}-\d{4,7}', entry.get('summary', ''))
                 instruction = f"Summarize Ubuntu security notice {usn_id} and the vulnerabilities it addresses."
                 # The response is created directly from the enhanced data, no LLM call needed here.
@@ -274,6 +276,9 @@ class CyberDataStructurer:
 
         for file_path in input_files:
             logger.info(f"Processing file: {file_path.name}")
+            # Reset file timing for benchmark tracking
+            self.benchmark.reset_file_timing()
+            
             handler = next((func for key, func in self.file_handlers.items() if key in file_path.name), None)
             if not handler:
                 logger.warning(f"No handler for file: {file_path.name}. Skipping.")
@@ -301,9 +306,23 @@ class CyberDataStructurer:
                         metadata = future_to_meta[future]
                         response = future.result()
                         if response:
+                            # Try to extract JSON from response if expected
+                            if '{' in response and '}' in response:
+                                json_obj = extract_first_json_object(response)
+                                if json_obj:
+                                    response = json.dumps(json_obj)
                             metadata['response'] = response.strip()
                             all_structured_pairs.append(metadata)
+                        
+                        # Log benchmark stats periodically
+                        self.benchmark.log_benchmark_stats()
+            
+            # Increment files completed
+            self.benchmark.metrics['files_completed'] += 1
 
+        # Log final benchmark stats
+        self.benchmark.log_benchmark_stats(force=True)
+        
         if all_structured_pairs:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             output_file = self.output_dir / f"consolidated_cybersecurity_dataset_{timestamp}.json"
@@ -320,13 +339,30 @@ def main():
     parser = argparse.ArgumentParser(description="Structure filtered cybersecurity data using an LLM.")
     parser.add_argument("--input-dir", default="filtered_data", help="Directory containing filtered data.")
     parser.add_argument("--output-dir", default="structured_data", help="Output directory.")
-    parser.add_argument("--model", type=str, default="mlx-community/c4ai-command-r-v01-4bit", help="The MLX-compatible model to use from Hugging Face.")
-    parser.add_argument("--workers", type=int, default=4, help="Number of parallel workers for LLM calls.")
+    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-8B-4bit", help="The MLX-compatible model to use from Hugging Face.")
+    parser.add_argument("--workers", type=int, default=1, help="Number of parallel workers for LLM calls.")
     parser.add_argument("--disable-llm", action="store_true", help="Disable LLM usage.")
+    # Add sampling parameters
+    parser.add_argument("--temperature", type=float, default=0.7, help="Sampling temperature (default: 0.7)")
+    parser.add_argument("--top-p", type=float, default=1.0, help="Top-p sampling parameter (default: 1.0)")
+    parser.add_argument("--top-k", type=int, default=0, help="Top-k sampling parameter (default: 0)")
+    parser.add_argument("--min-p", type=float, default=0.0, help="Min-p sampling parameter (default: 0.0)")
+    parser.add_argument("--repetition-penalty", type=float, default=1.0, help="Repetition penalty (default: 1.0)")
     args = parser.parse_args()
 
     try:
-        structurer = CyberDataStructurer(input_dir=args.input_dir, output_dir=args.output_dir, llm_model=args.model, workers=args.workers, disable_llm=args.disable_llm)
+        structurer = CyberDataStructurer(
+            input_dir=args.input_dir, 
+            output_dir=args.output_dir, 
+            llm_model=args.model, 
+            workers=args.workers, 
+            disable_llm=args.disable_llm,
+            temperature=args.temperature,
+            top_p=args.top_p,
+            top_k=args.top_k,
+            min_p=args.min_p,
+            repetition_penalty=args.repetition_penalty
+        )
         structurer.process_directory()
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}", exc_info=True)
