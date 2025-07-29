@@ -9,12 +9,12 @@ import logging
 import re
 import sys
 import time
+import pickle
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple, Set
 import argparse
 import xml.etree.ElementTree as ET
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 # Import shared utilities
 from utils import extract_first_json_object, BenchmarkTracker
@@ -35,16 +35,18 @@ logger = logging.getLogger(__name__)
 
 
 class CyberDataStructurer:
-    def __init__(self, input_dir: str, output_dir: str, llm_model: str, workers: int, disable_llm: bool,
+    def __init__(self, input_dir: str, output_dir: str, llm_model: str,
                  temperature: float = 0.7, top_p: float = 1.0, top_k: int = 0,
-                 min_p: float = 0.0, repetition_penalty: float = 1.0):
+                 min_p: float = 0.0, repetition_penalty: float = 1.0,
+                 two_prompts: bool = False):
         """Initialize the data structurer."""
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        self.num_workers = workers
-        self.model, self.tokenizer, self.llm_available = None, None, False
+        self.model, self.tokenizer = None, None
         self.sampler = None
+        self.llm_model_name = llm_model  # Store the model name
+        self.two_prompts = two_prompts  # Whether to generate 2 prompts per entry
         
         # Store sampling parameters
         self.temperature = temperature
@@ -55,31 +57,35 @@ class CyberDataStructurer:
         
         # Initialize benchmark tracker
         self.benchmark = BenchmarkTracker(logger=logger)
+        
+        # Initialize state management
+        self.state_file = self.output_dir / ".structurer_state.pkl"
+        self.state = self._load_state()
 
-        if not disable_llm and MLX_AVAILABLE:
-            try:
-                logger.info(f"Loading MLX model '{llm_model}'...")
-                self.model, self.tokenizer = load(llm_model)
-                self.llm_available = True
-                logger.info("MLX model loaded successfully.")
-                
-                # Create sampler with configured parameters
-                self.sampler = make_sampler(
-                    temp=self.temperature,
-                    top_p=self.top_p,
-                    top_k=self.top_k,
-                    min_p=self.min_p,
-                    min_tokens_to_keep=1
-                )
-                
-                # Log sampler configuration
-                logger.info(f"Sampler configured: temp={self.temperature}, top_p={self.top_p}, "
-                           f"top_k={self.top_k}, min_p={self.min_p}, rep_penalty={self.repetition_penalty}")
-            except Exception as e:
-                logger.error(f"Failed to load MLX model: {e}")
-                self.llm_available = False
-        else:
-            logger.warning("LLM disabled or mlx-lm not found. Structuring will not be possible.")
+        if not MLX_AVAILABLE:
+            logger.error("MLX not available. Please install mlx-lm package.")
+            raise RuntimeError("MLX not available. Cannot proceed without LLM.")
+            
+        try:
+            logger.info(f"Loading MLX model '{llm_model}'...")
+            self.model, self.tokenizer = load(llm_model)
+            logger.info("MLX model loaded successfully.")
+            
+            # Create sampler with configured parameters
+            self.sampler = make_sampler(
+                temp=self.temperature,
+                top_p=self.top_p,
+                top_k=self.top_k,
+                min_p=self.min_p,
+                min_tokens_to_keep=1
+            )
+            
+            # Log sampler configuration
+            logger.info(f"Sampler configured: temp={self.temperature}, top_p={self.top_p}, "
+                       f"top_k={self.top_k}, min_p={self.min_p}, rep_penalty={self.repetition_penalty}")
+        except Exception as e:
+            logger.error(f"Failed to load MLX model: {e}")
+            raise RuntimeError(f"Failed to load MLX model: {e}")
 
         self.file_handlers = {
             'ctf_data': self._prepare_ctf_tasks,
@@ -90,11 +96,51 @@ class CyberDataStructurer:
             'opencve_data': self._prepare_opencve_tasks,
             'mitre_attack': self._prepare_mitre_attack_tasks,
         }
+    
+    def _load_state(self) -> Dict:
+        """Load processing state from disk."""
+        if self.state_file.exists():
+            try:
+                with open(self.state_file, 'rb') as f:
+                    state = pickle.load(f)
+                logger.info(f"Loaded state with {len(state.get('processed_items', set()))} processed items, "
+                           f"{len(state.get('partial_results', []))} partial results")
+                return state
+            except Exception as e:
+                logger.warning(f"Could not load state file: {e}")
+        
+        return {
+            'processed_items': set(),  # Set of (source_id, instruction_hash) tuples
+            'partial_results': [],     # Results processed but not yet saved
+            'last_file': None,        # Last file being processed
+            'start_time': time.time()
+        }
+    
+    def _save_state(self):
+        """Save current processing state to disk."""
+        try:
+            # Create temporary file first for atomic write
+            temp_file = self.state_file.with_suffix('.tmp')
+            with open(temp_file, 'wb') as f:
+                pickle.dump(self.state, f)
+            # Atomic rename
+            temp_file.replace(self.state_file)
+            logger.debug(f"Saved state with {len(self.state['processed_items'])} processed items")
+        except Exception as e:
+            logger.error(f"Could not save state: {e}")
+    
+    def _mark_processed(self, source_id: str, instruction: str):
+        """Mark an item as processed."""
+        key = (source_id, hash(instruction))
+        self.state['processed_items'].add(key)
+    
+    def _is_processed(self, source_id: str, instruction: str) -> bool:
+        """Check if an item has been processed."""
+        key = (source_id, hash(instruction))
+        return key in self.state['processed_items']
 
     def _call_llm(self, prompt: str, use_chat_template: bool = True) -> Optional[str]:
         """Call the local MLX model with retry logic."""
-        if not self.llm_available: 
-            return None
             
         # Apply chat template if supported and requested
         formatted_prompt = prompt
@@ -106,11 +152,11 @@ class CyberDataStructurer:
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
-                enable_thinking=True  # We want direct responses, not thinking process
+                enable_thinking=False  # We want direct responses, not thinking process
             )
         
-        max_attempts = 3
-        token_limits = [512, 1024, 1500]
+        max_attempts = 1
+        token_limits = [1500]
         
         for attempt in range(max_attempts):
             try:
@@ -190,7 +236,13 @@ class CyberDataStructurer:
         for entry in data:
             title = entry.get('title', 'N/A')
             context = f"CTF Title: {title}\nDescription: {entry.get('description', 'N/A')}\nFormat: {entry.get('format', 'N/A')}"
-            instructions = [f"Provide a concise summary of the CTF event: '{title}'.", f"What are the prizes for the '{title}' CTF?"]
+            
+            if self.two_prompts:
+                instructions = [f"Provide a concise summary of the CTF event: '{title}'.", f"What are the prizes for the '{title}' CTF?"]
+            else:
+                # Single comprehensive instruction
+                instructions = [f"Provide a comprehensive summary of the CTF event '{title}', including its format, description, and prize information if available."]
+            
             for instruction in instructions:
                 prompt = f"You are an assistant providing clear information about CTF events.\n\nBased on this information:\n{context}\n\nAnswer the following question:\n{instruction}"
                 metadata = {'instruction': instruction, 'type': 'ctf_event', 'source_data': {'id': title, 'type': 'ctf_event'}}
@@ -204,7 +256,13 @@ class CyberDataStructurer:
             summary = entry.get('summary', 'N/A').replace('\n', ' ').strip()
             authors = ", ".join([author['name'] for author in entry.get('authors', [])])
             context = f"Paper Title: {title}\nAuthors: {authors}\nSummary: {summary}"
-            instructions = [f"Summarize the key findings of the research paper titled '{title}'.", f"What is the main contribution of the paper '{title}' by {authors}?"]
+            
+            if self.two_prompts:
+                instructions = [f"Summarize the key findings of the research paper titled '{title}'.", f"What is the main contribution of the paper '{title}' by {authors}?"]
+            else:
+                # Single comprehensive instruction
+                instructions = [f"Provide a comprehensive summary of the research paper '{title}' by {authors}, highlighting the key findings, main contributions, and significance of the work."]
+            
             for instruction in instructions:
                 prompt = f"You are a research assistant summarizing academic papers.\n\nBased on the paper details, answer the question.\n\nDetails:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'research_paper', 'source_data': {'id': entry.get('id'), 'type': 'arxiv_paper'}}
@@ -215,24 +273,56 @@ class CyberDataStructurer:
     def _prepare_ubuntu_tasks(self, data: List[Dict]) -> List[Dict]:
         structured_pairs = []
         for entry in data:
-            if 'enhanced' in entry and entry['enhanced'].get('description'):
+            start_time = time.time()
+            # Check for enhanced fields at the top level (from 2_data_filter.py)
+            if 'technical_description' in entry:
                 usn_id = entry.get('title', 'Unknown USN').split(':')[0].strip()
                 cves = re.findall(r'CVE-\d{4}-\d{4,7}', entry.get('summary', ''))
                 instruction = f"Summarize Ubuntu security notice {usn_id} and the vulnerabilities it addresses."
                 # The response is created directly from the enhanced data, no LLM call needed here.
-                response = f"Ubuntu Security Notice {usn_id} addresses vulnerabilities including {', '.join(cves) if cves else 'unspecified CVEs'}. The issue involves: {entry['enhanced']['description']}. The risk is rated as '{entry['enhanced']['risk_level']}'. The recommended mitigation is to {entry['enhanced']['mitigations']}."
+                response = f"Ubuntu Security Notice {usn_id} addresses vulnerabilities including {', '.join(cves) if cves else 'unspecified CVEs'}. The issue involves: {entry['technical_description']}. The risk is rated as '{entry['risk_level']}'. The recommended mitigation is to {entry['mitigations']}."
                 structured_pairs.append({'instruction': instruction, 'response': response.strip(), 'type': 'security_advisory', 'source_data': {'id': usn_id, 'type': 'ubuntu_advisory'}})
+                
+                # Record benchmark entry
+                processing_time = time.time() - start_time
+                entry_size = len(json.dumps(entry))
+                self.benchmark.record_entry(passed=True, processing_time=processing_time, entry_size=entry_size)
         return structured_pairs
 
     def _prepare_microsoft_tasks(self, data: List[Dict]) -> List[Tuple[str, Dict]]:
         tasks = []
         for entry in data:
-            title = entry.get('DocumentTitle', {}).get('Value', 'N/A')
-            context = f"Update Title: {title}\nRelease Date: {entry.get('CurrentReleaseDate', 'N/A')}"
-            instructions = [f"What is the purpose of the Microsoft security update titled '{title}'?", f"Provide a brief overview of the '{title}' security update."]
+            # Handle nested structure for DocumentTitle and ID
+            if isinstance(entry.get('DocumentTitle'), dict):
+                title = entry.get('DocumentTitle', {}).get('Value', 'N/A')
+                doc_id = entry.get('ID', {}).get('Value', 'N/A') if isinstance(entry.get('ID'), dict) else entry.get('ID', 'N/A')
+            else:
+                title = entry.get('DocumentTitle', 'N/A')
+                doc_id = entry.get('ID', 'N/A')
+            
+            # Check if enhanced fields are available
+            if 'technical_description' in entry:
+                context = f"Update Title: {title}\nRelease Date: {entry.get('CurrentReleaseDate', 'N/A')}\nTechnical Details: {entry['technical_description']}\nRisk Level: {entry.get('risk_level', 'N/A')}\nAffected Systems: {entry.get('affected_systems', 'N/A')}"
+                if self.two_prompts:
+                    instructions = [
+                        f"Provide a comprehensive analysis of the Microsoft security update '{title}' including technical details and impact.",
+                        f"What are the specific vulnerabilities addressed in '{title}' and their recommended mitigations?"
+                    ]
+                else:
+                    instructions = [f"Provide a comprehensive analysis of the Microsoft security update '{title}', including technical details, impact assessment, specific vulnerabilities addressed, and recommended mitigations."]
+            else:
+                context = f"Update Title: {title}\nRelease Date: {entry.get('CurrentReleaseDate', 'N/A')}"
+                if self.two_prompts:
+                    instructions = [
+                        f"What is the purpose of the Microsoft security update titled '{title}'?",
+                        f"Provide a brief overview of the '{title}' security update."
+                    ]
+                else:
+                    instructions = [f"Provide a comprehensive overview of the Microsoft security update '{title}', including its purpose, scope, and key information."]
+            
             for instruction in instructions:
                 prompt = f"You are an assistant summarizing Microsoft security bulletins.\n\nBased on the metadata, answer the question.\n\nMetadata:\n{context}\n\nQuestion: {instruction}"
-                metadata = {'instruction': instruction, 'type': 'security_advisory', 'source_data': {'id': entry.get('ID', {}).get('Value'), 'type': 'microsoft_advisory'}}
+                metadata = {'instruction': instruction, 'type': 'security_advisory', 'source_data': {'id': doc_id, 'type': 'microsoft_advisory'}}
                 tasks.append((prompt, metadata))
         return tasks
 
@@ -242,8 +332,27 @@ class CyberDataStructurer:
             name = entry.get('name', 'N/A')
             capec_id = entry.get('id', 'N/A')
             description = entry.get('description', 'N/A')
-            context = f"CAPEC ID: {capec_id}\nName: {name}\nDescription: {description}"
-            instructions = [f"Describe the Common Attack Pattern (CAPEC) known as '{name}'.", f"What are the typical mitigations for the attack pattern {capec_id}?"]
+            
+            # Check if enhanced fields are available
+            if 'technical_description' in entry:
+                context = f"CAPEC ID: {capec_id}\nName: {name}\nDescription: {description}\nTechnical Analysis: {entry['technical_description']}\nRisk Level: {entry.get('risk_level', 'N/A')}\nAffected Systems: {entry.get('affected_systems', 'N/A')}"
+                if self.two_prompts:
+                    instructions = [
+                        f"Provide a detailed explanation of the Common Attack Pattern (CAPEC) '{name}' including technical implementation details.",
+                        f"What are the comprehensive mitigations and detection strategies for the attack pattern {capec_id}?"
+                    ]
+                else:
+                    instructions = [f"Provide a comprehensive analysis of the Common Attack Pattern (CAPEC) '{name}' ({capec_id}), including technical implementation details, affected systems, and complete mitigation and detection strategies."]
+            else:
+                context = f"CAPEC ID: {capec_id}\nName: {name}\nDescription: {description}"
+                if self.two_prompts:
+                    instructions = [
+                        f"Describe the Common Attack Pattern (CAPEC) known as '{name}'.",
+                        f"What are the typical mitigations for the attack pattern {capec_id}?"
+                    ]
+                else:
+                    instructions = [f"Provide a comprehensive description of the Common Attack Pattern (CAPEC) '{name}' ({capec_id}), including how it works and typical mitigations."]
+            
             for instruction in instructions:
                 prompt = f"You are a cybersecurity expert explaining attack patterns.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'attack_pattern', 'source_data': {'id': capec_id, 'type': 'capec'}}
@@ -252,36 +361,123 @@ class CyberDataStructurer:
 
     def _prepare_opencve_tasks(self, data: List[Dict]) -> List[Tuple[str, Dict]]:
         tasks = []
-        for entry in data:
-            cve_id = entry.get('id', 'N/A')
-            summary = entry.get('summary', 'N/A')
-            cvss_v3 = entry.get('cvss', {}).get('v3', 'N/A')
-            context = f"CVE ID: {cve_id}\nSummary: {summary}\nCVSSv3 Score: {cvss_v3}"
-            instructions = [f"Summarize the vulnerability {cve_id} and its potential impact.", f"What is the severity of CVE {cve_id} based on its CVSS score?"]
-            for instruction in instructions:
-                prompt = f"You are a cybersecurity analyst summarizing vulnerability reports.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
-                metadata = {'instruction': instruction, 'type': 'vulnerability', 'source_data': {'id': cve_id, 'type': 'opencve'}}
-                tasks.append((prompt, metadata))
+        
+        # Handle the special structure of opencve filtered data
+        # It's wrapped in an array with one object containing 'summary' array and enhanced fields
+        if isinstance(data, list) and len(data) > 0 and 'summary' in data[0]:
+            # Extract the CVE entries from the summary array
+            cve_entries = data[0].get('summary', [])
+            # Get enhanced fields from the top-level object
+            enhanced_tech_desc = data[0].get('technical_description', '')
+            enhanced_risk = data[0].get('risk_level', '')
+            enhanced_affected = data[0].get('affected_systems', [])
+            enhanced_mitigations = data[0].get('mitigations', [])
+            
+            for entry in cve_entries:
+                cve_id = entry.get('cve_id', 'N/A')
+                description = entry.get('description', 'N/A')
+                
+                # Create enhanced context if we have enhanced data
+                if enhanced_tech_desc:
+                    context = f"CVE ID: {cve_id}\nDescription: {description}\nTechnical Analysis: {enhanced_tech_desc}\nRisk Level: {enhanced_risk}"
+                    if enhanced_affected:
+                        context += f"\nAffected Systems: {', '.join(enhanced_affected[:5])}"  # Limit to first 5
+                    if enhanced_mitigations:
+                        context += f"\nMitigations: {'; '.join(enhanced_mitigations[:3])}"  # Limit to first 3
+                    
+                    if self.two_prompts:
+                        instructions = [
+                            f"Provide a detailed analysis of vulnerability {cve_id} including its technical impact and severity.",
+                            f"What are the recommended mitigations for CVE {cve_id} and which systems are affected?"
+                        ]
+                    else:
+                        instructions = [f"Provide a comprehensive analysis of vulnerability {cve_id}, including its technical impact, severity assessment, affected systems, and recommended mitigations."]
+                else:
+                    context = f"CVE ID: {cve_id}\nDescription: {description}"
+                    if self.two_prompts:
+                        instructions = [
+                            f"Summarize the vulnerability {cve_id} and its potential impact.",
+                            f"What is the severity of CVE {cve_id} based on available information?"
+                        ]
+                    else:
+                        instructions = [f"Provide a comprehensive summary of vulnerability {cve_id}, including its potential impact and severity assessment."]
+                
+                for instruction in instructions:
+                    prompt = f"You are a cybersecurity analyst summarizing vulnerability reports.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
+                    metadata = {'instruction': instruction, 'type': 'vulnerability', 'source_data': {'id': cve_id, 'type': 'opencve'}}
+                    tasks.append((prompt, metadata))
+        else:
+            # Fallback to original logic if structure is different
+            for entry in data:
+                cve_id = entry.get('id', entry.get('cve_id', 'N/A'))
+                summary = entry.get('summary', entry.get('description', 'N/A'))
+                cvss_v3 = entry.get('cvss', {}).get('v3', 'N/A') if isinstance(entry.get('cvss'), dict) else 'N/A'
+                context = f"CVE ID: {cve_id}\nSummary: {summary}\nCVSSv3 Score: {cvss_v3}"
+                if self.two_prompts:
+                    instructions = [f"Summarize the vulnerability {cve_id} and its potential impact.", f"What is the severity of CVE {cve_id} based on its CVSS score?"]
+                else:
+                    instructions = [f"Provide a comprehensive summary of vulnerability {cve_id}, including its potential impact and severity based on the CVSS score."]
+                for instruction in instructions:
+                    prompt = f"You are a cybersecurity analyst summarizing vulnerability reports.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
+                    metadata = {'instruction': instruction, 'type': 'vulnerability', 'source_data': {'id': cve_id, 'type': 'opencve'}}
+                    tasks.append((prompt, metadata))
         return tasks
 
     def _prepare_mitre_attack_tasks(self, data: List[Dict]) -> List[Tuple[str, Dict]]:
         tasks = []
-        attack_patterns = [obj for obj in data if obj.get('type') == 'attack-pattern']
+        
+        # Check if we have enhanced fields at the top level
+        enhanced_data = None
+        if isinstance(data, list) and len(data) > 0 and 'technical_description' in data[0]:
+            enhanced_data = data[0]
+            # Extract attack patterns from the nested structure if present
+            if 'objects' in data[0]:
+                attack_patterns = [obj for obj in data[0]['objects'] if obj.get('type') == 'attack-pattern']
+            else:
+                attack_patterns = [obj for obj in data if obj.get('type') == 'attack-pattern']
+        else:
+            attack_patterns = [obj for obj in data if obj.get('type') == 'attack-pattern']
+        
         for entry in attack_patterns:
             name = entry.get('name', 'N/A')
             description = entry.get('description', 'N/A')
             mitre_id = next((ref['external_id'] for ref in entry.get('external_references', []) if ref.get('source_name') == 'mitre-attack'), 'N/A')
-            context = f"MITRE ID: {mitre_id}\nName: {name}\nDescription: {description}"
-            instructions = [f"Explain the MITRE ATT&CK technique '{name}' ({mitre_id}).", f"What are common detection methods for the attack technique '{name}'?"]
+            
+            # Use enhanced description if available
+            if enhanced_data and enhanced_data.get('technical_description'):
+                context = f"MITRE ID: {mitre_id}\nName: {name}\nDescription: {description}\nEnhanced Analysis: {enhanced_data['technical_description']}"
+                if self.two_prompts:
+                    instructions = [
+                        f"Provide a comprehensive explanation of the MITRE ATT&CK technique '{name}' ({mitre_id}) including its technical implementation.",
+                        f"What are the detection methods and mitigations for the attack technique '{name}'?"
+                    ]
+                else:
+                    instructions = [f"Provide a comprehensive analysis of the MITRE ATT&CK technique '{name}' ({mitre_id}), including its technical implementation, detection methods, and mitigation strategies."]
+            else:
+                context = f"MITRE ID: {mitre_id}\nName: {name}\nDescription: {description}"
+                if self.two_prompts:
+                    instructions = [
+                        f"Explain the MITRE ATT&CK technique '{name}' ({mitre_id}).",
+                        f"What are common detection methods for the attack technique '{name}'?"
+                    ]
+                else:
+                    instructions = [f"Provide a comprehensive explanation of the MITRE ATT&CK technique '{name}' ({mitre_id}), including how it works and common detection methods."]
+            
             for instruction in instructions:
                 prompt = f"You are a cybersecurity expert explaining MITRE ATT&CK techniques.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'attack_pattern', 'source_data': {'id': mitre_id, 'type': 'mitre_attack'}}
                 tasks.append((prompt, metadata))
         return tasks
 
-    def process_directory(self, sources: Optional[List[str]] = None):
+    def process_directory(self, sources: Optional[List[str]] = None, resume: bool = True):
         """Process all recognized files in the input directory."""
         all_structured_pairs = []
+        
+        # Load partial results if resuming
+        if resume and self.state.get('partial_results'):
+            all_structured_pairs.extend(self.state['partial_results'])
+            logger.info(f"Resuming with {len(all_structured_pairs)} partial results")
+        
         input_files = list(self.input_dir.glob('*_filtered_*.json'))
         
         # Filter by sources if specified
@@ -300,51 +496,101 @@ class CyberDataStructurer:
             logger.warning(f"No '*_filtered_*.json' files found in {self.input_dir}. Nothing to process.")
             return
 
-        for file_path in input_files:
-            logger.info(f"Processing file: {file_path.name}")
-            # Reset file timing for benchmark tracking
-            self.benchmark.reset_file_timing()
-            
-            handler = next((func for key, func in self.file_handlers.items() if key in file_path.name), None)
-            if not handler:
-                logger.warning(f"No handler for file: {file_path.name}. Skipping.")
-                continue
+        try:
+            for file_path in input_files:
+                # Skip to last file if resuming
+                if resume and self.state.get('last_file'):
+                    if file_path.name < self.state['last_file']:
+                        logger.info(f"Skipping already processed file: {file_path.name}")
+                        continue
+                
+                logger.info(f"Processing file: {file_path.name}")
+                self.state['last_file'] = file_path.name
+                # Reset file timing for benchmark tracking
+                self.benchmark.reset_file_timing()
+                
+                handler = next((func for key, func in self.file_handlers.items() if key in file_path.name), None)
+                if not handler:
+                    logger.warning(f"No handler for file: {file_path.name}. Skipping.")
+                    continue
 
-            data = self._load_data(file_path)
-            if not data: continue
-            
-            # Special case for Ubuntu data which is pre-structured
-            if handler == self._prepare_ubuntu_tasks:
-                structured_pairs = handler(data)
-                if structured_pairs:
-                    all_structured_pairs.extend(structured_pairs)
-                    logger.info(f"Generated {len(structured_pairs)} pairs from {file_path.name}")
-                continue # Move to the next file
-            
-            # For all other handlers, prepare and process LLM tasks
-            if self.llm_available:
-                tasks = handler(data)
-                with ThreadPoolExecutor(max_workers=self.num_workers) as executor:
-                    future_to_meta = {executor.submit(self._call_llm, prompt): meta for prompt, meta in tasks}
-                    progress_bar = tqdm(as_completed(future_to_meta), total=len(tasks), desc=f"Structuring {file_path.name}")
+                data = self._load_data(file_path)
+                if not data: continue
+                
+                # Special case for Ubuntu data which is pre-structured
+                if handler == self._prepare_ubuntu_tasks:
+                    structured_pairs = handler(data)
+                    new_pairs = []
+                    for pair in structured_pairs:
+                        source_id = pair.get('source_data', {}).get('id', '')
+                        instruction = pair.get('instruction', '')
+                        if not self._is_processed(source_id, instruction):
+                            new_pairs.append(pair)
+                            self._mark_processed(source_id, instruction)
                     
-                    for future in progress_bar:
-                        metadata = future_to_meta[future]
-                        response = future.result()
-                        if response:
-                            # Try to extract JSON from response if expected
-                            if '{' in response and '}' in response:
-                                json_obj = extract_first_json_object(response)
-                                if json_obj:
-                                    response = json.dumps(json_obj)
-                            metadata['response'] = response.strip()
-                            all_structured_pairs.append(metadata)
+                    if new_pairs:
+                        all_structured_pairs.extend(new_pairs)
+                        logger.info(f"Generated {len(new_pairs)} new pairs from {file_path.name} (skipped {len(structured_pairs) - len(new_pairs)} already processed)")
+                    else:
+                        logger.info(f"All entries from {file_path.name} already processed")
+                    continue # Move to the next file
+                
+                # For all other handlers, prepare and process LLM tasks
+                tasks = handler(data)
+                
+                # Filter out already processed tasks
+                new_tasks = []
+                skipped_count = 0
+                for prompt, metadata in tasks:
+                    source_id = metadata.get('source_data', {}).get('id', '')
+                    instruction = metadata.get('instruction', '')
+                    if not self._is_processed(source_id, instruction):
+                        new_tasks.append((prompt, metadata))
+                    else:
+                        skipped_count += 1
+                
+                if not new_tasks:
+                    logger.info(f"All {len(tasks)} tasks from {file_path.name} already processed")
+                    continue
+                
+                logger.info(f"Processing {len(new_tasks)} new tasks from {file_path.name} (skipped {skipped_count} already processed)")
+                
+                progress_bar = tqdm(new_tasks, desc=f"Structuring {file_path.name}")
+                
+                for i, (prompt, metadata) in enumerate(progress_bar):
+                    response = self._call_llm(prompt)
+                    if response:
+                        # Try to extract JSON from response if expected
+                        if '{' in response and '}' in response:
+                            json_obj = extract_first_json_object(response)
+                            if json_obj:
+                                response = json.dumps(json_obj)
+                        metadata['response'] = response.strip()
+                        all_structured_pairs.append(metadata)
                         
-                        # Log benchmark stats periodically
-                        self.benchmark.log_benchmark_stats()
-            
-            # Increment files completed
-            self.benchmark.metrics['files_completed'] += 1
+                        # Mark as processed
+                        source_id = metadata.get('source_data', {}).get('id', '')
+                        instruction = metadata.get('instruction', '')
+                        self._mark_processed(source_id, instruction)
+                    
+                    # Save state periodically (every 10 items)
+                    if (i + 1) % 10 == 0:
+                        self.state['partial_results'] = all_structured_pairs
+                        self._save_state()
+                        logger.debug(f"Saved state after {i + 1} items")
+                    
+                    # Log benchmark stats periodically
+                    self.benchmark.log_benchmark_stats()
+                # Increment files completed
+                self.benchmark.metrics['files_completed'] += 1
+                
+        except KeyboardInterrupt:
+            logger.info("\nProcessing interrupted! Saving state...")
+            self.state['partial_results'] = all_structured_pairs
+            self._save_state()
+            logger.info(f"State saved. Processed {len(all_structured_pairs)} items so far.")
+            logger.info("Run the script again to resume from where you left off.")
+            return
 
         # Log final benchmark stats
         self.benchmark.log_benchmark_stats(force=True)
@@ -355,43 +601,49 @@ class CyberDataStructurer:
             
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump({
-                    'metadata': {'total_entries': len(all_structured_pairs), 'generation_timestamp': timestamp, 'model_used': self.model.model.name if self.llm_available else "N/A"},
+                    'metadata': {'total_entries': len(all_structured_pairs), 'generation_timestamp': timestamp, 'model_used': self.llm_model_name},
                     'data': all_structured_pairs
                 }, f, indent=2)
             
             logger.info(f"Successfully saved {len(all_structured_pairs)} structured pairs to {output_file}")
+            
+            # Clean up state file on successful completion
+            if self.state_file.exists():
+                self.state_file.unlink()
+                logger.info("Processing completed successfully, removed state file")
 
 def main():
     parser = argparse.ArgumentParser(description="Structure filtered cybersecurity data using an LLM.")
     parser.add_argument("--input-dir", default="filtered_data", help="Directory containing filtered data.")
     parser.add_argument("--output-dir", default="structured_data", help="Output directory.")
-    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-8B-4bit", help="The MLX-compatible model to use from Hugging Face.")
-    parser.add_argument("--workers", type=int, default=1, help="Number of parallel workers for LLM calls.")
-    parser.add_argument("--disable-llm", action="store_true", help="Disable LLM usage.")
+    parser.add_argument("--model", type=str, default="mlx-community/Qwen3-8B-4bit-DWQ-053125", help="The MLX-compatible model to use from Hugging Face.")
     # Add sampling parameters
-    parser.add_argument("--temperature", type=float, default=0.7, help="Sampling temperature (default: 0.7)")
-    parser.add_argument("--top-p", type=float, default=1.0, help="Top-p sampling parameter (default: 1.0)")
-    parser.add_argument("--top-k", type=int, default=0, help="Top-k sampling parameter (default: 0)")
+    parser.add_argument("--temperature", type=float, default=0.6, help="Sampling temperature (default: 0.7)")
+    parser.add_argument("--top-p", type=float, default=0.95, help="Top-p sampling parameter (default: 1.0)")
+    parser.add_argument("--top-k", type=int, default=20, help="Top-k sampling parameter (default: 0)")
     parser.add_argument("--min-p", type=float, default=0.0, help="Min-p sampling parameter (default: 0.0)")
     parser.add_argument("--repetition-penalty", type=float, default=1.0, help="Repetition penalty (default: 1.0)")
     # Source filtering
     parser.add_argument("--sources", nargs='+', help="Filter files by source names (e.g., opencve mitre_attack ubuntu_security)")
+    # Two prompts mode
+    parser.add_argument("--two-prompts", action="store_true", help="Generate two prompts per entry instead of one comprehensive prompt (default: False)")
+    # Resume control
+    parser.add_argument("--no-resume", action="store_true", help="Start fresh, ignoring any saved state (default: resume if state exists)")
     args = parser.parse_args()
-
+    #Temperature=0.6, TopP=0.95, TopK=20, and MinP=0
     try:
         structurer = CyberDataStructurer(
             input_dir=args.input_dir, 
             output_dir=args.output_dir, 
-            llm_model=args.model, 
-            workers=args.workers, 
-            disable_llm=args.disable_llm,
+            llm_model=args.model,
             temperature=args.temperature,
             top_p=args.top_p,
             top_k=args.top_k,
             min_p=args.min_p,
-            repetition_penalty=args.repetition_penalty
+            repetition_penalty=args.repetition_penalty,
+            two_prompts=args.two_prompts
         )
-        structurer.process_directory(sources=args.sources)
+        structurer.process_directory(sources=args.sources, resume=not args.no_resume)
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}", exc_info=True)
         sys.exit(1)
