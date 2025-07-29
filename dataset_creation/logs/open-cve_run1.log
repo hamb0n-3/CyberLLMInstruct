@@ -1,0 +1,116 @@
+2025-07-29 09:01:08,817 - INFO - Loading model: mlx-community/Qwen3-8B-4bit-DWQ-053125...
+2025-07-29 09:01:08,818 - DEBUG - Starting new HTTPS connection (1): huggingface.co:443
+2025-07-29 09:01:09,300 - INFO - Model loaded successfully.
+2025-07-29 09:01:09,300 - INFO - Sampler configured: temp=0.6, top_p=0.95, top_k=20, min_p=0.0, rep_penalty=1.0
+2025-07-29 09:01:09,300 - INFO - Filtered to 1 files matching sources: ['opencve']
+2025-07-29 09:01:09,300 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-29 09:01:09,302 - INFO - 
+============================================================
+2025-07-29 09:01:09,302 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-29 09:01:09,302 - INFO - ============================================================
+2025-07-29 09:01:09,313 - INFO - Rule-based filtering took 0.01s (88.5 entries/sec)
+2025-07-29 09:01:09,313 - INFO - Rule-based pre-filter complete:
+2025-07-29 09:01:09,313 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-29 09:01:09,313 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-29 09:01:09,313 - INFO - Starting LLM enhancement for 1 candidates...
+2025-07-29 09:02:02,229 - INFO - 
+Enhancement Summary:
+2025-07-29 09:02:02,229 - INFO -   - Total time: 52.92s
+2025-07-29 09:02:02,229 - INFO -   - Average time per entry: 52.91s
+2025-07-29 09:02:02,229 - INFO -   - Min/Max times: 52.91s / 52.91s
+2025-07-29 09:02:02,229 - INFO - 
+File processing complete for opencve_data_20250715_183643.json:
+2025-07-29 09:02:02,229 - INFO -   - Total entries: 1
+2025-07-29 09:02:02,229 - INFO -   - Final retained: 1 (100.0%)
+2025-07-29 09:02:02,229 - INFO -   - Processing time: 52.93s
+2025-07-29 09:02:02,229 - INFO -   - Avg time per entry: 52.929s
+2025-07-29 09:02:02,230 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.9 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2
+  - Entries passed filter: 2 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 26.459s
+  - Median time per entry: 26.459s
+  - 90th percentile: 89.935s
+  - 95th percentile: 97.869s
+  - Throughput: 0.04 entries/second
+
+Memory Usage:
+  - Current RSS: 5059.7 MB
+  - Peak RSS: 5059.7 MB
+
+Score Distribution:
+  - Score 0: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 5.4 (median), 5.4 (mean)
+  - 90th percentile: 5.4 tokens/sec
+  - Generation time: 52.87s (median), 52.87s (mean)
+  - Avg tokens: 21190 input, 285 output
+================================================================================
+
+2025-07-29 09:02:02,231 - INFO - Saved 1 entries to filtered_data/opencve_data_20250715_183643_filtered_20250729_090202.json
+2025-07-29 09:02:02,231 - INFO - 
+================================================================================
+2025-07-29 09:02:02,231 - INFO - FINAL PROCESSING STATISTICS
+2025-07-29 09:02:02,231 - INFO - ================================================================================
+2025-07-29 09:02:02,231 - INFO - Total files processed: 1
+2025-07-29 09:02:02,231 - INFO - Total entries processed: 1
+2025-07-29 09:02:02,231 - INFO - 
+Filtering funnel:
+2025-07-29 09:02:02,231 - INFO -   1. Rule-based filter: 1/1 passed (100.0%)
+2025-07-29 09:02:02,231 - INFO -   2. LLM enhancement: 1/1 passed (100.0%)
+2025-07-29 09:02:02,231 - INFO - 
+Final retention rate: 1/1 (100.0%)
+2025-07-29 09:02:02,231 - INFO - 
+Performance metrics:
+2025-07-29 09:02:02,231 - INFO -   Total processing time: 52.93s
+2025-07-29 09:02:02,231 - INFO -   Average time per file: 52.93s
+2025-07-29 09:02:02,231 - INFO -   Average time per entry: 52.929s
+2025-07-29 09:02:02,231 - INFO - ================================================================================
+
+2025-07-29 09:02:02,231 - INFO - 
+FINAL BENCHMARK SUMMARY:
+2025-07-29 09:02:02,232 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 0.9 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 2
+  - Entries passed filter: 2 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Processing Speed:
+  - Mean time per entry: 26.459s
+  - Median time per entry: 26.459s
+  - 90th percentile: 89.935s
+  - 95th percentile: 97.869s
+  - Throughput: 0.04 entries/second
+
+Memory Usage:
+  - Current RSS: 5059.7 MB
+  - Peak RSS: 5059.7 MB
+
+Score Distribution:
+  - Score 0: 1 entries
+  - Score 502: 1 entries
+
+LLM Performance:
+  - Total calls: 1
+  - Tokens per second: 5.4 (median), 5.4 (mean)
+  - 90th percentile: 5.4 tokens/sec
+  - Generation time: 52.87s (median), 52.87s (mean)
+  - Avg tokens: 21190 input, 285 output
+================================================================================
+

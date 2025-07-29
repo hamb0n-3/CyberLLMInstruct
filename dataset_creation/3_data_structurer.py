@@ -91,18 +91,31 @@ class CyberDataStructurer:
             'mitre_attack': self._prepare_mitre_attack_tasks,
         }
 
-    def _call_llm(self, prompt: str) -> Optional[str]:
+    def _call_llm(self, prompt: str, use_chat_template: bool = True) -> Optional[str]:
         """Call the local MLX model with retry logic."""
         if not self.llm_available: 
             return None
             
+        # Apply chat template if supported and requested
+        formatted_prompt = prompt
+        if use_chat_template and hasattr(self.tokenizer, 'apply_chat_template'):
+            # Parse the prompt to extract the instruction part
+            # The prompts are in format: [INST] System message + instruction [/INST]
+            messages = [{"role": "user", "content": prompt}]
+            formatted_prompt = self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                enable_thinking=True  # We want direct responses, not thinking process
+            )
+        
         max_attempts = 3
         token_limits = [512, 1024, 1500]
         
         for attempt in range(max_attempts):
             try:
                 # Count input tokens
-                input_tokens = len(self.tokenizer.encode(prompt)) if self.tokenizer else len(prompt.split())
+                input_tokens = len(self.tokenizer.encode(formatted_prompt)) if self.tokenizer else len(formatted_prompt.split())
                 
                 start_time = time.time()
                 
@@ -118,7 +131,7 @@ class CyberDataStructurer:
                 response = generate(
                     self.model, 
                     self.tokenizer, 
-                    prompt=prompt, 
+                    prompt=formatted_prompt, 
                     verbose=False,
                     max_tokens=token_limits[attempt],
                     sampler=self.sampler,
@@ -179,7 +192,7 @@ class CyberDataStructurer:
             context = f"CTF Title: {title}\nDescription: {entry.get('description', 'N/A')}\nFormat: {entry.get('format', 'N/A')}"
             instructions = [f"Provide a concise summary of the CTF event: '{title}'.", f"What are the prizes for the '{title}' CTF?"]
             for instruction in instructions:
-                prompt = f"[INST] You are an assistant providing clear information about CTF events.\n\nBased on this information:\n{context}\n\nAnswer the following question:\n{instruction} [/INST]"
+                prompt = f"You are an assistant providing clear information about CTF events.\n\nBased on this information:\n{context}\n\nAnswer the following question:\n{instruction}"
                 metadata = {'instruction': instruction, 'type': 'ctf_event', 'source_data': {'id': title, 'type': 'ctf_event'}}
                 tasks.append((prompt, metadata))
         return tasks
@@ -193,7 +206,7 @@ class CyberDataStructurer:
             context = f"Paper Title: {title}\nAuthors: {authors}\nSummary: {summary}"
             instructions = [f"Summarize the key findings of the research paper titled '{title}'.", f"What is the main contribution of the paper '{title}' by {authors}?"]
             for instruction in instructions:
-                prompt = f"[INST] You are a research assistant summarizing academic papers.\n\nBased on the paper details, answer the question.\n\nDetails:\n{context}\n\nQuestion: {instruction} [/INST]"
+                prompt = f"You are a research assistant summarizing academic papers.\n\nBased on the paper details, answer the question.\n\nDetails:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'research_paper', 'source_data': {'id': entry.get('id'), 'type': 'arxiv_paper'}}
                 tasks.append((prompt, metadata))
         return tasks
@@ -218,7 +231,7 @@ class CyberDataStructurer:
             context = f"Update Title: {title}\nRelease Date: {entry.get('CurrentReleaseDate', 'N/A')}"
             instructions = [f"What is the purpose of the Microsoft security update titled '{title}'?", f"Provide a brief overview of the '{title}' security update."]
             for instruction in instructions:
-                prompt = f"[INST] You are an assistant summarizing Microsoft security bulletins.\n\nBased on the metadata, answer the question.\n\nMetadata:\n{context}\n\nQuestion: {instruction} [/INST]"
+                prompt = f"You are an assistant summarizing Microsoft security bulletins.\n\nBased on the metadata, answer the question.\n\nMetadata:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'security_advisory', 'source_data': {'id': entry.get('ID', {}).get('Value'), 'type': 'microsoft_advisory'}}
                 tasks.append((prompt, metadata))
         return tasks
@@ -232,7 +245,7 @@ class CyberDataStructurer:
             context = f"CAPEC ID: {capec_id}\nName: {name}\nDescription: {description}"
             instructions = [f"Describe the Common Attack Pattern (CAPEC) known as '{name}'.", f"What are the typical mitigations for the attack pattern {capec_id}?"]
             for instruction in instructions:
-                prompt = f"[INST] You are a cybersecurity expert explaining attack patterns.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction} [/INST]"
+                prompt = f"You are a cybersecurity expert explaining attack patterns.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'attack_pattern', 'source_data': {'id': capec_id, 'type': 'capec'}}
                 tasks.append((prompt, metadata))
         return tasks
@@ -246,7 +259,7 @@ class CyberDataStructurer:
             context = f"CVE ID: {cve_id}\nSummary: {summary}\nCVSSv3 Score: {cvss_v3}"
             instructions = [f"Summarize the vulnerability {cve_id} and its potential impact.", f"What is the severity of CVE {cve_id} based on its CVSS score?"]
             for instruction in instructions:
-                prompt = f"[INST] You are a cybersecurity analyst summarizing vulnerability reports.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction} [/INST]"
+                prompt = f"You are a cybersecurity analyst summarizing vulnerability reports.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'vulnerability', 'source_data': {'id': cve_id, 'type': 'opencve'}}
                 tasks.append((prompt, metadata))
         return tasks
@@ -261,15 +274,28 @@ class CyberDataStructurer:
             context = f"MITRE ID: {mitre_id}\nName: {name}\nDescription: {description}"
             instructions = [f"Explain the MITRE ATT&CK technique '{name}' ({mitre_id}).", f"What are common detection methods for the attack technique '{name}'?"]
             for instruction in instructions:
-                prompt = f"[INST] You are a cybersecurity expert explaining MITRE ATT&CK techniques.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction} [/INST]"
+                prompt = f"You are a cybersecurity expert explaining MITRE ATT&CK techniques.\n\nBased on the provided information, answer the question.\n\nInformation:\n{context}\n\nQuestion: {instruction}"
                 metadata = {'instruction': instruction, 'type': 'attack_pattern', 'source_data': {'id': mitre_id, 'type': 'mitre_attack'}}
                 tasks.append((prompt, metadata))
         return tasks
 
-    def process_directory(self):
+    def process_directory(self, sources: Optional[List[str]] = None):
         """Process all recognized files in the input directory."""
         all_structured_pairs = []
         input_files = list(self.input_dir.glob('*_filtered_*.json'))
+        
+        # Filter by sources if specified
+        if sources:
+            filtered_files = []
+            for file_path in input_files:
+                file_name_lower = file_path.name.lower()
+                for source in sources:
+                    if source.lower() in file_name_lower:
+                        filtered_files.append(file_path)
+                        break
+            input_files = filtered_files
+            logger.info(f"Filtered to {len(input_files)} files matching sources: {sources}")
+        
         if not input_files:
             logger.warning(f"No '*_filtered_*.json' files found in {self.input_dir}. Nothing to process.")
             return
@@ -348,6 +374,8 @@ def main():
     parser.add_argument("--top-k", type=int, default=0, help="Top-k sampling parameter (default: 0)")
     parser.add_argument("--min-p", type=float, default=0.0, help="Min-p sampling parameter (default: 0.0)")
     parser.add_argument("--repetition-penalty", type=float, default=1.0, help="Repetition penalty (default: 1.0)")
+    # Source filtering
+    parser.add_argument("--sources", nargs='+', help="Filter files by source names (e.g., opencve mitre_attack ubuntu_security)")
     args = parser.parse_args()
 
     try:
@@ -363,7 +391,7 @@ def main():
             min_p=args.min_p,
             repetition_penalty=args.repetition_penalty
         )
-        structurer.process_directory()
+        structurer.process_directory(sources=args.sources)
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}", exc_info=True)
         sys.exit(1)

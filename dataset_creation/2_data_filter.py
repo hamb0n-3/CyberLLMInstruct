@@ -16,7 +16,6 @@ import argparse
 import time
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
-from json import JSONDecoder
 from multiprocessing import Pool, cpu_count
 from functools import partial
 
@@ -26,8 +25,8 @@ from mlx_lm.sample_utils import make_sampler, make_repetition_penalty
 import mlx.core as mx
 mx.set_default_device(mx.gpu)
 
-# Import benchmark module
-from benchmark import BenchmarkTracker
+# Import shared utilities
+from utils import BenchmarkTracker, extract_first_json_object
 
 # Module logger - users can configure this externally
 logger = logging.getLogger(__name__)
@@ -199,52 +198,6 @@ def _is_relevant_rule_based_static(entry: Dict, text: str, filter_params: Dict) 
     return passed, debug_info
 
 
-def extract_first_json_object(text: str) -> Optional[Dict]:
-    """Extract the first valid JSON object from text, ignoring any trailing content."""
-    # First try to find JSON object boundaries
-    start_idx = text.find('{')
-    if start_idx == -1:
-        return None
-    
-    # Use JSONDecoder to handle proper JSON parsing
-    decoder = JSONDecoder()
-    try:
-        # This will parse the first valid JSON object and return its end position
-        obj, end_idx = decoder.raw_decode(text, start_idx)
-        return obj
-    except json.JSONDecodeError:
-        # Fallback: try to extract with balanced braces
-        brace_count = 0
-        in_string = False
-        escape_next = False
-        
-        for i in range(start_idx, len(text)):
-            char = text[i]
-            
-            if escape_next:
-                escape_next = False
-                continue
-                
-            if char == '\\' and in_string:
-                escape_next = True
-                continue
-                
-            if char == '"' and not escape_next:
-                in_string = not in_string
-                continue
-                
-            if not in_string:
-                if char == '{':
-                    brace_count += 1
-                elif char == '}':
-                    brace_count -= 1
-                    if brace_count == 0:
-                        try:
-                            return json.loads(text[start_idx:i+1])
-                        except json.JSONDecodeError:
-                            return None
-        
-        return None
 
 class CyberDataFilter:
     def __init__(self, input_dir: str, output_dir: str, model_path: str = None, 

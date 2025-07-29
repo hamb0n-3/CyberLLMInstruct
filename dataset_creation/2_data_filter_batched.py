@@ -559,7 +559,7 @@ class CyberDataFilter:
             for future in tqdm(as_completed(futures), total=len(futures), desc="Rule filtering"):
                 results = future.result()
                 for entry, passed, debug_info in results:
-                    self.benchmark.record_entry(passed, debug_info, 0)
+                    self.benchmark.record_entry(passed, 0)
                     
                     if passed:
                         text = get_text_from_entry(entry)

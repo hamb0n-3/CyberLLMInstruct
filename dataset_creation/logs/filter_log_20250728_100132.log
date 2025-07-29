@@ -1,0 +1,16 @@
+2025-07-28 10:01:32,135 - INFO - Loading model: mlx-community/Qwen3-8B-4bit-DWQ-053125...
+2025-07-28 10:01:33,244 - INFO - Model loaded successfully.
+2025-07-28 10:01:33,245 - INFO - Sampler configured: temp=0.6, top_p=0.95, top_k=20, min_p=0.0, rep_penalty=1.0
+2025-07-28 10:01:33,245 - INFO - Filtered to 1 files matching sources: ['opencve']
+2025-07-28 10:01:33,245 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-28 10:01:33,246 - INFO - 
+============================================================
+2025-07-28 10:01:33,246 - INFO - Processing 1 entries from opencve_data_20250715_183643.json
+2025-07-28 10:01:33,246 - INFO - ============================================================
+2025-07-28 10:01:33,259 - INFO - Rule-based filtering took 0.01s (77.6 entries/sec)
+2025-07-28 10:01:33,259 - INFO - Rule-based pre-filter complete:
+2025-07-28 10:01:33,259 - INFO -   - Passed: 1/1 (100.0%)
+2025-07-28 10:01:33,259 - INFO -   - Failed: 0/1 (0.0%)
+2025-07-28 10:01:33,259 - INFO - Starting LLM enhancement for 1 candidates...

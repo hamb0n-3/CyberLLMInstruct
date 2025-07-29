@@ -1,0 +1,15 @@
+2025-07-28 09:19:51,098 - INFO - Filtered to 1 files matching sources: ['mitre_attack']
+2025-07-28 09:19:51,098 - INFO - 
+Starting batch processing of 1 files...
+
+2025-07-28 09:19:51,098 - INFO - 
+============================================================
+2025-07-28 09:19:51,098 - INFO - Processing mitre_attack_20250715_183644.json
+2025-07-28 09:19:51,098 - INFO - ============================================================
+2025-07-28 09:19:51,234 - INFO - Loaded 22652 entries
+2025-07-28 09:19:51,236 - INFO - Applying rule-based filtering...
+2025-07-28 09:19:54,874 - INFO - Rule-based filtering took 3.64s (6225.0 entries/sec)
+2025-07-28 09:19:54,875 - INFO - Rule-based pre-filter complete:
+2025-07-28 09:19:54,875 - INFO -   - Passed: 22185/22652 (97.9%)
+2025-07-28 09:19:54,875 - INFO -   - Failed: 467/22652 (2.1%)
+2025-07-28 09:19:54,875 - INFO - Starting LLM enhancement for 22185 candidates...
