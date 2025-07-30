@@ -10,6 +10,7 @@ import re
 import sys
 import time
 import pickle
+import hashlib
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Set
@@ -29,9 +30,55 @@ try:
 except ImportError:
     MLX_AVAILABLE = False
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Initial logging setup (will be reconfigured in setup_logging)
 logger = logging.getLogger(__name__)
+
+
+def setup_logging(log_file_arg: str, model_name: str):
+    """Setup logging configuration with optional file logging."""
+    # Base logging format
+    log_format = '%(asctime)s - %(levelname)s - %(message)s'
+    
+    # Configure root logger
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    
+    # Clear any existing handlers
+    root_logger.handlers = []
+    
+    # Always add console handler
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(logging.Formatter(log_format))
+    root_logger.addHandler(console_handler)
+    
+    # Add file handler if requested
+    if log_file_arg:
+        try:
+            if log_file_arg == 'default':
+                # Extract model name from path
+                model_basename = model_name.split('/')[-1] if '/' in model_name else model_name
+                timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                
+                # Create logs directory relative to script
+                script_dir = Path(__file__).parent
+                logs_dir = script_dir / 'logs'
+                logs_dir.mkdir(exist_ok=True)
+                
+                log_file_path = logs_dir / f"{model_basename}_{timestamp}.log"
+            else:
+                log_file_path = Path(log_file_arg)
+                # Create parent directory if needed
+                log_file_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Add file handler
+            file_handler = logging.FileHandler(log_file_path, encoding='utf-8')
+            file_handler.setFormatter(logging.Formatter(log_format))
+            root_logger.addHandler(file_handler)
+            
+            logger.info(f"Logging to file: {log_file_path}")
+            
+        except Exception as e:
+            logger.warning(f"Could not setup file logging: {e}")
 
 
 class CyberDataStructurer:
@@ -103,8 +150,54 @@ class CyberDataStructurer:
             try:
                 with open(self.state_file, 'rb') as f:
                     state = pickle.load(f)
+                
+                # Rebuild processed_items from partial_results if needed
+                if 'processed_items' not in state or not state['processed_items']:
+                    state['processed_items'] = set()
+                    source_type_counts = {}
+                    for result in state.get('partial_results', []):
+                        source_id = result.get('source_data', {}).get('id', '')
+                        source_type = result.get('source_data', {}).get('type', 'unknown')
+                        instruction = result.get('instruction', '')
+                        if source_id and instruction:
+                            # Use SHA256 for deterministic hashing
+                            instruction_hash = hashlib.sha256(instruction.encode('utf-8')).hexdigest()
+                            key = (source_id, instruction_hash)
+                            state['processed_items'].add(key)
+                            source_type_counts[source_type] = source_type_counts.get(source_type, 0) + 1
+                    logger.info(f"Rebuilt processed_items set with {len(state['processed_items'])} entries from partial results")
+                    logger.info(f"Source types in partial results: {source_type_counts}")
+                
+                # Ensure completed_files exists in state
+                if 'completed_files' not in state:
+                    state['completed_files'] = set()
+                
                 logger.info(f"Loaded state with {len(state.get('processed_items', set()))} processed items, "
-                           f"{len(state.get('partial_results', []))} partial results")
+                           f"{len(state.get('partial_results', []))} partial results, "
+                           f"{len(state.get('completed_files', set()))} completed files")
+                
+                # Check if we need to migrate from old hash format
+                if state.get('processed_items') and isinstance(next(iter(state['processed_items']), None), tuple):
+                    sample_item = next(iter(state['processed_items']))
+                    if len(sample_item) == 2 and isinstance(sample_item[1], int):
+                        logger.warning("Detected old hash format in state file. State will be rebuilt with new SHA256 hashes.")
+                        # Clear processed_items to force rebuild from partial_results
+                        state['processed_items'] = set()
+                        # Rebuild with new hash format
+                        source_type_counts = {}
+                        for result in state.get('partial_results', []):
+                            source_id = result.get('source_data', {}).get('id', '')
+                            source_type = result.get('source_data', {}).get('type', 'unknown')
+                            instruction = result.get('instruction', '')
+                            if source_id and instruction:
+                                # Use SHA256 for deterministic hashing
+                                instruction_hash = hashlib.sha256(instruction.encode('utf-8')).hexdigest()
+                                key = (source_id, instruction_hash)
+                                state['processed_items'].add(key)
+                                source_type_counts[source_type] = source_type_counts.get(source_type, 0) + 1
+                        logger.info(f"Migrated {len(state['processed_items'])} entries to new SHA256 hash format")
+                        logger.info(f"Source types migrated: {source_type_counts}")
+                
                 return state
             except Exception as e:
                 logger.warning(f"Could not load state file: {e}")
@@ -112,9 +205,79 @@ class CyberDataStructurer:
         return {
             'processed_items': set(),  # Set of (source_id, instruction_hash) tuples
             'partial_results': [],     # Results processed but not yet saved
-            'last_file': None,        # Last file being processed
+            'last_file': None,        # Last file being processed (deprecated, kept for compatibility)
+            'completed_files': set(),  # Set of fully processed file names
             'start_time': time.time()
         }
+    
+    def _load_consolidated_dataset(self, dataset_path: str):
+        """Load an existing consolidated dataset and populate state from it."""
+        try:
+            logger.info(f"Loading consolidated dataset from {dataset_path}")
+            with open(dataset_path, 'r', encoding='utf-8') as f:
+                dataset = json.load(f)
+            
+            if 'data' not in dataset:
+                logger.error("Invalid dataset format: missing 'data' field")
+                return
+            
+            # Extract entries and rebuild state
+            entries = dataset['data']
+            source_type_counts = {}
+            file_source_counts = {}
+            
+            for entry in entries:
+                # Add to partial results
+                self.state['partial_results'].append(entry)
+                
+                # Extract metadata
+                source_id = entry.get('source_data', {}).get('id', '')
+                source_type = entry.get('source_data', {}).get('type', 'unknown')
+                instruction = entry.get('instruction', '')
+                
+                # Track source types
+                source_type_counts[source_type] = source_type_counts.get(source_type, 0) + 1
+                
+                # Map source types to file patterns
+                source_to_file_map = {
+                    'capec': 'capec_data',
+                    'arxiv_paper': 'arxiv_papers',
+                    'ubuntu_advisory': 'ubuntu_security',
+                    'microsoft_advisory': 'microsoft_security',
+                    'opencve': 'opencve_data',
+                    'mitre_attack': 'mitre_attack',
+                    'ctf_event': 'ctf_data'
+                }
+                
+                file_pattern = source_to_file_map.get(source_type, source_type)
+                file_source_counts[file_pattern] = file_source_counts.get(file_pattern, 0) + 1
+                
+                # Add to processed items
+                if source_id and instruction:
+                    instruction_hash = hashlib.sha256(instruction.encode('utf-8')).hexdigest()
+                    key = (source_id, instruction_hash)
+                    self.state['processed_items'].add(key)
+            
+            logger.info(f"Loaded {len(entries)} entries from consolidated dataset")
+            logger.info(f"Source type distribution: {source_type_counts}")
+            logger.info(f"Estimated file distribution: {file_source_counts}")
+            
+            # Try to determine which files might be fully completed
+            # This is an approximation since we don't have exact file completion info
+            for file_pattern, count in file_source_counts.items():
+                # Check if this looks like a complete file based on typical counts
+                # This is a heuristic and may need adjustment
+                if file_pattern == 'capec' and count >= 500:
+                    self.state['completed_files'].add('capec_data')
+                elif file_pattern == 'mitre_attack' and count >= 500:
+                    self.state['completed_files'].add('mitre_attack')
+                # Add other heuristics as needed
+            
+            logger.info(f"Marked as potentially completed: {self.state['completed_files']}")
+            
+        except Exception as e:
+            logger.error(f"Failed to load consolidated dataset: {e}")
+            raise
     
     def _save_state(self):
         """Save current processing state to disk."""
@@ -131,12 +294,16 @@ class CyberDataStructurer:
     
     def _mark_processed(self, source_id: str, instruction: str):
         """Mark an item as processed."""
-        key = (source_id, hash(instruction))
+        # Use SHA256 for deterministic hashing across Python sessions
+        instruction_hash = hashlib.sha256(instruction.encode('utf-8')).hexdigest()
+        key = (source_id, instruction_hash)
         self.state['processed_items'].add(key)
     
     def _is_processed(self, source_id: str, instruction: str) -> bool:
         """Check if an item has been processed."""
-        key = (source_id, hash(instruction))
+        # Use SHA256 for deterministic hashing across Python sessions
+        instruction_hash = hashlib.sha256(instruction.encode('utf-8')).hexdigest()
+        key = (source_id, instruction_hash)
         return key in self.state['processed_items']
 
     def _call_llm(self, prompt: str, use_chat_template: bool = True) -> Optional[str]:
@@ -476,7 +643,17 @@ class CyberDataStructurer:
         # Load partial results if resuming
         if resume and self.state.get('partial_results'):
             all_structured_pairs.extend(self.state['partial_results'])
-            logger.info(f"Resuming with {len(all_structured_pairs)} partial results")
+            # Count source types in partial results
+            source_type_counts = {}
+            for result in self.state['partial_results']:
+                source_type = result.get('source_data', {}).get('type', 'unknown')
+                source_type_counts[source_type] = source_type_counts.get(source_type, 0) + 1
+            logger.info(f"Resuming with {len(all_structured_pairs)} existing entries")
+            logger.info(f"Existing entries by type: {source_type_counts}")
+            if self.state.get('completed_files'):
+                logger.info(f"Files marked as completed: {self.state['completed_files']}")
+            if self.state.get('last_file'):
+                logger.info(f"Last processed file: {self.state['last_file']}")
         
         input_files = list(self.input_dir.glob('*_filtered_*.json'))
         
@@ -498,14 +675,13 @@ class CyberDataStructurer:
 
         try:
             for file_path in input_files:
-                # Skip to last file if resuming
-                if resume and self.state.get('last_file'):
-                    if file_path.name < self.state['last_file']:
-                        logger.info(f"Skipping already processed file: {file_path.name}")
-                        continue
+                # Skip files that have been fully completed
+                if resume and file_path.name in self.state.get('completed_files', set()):
+                    logger.info(f"Skipping already completed file: {file_path.name}")
+                    continue
                 
                 logger.info(f"Processing file: {file_path.name}")
-                self.state['last_file'] = file_path.name
+                self.state['last_file'] = file_path.name  # Keep for backward compatibility
                 # Reset file timing for benchmark tracking
                 self.benchmark.reset_file_timing()
                 
@@ -541,13 +717,21 @@ class CyberDataStructurer:
                 # Filter out already processed tasks
                 new_tasks = []
                 skipped_count = 0
-                for prompt, metadata in tasks:
+                # Log first few IDs for debugging
+                first_few_ids = []
+                for i, (prompt, metadata) in enumerate(tasks):
                     source_id = metadata.get('source_data', {}).get('id', '')
+                    source_type = metadata.get('source_data', {}).get('type', '')
                     instruction = metadata.get('instruction', '')
+                    if i < 3:  # Log first 3 for debugging
+                        first_few_ids.append(f"{source_type}:{source_id}")
                     if not self._is_processed(source_id, instruction):
                         new_tasks.append((prompt, metadata))
                     else:
                         skipped_count += 1
+                
+                if first_few_ids:
+                    logger.info(f"Sample IDs being checked from {file_path.name}: {first_few_ids}")
                 
                 if not new_tasks:
                     logger.info(f"All {len(tasks)} tasks from {file_path.name} already processed")
@@ -579,10 +763,16 @@ class CyberDataStructurer:
                         self._save_state()
                         logger.debug(f"Saved state after {i + 1} items")
                     
-                    # Log benchmark stats periodically
-                    self.benchmark.log_benchmark_stats()
+                    # Log benchmark stats periodically (every 100 items instead of every item)
+                    if (i + 1) % 100 == 0:
+                        self.benchmark.log_benchmark_stats()
                 # Increment files completed
                 self.benchmark.metrics['files_completed'] += 1
+                # Mark this file as completed
+                if 'completed_files' not in self.state:
+                    self.state['completed_files'] = set()
+                self.state['completed_files'].add(file_path.name)
+                logger.info(f"Completed processing {file_path.name}")
                 
         except KeyboardInterrupt:
             logger.info("\nProcessing interrupted! Saving state...")
@@ -629,7 +819,14 @@ def main():
     parser.add_argument("--two-prompts", action="store_true", help="Generate two prompts per entry instead of one comprehensive prompt (default: False)")
     # Resume control
     parser.add_argument("--no-resume", action="store_true", help="Start fresh, ignoring any saved state (default: resume if state exists)")
+    parser.add_argument("--resume-from", type=str, help="Resume from an existing consolidated dataset JSON file")
+    # Logging
+    parser.add_argument("-L", "--log-file", type=str, nargs='?', const='default', help="Log to file. If no path provided, uses logs/[model_name]_[datetime].log")
     args = parser.parse_args()
+    
+    # Setup logging configuration
+    setup_logging(args.log_file, args.model)
+    
     #Temperature=0.6, TopP=0.95, TopK=20, and MinP=0
     try:
         structurer = CyberDataStructurer(
@@ -643,7 +840,16 @@ def main():
             repetition_penalty=args.repetition_penalty,
             two_prompts=args.two_prompts
         )
-        structurer.process_directory(sources=args.sources, resume=not args.no_resume)
+        
+        # Handle resume-from consolidated dataset
+        if args.resume_from:
+            structurer._load_consolidated_dataset(args.resume_from)
+            # Force resume mode when loading from consolidated dataset
+            resume = True
+        else:
+            resume = not args.no_resume
+        
+        structurer.process_directory(sources=args.sources, resume=resume)
     except Exception as e:
         logger.error(f"An unexpected error occurred: {e}", exc_info=True)
         sys.exit(1)

@@ -1,0 +1,88 @@
+2025-07-30 11:51:11,866 - INFO - Logging to file: /Users/tristan/AI/AI-Training/CyberLLMInstruct/dataset_creation/logs/Qwen3-8B-4bit-DWQ-053125_20250730_115111.log
+2025-07-30 11:51:11,866 - INFO - Loading MLX model 'mlx-community/Qwen3-8B-4bit-DWQ-053125'...
+2025-07-30 11:51:12,567 - INFO - MLX model loaded successfully.
+2025-07-30 11:51:12,568 - INFO - Sampler configured: temp=0.6, top_p=0.95, top_k=20, min_p=0.0, rep_penalty=1.0
+2025-07-30 11:51:12,568 - INFO - Loading consolidated dataset from structured_data/consolidated_cybersecurity_dataset_20250730_000146.json
+2025-07-30 11:51:12,583 - INFO - Loaded 1184 entries from consolidated dataset
+2025-07-30 11:51:12,583 - INFO - Source type distribution: {'capec': 511, 'mitre_attack': 563, 'opencve': 100, 'ubuntu_advisory': 10}
+2025-07-30 11:51:12,583 - INFO - Estimated file distribution: {'capec_data': 511, 'mitre_attack': 563, 'opencve_data': 100, 'ubuntu_security': 10}
+2025-07-30 11:51:12,583 - INFO - Marked as potentially completed: {'mitre_attack'}
+2025-07-30 11:51:12,583 - INFO - Resuming with 1184 existing entries
+2025-07-30 11:51:12,583 - INFO - Existing entries by type: {'capec': 511, 'mitre_attack': 563, 'opencve': 100, 'ubuntu_advisory': 10}
+2025-07-30 11:51:12,583 - INFO - Files marked as completed: {'mitre_attack'}
+2025-07-30 11:51:12,583 - INFO - Processing file: capec_data_20250716_121342_filtered_20250721_161049.json
+2025-07-30 11:51:12,587 - INFO - Sample IDs being checked from capec_data_20250716_121342_filtered_20250721_161049.json: ['capec:CAPEC-1', 'capec:CAPEC-10', 'capec:CAPEC-100']
+2025-07-30 11:51:12,587 - INFO - All 511 tasks from capec_data_20250716_121342_filtered_20250721_161049.json already processed
+2025-07-30 11:51:12,587 - INFO - Processing file: arxiv_papers_20250715_183646_filtered_20250721_113004.json
+2025-07-30 11:51:12,588 - INFO - Sample IDs being checked from arxiv_papers_20250715_183646_filtered_20250721_113004.json: ['arxiv_paper:http://arxiv.org/abs/cs/9809031v1', 'arxiv_paper:http://arxiv.org/abs/cs/9809124v1', 'arxiv_paper:http://arxiv.org/abs/cs/9902010v1']
+2025-07-30 11:51:12,588 - INFO - Processing 91 new tasks from arxiv_papers_20250715_183646_filtered_20250721_113004.json (skipped 0 already processed)
+2025-07-30 12:03:30,926 - INFO - Completed processing arxiv_papers_20250715_183646_filtered_20250721_113004.json
+2025-07-30 12:03:30,926 - INFO - Processing file: mitre_attack_20250715_183644_filtered_20250729_074130.json
+2025-07-30 12:03:31,194 - INFO - Sample IDs being checked from mitre_attack_20250715_183644_filtered_20250729_074130.json: ['mitre_attack:T1055.011', 'mitre_attack:T1053.005', 'mitre_attack:T1205.002']
+2025-07-30 12:03:31,195 - INFO - All 563 tasks from mitre_attack_20250715_183644_filtered_20250729_074130.json already processed
+2025-07-30 12:03:31,195 - INFO - Processing file: opencve_data_20250715_183643_filtered_20250729_090202.json
+2025-07-30 12:03:31,206 - INFO - Sample IDs being checked from opencve_data_20250715_183643_filtered_20250729_090202.json: ['opencve:CVE-2025-7370', 'opencve:CVE-2025-6981', 'opencve:CVE-2025-53906']
+2025-07-30 12:03:31,206 - INFO - All 100 tasks from opencve_data_20250715_183643_filtered_20250729_090202.json already processed
+2025-07-30 12:03:31,206 - INFO - Processing file: microsoft_security_20250715_183647_filtered_20250721_114311.json
+2025-07-30 12:03:31,208 - INFO - Sample IDs being checked from microsoft_security_20250715_183647_filtered_20250721_114311.json: ['microsoft_advisory:2016-Apr', 'microsoft_advisory:2016-Aug', 'microsoft_advisory:2016-Dec']
+2025-07-30 12:03:31,208 - INFO - Processing 113 new tasks from microsoft_security_20250715_183647_filtered_20250721_114311.json (skipped 0 already processed)
+2025-07-30 12:26:10,191 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 35.0 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 0
+  - Entries passed filter: 0 (0.0%)
+  - Entries failed filter: 0
+  - Files completed: 1
+
+Memory Usage:
+  - Current RSS: 5310.1 MB
+  - Peak RSS: 5310.1 MB
+
+LLM Performance:
+  - Total calls: 191
+  - Tokens per second: 60.1 (median), 60.9 (mean)
+  - 90th percentile: 69.6 tokens/sec
+  - Generation time: 11.03s (median), 10.98s (mean)
+  - Avg tokens: 245 input, 664 output
+================================================================================
+
+2025-07-30 12:28:57,811 - INFO - Completed processing microsoft_security_20250715_183647_filtered_20250721_114311.json
+2025-07-30 12:28:57,811 - INFO - Processing file: ubuntu_security_20250715_183646_filtered_20250721_132346.json
+2025-07-30 12:28:57,812 - INFO - All entries from ubuntu_security_20250715_183646_filtered_20250721_132346.json already processed
+2025-07-30 12:28:57,812 - INFO - Processing file: ctf_data_20250715_183648_filtered_20250721_133611.json
+2025-07-30 12:28:57,813 - INFO - Sample IDs being checked from ctf_data_20250715_183648_filtered_20250721_133611.json: ['ctf_event:DownUnderCTF 2025', 'ctf_event:ENOWARS 9', 'ctf_event:ToH CTF 2025']
+2025-07-30 12:28:57,813 - INFO - Processing 28 new tasks from ctf_data_20250715_183648_filtered_20250721_133611.json (skipped 0 already processed)
+2025-07-30 12:32:01,187 - INFO - Completed processing ctf_data_20250715_183648_filtered_20250721_133611.json
+2025-07-30 12:32:01,188 - INFO - 
+================================================================================
+BENCHMARK STATISTICS - Elapsed: 40.8 minutes
+================================================================================
+Progress Summary:
+  - Total entries processed: 10
+  - Entries passed filter: 10 (100.0%)
+  - Entries failed filter: 0
+  - Files completed: 3
+
+Processing Speed:
+  - Mean time per entry: 0.000s
+  - Median time per entry: 0.000s
+  - 90th percentile: 0.000s
+  - 95th percentile: 0.000s
+  - Throughput: 75437.12 entries/second
+
+Memory Usage:
+  - Current RSS: 5311.0 MB
+  - Peak RSS: 5311.0 MB
+
+LLM Performance:
+  - Total calls: 232
+  - Tokens per second: 59.7 (median), 60.5 (mean)
+  - 90th percentile: 67.4 tokens/sec
+  - Generation time: 10.59s (median), 10.55s (mean)
+  - Avg tokens: 240 input, 635 output
+================================================================================
+
+2025-07-30 12:32:01,221 - INFO - Successfully saved 1416 structured pairs to structured_data/consolidated_cybersecurity_dataset_20250730_123201.json
+2025-07-30 12:32:01,222 - INFO - Processing completed successfully, removed state file
