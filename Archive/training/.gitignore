@@ -1,0 +1,42 @@
+# Training outputs
+outputs/
+*.log
+*.pt
+*.safetensors
+checkpoint-*/
+
+# Temporary files
+*.tmp
+*.cache
+__pycache__/
+*.pyc
+.DS_Store
+
+# Monitoring and logs
+logs/
+tensorboard/
+wandb/
+.tensorboard/
+
+# Model downloads
+models/
+*.bin
+*.gguf
+
+# Development
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Memory dumps
+*.pkl
+!training_state.pkl  # Exception for checkpoint state
+
+# Archive (can be uncommitted)
+archive/

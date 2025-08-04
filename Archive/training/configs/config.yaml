@@ -1,0 +1,126 @@
+# Unified configuration for cybersecurity model training
+# Optimized for Qwen3-30B-A3B-Thinking with memory safety measures
+#
+# ⚠️ WARNING: This model has vocabulary size of ~152k tokens
+# Estimated memory usage with these settings: 40-50GB minimum
+# Previously caused system crash with 430GB usage!
+#
+# NOTE: This is a Mixture-of-Experts (MoE) model with special architecture
+# - Uses QuantizedLinear layers (may have limited LoRA support)
+# - Has switch_mlp modules for expert routing
+# - Requires specific target module paths (e.g., "self_attn.q_proj")
+#
+# RECOMMENDATIONS:
+# 1. Close all other applications before training
+# 2. Monitor memory usage with Activity Monitor
+# 3. Run preview mode first: python train_cybersecurity_model.py --preview
+# 4. Consider using Qwen2.5-3B instead for safer training
+
+# Model configuration
+model_name: "lmstudio-community/Qwen3-30B-A3B-Thinking-2507-MLX-8bit"
+tokenizer_name: null  # Use model tokenizer
+trust_remote_code: true
+
+# LoRA configuration - Low rank to minimize memory usage
+use_lora: true
+lora_config:
+  rank: 16  # Very low rank for memory safety with large model
+  alpha: 16.0  # 2x rank for stability
+  dropout: 0.05
+  target_modules:
+    - "self_attn.q_proj"
+    - "self_attn.k_proj"
+    - "self_attn.v_proj"
+    - "self_attn.o_proj"
+  bias: "none"
+  modules_to_save: []
+
+# Training hyperparameters - Ultra-conservative for 152k vocab model
+learning_rate: 0.0002  # 2e-4 in decimal format
+num_epochs: 3  # Reduced epochs
+batch_size: 1  # Critical: reduced to 1 for 152k vocab model
+gradient_accumulation_steps: 4  # Increased to maintain effective batch size
+warmup_steps: 50
+weight_decay: 0.01
+max_grad_norm: 1.0
+
+# Learning rate schedule
+lr_scheduler: "cosine"
+min_learning_rate: 0.00001  # 1e-5 in decimal format
+
+# Dataset configuration
+dataset_config:
+  paths:
+    - "../dataset_creation/structured_data"
+  format: "cybersec"
+  split_ratio: 0.95
+  max_length: 256  # Critical: reduced to 256 for 152k vocab model
+  min_length: 10
+  shuffle: true
+  seed: 42
+  system_prompt: "You are a helpful cybersecurity expert assistant."
+  add_eos_token: true
+  padding_side: "left"
+  truncation_side: "right"
+  ignore_index: -100
+  min_response_length: 50
+
+# Data configuration (max_length at top level for CLI override)
+max_length: 256  # Critical: must match dataset_config for 152k vocab model
+
+# Optimization
+optimizer: "adamw"
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_epsilon: 0.00000001  # 1e-8 in decimal format
+
+# Evaluation - Less frequent to save memory
+eval_steps: 200
+eval_strategy: "steps"
+save_steps: 1000
+logging_steps: 10  # Reduced to catch memory issues earlier
+
+# Checkpointing
+output_dir: "./outputs/qwen3_30b_cybersec"
+save_total_limit: 2  # Keep only 2 checkpoints to save disk space
+resume_from_checkpoint: null
+
+# Hardware
+use_mps: true
+gradient_checkpointing: true  # IMPORTANT: Enable to trade compute for memory
+mixed_precision: "no"  # MLX doesn't support mixed precision yet
+
+# Monitoring - Disabled to save memory
+use_wandb: false
+wandb_project: "cybersec-llm"
+use_tensorboard: false
+
+# Generation during training
+generation_max_length: 1500  # Match max_length for consistency
+generation_temperature: 0.7
+generation_top_p: 0.9
+
+# Early stopping
+early_stopping_patience: 3
+early_stopping_threshold: 0.0001
+
+# Other
+seed: 42
+save_merged_model: false  # Don't merge to save memory
+push_to_hub: false
+hub_model_id: null
+
+# MEMORY USAGE ESTIMATES (with updated settings):
+# - Base model: ~30GB (8-bit quantized)
+# - Logits (chunked): ~0.16GB per chunk (batch=1, seq=256, vocab=152k)
+# - LoRA params: ~0.3GB (rank 16, 5 modules including mlp.gate)
+# - Optimizer: ~0.6GB (AdamW states for LoRA params)
+# - Activations: ~0.13GB (batch=1, seq=256)
+# - Total: ~32-35GB (within 48GB GPU memory limit)
+#
+# CRITICAL: These settings are optimized for the 152k vocabulary model.
+# Do NOT increase batch_size or max_length without recalculating memory!
+#
+# SAFER ALTERNATIVE - Replace model_name with:
+# model_name: "mlx-community/Qwen2.5-3B-Instruct-MLX-4bit"
+# This uses only ~15GB memory and has better LoRA support

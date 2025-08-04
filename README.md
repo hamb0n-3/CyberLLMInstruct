@@ -11,31 +11,31 @@ The entire process transforms raw, unstructured data from various sources into a
 ```mermaid
 graph TD
     subgraph "Stage 1: Collection"
-        A[1_data_collector.py] -->|API Calls, RSS, Scrapers| B[(raw_data)]
+        A[dataset_creation/1_data_collector.py] -->|API Calls, RSS, Scrapers| B[(dataset_creation/raw_data)]
     end
     subgraph "Stage 2: Filtering"
-        B --> C[2_data_filter.py]
-        C -->|LLM Relevance Check| D[(filtered_data)]
+        B --> C[dataset_creation/2_data_filter.py]
+        C -->|LLM Relevance Check| D[(dataset_creation/filtered_data)]
     end
     subgraph "Stage 3: Structuring"
-        D --> E[3_data_structurer.py]
-        E -->|LLM Instruction Generation| F[(structured_data)]
+        D --> E[dataset_creation/3_data_structurer.py]
+        E -->|LLM Instruction Generation| F[(dataset_creation/structured_data)]
     end
     subgraph "Stage 4: Classification"
-        F --> G[4_domain_classifier.py]
-        G -->|LLM Domain Tagging| H[(domain_classified)]
+        F --> G[dataset_creation/4_domain_classifier.py]
+        G -->|LLM Domain Tagging| H[(dataset_creation/domain_classified)]
     end
     subgraph "Stage 5: Human Review"
-        H --> I[5_manual_reviewer.py]
-        I -->|CLI-based Review| J[(reviewed_data)]
+        H --> I[dataset_creation/5_manual_reviewer.py]
+        I -->|CLI-based Review| J[(dataset_creation/reviewed_data)]
     end
     subgraph "Stage 6: Security Alignment"
-        J --> K[6_security_aligner.py]
-        K -->|Injects Security Examples| L[(security_aligned)]
+        J --> K[dataset_creation/6_security_aligner.py]
+        K -->|Injects Security Examples| L[(dataset_creation/security_aligned)]
     end
     subgraph "Stage 7: Final Assembly"
-        L --> M[8_final_assembler.py]
-        M -->|Deduplication & Validation| N[[🏆 final_dataset]]
+        L --> M[dataset_creation/8_final_assembler.py]
+        M -->|Deduplication & Validation| N[[🏆 dataset_creation/final_dataset]]
     end
 ```
 
@@ -112,69 +112,70 @@ Run the scripts sequentially from your terminal. It's recommended to run them in
 
 Fetch raw data from all configured sources.
 ```sh
-python3 1_data_collector.py --sources all
+python3 dataset_creation/1_data_collector.py --sources all
 ```
 - **Input**: None (fetches from web sources/APIs).
-- **Output**: Raw JSON files in the `./raw_data/` directory.
+- **Output**: Raw JSON files in the `./dataset_creation/raw_data/` directory.
 
 ### 2. Stage 2: Filter Data
 
 Filter the raw data for cybersecurity relevance and enhance it using a local LLM.
 ```sh
-python3 2_data_filter.py
+python3 dataset_creation/2_data_filter.py
 ```
-- **Input**: Files from `./raw_data/`.
-- **Output**: Filtered and enhanced data in the `./filtered_data/` directory.
+- **Input**: Files from `./dataset_creation/raw_data/`.
+- **Output**: Filtered and enhanced data in the `./dataset_creation/filtered_data/` directory.
 
 ### 3. Stage 3: Structure Data
 
 Convert the filtered data into a consistent instruction-response format.
 ```sh
-python3 3_data_structurer.py
+python3 dataset_creation/3_data_structurer.py
 ```
-- **Input**: Files from `./filtered_data/`.
-- **Output**: A consolidated JSON file in the `./structured_data/` directory.
+- **Input**: Files from `./dataset_creation/filtered_data/`.
+- **Output**: A consolidated JSON file in the `./dataset_creation/structured_data/` directory.
 
 ### 4. Stage 4: Classify Data
 
 Classify each instruction-response pair into a predefined cybersecurity domain.
 ```sh
-python3 4_domain_classifier.py
+python3 dataset_creation/4_domain_classifier.py
 ```
-- **Input**: The consolidated file from `./structured_data/`.
-- **Output**: A classified JSON file in the `./domain_classified/` directory.
+- **Input**: The consolidated file from `./dataset_creation/structured_data/`.
+- **Output**: A classified JSON file in the `./dataset_creation/domain_classified/` directory.
 
 ### 5. Stage 5: Manual Review
 
 Launch the interactive CLI to manually review, edit, and approve the classified data.
 ```sh
-python3 5_manual_reviewer.py```
-- **Input**: The classified file from `./domain_classified/`.
-- **Output**: A reviewed JSON file in the `./reviewed_data/` directory, along with session statistics.
+python3 dataset_creation/5_manual_reviewer.py
+```
+- **Input**: The classified file from `./dataset_creation/domain_classified/`.
+- **Output**: A reviewed JSON file in the `./dataset_creation/reviewed_data/` directory, along with session statistics.
 
 ### 6. Stage 6: Align for Security
 
 Enhance the dataset and inject synthetic security-focused examples to improve safety.
 ```sh
-python3 6_security_aligner.py --ratio 0.2
+python3 dataset_creation/6_security_aligner.py --ratio 0.2
 ```
-- **Input**: The reviewed file from `./reviewed_data/`.
-- **Output**: An aligned and enhanced JSON file in the `./security_aligned/` directory.
+- **Input**: The reviewed file from `./dataset_creation/reviewed_data/`.
+- **Output**: An aligned and enhanced JSON file in the `./dataset_creation/security_aligned/` directory.
 
 ### 7. Stage 7: Assemble Final Dataset
 
 Combine all processed data, remove duplicates, validate against a schema, and produce the final clean dataset.
 ```sh
-python3 8_final_assembler.py
+python3 dataset_creation/8_final_assembler.py
 ```
-- **Input**: The aligned file from `./security_aligned/`.
-- **Output**: The final `final_cybersecurity_dataset_{timestamp}.json` in the `./final_dataset/` directory.
+- **Input**: The aligned file from `./dataset_creation/security_aligned/`.
+- **Output**: The final `final_cybersecurity_dataset_{timestamp}.json` in the `./dataset_creation/final_dataset/` directory.
 
 ## 🔧 Configuration & Customization
 
-- **Command-Line Arguments**: Most scripts accept command-line arguments. Use the `--help` flag to see available options (e.g., `python3 2_data_filter.py --help`).
+- **Command-Line Arguments**: Most scripts accept command-line arguments. Use the `--help` flag to see available options (e.g., `python3 dataset_creation/2_data_filter.py --help`).
 - **LLM Models**: You can change the local MLX model used in the scripts (`2_data_filter.py`, `3_data_structurer.py`, etc.) via the `--model` argument. The default models are chosen for a balance of performance and capability (e.g., `mlx-community/Phi-3-mini-4k-instruct-4bit`).
-- **Data Sources**: To add a new data source, add a new `fetch_*` method in `1_data_collector.py` and register it in the `all_sources` dictionary in `main()`. You will also need a corresponding handler in `3_data_structurer.py` to convert its output to the instruction-response format.
+- **Data Sources**: To add a new data source, add a new `fetch_*` method in `dataset_creation/1_data_collector.py` and register it in the `all_sources` dictionary in `main()`. You will also need a corresponding handler in `dataset_creation/3_data_structurer.py` to convert its output to the instruction-response format.
 
 ## 📜 License
 
