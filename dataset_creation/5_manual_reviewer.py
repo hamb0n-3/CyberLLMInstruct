@@ -17,6 +17,7 @@ import threading
 import queue
 import signal
 import sys
+import traceback
 
 # Configure logging
 logging.basicConfig(
@@ -182,11 +183,11 @@ class CyberDataReviewer:
             if questionary.confirm("Modify domains?").ask():
                 domains_input = questionary.text(
                     "Enter domains (comma-separated):",
-                    default=','.join(d['name'] for d in entry.get('domains', []))
+                    default=','.join(d.get('domain', d.get('name', '')) for d in entry.get('domains', []))
                 ).ask()
                 
                 domains = [
-                    {'name': d.strip(), 'confidence': 1.0}
+                    {'domain': d.strip(), 'confidence': 1.0}
                     for d in domains_input.split(',')
                     if d.strip()
                 ]
@@ -237,7 +238,7 @@ class CyberDataReviewer:
             # Track domain modifications
             if 'domains' in entry:
                 for domain in entry['domains']:
-                    domain_name = domain['name']
+                    domain_name = domain.get('domain', domain.get('name', 'unknown'))
                     if domain_name not in self.stats['domains_modified']:
                         self.stats['domains_modified'][domain_name] = 0
                     self.stats['domains_modified'][domain_name] += 1
@@ -287,12 +288,37 @@ class CyberDataReviewer:
         
         # Save as JSON
         json_path = self.output_dir / f"{base_name}.json"
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2)
+        try:
+            with open(json_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2)
+        except Exception as e:
+            logger.error(f"Failed to save JSON: {e}")
+            return
         
-        # Save as CSV
+        # Save as CSV - flatten the data structure
         csv_path = self.output_dir / f"{base_name}.csv"
-        pd.DataFrame(data).to_csv(csv_path, index=False)
+        try:
+            # Extract only essential fields for CSV
+            csv_data = []
+            for entry in data:
+                csv_row = {
+                    'instruction': entry.get('instruction', ''),
+                    'response': entry.get('response', ''),
+                    'type': entry.get('type', ''),
+                    'primary_domain': entry.get('primary_domain', ''),
+                    'source_id': entry.get('source_data', {}).get('id', '') if isinstance(entry.get('source_data'), dict) else ''
+                }
+                # Add review info if present
+                if 'review_info' in entry:
+                    csv_row['quality_relevance'] = entry['review_info'].get('quality_assessment', {}).get('relevance', '')
+                    csv_row['quality_accuracy'] = entry['review_info'].get('quality_assessment', {}).get('accuracy', '')
+                    csv_row['quality_completeness'] = entry['review_info'].get('quality_assessment', {}).get('completeness', '')
+                csv_data.append(csv_row)
+            
+            pd.DataFrame(csv_data).to_csv(csv_path, index=False)
+        except Exception as e:
+            logger.error(f"Failed to save CSV: {e}")
+            logger.error(traceback.format_exc())
         
         logger.info(f"Saved reviewed data to {self.output_dir}")
 
@@ -327,7 +353,7 @@ class CyberDataReviewer:
                     self.update_statistics(feedback, modified_entry)
                     
                     # Save progress periodically
-                    if i % 10 == 0:
+                    if i % 50 == 0:
                         self.save_progress()
                     
                     # Check if user wants to continue
@@ -392,6 +418,7 @@ def main():
         sys.exit(0)
     
     signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
     
     reviewer.process_directory()
 

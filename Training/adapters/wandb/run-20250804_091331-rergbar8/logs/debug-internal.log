@@ -1,0 +1,12 @@
+{"time":"2025-08-04T09:13:32.274754-07:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-04T09:13:32.675203-07:00","level":"INFO","msg":"stream: created new stream","id":"rergbar8"}
+{"time":"2025-08-04T09:13:32.675238-07:00","level":"INFO","msg":"stream: started","id":"rergbar8"}
+{"time":"2025-08-04T09:13:32.675272-07:00","level":"INFO","msg":"handler: started","stream_id":"rergbar8"}
+{"time":"2025-08-04T09:13:32.675296-07:00","level":"INFO","msg":"writer: Do: started","stream_id":"rergbar8"}
+{"time":"2025-08-04T09:13:32.67531-07:00","level":"INFO","msg":"sender: started","stream_id":"rergbar8"}
+{"time":"2025-08-04T09:13:35.060023-07:00","level":"INFO","msg":"stream: closing","id":"rergbar8"}
+{"time":"2025-08-04T09:13:35.686688-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-04T09:13:35.845776-07:00","level":"INFO","msg":"handler: closed","stream_id":"rergbar8"}
+{"time":"2025-08-04T09:13:35.845915-07:00","level":"INFO","msg":"sender: closed","stream_id":"rergbar8"}
+{"time":"2025-08-04T09:13:35.845911-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":"rergbar8"}
+{"time":"2025-08-04T09:13:35.846675-07:00","level":"INFO","msg":"stream: closed","id":"rergbar8"}

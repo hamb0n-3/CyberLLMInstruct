@@ -1,0 +1,121 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            d8h87au4750eln1s7lognkr8y4hbp5so:
+                apple:
+                    ecpuCores: 4
+                    gpuCores: 40
+                    memoryGb: 128
+                    name: Apple M4 Max
+                    pcpuCores: 12
+                    ramTotalBytes: "137438953472"
+                args:
+                    - -c
+                    - lora_config.yaml
+                codePath: .venv/bin/mlx_lm.lora
+                cpu_count: 16
+                cpu_count_logical: 16
+                disk:
+                    /:
+                        total: "994662584320"
+                        used: "292681457664"
+                email: tristanp7313@gmail.com
+                executable: /Users/tristan/AI/DataCreation/CyberLLMInstruct/.venv/bin/python3.13
+                git:
+                    commit: 48421069c5b471bd69dc6def6bde86fa686b84d9
+                    remote: git@github.com:hamb0n-3/CyberLLMInstruct.git
+                host: Mac.attlocal.net
+                memory:
+                    total: "137438953472"
+                os: macOS-15.5-arm64-arm-64bit-Mach-O
+                program: /Users/tristan/AI/DataCreation/CyberLLMInstruct/.venv/bin/mlx_lm.lora
+                python: CPython 3.13.5
+                root: adapters
+                startedAt: "2025-08-04T16:37:31.051251Z"
+                writerId: d8h87au4750eln1s7lognkr8y4hbp5so
+        m: []
+        python_version: 3.13.5
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 71
+            "3":
+                - 16
+                - 61
+            "4": 3.13.5
+            "5": 0.21.0
+            "6": 4.54.1
+            "12": 0.21.0
+            "13": darwin-arm64
+adapter_path:
+    value: adapters
+batch_size:
+    value: 1
+completion_feature:
+    value: response
+config:
+    value: lora_config.yaml
+data:
+    value: /Users/tristan/AI/DataCreation/CyberLLMInstruct/dataset_creation/final_dataset/final_cybersecurity_dataset_20250804_093628_mlx
+fine_tune_type:
+    value: lora
+grad_checkpoint:
+    value: true
+iters:
+    value: 100
+learning_rate:
+    value: 1e-05
+lora_parameters:
+    value:
+        dropout: 0
+        keys:
+            - self_attn.q_proj
+            - self_attn.v_proj
+        rank: 8
+        scale: 20
+lr_schedule:
+    value: null
+mask_prompt:
+    value: false
+max_seq_length:
+    value: 2048
+model:
+    value: lmstudio-community/Qwen3-30B-A3B-Thinking-2507-MLX-8bit
+num_layers:
+    value: 8
+optimizer:
+    value: adamw
+prompt_feature:
+    value: instruction
+resume_adapter_file:
+    value: null
+save_every:
+    value: 50
+seed:
+    value: 42
+steps_per_eval:
+    value: 200
+steps_per_report:
+    value: 10
+test:
+    value: false
+test_batches:
+    value: 10
+train:
+    value: true
+val_batches:
+    value: 10
+wandb:
+    value: wandb-project

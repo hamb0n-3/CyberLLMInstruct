@@ -1,0 +1,23 @@
+Loading pretrained model
+Fetching 17 files: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 17/17 [00:00<00:00, 173487.03it/s]
+Loading datasets
+Training
+Trainable parameters: 0.002% (0.557M/30532.123M)
+Starting training..., iters: 100
+Calculating loss...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:04<00:00,  2.17it/s]
+Iter 1: Val loss 1.426, Val took 4.604s
+Iter 10: Train loss 1.038, Learning Rate 1.000e-05, It/sec 0.501, Tokens/sec 679.046, Trained Tokens 13541, Peak mem 35.193 GB
+Iter 20: Train loss 0.975, Learning Rate 1.000e-05, It/sec 0.527, Tokens/sec 703.659, Trained Tokens 26882, Peak mem 35.193 GB
+Iter 30: Train loss 0.904, Learning Rate 1.000e-05, It/sec 0.530, Tokens/sec 702.293, Trained Tokens 40125, Peak mem 35.193 GB
+Iter 40: Train loss 0.885, Learning Rate 1.000e-05, It/sec 0.562, Tokens/sec 708.181, Trained Tokens 52716, Peak mem 35.193 GB
+Iter 50: Train loss 0.874, Learning Rate 1.000e-05, It/sec 0.556, Tokens/sec 689.187, Trained Tokens 65107, Peak mem 35.193 GB
+Iter 50: Saved adapter weights to adapters/adapters.safetensors and adapters/0000050_adapters.safetensors.
+Iter 60: Train loss 0.844, Learning Rate 1.000e-05, It/sec 0.520, Tokens/sec 701.501, Trained Tokens 78600, Peak mem 35.193 GB
+Iter 70: Train loss 0.872, Learning Rate 1.000e-05, It/sec 0.573, Tokens/sec 698.164, Trained Tokens 90785, Peak mem 35.193 GB
+Iter 80: Train loss 0.800, Learning Rate 1.000e-05, It/sec 0.566, Tokens/sec 727.192, Trained Tokens 103623, Peak mem 35.193 GB
+Iter 90: Train loss 0.812, Learning Rate 1.000e-05, It/sec 0.564, Tokens/sec 738.732, Trained Tokens 116710, Peak mem 35.193 GB
+Calculating loss...: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [00:05<00:00,  1.84it/s]
+Iter 100: Val loss 1.031, Val took 5.443s
+Iter 100: Train loss 0.751, Learning Rate 1.000e-05, It/sec 0.531, Tokens/sec 716.164, Trained Tokens 130203, Peak mem 35.193 GB
+Iter 100: Saved adapter weights to adapters/adapters.safetensors and adapters/0000100_adapters.safetensors.
+Saved final weights to adapters/adapters.safetensors.

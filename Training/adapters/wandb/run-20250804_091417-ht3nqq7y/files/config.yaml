@@ -1,0 +1,124 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            iakyjgtshyu8atbt4ygfl7peow3kk18l:
+                apple:
+                    ecpuCores: 4
+                    gpuCores: 40
+                    memoryGb: 128
+                    name: Apple M4 Max
+                    pcpuCores: 12
+                    ramTotalBytes: "137438953472"
+                args:
+                    - --model
+                    - lmstudio-community/Qwen3-30B-A3B-Thinking-2507-MLX-8bit
+                    - --data
+                    - ../dataset_creation/final_dataset/final_cybersecurity_dataset_20250803_160211_hf/train
+                    - --iters
+                    - "100"
+                    - --wandb
+                    - Qwen3-30B-A3B-Test
+                    - --batch-size
+                    - "1"
+                    - --num-layers
+                    - "8"
+                    - --train
+                codePath: .venv/bin/mlx_lm.lora
+                cpu_count: 16
+                cpu_count_logical: 16
+                disk:
+                    /:
+                        total: "994662584320"
+                        used: "292691427328"
+                email: tristanp7313@gmail.com
+                executable: /Users/tristan/AI/DataCreation/CyberLLMInstruct/.venv/bin/python3.13
+                git:
+                    commit: 48421069c5b471bd69dc6def6bde86fa686b84d9
+                    remote: git@github.com:hamb0n-3/CyberLLMInstruct.git
+                host: Mac.attlocal.net
+                memory:
+                    total: "137438953472"
+                os: macOS-15.5-arm64-arm-64bit-Mach-O
+                program: /Users/tristan/AI/DataCreation/CyberLLMInstruct/.venv/bin/mlx_lm.lora
+                python: CPython 3.13.5
+                root: adapters
+                startedAt: "2025-08-04T16:14:17.832184Z"
+                writerId: iakyjgtshyu8atbt4ygfl7peow3kk18l
+        m: []
+        python_version: 3.13.5
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 71
+            "3":
+                - 16
+            "4": 3.13.5
+            "5": 0.21.0
+            "6": 4.54.1
+            "12": 0.21.0
+            "13": darwin-arm64
+adapter_path:
+    value: adapters
+batch_size:
+    value: 1
+config:
+    value: null
+data:
+    value: ../dataset_creation/final_dataset/final_cybersecurity_dataset_20250803_160211_hf/train
+fine_tune_type:
+    value: lora
+grad_checkpoint:
+    value: false
+iters:
+    value: 100
+learning_rate:
+    value: 1e-05
+lora_parameters:
+    value:
+        dropout: 0
+        rank: 8
+        scale: 20
+lr_schedule:
+    value: null
+mask_prompt:
+    value: false
+max_seq_length:
+    value: 2048
+model:
+    value: lmstudio-community/Qwen3-30B-A3B-Thinking-2507-MLX-8bit
+num_layers:
+    value: 8
+optimizer:
+    value: adam
+resume_adapter_file:
+    value: null
+save_every:
+    value: 100
+seed:
+    value: 0
+steps_per_eval:
+    value: 200
+steps_per_report:
+    value: 10
+test:
+    value: false
+test_batches:
+    value: 500
+train:
+    value: true
+val_batches:
+    value: 25
+wandb:
+    value: Qwen3-30B-A3B-Test
