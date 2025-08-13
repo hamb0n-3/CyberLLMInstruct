@@ -1,0 +1,7 @@
+{
+  "format": "chatml",
+  "total_entries": 1416,
+  "conversion_timestamp": "2025-08-12T21:03:44.103292",
+  "source_format": "instruction-response pairs",
+  "description": "Cybersecurity dataset converted to chatml chat template format"
+}

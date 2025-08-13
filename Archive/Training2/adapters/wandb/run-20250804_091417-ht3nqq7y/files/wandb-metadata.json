@@ -1,0 +1,50 @@
+{
+  "os":  "macOS-15.5-arm64-arm-64bit-Mach-O",
+  "python":  "CPython 3.13.5",
+  "startedAt":  "2025-08-04T16:14:17.832184Z",
+  "args":  [
+    "--model",
+    "lmstudio-community/Qwen3-30B-A3B-Thinking-2507-MLX-8bit",
+    "--data",
+    "../dataset_creation/final_dataset/final_cybersecurity_dataset_20250803_160211_hf/train",
+    "--iters",
+    "100",
+    "--wandb",
+    "Qwen3-30B-A3B-Test",
+    "--batch-size",
+    "1",
+    "--num-layers",
+    "8",
+    "--train"
+  ],
+  "program":  "/Users/tristan/AI/DataCreation/CyberLLMInstruct/.venv/bin/mlx_lm.lora",
+  "codePath":  ".venv/bin/mlx_lm.lora",
+  "git":  {
+    "remote":  "git@github.com:hamb0n-3/CyberLLMInstruct.git",
+    "commit":  "48421069c5b471bd69dc6def6bde86fa686b84d9"
+  },
+  "email":  "tristanp7313@gmail.com",
+  "root":  "adapters",
+  "host":  "Mac.attlocal.net",
+  "executable":  "/Users/tristan/AI/DataCreation/CyberLLMInstruct/.venv/bin/python3.13",
+  "cpu_count":  16,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "994662584320",
+      "used":  "292691427328"
+    }
+  },
+  "memory":  {
+    "total":  "137438953472"
+  },
+  "apple":  {
+    "name":  "Apple M4 Max",
+    "ecpuCores":  4,
+    "pcpuCores":  12,
+    "gpuCores":  40,
+    "memoryGb":  128,
+    "ramTotalBytes":  "137438953472"
+  },
+  "writerId":  "iakyjgtshyu8atbt4ygfl7peow3kk18l"
+}

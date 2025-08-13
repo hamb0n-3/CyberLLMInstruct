@@ -1,0 +1,7 @@
+{
+  "format": "llama2",
+  "total_entries": 1416,
+  "conversion_timestamp": "2025-08-12T21:03:44.180151",
+  "source_format": "instruction-response pairs",
+  "description": "Cybersecurity dataset converted to llama2 chat template format"
+}

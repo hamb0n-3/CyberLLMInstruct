@@ -1,0 +1,7 @@
+{
+  "format": "openai",
+  "total_entries": 1416,
+  "conversion_timestamp": "2025-08-12T20:47:21.063453",
+  "source_format": "instruction-response pairs",
+  "description": "Cybersecurity dataset converted to openai chat template format"
+}
