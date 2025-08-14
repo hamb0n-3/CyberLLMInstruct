@@ -8,6 +8,9 @@ raw_data/
 reviewed_data/
 security_aligned/
 structured_data/
+chat_templates/
+logs/
+formatted_chat_templates/
 
 # macOS system files
 .DS_Store
