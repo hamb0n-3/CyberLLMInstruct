@@ -1,7 +1,0 @@
-{
-  "format": "alpaca",
-  "total_entries": 1416,
-  "conversion_timestamp": "2025-08-12T21:03:44.064217",
-  "source_format": "instruction-response pairs",
-  "description": "Cybersecurity dataset converted to alpaca chat template format"
-}

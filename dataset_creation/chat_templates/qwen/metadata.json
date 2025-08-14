@@ -1,0 +1,11 @@
+{
+  "format": "qwen",
+  "train_entries": 1416,
+  "validation_entries": 141,
+  "test_entries": 141,
+  "total_entries": 1416,
+  "reformulated_entries": 282,
+  "conversion_timestamp": "2025-08-13T10:50:39.738000",
+  "source_format": "instruction-response pairs",
+  "description": "Cybersecurity dataset converted to qwen chat template format with train/val/test splits"
+}

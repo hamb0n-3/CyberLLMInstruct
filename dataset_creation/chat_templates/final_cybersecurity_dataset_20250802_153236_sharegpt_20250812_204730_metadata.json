@@ -1,7 +1,0 @@
-{
-  "format": "sharegpt",
-  "total_entries": 1416,
-  "conversion_timestamp": "2025-08-12T20:47:30.105891",
-  "source_format": "instruction-response pairs",
-  "description": "Cybersecurity dataset converted to sharegpt chat template format"
-}
